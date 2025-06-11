@@ -3,70 +3,25 @@ import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { Fade, Slide } from "react-awesome-reveal";
 import Loading from "../Loading/Loading";
+import CheckNumero from "./CheckNumero";
+import Localisation from "./Localisation";
+import { Dynamic } from "../../Context/ContextDynamique";
+import { toast } from "react-toastify";
+import axios from "axios";
 const Inscription = () => {
-  const [saveur, setSaveur] = useState("");
   const [etape, setEtape] = useState(0);
   const [mot, setMot] = useState("");
-  const [mots, setMots] = useState<string[]>([]);
-  const [profil, setProfil] = useState<File | null>(null);
-  const [galerie, setGalerie] = useState<File[]>([]);
   const [imageUrl, setImageUrl] = useState("");
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-  const [numero, setNumero] = useState("");
-  const [displayNumero, setDisplayNumero] = useState<null | string>("");
-  const [changeField, setChangeField] = useState(false);
-  const [error, setError] = useState("");
+  const [displayNumero, setDisplayNumero] = useState<null | string>(""); //to api
+  const [mots, setMots] = useState<string[]>([]);
+  const [saveur, setSaveur] = useState("");
+  const [profil, setProfil] = useState<File | null>(null);
+  const [galerie, setGalerie] = useState<File[]>([]);
   const [pseudo, setPseudo] = useState("");
-  const [ville, setVille] = useState("");
-  const [codeSms, setCodeSms] = useState("");
-  const [sendingCode, setSendingCode] = useState(false);
-
-  //vérifie si le numero est déjà associé a un code
-  const [sendedCode, setSendedCode] = useState(false);
-
-  const backNumero = () => {
-    setDisplayNumero("");
-    setNumero("");
-    setChangeField(false);
-  };
-
-  const handleValidation = () => {
-    if (!formatAndValidatePhone(numero)) {
-      setError(
-        "Numéro invalide. Veuillez entrer un numéro mobile valide (France, DOM)."
-      );
-      const timer = setTimeout(() => {
-        setError("");
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    } else {
-      setError("");
-      const formatNum = formatAndValidatePhone(numero);
-      setDisplayNumero(formatNum);
-      setChangeField(true);
-      alert("✅ Numéro valide !" + formatNum);
-    }
-  };
-  const formatAndValidatePhone = (numero: string): string | null => {
-    const clean = numero.replace(/[\s\-().]/g, "");
-
-    if (/^0690\d{6}$/.test(clean)) return "+590" + clean.slice(1); // Guadeloupe
-    if (/^0696\d{6}$/.test(clean)) return "+596" + clean.slice(1); // Martinique
-    if (/^0694\d{6}$/.test(clean)) return "+594" + clean.slice(1); // Guyane
-    if (/^0639\d{6}$/.test(clean)) return "+262" + clean.slice(1); // Mayotte
-
-    if (/^0[67]\d{8}$/.test(clean)) return "+33" + clean.slice(1); // France
-
-    if (/^\+33[67]\d{8}$/.test(clean)) return clean;
-    if (/^\+590690\d{6}$/.test(clean)) return clean;
-    if (/^\+596696\d{6}$/.test(clean)) return clean;
-    if (/^\+594694\d{6}$/.test(clean)) return clean;
-    if (/^\+262639\d{6}$/.test(clean)) return clean;
-
-    return null; // Numéro invalide
-  };
-
+  const { ville } = Dynamic();
+  const [codeSms, setCodeSms] = useState(""); //to api
+  const [description, setDescription] = useState("");
   const moreImg = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
@@ -120,13 +75,62 @@ const Inscription = () => {
   const handleRemoveMot = (motASupprimer: string) => {
     setMots((prev) => prev.filter((m) => m !== motASupprimer));
   };
-  const handleSendCode = async () => {
-    setSendingCode(true);
-    const timeSendin = setTimeout(() => {
-      setSendingCode(false);
-      setSendedCode(true);
-    }, 2000);
-    return () => clearTimeout(timeSendin);
+
+  const handleSubmit = async () => {
+    if (!pseudo || !saveur || !ville) {
+      return alert("Tous les champs sont nécessaires");
+    }
+    if (pseudo.length > 20) alert("20 caractères max pour le pseudo");
+    if (!displayNumero) return alert("Vérifiez le numéro de téléphone");
+    if (!codeSms) return alert("Le code reçu par sms est nécessaire");
+
+    //second etape ::img profil/img galerie/description/5 mots
+    const data = new FormData();
+    // Champs simples
+    data.append("pseudo", pseudo);
+    data.append("ville", ville);
+    data.append("saveur", saveur);
+    data.append("numero", displayNumero); // le numéro formaté avec indicatif
+    data.append("checkcode", codeSms);
+
+    // Optionnel : image de profil
+    if (profil) {
+      data.append("profil", profil);
+    }
+
+    // Optionnel : images galerie
+    if (galerie.length > 0) {
+      galerie.forEach((file) => {
+        data.append("galerie", file);
+      });
+    }
+
+    // Optionnel : description
+    if (description) {
+      data.append("description", description);
+    }
+
+    // Optionnel : mots-clés (speciality)
+    if (mots.length > 0) {
+      mots.forEach((mot) => {
+        data.append("speciality", mot);
+      });
+    }
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}create`,
+        withCredentials: true,
+        data,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      return toast.error("Une erreur est survenue lors de l'inscription");
+    }
   };
   return (
     <StyledInscription>
@@ -141,12 +145,13 @@ const Inscription = () => {
               value={pseudo ? pseudo : ""}
               onChange={(e) => setPseudo(e.target.value)}
             />
-            <input
+            <Localisation />
+            {/* <input
               type="text"
               placeholder="Ville*"
               value={ville ? ville : ""}
               onChange={(e) => setVille(e.target.value)}
-            />
+            /> */}
             <div className="box-saveur">
               <label htmlFor="saveur">Saveurs de* : </label>
               <select id="saveur" value={saveur} onChange={handleChange}>
@@ -157,50 +162,12 @@ const Inscription = () => {
                 <option value="Mayotte">Mayotte</option>
               </select>
             </div>
-            <div className="numero">
-              <label htmlFor="num">Entrez le numéro de téléphone** :</label>
-              {changeField ? (
-                <div className="send-code">
-                  <p>
-                    Pour rester actif. Un code est envoyé au {displayNumero}
-                  </p>
-                  {sendingCode && <Loading />}
-                  {sendedCode && (
-                    <input
-                      type="text"
-                      placeholder="Code reçu"
-                      value={codeSms ? codeSms : ""}
-                      onChange={(e) => setCodeSms(e.target.value)}
-                    />
-                  )}
-                  {!sendingCode && !sendedCode && (
-                    <>
-                      <button onClick={() => handleSendCode()}>
-                        Envoyer le code
-                      </button>
-                      <span onClick={() => backNumero()}>Retour</span>
-                    </>
-                  )}
-                </div>
-              ) : (
-                <input
-                  type="tel"
-                  placeholder="Avec indicatif téléphonique"
-                  value={numero}
-                  onChange={(e) => setNumero(e.target.value)}
-                />
-              )}
-              {!changeField && (
-                <button onClick={handleValidation}>Vérifier</button>
-              )}
-              <span>
-                Numéro accepté : France(+33), Guyane(+594), Guadeloupe(+590),
-                Martinique(+596), Mayotte(+262). Numéro non public
-              </span>
-              {error && (
-                <p style={{ color: "red", fontSize: "0.7em" }}>{error}</p>
-              )}
-            </div>
+            <CheckNumero
+              setDisplayNumero={setDisplayNumero}
+              displayNumero={displayNumero}
+              setCodeSms={setCodeSms}
+              codeSms={codeSms}
+            />
           </div>
         </Slide>
       )}
@@ -350,8 +317,7 @@ const StyledInscription = styled.div`
       outline: none;
       border-radius: 5px;
     }
-    .box-saveur,
-    .numero {
+    .box-saveur {
       width: 100%;
       margin-top: 10px;
       background: ${COLORS.main};
@@ -359,15 +325,6 @@ const StyledInscription = styled.div`
       display: flex;
       flex-direction: column;
       padding: 10px 10px 10px 10px;
-      button {
-        margin-top: 5px;
-        width: 50%;
-        outline: none;
-        border: none;
-        background: ${COLORS.green};
-        border-radius: 5px;
-        cursor: pointer;
-      }
       select {
         padding: 5px;
         outline: none;
@@ -382,24 +339,6 @@ const StyledInscription = styled.div`
       label {
         font-size: 0.8em;
         color: white;
-      }
-      span {
-        font-size: 0.7em;
-        color: ${COLORS.yellow};
-      }
-      .send-code {
-        margin: 10px 0px;
-        display: flex;
-        flex-direction: column;
-        p {
-          font-size: 0.8em;
-          text-decoration: underline;
-          color: white;
-        }
-        span {
-          cursor: pointer;
-          margin-top: 15px;
-        }
       }
     }
   }

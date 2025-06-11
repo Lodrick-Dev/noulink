@@ -4,10 +4,13 @@ import BarreSearch from "../../components/BarreSearch/BarreSearch";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import type { TypeProps } from "../Home";
-const MainHome = ({ ville, setVille, setPopRouter }: TypeProps) => {
+import { Dynamic } from "../../Context/ContextDynamique";
+const MainHome = ({ setPopRouter }: TypeProps) => {
   const [selectSaveur, setSelectSaveur] = useState("");
+  const { setVille, ville, deleteCityCookie } = Dynamic();
   const cancelPositon = () => {
     setVille("");
+    deleteCityCookie();
   };
   return (
     <StyledMainHome>

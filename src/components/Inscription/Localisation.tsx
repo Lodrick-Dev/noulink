@@ -1,22 +1,25 @@
 import { useState } from "react";
 import styled from "styled-components";
+import COLORS from "../../Styles/Styles";
 import { Dynamic } from "../../Context/ContextDynamique";
 type TypeState = {
   latitude: number;
   longitude: number;
 };
-function GeolocationPrompt() {
+const Localisation = () => {
   const [position, setPosition] = useState<TypeState | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [askPermission, setAskPermission] = useState(true);
-  const { setVille } = Dynamic();
+  const [withCountry, setWithCountry] = useState("");
+  const { setVille, ville, deleteCityCookie } = Dynamic();
+  const [loading, setLoading] = useState(false);
 
   const handleGeolocation = () => {
     if (!navigator.geolocation) {
       setError("La géolocalisation n'est pas supportée par ce navigateur.");
       return;
     }
-
+    setVille("Recherche...");
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
@@ -47,45 +50,81 @@ function GeolocationPrompt() {
       const country = data.results[0]?.components?.county
         ? data.results[0]?.components?.country
         : "Non fourni";
-      console.log("tout : ", data);
-      const dataLocalication = `${city} (${country})`;
-      console.log("Ville détectée :", city);
-      setVille(dataLocalication);
+      setWithCountry(country);
+      setVille(city);
     } catch (err) {
+      setVille("");
       console.error("Erreur lors du géocodage inverse :", err);
     }
   };
-
+  const cancelVille = () => {
+    if (window.confirm("Retirer la ville ? Ok pour confirmer")) {
+      setPosition(null);
+      setAskPermission(true);
+      setError(null);
+      setWithCountry("");
+      setVille("");
+      deleteCityCookie();
+    }
+  };
   return (
-    <StyledGeolocationPrompt>
-      {position ? (
-        <p>Merci 😉</p>
+    <StyledLocalisation>
+      {ville ? (
+        <p onClick={() => cancelVille()} className="ville-name">
+          {/* Votre position : {position.latitude}, {position.longitude} */}
+          Lieu : {ville}
+        </p>
       ) : error ? (
         <p style={{ color: "red" }}>{error}</p>
       ) : askPermission ? (
-        <div
-          style={{
-            padding: "1rem",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-          }}
-        >
-          <p>👋 Votre position nous aidera a mieux vous servir</p>
-          <button onClick={handleGeolocation}>
-            Autoriser la géolocalisation de ma ville
-          </button>
+        <div className="u-box">
+          <p>📌 Trouvons automatiquement votre ville ?</p>
+          <button onClick={handleGeolocation}>Autoriser</button>
         </div>
       ) : (
         <p>Chargement...</p>
       )}
-    </StyledGeolocationPrompt>
+    </StyledLocalisation>
   );
-}
+};
 
-export default GeolocationPrompt;
-
-const StyledGeolocationPrompt = styled.div`
-  button {
+export default Localisation;
+const StyledLocalisation = styled.div`
+  background: ${COLORS.main};
+  margin-top: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  .ville-name {
+    color: ${COLORS.white};
     cursor: pointer;
+    transition: 0.2s;
+  }
+  .ville-name:hover {
+    transition: 0.2s;
+    color: ${COLORS.green};
+  }
+  .u-box {
+    padding: "1rem";
+    border: "1px solid #ccc";
+    border-radius: "8px";
+    width: 100%;
+    p {
+      width: 100%;
+      text-align: center;
+      font-size: 0.9em;
+      color: ${COLORS.white};
+    }
+    button {
+      background: ${COLORS.green};
+      display: block;
+      margin: 0px auto;
+      padding: 5px 15px;
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
   }
 `;
