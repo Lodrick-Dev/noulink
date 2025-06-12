@@ -18,13 +18,22 @@ const PopRouter = ({
             setPopRouter(false);
           }}
         >
-          Continuer
+          Inscription
         </button>
-        <span>
+        <button
+          className="actu"
+          onClick={() => {
+            direction("/update");
+            setPopRouter(false);
+          }}
+        >
+          Autre
+        </button>
+        {/* <span>
           ✨ Vous avez déjà un compte ? Vérifiez votre numéro de mobile
           directement pour le garder actif, puis mettez à jour vos infos si
           besoin.
-        </span>
+        </span> */}
       </div>
     </StyledPopRouter>
   );
