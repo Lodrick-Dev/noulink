@@ -160,7 +160,7 @@ const Inscription = () => {
   return (
     <StyledInscription>
       <h2>Inscription*</h2>
-      <p>Pour rester actif vérifiez votre numéro directement</p>
+      <p>Link to favorite food</p>
       {etape === 0 && (
         <Slide direction="down">
           <div className="first">
