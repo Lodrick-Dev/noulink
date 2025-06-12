@@ -65,7 +65,6 @@ const CheckNumero = ({
   const handleSendCode = async () => {
     setSendingCode(true);
     const uuid = uuidv4();
-    console.log(uuid);
 
     try {
       const res = await axios({
@@ -79,13 +78,18 @@ const CheckNumero = ({
           numero,
         },
       });
-
-      console.log(res);
       setSendedCode(true);
       setSendingCode(false);
-    } catch (error) {
+      if (res.data) {
+        return toast.success(res.data.message);
+      }
+    } catch (error: any) {
       setSendingCode(false);
       console.log(error);
+      if (error.response.data.error) {
+        setSendedCode(true);
+        return toast.info(error.response.data.error);
+      }
       return toast.error("Une erreur est survenue");
     }
   };
@@ -184,6 +188,7 @@ const StyledCheckNumero = styled.div`
     span {
       cursor: pointer;
       margin-top: 15px;
+      text-decoration: underline;
     }
   }
 `;

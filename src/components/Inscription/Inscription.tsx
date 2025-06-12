@@ -22,6 +22,7 @@ const Inscription = () => {
   const { ville } = Dynamic();
   const [codeSms, setCodeSms] = useState(""); //to api
   const [description, setDescription] = useState("");
+  const [sendingSub, setSendingSub] = useState(false);
   const moreImg = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
@@ -83,6 +84,7 @@ const Inscription = () => {
     if (pseudo.length > 20) alert("20 caractères max pour le pseudo");
     if (!displayNumero) return alert("Vérifiez le numéro de téléphone");
     if (!codeSms) return alert("Le code reçu par sms est nécessaire");
+    setSendingSub(true);
 
     //second etape ::img profil/img galerie/description/5 mots
     const data = new FormData();
@@ -119,18 +121,41 @@ const Inscription = () => {
     try {
       const res = await axios({
         method: "post",
-        url: `${import.meta.env.VITE_APP_API}create`,
+        url: `${import.meta.env.VITE_APP_API}restaurant/create`,
         withCredentials: true,
         data,
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(res);
-    } catch (error) {
+      if (res.data) {
+        setSendingSub(false);
+        deleteDataCurrent();
+        return toast.success(res.data.succes);
+      }
+    } catch (error: any) {
+      setSendingSub(false);
       console.log(error);
+      if (error.response.data.error) {
+        return toast.info(error.response.data.error);
+      }
       return toast.error("Une erreur est survenue lors de l'inscription");
     }
+  };
+
+  const deleteDataCurrent = () => {
+    setEtape(0);
+    setMot("");
+    setImageUrl("");
+    setPreviewUrls([]);
+    setDisplayNumero("");
+    setMots([]);
+    setSaveur("");
+    setProfil(null);
+    setGalerie([]);
+    setPseudo("");
+    setCodeSms("");
+    setDescription("");
   };
   return (
     <StyledInscription>
@@ -218,7 +243,12 @@ const Inscription = () => {
                   </div>
                 )}
               </div>
-              <button className="btn-sub">Inscription</button>
+              {sendingSub && <Loading />}
+              {!sendingSub && (
+                <button className="btn-sub" onClick={() => handleSubmit()}>
+                  Inscription
+                </button>
+              )}
             </div>
             <div className="preview">
               <span>Présualisation des images 1:1</span>
