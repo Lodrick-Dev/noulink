@@ -10,12 +10,14 @@ type TypeProps = {
   displayNumero: string | null;
   setCodeSms: React.Dispatch<React.SetStateAction<string>>;
   codeSms: string;
+  onSendCode?: (numero: string, uuid: string) => Promise<void>; // facultative
 };
 const CheckNumero = ({
   setDisplayNumero,
   displayNumero,
   setCodeSms,
   codeSms,
+  onSendCode,
 }: TypeProps) => {
   const [changeField, setChangeField] = useState(false);
   const [sendingCode, setSendingCode] = useState(false);
@@ -75,7 +77,7 @@ const CheckNumero = ({
           "x-client-uuid": uuid,
         },
         data: {
-          numero,
+          numero: displayNumero,
         },
       });
       setSendedCode(true);
@@ -101,7 +103,7 @@ const CheckNumero = ({
   };
   return (
     <StyledCheckNumero>
-      <label htmlFor="num">Entrez le numéro de téléphone** :</label>
+      <label htmlFor="num">Entrez votre numéro de téléphone** :</label>
       {changeField ? (
         <div className="send-code">
           <p>Pour rester actif. Un code est envoyé au {displayNumero}</p>
@@ -167,6 +169,12 @@ const StyledCheckNumero = styled.div`
   input {
     margin-top: 0px;
     font-size: 1em;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.1em;
+    border: none;
+    outline: none;
+    border-radius: 5px;
   }
   label {
     font-size: 0.8em;

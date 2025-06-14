@@ -220,7 +220,10 @@ const Inscription = () => {
                   onChange={(e) => moreImg(e)}
                 />
               </div>
-              <textarea placeholder="Description, contact, horaire, ect (optionnel)"></textarea>
+              <textarea
+                placeholder="Description, contact, horaire, ect (optionnel)"
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
               <div className="key-search">
                 <label htmlFor="key">
                   5 mots max(spécialités) pour que les visiteurs vous trouvent :{" "}
