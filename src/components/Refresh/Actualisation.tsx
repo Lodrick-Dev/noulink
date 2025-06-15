@@ -214,5 +214,8 @@ const StyledActualisation = styled.div`
     input {
       font-size: 1em;
     }
+    button {
+      width: 50%;
+    }
   }
 `;

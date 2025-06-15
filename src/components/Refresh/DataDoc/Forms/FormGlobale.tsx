@@ -113,4 +113,12 @@ const StyledFormGlobale = styled.div`
       background: ${COLORS.main};
     }
   }
+  @media screen and (max-width: 450px) {
+    .the-inputs {
+      width: 100%;
+      textarea {
+        height: 10svh;
+      }
+    }
+  }
 `;

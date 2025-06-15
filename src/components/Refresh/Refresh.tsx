@@ -63,7 +63,7 @@ const Refresh = () => {
     <StyledRefresh>
       {!actualised && <h3>Votre compte</h3>}
       <div className="box-check-account">
-        <p>Pour vous actualiser</p>
+        {!actualised && <p>Pour vous actualiser</p>}
         {actualised ? (
           <CheckedCodeNumber />
         ) : (

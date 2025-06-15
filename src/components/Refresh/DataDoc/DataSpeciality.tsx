@@ -90,4 +90,13 @@ const StyledDataSpeciality = styled.div`
       color: ${COLORS.green};
     }
   }
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    margin: 50px 0px;
+    .add-speciality {
+      input {
+        width: 60%;
+      }
+    }
+  }
 `;

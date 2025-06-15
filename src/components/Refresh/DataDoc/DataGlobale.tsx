@@ -34,10 +34,6 @@ const DataGlobale = ({ restaurant }: { restaurant: TypeDoc }) => {
           {formatRelativeDate(restaurant.createdAt, "Inscrit : ")}
         </p>
         <div className="profil-img">
-          {/* <SquarePen
-            className="icon-update-profil"
-            onClick={() => setUpdate(!update)}
-          /> */}
           <img
             // src={restaurant.profil}
             src={imageProfil}
@@ -104,11 +100,6 @@ const StyledDataGlobale = styled.div`
       background: ${COLORS.second};
       border-radius: 5px;
       margin: 20px 0px;
-      .icon-update-profil {
-        cursor: pointer;
-        margin: 10px;
-        color: ${COLORS.yellow};
-      }
       img {
         width: 30%;
         border-radius: 10px;
@@ -123,9 +114,21 @@ const StyledDataGlobale = styled.div`
     }
     .icon-update {
       cursor: pointer;
-      color: ${COLORS.yellow};
+      color: ${COLORS.green};
     }
     .data-text-glob {
+    }
+  }
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    margin: 0px;
+    .info-rest {
+      .profil-img {
+        img {
+          width: 80%;
+          border-radius: 20px;
+        }
+      }
     }
   }
 `;

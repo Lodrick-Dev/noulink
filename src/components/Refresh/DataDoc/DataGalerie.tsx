@@ -94,4 +94,12 @@ const StyledDataGalerie = styled.div`
       }
     }
   }
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    margin: 0px;
+    .imgs-galeries {
+      margin: 5px;
+      min-width: 40%;
+    }
+  }
 `;

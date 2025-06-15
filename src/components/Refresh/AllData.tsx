@@ -28,4 +28,8 @@ const StyledAllData = styled.div`
   background: ${COLORS.second};
   display: flex;
   flex-wrap: wrap;
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+    padding: 10px;
+  }
 `;
