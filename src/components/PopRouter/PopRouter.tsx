@@ -85,7 +85,7 @@ const StyledPopRouter = styled.div`
   @media screen and (max-width: 450px) {
     .box-btn {
       button {
-        width: 80%;
+        width: 100%;
       }
     }
   }

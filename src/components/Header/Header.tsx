@@ -43,7 +43,7 @@ const StyledHeader = styled.header`
     padding: 15px;
     span {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
-      color: ${COLORS.white};
+      color: ${COLORS.yellow};
       cursor: pointer;
       text-decoration: underline;
     }
