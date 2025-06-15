@@ -3,19 +3,77 @@ import { capitalizeFirstLetter } from "../../utils/fonctions";
 import COLORS from "../../../Styles/Styles";
 import { SquarePlus, Trash2 } from "lucide-react";
 import { useState } from "react";
-
-const DataSpeciality = ({ speciality }: { speciality: string[] }) => {
-  const [updateEdit, setUpdateEdit] = useState(false);
+import { toast } from "react-toastify";
+import axios from "axios";
+import Loading from "../../Loading/Loading";
+type TypeProps = {
+  speciality: string[];
+  id: string;
+};
+const DataSpeciality = ({ speciality, id }: TypeProps) => {
+  const [updating, setUpdating] = useState(false);
+  const [newSpeciality, setNewSpeciality] = useState<string>("");
   const [specialityLocal, setSpecialityLocal] = useState<string[]>(
     speciality.length > 0 ? speciality : []
   );
-  const deleteEl = (url: string) => {
-    setSpecialityLocal((prev) => prev.filter((m) => m !== url));
+
+  //delete
+  const deleteEl = async (valueToDelete: string) => {
+    const updated = specialityLocal.filter((m) => m !== valueToDelete);
+    setSpecialityLocal(updated);
+    await handleUpdate(updated);
+  };
+
+  const addEl = async () => {
+    const trimmed = newSpeciality.trim().toLowerCase();
+    if (!trimmed) {
+      return toast.warning("Spécialité vide !");
+    }
+
+    if (specialityLocal.includes(trimmed)) {
+      return toast.info("Cette spécialité est déjà ajoutée.");
+    }
+
+    if (specialityLocal.length >= 5) {
+      return toast.info("Maximum 5 spécialités.");
+    }
+    setUpdating(true);
+    const updated = [...specialityLocal, trimmed];
+    setSpecialityLocal(updated);
+    setNewSpeciality(""); // vider le champ
+    await handleUpdate(updated);
+    setUpdating(false);
+  };
+
+  //speciality api
+  const handleUpdate = async (array: string[]) => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${
+          import.meta.env.VITE_APP_API
+        }restaurant/update-speciality/${id}`,
+        data: { speciality: array },
+        withCredentials: true,
+      });
+      if (res) {
+        if (res.data.succes) {
+          setSpecialityLocal(res.data.speciality);
+          setNewSpeciality("");
+          return;
+          //toast.error(res.data.succes);
+        }
+      }
+    } catch (error) {
+      setUpdating(false);
+      console.log(error);
+      return toast.error("Une erreur est survenue");
+    }
   };
   return (
     <StyledDataSpeciality>
       <div className="specility-box">
-        <span>Spécialité(s)</span>
+        <span>Spécialité(s) 5 max</span>
         {Array.isArray(specialityLocal) &&
           specialityLocal.map((el, i) => (
             <div className="box-specia" key={i}>
@@ -30,8 +88,21 @@ const DataSpeciality = ({ speciality }: { speciality: string[] }) => {
       </div>
       {specialityLocal && specialityLocal.length < 5 && (
         <div className="add-speciality">
-          <input type="text" placeholder="Ajouter une spécialité" />
-          <SquarePlus className="icon-add-plat" size={25} />
+          <input
+            type="text"
+            value={newSpeciality ? newSpeciality : ""}
+            placeholder="Ajouter une spécialité"
+            onChange={(e) => setNewSpeciality(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && addEl()}
+          />
+          {updating && <Loading />}
+          {!updating && (
+            <SquarePlus
+              className="icon-add-plat"
+              size={25}
+              onClick={() => addEl()}
+            />
+          )}
         </div>
       )}
     </StyledDataSpeciality>

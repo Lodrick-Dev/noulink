@@ -1,16 +1,24 @@
 import styled from "styled-components";
 import Localisation from "../../../Inscription/Localisation";
 import COLORS from "../../../../Styles/Styles";
-import { capitalizeFirstLetter } from "../../../utils/fonctions";
+import {
+  capitalizeFirstLetter,
+  normalizeString,
+} from "../../../utils/fonctions";
 import { useState } from "react";
 import { Dynamic } from "../../../../Context/ContextDynamique";
 import { toast } from "react-toastify";
+import type { TypeDoc } from "../../Refresh";
+import axios from "axios";
+import Loading from "../../../Loading/Loading";
 type TypeProps = {
   name: string | undefined;
   saveur: string | undefined;
   villebase: string | undefined;
   description: string | undefined;
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string;
+  setRestaurant: React.Dispatch<React.SetStateAction<TypeDoc | null>>;
 };
 const FormGlobale = ({
   name,
@@ -18,18 +26,74 @@ const FormGlobale = ({
   villebase,
   description,
   setUpdate,
+  id,
+  setRestaurant,
 }: TypeProps) => {
+  const [updating, setUpdating] = useState(false);
   const [updatePseudo, setUpdatePseudo] = useState("");
   const [updateSaveur, setUpdateSaveur] = useState("");
   const [updateDescription, setUpdateDescription] = useState("");
   const { ville } = Dynamic();
 
   const handleUpdate = async () => {
-    if (!updatePseudo && !updatePseudo && !updateDescription) {
-      if (villebase !== ville) {
-        setUpdate(false);
-        return toast.info("Aucune modification a été apporté");
+    // 1. Normaliser les valeurs de la base
+    const basePseudo = name?.trim() || "";
+    const baseSaveur = saveur?.trim() || "";
+    const baseDescription = description?.trim() || "";
+    const baseVille = normalizeString(villebase || "");
+
+    // 2. Normaliser les valeurs saisies (états)
+    const currentPseudo = updatePseudo.trim() || basePseudo;
+    const currentSaveur = updateSaveur.trim() || baseSaveur;
+    const currentDescription = updateDescription.trim() || baseDescription;
+    const currentVille = normalizeString(ville);
+
+    // 3. Comparaison réelle
+    const hasChangedPseudo = currentPseudo !== basePseudo;
+    const hasChangedSaveur = currentSaveur !== baseSaveur;
+    const hasChangedDescription = currentDescription !== baseDescription;
+    const hasChangedVille = currentVille !== baseVille;
+
+    // 4. Si aucun champ n’a changé
+    if (
+      !hasChangedPseudo &&
+      !hasChangedSaveur &&
+      !hasChangedDescription &&
+      !hasChangedVille
+    ) {
+      setUpdate(false);
+      return toast.info("Aucune modification n’a été apportée.");
+    }
+
+    setUpdating(true);
+    // 5. Envoi complet même si vide
+    const data = {
+      pseudo: currentPseudo,
+      saveur: currentSaveur,
+      description: currentDescription,
+      ville: currentVille,
+    };
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}restaurant/update-info/${id}`,
+        data,
+        withCredentials: true,
+      });
+      if (res) {
+        if (res.data) {
+          if (res.data.succes) {
+            setUpdating(false);
+            setUpdate(false);
+            setRestaurant(res.data.doc);
+            return toast.success(res.data.succes);
+          }
+        }
       }
+    } catch (error) {
+      setUpdating(false);
+      console.log(error);
+      return toast.error("Une erreur est survenue");
     }
   };
   return (
@@ -38,14 +102,18 @@ const FormGlobale = ({
         <input
           type="text"
           placeholder="Nom (pseudo,etablissement)"
-          value={updatePseudo ? updatePseudo : name}
+          defaultValue={updatePseudo ? updatePseudo : name}
+          onChange={(e) => setUpdatePseudo(e.target.value)}
         />
         <Localisation />
         <div className="box-saveur">
           <label htmlFor="saveur">Saveurs de* : </label>
           <select
             id="saveur"
-            value={updateSaveur ? updateSaveur : capitalizeFirstLetter(saveur)}
+            defaultValue={
+              updateSaveur ? updateSaveur : capitalizeFirstLetter(saveur)
+            }
+            onChange={(e) => setUpdateSaveur(e.target.value)}
           >
             <option value="">--Selection de la saveur--</option>
             <option value="Guyane">Guyane</option>
@@ -57,8 +125,12 @@ const FormGlobale = ({
         <textarea
           placeholder="Description, contact, horaire, ect (optionnel)"
           value={updateDescription ? updateDescription : description}
+          onChange={(e) => setUpdateDescription(e.target.value)}
         ></textarea>
-        <button onClick={() => handleUpdate()}>Enregistrer</button>
+        {updating && <Loading />}
+        {!updating && (
+          <button onClick={() => handleUpdate()}>Enregistrer</button>
+        )}
       </div>
     </StyledFormGlobale>
   );

@@ -6,19 +6,22 @@ import type { TypeDoc, TypeGalerie, TypeSpecility } from "./Refresh";
 import COLORS from "../../Styles/Styles";
 type PropsAllData = {
   restaurant: TypeDoc;
+  setRestaurant: React.Dispatch<React.SetStateAction<TypeDoc | null>>;
   galerie: TypeGalerie[];
   speciality: TypeSpecility[];
+  id?: string;
 };
-const AllData = ({ restaurant, galerie, speciality }: PropsAllData) => {
-  console.log(restaurant);
-  console.log(galerie);
-  console.log(speciality);
-
+const AllData = ({
+  restaurant,
+  galerie,
+  speciality,
+  setRestaurant,
+}: PropsAllData) => {
   return (
     <StyledAllData>
-      <DataGlobale restaurant={restaurant} />
-      <DataSpeciality speciality={speciality} />
-      <DataGalerie galerie={galerie} />
+      <DataGlobale restaurant={restaurant} setRestaurant={setRestaurant} />
+      <DataSpeciality speciality={speciality} id={restaurant._id} />
+      <DataGalerie galerie={galerie} id={restaurant._id} />
     </StyledAllData>
   );
 };

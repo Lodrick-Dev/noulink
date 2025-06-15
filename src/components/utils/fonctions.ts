@@ -55,3 +55,31 @@ export const capitalizeFirstLetter = (str: string | undefined): string => {
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
+
+//controlle image mime extension
+export const isValidImageFile = (file: File): boolean => {
+  if (!file) return false;
+
+  const allowedMimeTypes = ["image/jpeg", "image/png", "image/jpg"];
+  const allowedExtensions = [".jpeg", ".jpg", ".png"];
+
+  const isMimeOk = allowedMimeTypes.includes(file.type.toLowerCase());
+
+  const originalName = file.name.toLowerCase();
+  const hasValidExtension = allowedExtensions.some((ext) =>
+    originalName.endsWith(ext)
+  );
+
+  return isMimeOk && hasValidExtension;
+};
+
+//controlle taille image
+export const isFileSizeValid = (file: File, maxSizeInMB = 5): boolean => {
+  const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+  return file.size <= maxSizeInBytes;
+};
+
+//supprime espace utilise début et fin , et met miniscule
+export const normalizeString = (str: string): string => {
+  return str.trim().toLowerCase();
+};

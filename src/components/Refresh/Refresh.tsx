@@ -89,6 +89,7 @@ const Refresh = () => {
       {restaurant && !idLoading && (
         <AllData
           restaurant={restaurant}
+          setRestaurant={setRestaurant}
           galerie={galerie}
           speciality={speciality}
         />
