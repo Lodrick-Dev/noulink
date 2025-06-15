@@ -46,7 +46,7 @@ const DataGalerie = ({ galerie, id }: TypeProps) => {
 
   const handleUpdateGalerie = async (img: File) => {
     const data = new FormData();
-    data.append("one", img);
+    data.append("galerie", img);
     try {
       const res = await axios({
         method: "post",
@@ -128,11 +128,13 @@ const DataGalerie = ({ galerie, id }: TypeProps) => {
               accept=".jpeg,.jpg,.png"
               onChange={handleCheckImg}
             />
-            <SquarePlus
-              className="icon-add-img"
-              size={40}
-              onClick={handleChargeImg}
-            />
+            {!updating && (
+              <SquarePlus
+                className="icon-add-img"
+                size={40}
+                onClick={handleChargeImg}
+              />
+            )}
           </div>
         )}
       </div>

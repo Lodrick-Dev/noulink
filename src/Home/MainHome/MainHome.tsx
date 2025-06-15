@@ -53,7 +53,7 @@ const MainHome = ({ setPopRouter }: TypeProps) => {
           Mayotte
         </span>
       </div>
-      <BarreSearch />
+      {/* <BarreSearch /> */}
       <div className="position">
         <span onClick={() => cancelPositon()} className="localisation">
           Lieu actuel : {ville ? `${ville} ✅` : <Loading />}{" "}
