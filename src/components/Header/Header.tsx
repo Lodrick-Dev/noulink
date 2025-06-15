@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { useLocation, useNavigate } from "react-router-dom";
+import { House } from "lucide-react";
 type TypeProps = {
   setPopRouter: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -8,7 +9,11 @@ const Header = ({ setPopRouter }: TypeProps) => {
   const pageActu = useLocation();
   const direction = useNavigate();
   const returnText = () => {
-    return pageActu.pathname !== "/" ? "Accueil" : "S'enregistrer";
+    return pageActu.pathname !== "/" ? (
+      <House className="home-a" />
+    ) : (
+      "S'enregistrer"
+    );
   };
   const actionCondition = () => {
     if (pageActu.pathname !== "/") {
