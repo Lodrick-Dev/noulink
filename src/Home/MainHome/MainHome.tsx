@@ -14,7 +14,7 @@ const MainHome = ({ setPopRouter }: TypeProps) => {
   };
   return (
     <StyledMainHome>
-      <h1>Link to favorite food</h1>
+      <h1>Link up to favorite food</h1>
       <div className="liste-country">
         <span
           onClick={() =>

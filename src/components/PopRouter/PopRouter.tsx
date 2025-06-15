@@ -27,7 +27,7 @@ const PopRouter = ({
             setPopRouter(false);
           }}
         >
-          Autre
+          Mettre à jour
         </button>
         {/* <span>
           ✨ Vous avez déjà un compte ? Vérifiez votre numéro de mobile
