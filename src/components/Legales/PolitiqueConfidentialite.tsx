@@ -58,6 +58,13 @@ const PolitiqueConfidentialite = () => {
           jamais visible publiquement.
         </p>
         <p>- Il n'est pas utilisé à des fins commerciales ou publicitaires.</p>
+        <p>
+          De plus, pour garantir que les profils affichés sont bien actifs,
+          chaque utilisateur doit actualiser son profil au moins une fois tous
+          les 5 mois. À défaut, le compte sera automatiquement supprimé. Cette
+          mesure vise à éviter que des visiteurs contactent des établissements
+          qui ne sont plus actifs dans la réalité.
+        </p>
       </div>
       <div className="box">
         <h2>.4 Utilisation de Google Analytics</h2>

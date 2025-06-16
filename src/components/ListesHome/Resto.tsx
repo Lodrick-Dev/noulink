@@ -105,7 +105,7 @@ const StyledResto = styled.div`
         display: block;
         width: 30%;
         border-radius: 15px;
-        background: ${COLORS.yellow};
+        background: ${COLORS.green};
         padding: 10px;
       }
       .infos-compte {
@@ -152,6 +152,7 @@ const StyledResto = styled.div`
       img {
         margin: 10px;
         width: 30%;
+        box-shadow: 1px 1px 10px 2px ${COLORS.green};
       }
     }
   }

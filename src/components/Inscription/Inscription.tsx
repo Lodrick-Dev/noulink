@@ -277,7 +277,7 @@ const Inscription = () => {
         *Votre inscription vaut l'acceptation des cgu
       </span>
       <span className="info-cgu">
-        **Suppression de votre compte après 5 Mois si pas actif. Le CODE vous
+        **Suppression de votre compte après 5 Mois si non actif. Le CODE vous
         permettra de rester actif
       </span>
     </StyledInscription>

@@ -35,6 +35,13 @@ const Cgu = () => {
           fournit. En cas d'informations trompeuses ou inappropriées, Nou Link
           se réserve le droit de suspendre ou supprimer le profil concerné.
         </p>
+        <p>
+          Pour garantir la pertinence des profils visibles sur Nou Link, tout
+          compte doit être actualisé au moins une fois tous les 5 mois. Passé ce
+          délai sans activité, le compte sera automatiquement supprimé. Cela
+          permet d’éviter que des visiteurs essaient de contacter des
+          établissements qui ne sont plus actifs dans la réalité.
+        </p>
       </div>
       <div>
         <h2>.3 Données personnelles</h2>
@@ -118,6 +125,7 @@ const StyledCgu = styled.section`
       color: ${COLORS.green};
     }
     p {
+      margin-top: 10px;
       color: aliceblue;
       span {
         cursor: pointer;
