@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const nav = useNavigate();
   return (
     <StyledFooter>
       <ul>
-        <li>CGU</li>
-        <li>Politique de confidentialité</li>
-        <li>Mentions légales</li>
+        <li onClick={() => nav("/cgu")}>CGU</li>
+        <li onClick={() => nav("/politique-confidentialite")}>
+          Politique de confidentialité
+        </li>
+        <li onClick={() => nav("/mentions")}>Mentions légales</li>
       </ul>
       <div className="box-img">
         <img src="/svglogo.svg" alt="logo-noulink" />
@@ -30,6 +34,7 @@ const StyledFooter = styled.div`
     justify-content: center;
     align-items: center;
     li {
+      cursor: pointer;
       list-style: none;
       text-decoration: underline;
       color: white;

@@ -12,6 +12,9 @@ import Home from "./Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Dynamic } from "./Context/ContextDynamique";
 import { ToastContainer } from "react-toastify";
+import MentionsLegales from "./components/Legales/MentionsLegales";
+import PolitiqueConfidentialite from "./components/Legales/PolitiqueConfidentialite";
+import Cgu from "./components/Legales/Cgu";
 
 function App() {
   const [showPrompt, setShowPrompt] = useState(false);
@@ -36,6 +39,12 @@ function App() {
       <Routes>
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/update" element={<Refresh />} />
+        <Route path="/mentions" element={<MentionsLegales />} />
+        <Route path="/cgu" element={<Cgu />} />
+        <Route
+          path="/politique-confidentialite"
+          element={<PolitiqueConfidentialite />}
+        />
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
