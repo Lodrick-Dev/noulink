@@ -44,9 +44,9 @@ function GeolocationPrompt() {
         data.results[0]?.components?.town ||
         data.results[0]?.components?.village ||
         data.results[0]?.components?.county;
-      const country = data.results[0]?.components?.county
-        ? data.results[0]?.components?.country
-        : "Non fourni";
+      // const country = data.results[0]?.components?.county
+      //   ? data.results[0]?.components?.country
+      //   : "Non fourni";
       const dataLocalication = `${city}`;
       setVille(dataLocalication);
       // const dataLocalication = `${city} (${country})`;

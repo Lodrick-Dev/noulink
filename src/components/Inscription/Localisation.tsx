@@ -2,17 +2,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { Dynamic } from "../../Context/ContextDynamique";
-type TypeState = {
-  latitude: number;
-  longitude: number;
-};
 const Localisation = () => {
-  const [position, setPosition] = useState<TypeState | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [askPermission, setAskPermission] = useState(true);
-  const [withCountry, setWithCountry] = useState("");
+  // const [withCountry, setWithCountry] = useState("");
   const { setVille, ville, deleteCityCookie } = Dynamic();
-  const [loading, setLoading] = useState(false);
 
   const handleGeolocation = () => {
     if (!navigator.geolocation) {
@@ -23,7 +17,6 @@ const Localisation = () => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
-        setPosition({ latitude, longitude });
         setAskPermission(false);
         fetchCity(latitude, longitude);
       },
@@ -50,7 +43,7 @@ const Localisation = () => {
       const country = data.results[0]?.components?.county
         ? data.results[0]?.components?.country
         : "Non fourni";
-      setWithCountry(country);
+      // setWithCountry(country);
       setVille(city);
     } catch (err) {
       setVille("");
@@ -59,10 +52,9 @@ const Localisation = () => {
   };
   const cancelVille = () => {
     if (window.confirm("Retirer la ville ? Ok pour confirmer")) {
-      setPosition(null);
       setAskPermission(true);
       setError(null);
-      setWithCountry("");
+      // setWithCountry("");
       setVille("");
       deleteCityCookie();
     }
@@ -71,7 +63,6 @@ const Localisation = () => {
     <StyledLocalisation>
       {ville ? (
         <p onClick={() => cancelVille()} className="ville-name">
-          {/* Votre position : {position.latitude}, {position.longitude} */}
           Lieu : {ville}
         </p>
       ) : error ? (

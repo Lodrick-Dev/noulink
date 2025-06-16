@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
-import BarreSearch from "../../components/BarreSearch/BarreSearch";
-import { useState } from "react";
+// import BarreSearch from "../../components/BarreSearch/BarreSearch";
 import Loading from "../../components/Loading/Loading";
 import { Dynamic } from "../../Context/ContextDynamique";
 export type TypePropsHome = {
@@ -9,7 +8,6 @@ export type TypePropsHome = {
   saveur: string;
 };
 const MainHome = ({ setSaveur, saveur }: TypePropsHome) => {
-  const [selectSaveur, setSelectSaveur] = useState("");
   const { setVille, ville, deleteCityCookie } = Dynamic();
   const cancelPositon = () => {
     setVille("");

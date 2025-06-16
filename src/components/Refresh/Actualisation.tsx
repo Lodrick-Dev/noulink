@@ -13,7 +13,6 @@ const Actualisation = ({ setActualised, setId }: TypeProps) => {
   const [displayNumero, setDisplayNumero] = useState<string | null>("");
   const [codeSms, setCodeSms] = useState("");
   const [numero, setNumero] = useState("");
-  const [checkedNum, setCheckedNum] = useState(false);
   const [error, setError] = useState("");
   const [changeField, setChangeField] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -21,23 +20,22 @@ const Actualisation = ({ setActualised, setId }: TypeProps) => {
   //fonctions
   const handleValidation = () => {
     if (!numero) {
-      return toast.error("Un numéro est obligatoire");
+      toast.error("Un numéro est obligatoire");
+      return null;
     }
-    if (!formatAndValidatePhone(numero)) {
+
+    const formatNum = formatAndValidatePhone(numero);
+
+    if (!formatNum) {
       setError(
         "Numéro invalide. Veuillez entrer un numéro mobile valide (France, DOM)."
       );
-      const timer = setTimeout(() => {
-        setError("");
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    } else {
-      setError("");
-      const formatNum = formatAndValidatePhone(numero);
-      //   setDisplayNumero(formatNum);
-      return formatNum;
+      setTimeout(() => setError(""), 3000);
+      return null;
     }
+
+    setError("");
+    return formatNum;
   };
 
   //format numero
@@ -62,6 +60,10 @@ const Actualisation = ({ setActualised, setId }: TypeProps) => {
 
   //handleCheckIfNumExist
   const handleCheckIfNumExist = async () => {
+    const checkedIfAutorize = handleValidation();
+    if (!checkedIfAutorize) {
+      return; // Stoppe la fonction si le numéro est invalide
+    }
     const t = formatAndValidatePhone(numero);
 
     setDisplayNumero(t);
@@ -88,11 +90,15 @@ const Actualisation = ({ setActualised, setId }: TypeProps) => {
           return toast.success(res.data.message);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       setLoading(false);
       setChangeField(false);
-      return toast.error("Une erreur est survenue");
+      if (error.response.data.error) {
+        return toast.error(error.response.data.error);
+      } else {
+        return toast.error("Une erreur est survenue");
+      }
     }
   };
 

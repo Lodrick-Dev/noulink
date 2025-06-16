@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Header from "./components/Header/Header";
 import GeolocationPrompt from "./components/Geolocalise/Geolocalise";
-import { Fade, Slide } from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";

@@ -10,14 +10,12 @@ type TypeProps = {
   displayNumero: string | null;
   setCodeSms: React.Dispatch<React.SetStateAction<string>>;
   codeSms: string;
-  onSendCode?: (numero: string, uuid: string) => Promise<void>; // facultative
 };
 const CheckNumero = ({
   setDisplayNumero,
   displayNumero,
   setCodeSms,
   codeSms,
-  onSendCode,
 }: TypeProps) => {
   const [changeField, setChangeField] = useState(false);
   const [sendingCode, setSendingCode] = useState(false);

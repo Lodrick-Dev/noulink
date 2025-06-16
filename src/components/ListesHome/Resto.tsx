@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Fade, Slide } from "react-awesome-reveal";
+import React from "react";
+import { Slide } from "react-awesome-reveal";
 import styled from "styled-components";
 import type { TypeDocProps } from "./ListesHome";
 import {
@@ -30,8 +30,8 @@ const Resto = ({
   speciality,
   setGetOne,
 }: TypeDocPropsResto) => {
-  const [galeries, setGaleries] = useState(galerie);
-  const [specialities, setSpecialities] = useState(speciality);
+  //   const [galeries, setGaleries] = useState(galerie);
+  //   const [specialities, setSpecialities] = useState(speciality);
 
   return (
     <StyledResto>
@@ -48,9 +48,9 @@ const Resto = ({
             <p>Info : {description}</p>
             <div className="specialities">
               <span className="title">Spécialité(s) : </span>
-              {specialities &&
-                specialities.length > 0 &&
-                specialities.map((spec, i) => (
+              {speciality &&
+                speciality.length > 0 &&
+                speciality.map((spec, i) => (
                   <span key={i} className="el">
                     {capitalizeFirstLetter(spec)}
                   </span>
