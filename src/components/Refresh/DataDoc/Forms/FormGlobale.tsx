@@ -124,7 +124,7 @@ const FormGlobale = ({
         </div>
         <textarea
           placeholder="Description, contact, horaire, ect (optionnel)"
-          value={updateDescription ? updateDescription : description}
+          defaultValue={updateDescription ? updateDescription : description}
           onChange={(e) => setUpdateDescription(e.target.value)}
         ></textarea>
         {updating && <Loading />}
