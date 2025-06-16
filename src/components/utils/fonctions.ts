@@ -25,28 +25,30 @@ export const formatRelativeDate = (value: string, label: string) => {
   }
 };
 
-//last actualisation
-export const getLastUpdateMessage = (value: string) => {
-  const date = new Date(value);
-  const now = new Date();
+//last actualisation (gernière activité ou dernière actualisation)
+export const getLastUpdateMessage = (value: string | undefined) => {
+  if (value) {
+    const date = new Date(value);
+    const now = new Date();
 
-  // Réinitialiser à minuit
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const inputDate = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate()
-  );
+    // Réinitialiser à minuit
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const inputDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
 
-  const diffInMs = today.getTime() - inputDate.getTime();
-  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    const diffInMs = today.getTime() - inputDate.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
-  if (diffInDays === 0) {
-    return "Dernière actualisation aujourd'hui";
-  } else if (diffInDays === 1) {
-    return "Dernière actualisation hier";
-  } else {
-    return `Dernière actualisation il y a ${diffInDays} jours`;
+    if (diffInDays === 0) {
+      return "Activité aujourd'hui";
+    } else if (diffInDays === 1) {
+      return "Activité hier";
+    } else {
+      return `Activité il y a ${diffInDays} jours`;
+    }
   }
 };
 

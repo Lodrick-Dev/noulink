@@ -14,7 +14,6 @@ export type TypeDoc = {
   pseudo?: string;
   ville?: string;
   saveur?: string;
-  numero?: string; //a retirer
   profil?: string;
   galerie?: string[];
   description?: string;

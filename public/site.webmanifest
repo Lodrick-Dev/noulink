@@ -1,0 +1,27 @@
+{
+"name": "Nou Link",
+  "short_name": "Nou Link",
+  "description": "Les saveurs d'Outre-mer près de chez vous.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#278ea5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#06044a",
+  "background_color": "#051263",
+  "display": "standalone"
+}

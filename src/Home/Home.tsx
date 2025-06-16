@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import MainHome from "./MainHome/MainHome";
 import ListesHome from "../components/ListesHome/ListesHome";
-export type TypeProps = {
-  setPopRouter: React.Dispatch<React.SetStateAction<boolean>>;
-};
-const Home = ({ setPopRouter }: TypeProps) => {
+import { useState } from "react";
+const Home = () => {
+  const [saveur, setSaveur] = useState<string>("");
   return (
     <StyledHome>
-      <MainHome setPopRouter={setPopRouter} />
-      <ListesHome />
+      <MainHome setSaveur={setSaveur} saveur={saveur} />
+      <ListesHome saveur={saveur} />
     </StyledHome>
   );
 };

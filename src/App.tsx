@@ -36,7 +36,7 @@ function App() {
       <Routes>
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/update" element={<Refresh />} />
-        <Route path="*" element={<Home setPopRouter={setPopRouter} />} />
+        <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
       {popRouter && <PopRouter setPopRouter={setPopRouter} />}

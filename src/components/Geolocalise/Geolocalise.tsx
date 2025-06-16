@@ -47,10 +47,10 @@ function GeolocationPrompt() {
       const country = data.results[0]?.components?.county
         ? data.results[0]?.components?.country
         : "Non fourni";
-      console.log("tout : ", data);
-      const dataLocalication = `${city} (${country})`;
-      console.log("Ville détectée :", city);
+      const dataLocalication = `${city}`;
       setVille(dataLocalication);
+      // const dataLocalication = `${city} (${country})`;
+      // setVille(dataLocalication);
     } catch (err) {
       console.error("Erreur lors du géocodage inverse :", err);
     }

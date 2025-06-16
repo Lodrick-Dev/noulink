@@ -1,12 +1,18 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
-
-const One = () => {
+type TypePropsOne = {
+  profil: string | undefined;
+  name: string | undefined;
+  saveur: string | undefined;
+  id: string;
+  actionClick: (id: string) => void;
+};
+const One = ({ profil, name, saveur, id, actionClick }: TypePropsOne) => {
   return (
-    <StyledOne>
-      <img src="/assets/repas.jpg" alt="" />
-      <strong>Marc uo pp ej ee ooi</strong>
-      <span className="the-span">Saveur : Guyane</span>
+    <StyledOne onClick={() => actionClick(id)}>
+      <img src={profil ? profil : ""} alt={"profil-img"} />
+      {name && <strong>{name}</strong>}
+      {saveur && <span className="the-span">Saveur : {saveur}</span>}
     </StyledOne>
   );
 };
@@ -17,6 +23,7 @@ const StyledOne = styled.div`
   height: 30vh;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   border-radius: 10px;
   margin: 10px;
   border: solid 1px ${COLORS.grey};
@@ -39,6 +46,7 @@ const StyledOne = styled.div`
     text-align: center;
     border-radius: 7px;
     font-size: 0.8em;
+    width: 90%;
     background: ${COLORS.yellow};
   }
   @media screen and (max-width: 450px) {

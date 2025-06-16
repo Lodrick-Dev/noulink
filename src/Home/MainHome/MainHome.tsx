@@ -3,9 +3,12 @@ import COLORS from "../../Styles/Styles";
 import BarreSearch from "../../components/BarreSearch/BarreSearch";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
-import type { TypeProps } from "../Home";
 import { Dynamic } from "../../Context/ContextDynamique";
-const MainHome = ({ setPopRouter }: TypeProps) => {
+export type TypePropsHome = {
+  setSaveur: React.Dispatch<React.SetStateAction<string>>;
+  saveur: string;
+};
+const MainHome = ({ setSaveur, saveur }: TypePropsHome) => {
   const [selectSaveur, setSelectSaveur] = useState("");
   const { setVille, ville, deleteCityCookie } = Dynamic();
   const cancelPositon = () => {
@@ -18,37 +21,33 @@ const MainHome = ({ setPopRouter }: TypeProps) => {
       <div className="liste-country">
         <span
           onClick={() =>
-            setSelectSaveur((prev) => (prev === "Guyane" ? "" : "Guyane"))
+            setSaveur((prev) => (prev === "Guyane" ? "" : "Guyane"))
           }
-          className={selectSaveur === "Guyane" ? "actif" : ""}
+          className={saveur === "Guyane" ? "actif" : ""}
         >
           Guyane
         </span>
         <span
           onClick={() =>
-            setSelectSaveur((prev) =>
-              prev === "Guadeloupe" ? "" : "Guadeloupe"
-            )
+            setSaveur((prev) => (prev === "Guadeloupe" ? "" : "Guadeloupe"))
           }
-          className={selectSaveur === "Guadeloupe" ? "actif" : ""}
+          className={saveur === "Guadeloupe" ? "actif" : ""}
         >
           Guadeloupe
         </span>
         <span
           onClick={() =>
-            setSelectSaveur((prev) =>
-              prev === "Martinique" ? "" : "Martinique"
-            )
+            setSaveur((prev) => (prev === "Martinique" ? "" : "Martinique"))
           }
-          className={selectSaveur === "Martinique" ? "actif" : ""}
+          className={saveur === "Martinique" ? "actif" : ""}
         >
           Martinique
         </span>
         <span
           onClick={() =>
-            setSelectSaveur((prev) => (prev === "Mayotte" ? "" : "Mayotte"))
+            setSaveur((prev) => (prev === "Mayotte" ? "" : "Mayotte"))
           }
-          className={selectSaveur === "Mayotte" ? "actif" : ""}
+          className={saveur === "Mayotte" ? "actif" : ""}
         >
           Mayotte
         </span>
@@ -58,9 +57,7 @@ const MainHome = ({ setPopRouter }: TypeProps) => {
         <span onClick={() => cancelPositon()} className="localisation">
           Lieu actuel : {ville ? `${ville} ✅` : <Loading />}{" "}
         </span>
-        <span>
-          Saveurs de : {selectSaveur ? `${selectSaveur} ✅` : "Tous"}{" "}
-        </span>
+        <span>Saveurs de : {saveur ? `${saveur} ✅` : "Tous"} </span>
       </div>
     </StyledMainHome>
   );
