@@ -30,10 +30,8 @@ const Resto = ({
   speciality,
   setGetOne,
 }: TypeDocPropsResto) => {
-  console.log(updatedAt);
   const [galeries, setGaleries] = useState(galerie);
   const [specialities, setSpecialities] = useState(speciality);
-  console.log(specialities);
 
   return (
     <StyledResto>
@@ -64,7 +62,9 @@ const Resto = ({
           <span className="legend-galerie">Galerie</span>
           {galerie &&
             galerie.length > 0 &&
-            galerie.map((img, i) => <img src={img} alt="image-galerie-one" />)}
+            galerie.map((img, i) => (
+              <img key={i} src={img} alt="image-galerie-one" />
+            ))}
         </div>
       </Slide>
       <OctagonX className="i-con" size={40} onClick={() => setGetOne(null)} />

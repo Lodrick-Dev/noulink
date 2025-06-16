@@ -39,7 +39,6 @@ const Refresh = () => {
         url: `${import.meta.env.VITE_APP_API}restaurant/one/${id}`,
         withCredentials: true,
       });
-      console.log(res);
       if (res.data) {
         setRestaurant(res.data);
         setGalerie(res.data.galerie);
