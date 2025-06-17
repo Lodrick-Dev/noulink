@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import MentionsLegales from "./components/Legales/MentionsLegales";
 import PolitiqueConfidentialite from "./components/Legales/PolitiqueConfidentialite";
 import Cgu from "./components/Legales/Cgu";
+import LandingPage from "./Home/LandingPage/LandingPage";
 
 function App() {
   const [showPrompt, setShowPrompt] = useState(false);
@@ -30,12 +31,12 @@ function App() {
   }, []);
   return (
     <StyledApp>
-      {showPrompt && !ville && location.pathname === "/" && (
+      {showPrompt && !ville && location.pathname === "/home" && (
         <Slide direction="down" triggerOnce>
           <GeolocationPrompt />
         </Slide>
       )}
-      <Header setPopRouter={setPopRouter} />
+      {location.pathname !== "/" && <Header setPopRouter={setPopRouter} />}
       <Routes>
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/update" element={<Refresh />} />
@@ -45,7 +46,8 @@ function App() {
           path="/politique-confidentialite"
           element={<PolitiqueConfidentialite />}
         />
-        <Route path="*" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="*" element={<LandingPage />} />
       </Routes>
       <Footer />
       {popRouter && <PopRouter setPopRouter={setPopRouter} />}
