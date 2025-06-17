@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { Link } from "react-router-dom";
-import { Fade, Slide } from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 
 const LandingPage = () => {
   return (
