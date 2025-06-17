@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Fade, Slide } from "react-awesome-reveal";
 
 const LandingPage = () => {
-  const navigate = useNavigate();
-
   return (
     <StyledLandingPage>
       <div className="hero">
-        <h1>Nou Link</h1>
+        <Slide direction="down" triggerOnce>
+          <h1>Nou Link</h1>
+        </Slide>
         <p>
           Trouvez le plat de vos origines, où que vous soyez.
           <br />
@@ -23,12 +23,14 @@ const LandingPage = () => {
           souhaitiez faire vivre vos traditions culinaires, Nou Link est fait
           pour vous.
         </p>
-        <div className="departement">
-          <span className="span-countries ">Guyane</span>
-          <span className="span-countries ">Guadeloupe</span>
-          <span className="span-countries ">Martinique</span>
-          <span className="span-countries ">Mayotte</span>
-        </div>
+        <Slide direction="down" triggerOnce>
+          <div className="departement">
+            <span className="span-countries ">Guyane</span>
+            <span className="span-countries ">Guadeloupe</span>
+            <span className="span-countries ">Martinique</span>
+            <span className="span-countries ">Mayotte</span>
+          </div>
+        </Slide>
         <div className="cta">
           <Link to="/home" className="btn">
             Découvrir les saveurs près de chez vous

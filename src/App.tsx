@@ -16,6 +16,7 @@ import MentionsLegales from "./components/Legales/MentionsLegales";
 import PolitiqueConfidentialite from "./components/Legales/PolitiqueConfidentialite";
 import Cgu from "./components/Legales/Cgu";
 import LandingPage from "./Home/LandingPage/LandingPage";
+import { PopCookies } from "./components/PopCookies/PopCookies";
 
 function App() {
   const [showPrompt, setShowPrompt] = useState(false);
@@ -29,6 +30,9 @@ function App() {
 
     return () => clearTimeout(timer); // bonne pratique pour nettoyer si le composant est démonté
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   return (
     <StyledApp>
       {showPrompt && !ville && location.pathname === "/home" && (
@@ -37,6 +41,7 @@ function App() {
         </Slide>
       )}
       {location.pathname !== "/" && <Header setPopRouter={setPopRouter} />}
+      {location.pathname !== "/" && <PopCookies />}
       <Routes>
         <Route path="/inscription" element={<Inscription />} />
         <Route path="/update" element={<Refresh />} />
