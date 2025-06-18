@@ -9,14 +9,14 @@ const Header = ({ setPopRouter }: TypeProps) => {
   const pageActu = useLocation();
   const direction = useNavigate();
   const returnText = () => {
-    return pageActu.pathname !== "/" ? (
+    return pageActu.pathname !== "/home" ? (
       <House className="home-a" />
     ) : (
       "S'enregistrer"
     );
   };
   const actionCondition = () => {
-    if (pageActu.pathname !== "/") {
+    if (pageActu.pathname !== "/home") {
       direction("/");
     } else {
       setPopRouter(true);

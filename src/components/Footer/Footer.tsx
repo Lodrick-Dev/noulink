@@ -12,6 +12,9 @@ const Footer = () => {
           Politique de confidentialité
         </li>
         <li onClick={() => nav("/mentions")}>Mentions légales</li>
+        <a href="https://www.instagram.com/noulinkg/" target="_blank">
+          Instagram
+        </a>
       </ul>
       <div className="box-img">
         <img src="/svglogo.svg" alt="logo-noulink" />
@@ -37,6 +40,11 @@ const StyledFooter = styled.div`
       cursor: pointer;
       list-style: none;
       text-decoration: underline;
+      color: white;
+      margin-top: 10px;
+    }
+    a {
+      cursor: pointer;
       color: white;
       margin-top: 10px;
     }
