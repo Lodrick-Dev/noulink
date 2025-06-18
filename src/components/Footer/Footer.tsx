@@ -17,7 +17,7 @@ const Footer = () => {
         </a>
       </ul>
       <div className="box-img">
-        <img src="/svglogo.svg" alt="logo-noulink" />
+        <img src="/svglogo.svg" alt="logo-noulink" onClick={() => nav("/")} />
       </div>
       <span>©copyright - 2025</span>
     </StyledFooter>
@@ -55,6 +55,7 @@ const StyledFooter = styled.div`
     align-items: center;
     img {
       width: 40%;
+      cursor: pointer;
     }
   }
   @media screen and (max-width: 450px) {
