@@ -11,18 +11,14 @@ const LandingPage = () => {
           <h1>Nou Link</h1>
         </Slide>
         <p>
-          Trouvez le plat de vos origines, où que vous soyez.
+          Trouvez les spécialités de vos péyi, où que vous soyez.
           <br />
-          La plateforme connecte la diaspora avec les cuisiniers de leur
-          communauté.
+          La plateforme connecte les Antilles/Guyane autour des spécialités
+          culinaires.
           <br />
         </p>
 
-        <p className="last-p">
-          Que vous soyez en quête des saveurs de votre enfance ou que vous
-          souhaitiez faire vivre vos traditions culinaires, Nou Link est fait
-          pour vous.
-        </p>
+        <p className="last-p">Nou Link pou zot trouvé zot favorite food.</p>
         <Slide direction="down" triggerOnce>
           <div className="departement">
             <span className="span-countries ">Guyane</span>
