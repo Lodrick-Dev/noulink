@@ -105,7 +105,7 @@ const StyledResto = styled.div`
         display: block;
         width: 30%;
         border-radius: 15px;
-        background: ${COLORS.green};
+        background: ${COLORS.black};
         padding: 10px;
       }
       .infos-compte {

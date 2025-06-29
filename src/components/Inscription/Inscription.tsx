@@ -10,11 +10,11 @@ import { toast } from "react-toastify";
 import axios from "axios";
 const Inscription = () => {
   const [etape, setEtape] = useState(0);
-  const [mot, setMot] = useState("");
+  // const [mot, setMot] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [displayNumero, setDisplayNumero] = useState<null | string>(""); //to api
-  const [mots, setMots] = useState<string[]>([]);
+  // const [mots, setMots] = useState<string[]>([]);
   const [saveur, setSaveur] = useState("");
   const [profil, setProfil] = useState<File | null>(null);
   const [galerie, setGalerie] = useState<File[]>([]);
@@ -48,7 +48,6 @@ const Inscription = () => {
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSaveur(event.target.value);
-    console.log("Saveur choisie :", event.target.value);
   };
   const handleEtape = () => {
     if (etape === 0) {
@@ -66,16 +65,16 @@ const Inscription = () => {
       setEtape(0);
     }
   };
-  const handleMots = () => {
-    if (!mot.trim()) return alert("Ajouter un mot");
-    if (mots.length >= 5) return alert("5 mots max");
-    if (mots.includes(mot.trim())) return alert("Ce mot existe déjà");
-    setMots((prev) => [...prev, mot.trim()]);
-    setMot("");
-  };
-  const handleRemoveMot = (motASupprimer: string) => {
-    setMots((prev) => prev.filter((m) => m !== motASupprimer));
-  };
+  // const handleMots = () => {
+  //   if (!mot.trim()) return alert("Ajouter un mot");
+  //   if (mots.length >= 5) return alert("5 mots max");
+  //   if (mots.includes(mot.trim())) return alert("Ce mot existe déjà");
+  //   setMots((prev) => [...prev, mot.trim()]);
+  //   setMot("");
+  // };
+  // const handleRemoveMot = (motASupprimer: string) => {
+  //   setMots((prev) => prev.filter((m) => m !== motASupprimer));
+  // };
 
   const handleSubmit = async () => {
     if (!pseudo || !saveur || !ville) {
@@ -112,12 +111,6 @@ const Inscription = () => {
       data.append("description", description);
     }
 
-    // Optionnel : mots-clés (speciality)
-    if (mots.length > 0) {
-      mots.forEach((mot) => {
-        data.append("speciality", mot);
-      });
-    }
     try {
       const res = await axios({
         method: "post",
@@ -145,11 +138,11 @@ const Inscription = () => {
 
   const deleteDataCurrent = () => {
     setEtape(0);
-    setMot("");
+    // setMot("");
     setImageUrl("");
     setPreviewUrls([]);
     setDisplayNumero("");
-    setMots([]);
+    // setMots([]);
     setSaveur("");
     setProfil(null);
     setGalerie([]);
@@ -224,7 +217,7 @@ const Inscription = () => {
                 placeholder="Description, contact, horaire, ect (optionnel)"
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
-              <div className="key-search">
+              {/* <div className="key-search">
                 <label htmlFor="key">
                   5 mots max(spécialités) pour que les visiteurs vous trouvent :{" "}
                 </label>
@@ -245,7 +238,7 @@ const Inscription = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
               {sendingSub && <Loading />}
               {!sendingSub && (
                 <button className="btn-sub" onClick={() => handleSubmit()}>

@@ -63,7 +63,7 @@ const Refresh = () => {
       <div className="box-check-account">
         {!actualised && <p>Pour vous actualiser</p>}
         {actualised ? (
-          <CheckedCodeNumber />
+          <CheckedCodeNumber id={id} />
         ) : (
           <Actualisation setActualised={setActualised} setId={setId} />
         )}

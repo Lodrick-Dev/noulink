@@ -36,6 +36,7 @@ const StyledOne = styled.div`
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     display: block;
+    background: ${COLORS.black};
   }
   strong {
     text-align: center;
