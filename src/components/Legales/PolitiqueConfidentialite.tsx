@@ -73,6 +73,12 @@ const PolitiqueConfidentialite = () => {
           données sont anonymes et ne permettent pas de vous identifier
           personnellement.
         </p>
+        <p>
+          Les données de fréquentation anonymes collectées via cet outil sont
+          conservées pour une durée maximale de 6 mois, conformément aux
+          recommandations de la CNIL. Vous pouvez refuser ce suivi à tout moment
+          via notre bannière de consentement ou en nous contactant.
+        </p>
       </div>
       <div className="box">
         <h2>.5 Durée de conversation</h2>

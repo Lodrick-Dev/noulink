@@ -84,12 +84,21 @@ const ConsentementRGPD = () => {
         nous recueillons des données anonymes de navigation. Souhaitez-vous y
         contribuer ?
       </p>
-      <button className="acc" onClick={handleAccept}>
-        Accepter
-      </button>
-      <button className="ref" onClick={handleRefuse}>
-        Refuser
-      </button>
+      <a
+        className="a-direct"
+        href="/politique-confidentialite"
+        rel="noopener noreferrer"
+      >
+        En savoir plus
+      </a>
+      <div className="box-btns-legale">
+        <button className="acc" onClick={handleAccept}>
+          Accepter
+        </button>
+        <button className="ref" onClick={handleRefuse}>
+          Refuser
+        </button>
+      </div>
     </StyledConsentementRGPD>
   );
 };
@@ -102,22 +111,32 @@ const StyledConsentementRGPD = styled.div`
   background: ${COLORS.white};
   width: 100%;
   bottom: 0px;
-  button {
-    padding: 5px 25px;
-    margin: 10px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 1px 1px 5px 1px ${COLORS.black};
-    outline: none;
+  display: flex;
+  flex-direction: column;
+  .a-direct {
+    color: ${COLORS.red};
+    margin: 10px 0px;
   }
-  .acc {
-    background: ${COLORS.green};
-    color: white;
-    font-size: 1.1em;
-  }
-  .ref {
-    background: ${COLORS.red};
-    color: white;
+  .box-btns-legale {
+    width: 50%;
+    button {
+      /* width: 15%; */
+      padding: 5px 25px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 1px 1px 5px 1px ${COLORS.black};
+      outline: none;
+    }
+    .acc {
+      background: ${COLORS.green};
+      color: white;
+      font-size: 1.1em;
+    }
+    .ref {
+      background: ${COLORS.red};
+      color: white;
+    }
   }
 `;
