@@ -17,6 +17,7 @@ import PolitiqueConfidentialite from "./components/Legales/PolitiqueConfidential
 import Cgu from "./components/Legales/Cgu";
 import LandingPage from "./Home/LandingPage/LandingPage";
 import { PopCookies } from "./components/PopCookies/PopCookies";
+import ConsentementRGPD from "./components/Legales/ConsentementRGPD";
 
 function App() {
   const [showPrompt, setShowPrompt] = useState(false);
@@ -35,6 +36,7 @@ function App() {
   }, [location]);
   return (
     <StyledApp>
+      <ConsentementRGPD />
       {showPrompt && !ville && location.pathname === "/home" && (
         <Slide direction="down" triggerOnce>
           <GeolocationPrompt />
