@@ -18,7 +18,7 @@ const LandingPage = () => {
           <br />
         </p>
 
-        <p className="last-p">Nou Link pou zot trouvé zot favorite food.</p>
+        <h2 className="last-p">Nou Link pou zot trouvé zot favorite food.</h2>
         <Slide direction="down" triggerOnce>
           <div className="departement">
             <span className="span-countries ">Guyane</span>
@@ -27,43 +27,33 @@ const LandingPage = () => {
             <span className="span-countries ">Mayotte</span>
           </div>
         </Slide>
-        <div className="cta">
+        <nav className="cta">
           <Link to="/home" className="btn">
             Découvrir les saveurs près de chez vous
           </Link>
           <Link to="/inscription" className="btn secondary">
-            Cuisinier ? Rejoignez Nou Link
+            Publiez vos spécialités
           </Link>
-        </div>
+        </nav>
       </div>
-      {/* <div className="food-gallery">
-        <h2>Quelques plats que vous pourriez trouver</h2>
-        <div className="images">
-          <img
-            src="https://via.placeholder.com/250x250.png?text=Boudin+créole"
-            alt="Boudin créole"
-          />
-          <img
-            src="https://via.placeholder.com/250x250.png?text=Colombo"
-            alt="Colombo"
-          />
-          <img
-            src="https://via.placeholder.com/250x250.png?text=Accras"
-            alt="Accras de morue"
-          />
-          <img
-            src="https://via.placeholder.com/250x250.png?text=Blaff+de+poisson"
-            alt="Blaff de poisson"
-          />
-        </div>
-      </div> */}
+      <section className="section-2">
+        <h3>Pourquoi utiliser Nou Link ?</h3>
+        <p>
+          Nou Link est la première plateforme qui connecte les passionnés de
+          cuisine ultramarine. Retrouvez des plats traditionnels comme le{" "}
+          <strong>colombo</strong>, le <strong>bokit</strong> ou les{" "}
+          <strong>accras</strong> près de chez vous, que vous soyez à{" "}
+          <strong>Paris</strong>, <strong>Lyon</strong>,
+          <strong>Marseille</strong> ou ailleurs en France.
+        </p>
+      </section>
     </StyledLandingPage>
   );
 };
 
 export default LandingPage;
 
-const StyledLandingPage = styled.div`
+const StyledLandingPage = styled.section`
   padding: 50px 0px;
   color: ${COLORS.white};
   position: relative;
@@ -170,33 +160,20 @@ const StyledLandingPage = styled.div`
       }
     }
   }
-  .food-gallery {
-    text-align: center;
-    margin-top: 20px;
-    h2 {
-      color: ${COLORS.yellow};
-      font-size: 2em;
-      margin-bottom: 30px;
-    }
-    .images {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 10px;
-        box-shadow: 0 0 10px ${COLORS.yellow};
-        transition: 0.2s;
-      }
-      img:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px ${COLORS.yellow};
+  .section-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
+    > p {
+      margin-top: 20px;
+      text-align: center;
+      > strong {
+        color: ${COLORS.main};
       }
     }
   }
-
   @media (max-width: 500px) {
     .hero {
       h1 {
