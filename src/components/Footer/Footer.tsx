@@ -8,6 +8,7 @@ const Footer = () => {
     <StyledFooter>
       <ul>
         <li onClick={() => nav("/cgu")}>CGU</li>
+        <li onClick={() => nav("/cgv")}>CGV</li>
         <li onClick={() => nav("/politique-confidentialite")}>
           Politique de confidentialité
         </li>

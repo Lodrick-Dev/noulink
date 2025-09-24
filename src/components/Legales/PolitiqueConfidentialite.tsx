@@ -30,10 +30,7 @@ const PolitiqueConfidentialite = () => {
           création et de la gestion de votre profil sur Nou Link :
         </p>
         <p>- Pseudo (Nom etablissement pseudo)</p>
-        <p>
-          - Numéro de téléphone (utilisé uniquement pour vérification via SMS -
-          non public )
-        </p>
+        <p>- Numéro de téléphone ( non public )</p>
         <p>- Ville (via géolocalisation)</p>
         <p>- Saveur (de Guyane, Guadeloupe, ect)</p>
         <p>- Spécialités culinaires saisies</p>
@@ -46,23 +43,15 @@ const PolitiqueConfidentialite = () => {
         </strong>
       </div>
       <div className="box">
-        <h2>.3 Vérification par SMS (Twilio)</h2>
+        <h2>.3 Abonnement annuel et conservation des données</h2>
         <p>
-          Pour vérifier l'authenticité de votre compte, Nou Link utilise Twilio,
-          un service tiers, pour l'envoi de codes de validation par SMS.
+          La création et la publication d’un profil nécessitent la souscription
+          d’un abonnement annuel payant.
         </p>
-        <p>- Modification & suppression de votre compte </p>
         <p>
-          - Votre numéro de téléphone est stocké en toute sécurité et n'est
-          jamais visible publiquement.
-        </p>
-        <p>- Il n'est pas utilisé à des fins commerciales ou publicitaires.</p>
-        <p>
-          De plus, pour garantir que les profils affichés sont bien actifs,
-          chaque utilisateur doit actualiser son profil au moins une fois tous
-          les 5 mois. À défaut, le compte sera automatiquement supprimé. Cette
-          mesure vise à éviter que des visiteurs contactent des établissements
-          qui ne sont plus actifs dans la réalité.
+          Vos données sont conservées tant que votre abonnement est actif. Vous
+          pouvez demander la suppression de votre profil ou de vos données à
+          tout moment en contactant : dev.frenchlod@gmail.com .
         </p>
       </div>
       <div className="box">
@@ -77,7 +66,7 @@ const PolitiqueConfidentialite = () => {
           Les données de fréquentation anonymes collectées via cet outil sont
           conservées pour une durée maximale de 6 mois, conformément aux
           recommandations de la CNIL. Vous pouvez refuser ce suivi à tout moment
-          via notre bannière de consentement ou en nous contactant.
+          en nous contactant.
         </p>
       </div>
       <div className="box">

@@ -17,41 +17,58 @@ const Cgu = () => {
       <div>
         <h2>.1 Présentation du service</h2>
         <p>
-          Nou Link est une plateforme gratuite destinée à mettre en avant les
-          spécialités culinaires de l'Outre-mer. Elle permet aux utilisateurs de
-          référencer un profil (pseudo, description, spécialités, images) qui
-          sera visible publiquement.
+          Nou Link (service exploité sous le nom commercial Losira) est une
+          plateforme destinée à mettre en avant les spécialités culinaires de
+          l’Outre-mer. La consultation, la recherche et la découverte des fiches
+          et profils (spécialités, photos, descriptions, localisation) sont
+          gratuites pour les utilisateurs à la recherche de repas. En revanche,
+          la création, la publication et la gestion d’un profil permettant de
+          présenter une offre de repas (qu’il s’agisse d’un particulier, d’un
+          vendeur ou d’un établissement) sont payantes : l’inscription, la mise
+          en ligne des contenus et l’accès aux outils associés sont à un
+          abonnement annuel, dont les modalités et tarifs sont communiqués au
+          moment de l’inscription et précisés dans les Conditions Générales de
+          Vente. Un profil public peut contenir un pseudo, une description, la
+          liste des spécialités, des images et des coordonnées de contact.
+          Chaque utilisateur reste responsable de l’exactitude des informations
+          qu’il publie.
         </p>
       </div>
       <div>
         <h2>.2 Accès au site</h2>
         <p>
-          L'accès à Nou Link est gratuit et ouvert à tous. Toutefois, certaines
-          fonctionnalités (comme la publication d'un profil) nécessitent une
-          vérification par SMS via un code unique.
+          L’accès à Nou Link est gratuit et ouvert à tous pour la consultation.
+          Toutefois, certaines fonctionnalités — notamment la création et la
+          publication d’un profil payant — nécessitent la souscription d’un
+          abonnement annuel payant.
         </p>
         <p>
-          L'utilisateur est responsable de l'exactitude des informations qu'il
-          fournit. En cas d'informations trompeuses ou inappropriées, Nou Link
-          se réserve le droit de suspendre ou supprimer le profil concerné.
-        </p>
-        <p>
-          Pour garantir la pertinence des profils visibles sur Nou Link, tout
-          compte doit être actualisé au moins une fois tous les 5 mois. Passé ce
-          délai sans activité, le compte sera automatiquement supprimé. Cela
-          permet d’éviter que des visiteurs essaient de contacter des
-          établissements qui ne sont plus actifs dans la réalité.
+          L’utilisateur est responsable de l’exactitude et de la mise à jour des
+          informations qu’il fournit. En cas d’informations trompeuses,
+          inappropriées ou frauduleuses, Nou Link se réserve le droit de
+          suspendre ou de supprimer le profil concerné sans remboursement.
         </p>
       </div>
       <div>
         <h2>.3 Données personnelles</h2>
         <p>
           L'utilisation de Nou Link implique la collecte de certaines données
-          (téléphone, ville, description, etc.). Celles-ci sont traitées
-          conformément à notre{" "}
+          uniquement au fonctionnement du service (téléphone, ville,
+          description, etc.). Celles-ci sont traitées conformément à notre{" "}
           <span onClick={() => nav("/politique-confidentialite")}>
             Politique de Confidentialité.
-          </span>
+          </span>{" "}
+        </p>
+        <p>
+          Ces données sont traitées conformément à notre Politique de
+          Confidentialité et dans le respect du Règlement Général sur la
+          Protection des Données (RGPD).
+        </p>
+
+        <p>
+          Conformément à la loi, l’utilisateur dispose de droits sur ses données
+          (accès, rectification, suppression) qu’il peut exercer en contactant
+          Nou Link à l’adresse indiquée à l’article 8.
         </p>
       </div>
       <div>
@@ -70,16 +87,21 @@ const Cgu = () => {
           discriminatoires, ou violents)
         </p>
         <strong>
-          Nous nous réservons le droit de modérer ou supprimer tout contenu
-          contraire à ces règles.
+          Nous nous réservons le droit de modérer ou de supprimer tout contenu
+          contraire à ces règles, sans préavis ni remboursement.
         </strong>
       </div>
       <div>
-        <h2>.5 Proprité intellectuelle</h2>
+        <h2>.5 Propriété intellectuelle</h2>
         <p>
-          Tous les contenus de la plateforme (logo, charte graphique, textes,
-          etc.) sont la propriété de Nou Link. Toute reproduction, totale ou
-          partielle, est interdite sans autorisation préalable.
+          Nou Link est propriétaire de son logo, charte graphique, textes, etc.
+          Toute reproduction, totale ou partielle, est interdite sans
+          autorisation préalable.
+        </p>
+        <p>
+          Les utilisateurs conservent leur droits d'auteur sur leur contenus,
+          mais ils accordent à Nou Link une licence non exclusive, mondiale,
+          gratuite, pour les afficher sur la plateforme.
         </p>
       </div>
       <div>
@@ -94,6 +116,14 @@ const Cgu = () => {
           l'abri de failles ou d'attaques informatiques.
         </strong>
         <p>En utilisant le site, vous acceptez ces limites.</p>
+        <p>
+          Nou Link n'est pas responsable si les informations publiées par les
+          utilisateurs sont fausses, trompeuses ou illégales
+        </p>
+        <p>
+          Nou Link n’est pas garant de la disponibilité réelle des vendeurs,
+          particuliers ou établissements, ni de la qualité des repas proposés.
+        </p>
       </div>
       <div>
         <h2>.7 Modification des CGU</h2>

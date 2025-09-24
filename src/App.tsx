@@ -18,6 +18,7 @@ import Cgu from "./components/Legales/Cgu";
 import LandingPage from "./Home/LandingPage/LandingPage";
 import { PopCookies } from "./components/PopCookies/PopCookies";
 import ConsentementRGPD from "./components/Legales/ConsentementRGPD";
+import Cgv from "./components/Legales/Cgv";
 
 function App() {
   const [showPrompt, setShowPrompt] = useState(false);
@@ -49,6 +50,7 @@ function App() {
         <Route path="/update" element={<Refresh />} />
         <Route path="/mentions" element={<MentionsLegales />} />
         <Route path="/cgu" element={<Cgu />} />
+        <Route path="/cgv" element={<Cgv />} />
         <Route
           path="/politique-confidentialite"
           element={<PolitiqueConfidentialite />}
