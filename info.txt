@@ -1,1 +1,18 @@
 Ce projet est une application web complète (fullstack) qui permet de recenser, présenter et connecter des restaurants d’outre-mer à des utilisateurs souhaitant découvrir leurs saveurs et spécialités. Elle offre aux restaurateurs une interface simple pour gérer leur profil, partager leurs spécialités et images, tandis que les visiteurs peuvent filtrer les établissements selon la ville ou la cuisine (saveur), avec une intégration intelligente de la géolocalisation.
+
+FAQ – Nou Link
+
+Q1 : Qu’est-ce que Nou Link ?
+R : Nou Link est une plateforme qui met en avant les spécialités culinaires de l’Outre-mer. Vous pouvez rechercher et découvrir des repas gratuitement.
+
+Q2 : Qui peut publier un profil ?
+R : Toute personne souhaitant présenter ses repas peut créer un profil, qu’il s’agisse d’un particulier ou d’un établissement.
+
+Q3 : Faut-il payer pour publier un profil ?
+R : Oui, la création et la gestion d’un profil sont soumises à un abonnement annuel payant. La consultation reste gratuite.
+
+Q4 : Que comprend l’abonnement ?
+R : L’abonnement annuel permet de créer et gérer un profil public avec pseudo, description, images et liste de spécialités culinaires.
+
+Q5 : Puis-je arrêter mon abonnement ou supprimer mon profil ?
+R : Oui, vous pouvez supprimer votre profil et résilier votre abonnement à tout moment. Les abonnements ne sont pas remboursables.

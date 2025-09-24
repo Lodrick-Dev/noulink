@@ -2,6 +2,7 @@ import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { Link } from "react-router-dom";
 import { Slide } from "react-awesome-reveal";
+import Faq from "../../components/FAQ/faq";
 
 const LandingPage = () => {
   return (
@@ -11,11 +12,11 @@ const LandingPage = () => {
           <h1>Nou Link</h1>
         </Slide>
         <p>
-          Trouvez les spécialités de vos péyi, où que vous soyez.
-          <br />
+          Trouvez les spécialités culinaires de vos péyi, où que vous soyez.
+          {/* <br />
           La plateforme connecte les Antilles/Guyane autour des spécialités
           culinaires.
-          <br />
+          <br /> */}
         </p>
 
         <h2 className="last-p">Nou Link pou zot trouvé zot favorite food.</h2>
@@ -47,6 +48,7 @@ const LandingPage = () => {
           <strong>Marseille</strong> ou ailleurs en France.
         </p>
       </section>
+      <Faq />
     </StyledLandingPage>
   );
 };
@@ -65,7 +67,7 @@ const StyledLandingPage = styled.section`
     margin: 0 auto;
     h1 {
       color: ${COLORS.yellow};
-      font-size: 4em;
+      font-size: 5em;
       margin-bottom: 0px;
     }
     p {
@@ -177,7 +179,7 @@ const StyledLandingPage = styled.section`
   @media (max-width: 500px) {
     .hero {
       h1 {
-        font-size: 2.5em;
+        font-size: 3em;
       }
       p {
         width: 100%;
