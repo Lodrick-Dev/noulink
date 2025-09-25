@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { Dynamic } from "../../../../Context/ContextDynamique";
 import { toast } from "react-toastify";
-import type { TypeDoc } from "../../Refresh";
+import type { TypeDoc } from "../../Dashboard";
 import axios from "axios";
 import Loading from "../../../Loading/Loading";
 type TypeProps = {

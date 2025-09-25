@@ -2,7 +2,7 @@ import styled from "styled-components";
 import DataGlobale from "./DataDoc/DataGlobale";
 import DataSpeciality from "./DataDoc/DataSpeciality";
 import DataGalerie from "./DataDoc/DataGalerie";
-import type { TypeDoc, TypeGalerie, TypeSpecility } from "./Refresh";
+import type { TypeDoc, TypeGalerie, TypeSpecility } from "./Dashboard";
 import COLORS from "../../Styles/Styles";
 type PropsAllData = {
   restaurant: TypeDoc;

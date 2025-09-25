@@ -65,16 +65,6 @@ const Inscription = () => {
       setEtape(0);
     }
   };
-  // const handleMots = () => {
-  //   if (!mot.trim()) return alert("Ajouter un mot");
-  //   if (mots.length >= 5) return alert("5 mots max");
-  //   if (mots.includes(mot.trim())) return alert("Ce mot existe déjà");
-  //   setMots((prev) => [...prev, mot.trim()]);
-  //   setMot("");
-  // };
-  // const handleRemoveMot = (motASupprimer: string) => {
-  //   setMots((prev) => prev.filter((m) => m !== motASupprimer));
-  // };
 
   const handleSubmit = async () => {
     if (!pseudo || !saveur || !ville) {
@@ -164,12 +154,6 @@ const Inscription = () => {
               onChange={(e) => setPseudo(e.target.value)}
             />
             <Localisation />
-            {/* <input
-              type="text"
-              placeholder="Ville*"
-              value={ville ? ville : ""}
-              onChange={(e) => setVille(e.target.value)}
-            /> */}
             <div className="box-saveur">
               <label htmlFor="saveur">Saveurs de* : </label>
               <select id="saveur" value={saveur} onChange={handleChange}>
@@ -217,28 +201,6 @@ const Inscription = () => {
                 placeholder="Description, contact, horaire, ect (optionnel)"
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
-              {/* <div className="key-search">
-                <label htmlFor="key">
-                  5 mots max(spécialités) pour que les visiteurs vous trouvent :{" "}
-                </label>
-                <input
-                  type="text"
-                  id="key"
-                  value={mot ? mot : ""}
-                  placeholder="Mot"
-                  onChange={(e) => setMot(e.target.value)}
-                />
-                <button onClick={() => handleMots()}>➕</button>
-                {mots && mots.length > 0 && (
-                  <div className="key-w">
-                    {mots.map((mot, i) => (
-                      <span key={i} onClick={() => handleRemoveMot(mot)}>
-                        {mot} ❌
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div> */}
               {sendingSub && <Loading />}
               {!sendingSub && (
                 <button className="btn-sub" onClick={() => handleSubmit()}>

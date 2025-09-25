@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import type { TypeDoc } from "../Refresh";
+import type { TypeDoc } from "../Dashboard";
 import COLORS from "../../../Styles/Styles";
 import {
   capitalizeFirstLetter,

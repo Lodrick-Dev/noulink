@@ -3,6 +3,7 @@ import type {
   TypeContextDynamic,
   TypeContextDynamicProviderProps,
 } from "./TypeContextDynamique";
+import type { User } from "@supabase/supabase-js";
 
 const ContextDynamic = createContext<TypeContextDynamic | undefined>(undefined);
 
@@ -10,6 +11,8 @@ export const ContextDynamicProvider = ({
   children,
 }: TypeContextDynamicProviderProps) => {
   const [ville, setVille] = useState<string>("");
+  const [token, setToken] = useState<string>("");
+  const [userAuth, setUserAuth] = useState<User | null>(null);
 
   const setCityCookie = () => {
     const now = new Date();
@@ -40,7 +43,17 @@ export const ContextDynamicProvider = ({
     }
   }, []);
   return (
-    <ContextDynamic.Provider value={{ setVille, ville, deleteCityCookie }}>
+    <ContextDynamic.Provider
+      value={{
+        setVille,
+        ville,
+        setToken,
+        token,
+        deleteCityCookie,
+        setUserAuth,
+        userAuth,
+      }}
+    >
       {children}
     </ContextDynamic.Provider>
   );

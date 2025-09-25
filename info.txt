@@ -16,3 +16,9 @@ R : L’abonnement annuel permet de créer et gérer un profil public avec pseud
 
 Q5 : Puis-je arrêter mon abonnement ou supprimer mon profil ?
 R : Oui, vous pouvez supprimer votre profil et résilier votre abonnement à tout moment. Les abonnements ne sont pas remboursables.
+
+
+***IMPORTANT §§
+Sur ton interface d’inscription/payement, tu dois afficher une case du type :
+
+☑️ « Je reconnais que mon profil sera mis en ligne immédiatement après mon paiement et que je renonce expressément à mon droit de rétractation conformément à l’article L221-28 du Code de la Consommation. »

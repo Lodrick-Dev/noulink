@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Inscription from "./components/Inscription/Inscription";
-import Refresh from "./components/Refresh/Refresh";
+import Refresh from "./components/Refresh/Dashboard";
 import PopRouter from "./components/PopRouter/PopRouter";
 import Home from "./Home/Home";
 import Footer from "./components/Footer/Footer";
@@ -19,6 +19,11 @@ import LandingPage from "./Home/LandingPage/LandingPage";
 import { PopCookies } from "./components/PopCookies/PopCookies";
 import ConsentementRGPD from "./components/Legales/ConsentementRGPD";
 import Cgv from "./components/Legales/Cgv";
+import Auth from "./Screens/Auth/Auth";
+import EmailConf from "./components/Register/EmailConf";
+import ResetPassword from "./components/Register/ResetPassword";
+import PrivateRoute from "./components/Private/PrivateRoute";
+import PublicRoute from "./components/Private/PublicRoute";
 
 function App() {
   const [showPrompt, setShowPrompt] = useState(false);
@@ -46,11 +51,28 @@ function App() {
       {location.pathname !== "/" && <Header setPopRouter={setPopRouter} />}
       {location.pathname !== "/" && <PopCookies />}
       <Routes>
-        <Route path="/inscription" element={<Inscription />} />
-        <Route path="/update" element={<Refresh />} />
+        {/* <Route path="/inscription" element={<Inscription />} /> */}
+        <Route
+          path="/inscription"
+          element={
+            <PublicRoute>
+              <Auth />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Refresh />
+            </PrivateRoute>
+          }
+        />
         <Route path="/mentions" element={<MentionsLegales />} />
         <Route path="/cgu" element={<Cgu />} />
         <Route path="/cgv" element={<Cgv />} />
+        <Route path="/conf-email" element={<EmailConf />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/politique-confidentialite"
           element={<PolitiqueConfidentialite />}

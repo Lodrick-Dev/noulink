@@ -126,7 +126,21 @@ const Cgv = () => {
         </p>
       </div>
       <div>
-        <h2>.9 Modification des CGV</h2>
+        <h2>.9 Droit de rétractation</h2>
+        <p>
+          Conformément à l’article L221-28 du Code de la Consommation,
+          l’utilisateur reconnaît et accepte que le service (création et mise en
+          ligne du profil, accès aux outils et à la visibilité sur la
+          plateforme) commence immédiatement après le paiement.
+        </p>
+        <p>
+          Dès lors, l’utilisateur renonce expressément à son droit de
+          rétractation, et aucun remboursement ne pourra être exigé au titre de
+          ce délai légal de 14 jours.
+        </p>
+      </div>
+      <div>
+        <h2>.10 Modification des CGV</h2>
         <p>
           Nou Link se réserve le droit de modifier les présentes CGV à tout
           moment. Les modifications s’appliquent uniquement aux nouvelles
@@ -134,7 +148,7 @@ const Cgv = () => {
         </p>
       </div>
       <div>
-        <h2>.10 Litiges et droit applicable</h2>
+        <h2>.11 Litiges et droit applicable</h2>
         <p>Les présentes CGV sont régies par le droit françai</p>
         <p>
           Tout litige relatif à la souscription ou à l’utilisation des

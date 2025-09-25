@@ -7,6 +7,11 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Loading from "../Loading/Loading";
 import AllData from "./AllData";
+import FormSpeciality from "./DataDoc/Forms/FormSpeciality";
+import FormProfil from "./DataDoc/Forms/FormProfil";
+import FormGalerie from "./DataDoc/Forms/FormGalerie";
+import LoadingBlue from "../Loading/LoadingBlue";
+// import Loading from "../utils/Loading";
 export type TypeDoc = {
   _id: string;
   createdAt: string;
@@ -21,7 +26,7 @@ export type TypeDoc = {
 };
 export type TypeGalerie = string;
 export type TypeSpecility = string;
-const Refresh = () => {
+const Dashboard = () => {
   const [actualised, setActualised] = useState(false);
   const [id, setId] = useState("");
   const [idLoading, setIdLoading] = useState(false);
@@ -58,32 +63,19 @@ const Refresh = () => {
     }
   }, [id]);
   return (
-    <StyledRefresh>
+    <StyledDashboard>
       {!actualised && <h3>Votre compte</h3>}
-      <div className="box-check-account">
+      {/* <div className="box-check-account">
         {!actualised && <p>Pour vous actualiser</p>}
         {actualised ? (
           <CheckedCodeNumber id={id} />
         ) : (
           <Actualisation setActualised={setActualised} setId={setId} />
         )}
-      </div>
-      {idLoading && (
-        <div className="loading-data">
-          <div className="box">
-            {" "}
-            <Loading />{" "}
-          </div>
-          <div className="box">
-            {" "}
-            <Loading />{" "}
-          </div>
-          <div className="box">
-            {" "}
-            <Loading />{" "}
-          </div>
-        </div>
-      )}
+      </div> */}
+      <FormSpeciality speciality={[]} id={"yoinp"} />
+      <FormProfil />
+      <FormGalerie galerie={[]} id={"ouobo"} />
       {restaurant && !idLoading && (
         <AllData
           restaurant={restaurant}
@@ -92,12 +84,12 @@ const Refresh = () => {
           speciality={speciality}
         />
       )}
-    </StyledRefresh>
+    </StyledDashboard>
   );
 };
 
-export default Refresh;
-const StyledRefresh = styled.section`
+export default Dashboard;
+const StyledDashboard = styled.section`
   display: flex;
   flex-direction: column;
   background: ${COLORS.white};
