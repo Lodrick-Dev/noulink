@@ -3,6 +3,7 @@ import COLORS from "../../Styles/Styles";
 import { Link } from "react-router-dom";
 import { Slide } from "react-awesome-reveal";
 import Faq from "../../components/FAQ/faq";
+import AbonnementCard from "../../components/AbonnementCard/AbonnementCard";
 
 const LandingPage = () => {
   return (
@@ -48,6 +49,7 @@ const LandingPage = () => {
           <strong>Marseille</strong> ou ailleurs en France.
         </p>
       </section>
+      <AbonnementCard />
       <Faq />
     </StyledLandingPage>
   );
@@ -74,9 +76,8 @@ const StyledLandingPage = styled.section`
       text-align: center;
       width: 70%;
       font-size: 1.2em;
-      margin: 0px auto 30px;
+      margin: 0px auto 0px;
       margin-top: 0px;
-      margin-bottom: 30px;
     }
     .last-p {
       margin-bottom: 5px;
@@ -185,7 +186,6 @@ const StyledLandingPage = styled.section`
         width: 100%;
         padding: 0px 5px;
         font-size: 0.9em;
-        margin-bottom: 15px;
       }
       .departement {
         max-width: 90% !important;
