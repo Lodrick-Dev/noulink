@@ -74,7 +74,7 @@ const FormProfil = () => {
       {!uploading && (
         <img
           // src={restaurant.profil}
-          src={imageProfil}
+          src={imageProfil ? imageProfil : "/assets/logo.png"}
           alt="image-profil"
           onClick={() => handleChangeProfil()}
         />
@@ -88,21 +88,22 @@ const FormProfil = () => {
           onChange={handleFileChange}
         />
       )}
+      <span onClick={() => handleChangeProfil()}>profil</span>
     </StyledFormProfil>
   );
 };
 
 export default FormProfil;
 const StyledFormProfil = styled.div`
-  width: 100%;
-  margin-bottom: 10px;
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: ${COLORS.second};
-  border-radius: 5px;
-  margin: 20px 0px;
+  border-radius: 10px;
+  margin: 10px 0px;
+  min-height: 200px;
   img {
     width: 30%;
     border-radius: 10px;
@@ -113,5 +114,15 @@ const StyledFormProfil = styled.div`
   }
   .input-file {
     visibility: hidden;
+  }
+  span {
+    border-bottom: solid 1px ${COLORS.white};
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.5;
+    text-align: center;
+  }
+  @media screen and (max-width: 450px) {
+    width: 80%;
   }
 `;

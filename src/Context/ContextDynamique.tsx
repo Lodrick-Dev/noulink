@@ -4,6 +4,7 @@ import type {
   TypeContextDynamicProviderProps,
 } from "./TypeContextDynamique";
 import type { User } from "@supabase/supabase-js";
+import { supabase } from "../components/utils/supabaseClient";
 
 const ContextDynamic = createContext<TypeContextDynamic | undefined>(undefined);
 
@@ -13,6 +14,7 @@ export const ContextDynamicProvider = ({
   const [ville, setVille] = useState<string>("");
   const [token, setToken] = useState<string>("");
   const [userAuth, setUserAuth] = useState<User | null>(null);
+  const [loadingUser, setLoadingUser] = useState(true);
 
   const setCityCookie = () => {
     const now = new Date();
@@ -42,6 +44,34 @@ export const ContextDynamicProvider = ({
       setVille(catchData);
     }
   }, []);
+
+  //useeffect check if user connected
+  const refreshuser = async () => {
+    const { data: sessionData } = await supabase.auth.getSession();
+    if (sessionData.session) {
+      console.log("Connecté :", sessionData.session.user);
+      setUserAuth(sessionData.session.user);
+    } else {
+      // alert("Connexion échouée : aucune session trouvée");
+      return;
+    }
+  };
+  useEffect(() => {
+    // 1. Vérifie au chargement si l’utilisateur est déjà connecté
+    refreshuser().finally(() => setLoadingUser(false));
+
+    // Optionnel : écouter les changements de session en temps réel
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUserAuth(session?.user ?? null);
+      }
+    );
+
+    // 3. Nettoie le listener quand le composant est démonté
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
+  }, []);
   return (
     <ContextDynamic.Provider
       value={{
@@ -50,6 +80,8 @@ export const ContextDynamicProvider = ({
         setToken,
         token,
         deleteCityCookie,
+        loadingUser,
+        setLoadingUser,
         setUserAuth,
         userAuth,
       }}

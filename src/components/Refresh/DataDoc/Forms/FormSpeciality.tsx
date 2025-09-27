@@ -34,8 +34,8 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
       return toast.info("Cette spécialité est déjà ajoutée.");
     }
 
-    if (specialityLocal.length >= 5) {
-      return toast.info("Maximum 5 spécialités.");
+    if (specialityLocal.length >= 7) {
+      return toast.info("Maximum 7 spécialités.");
     }
     setUpdating(true);
     const updated = [...specialityLocal, trimmed];
@@ -73,7 +73,7 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
   return (
     <StyledFormSpeciality>
       <div className="specility-box">
-        <span>Spécialité(s) 5 max</span>
+        <span>7 spécialités max</span>
         {Array.isArray(specialityLocal) &&
           specialityLocal.map((el, i) => (
             <div className="box-specia" key={i}>
@@ -112,11 +112,12 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
 export default FormSpeciality;
 const StyledFormSpeciality = styled.div`
   background: ${COLORS.main};
-  margin: 10px;
+  margin: 10px 0px;
   border-radius: 10px;
   width: 40%;
   display: flex;
   flex-direction: column;
+  min-height: 200px;
   .specility-box {
     padding: 10px;
     .box-specia {
@@ -162,11 +163,14 @@ const StyledFormSpeciality = styled.div`
     }
   }
   @media screen and (max-width: 450px) {
-    width: 100%;
-    margin: 50px 0px;
+    width: 80%;
     .add-speciality {
+      margin: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       input {
-        width: 60%;
+        width: 80%;
       }
     }
   }

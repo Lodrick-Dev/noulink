@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import COLORS from "../../Styles/Styles";
 
 const Loading = () => {
   return (
@@ -10,10 +11,13 @@ const Loading = () => {
 
 export default Loading;
 const LaodingStyled = styled.div`
+  width: 25px;
+  height: 25px;
+  margin: 0px 10px;
   .loader {
     width: 25px;
     height: 25px;
-    border: 3px solid #fff;
+    border: 3px solid ${COLORS.black};
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;

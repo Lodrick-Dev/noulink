@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import type { TypeDoc } from "../../Dashboard";
 import axios from "axios";
 import Loading from "../../../Loading/Loading";
+import { supabase } from "../../../utils/supabaseClient";
 type TypeProps = {
   name: string | undefined;
   saveur: string | undefined;
@@ -34,6 +35,19 @@ const FormGlobale = ({
   const [updateSaveur, setUpdateSaveur] = useState("");
   const [updateDescription, setUpdateDescription] = useState("");
   const { ville } = Dynamic();
+
+  //before we save pseudo to supabase:
+  const updatePseudoSupaBase = async () => {
+    const { data, error } = await supabase.auth.updateUser({
+      data: { name: updatePseudo }, // ou { pseudo: newPseudo }
+    });
+
+    if (error) {
+      console.error("Erreur :", error.message);
+    } else {
+      console.log("Profil mis à jour :", data.user);
+    }
+  };
 
   const handleUpdate = async () => {
     // 1. Normaliser les valeurs de la base
@@ -129,7 +143,7 @@ const FormGlobale = ({
         ></textarea>
         {updating && <Loading />}
         {!updating && (
-          <button onClick={() => handleUpdate()}>Enregistrer</button>
+          <button onClick={() => updatePseudoSupaBase()}>Enregistrer</button>
         )}
       </div>
     </StyledFormGlobale>
@@ -142,8 +156,9 @@ const StyledFormGlobale = styled.div`
   padding: 10px;
   border-radius: 10px;
   .the-inputs {
-    width: 60%;
+    width: 100%;
     display: flex;
+    margin: 0px auto;
     flex-direction: column;
     input,
     textarea {

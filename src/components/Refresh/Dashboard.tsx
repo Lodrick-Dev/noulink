@@ -11,6 +11,10 @@ import FormSpeciality from "./DataDoc/Forms/FormSpeciality";
 import FormProfil from "./DataDoc/Forms/FormProfil";
 import FormGalerie from "./DataDoc/Forms/FormGalerie";
 import LoadingBlue from "../Loading/LoadingBlue";
+import FormGlobale from "./DataDoc/Forms/FormGlobale";
+import ManagerAccount from "./ManagerAccount";
+import { Dynamic } from "../../Context/ContextDynamique";
+import SkeletonLoader from "../utils/SkeletonLoader";
 // import Loading from "../utils/Loading";
 export type TypeDoc = {
   _id: string;
@@ -27,14 +31,16 @@ export type TypeDoc = {
 export type TypeGalerie = string;
 export type TypeSpecility = string;
 const Dashboard = () => {
+  const { loadingUser, userAuth } = Dynamic();
   const [actualised, setActualised] = useState(false);
+  const [update, setUpdate] = useState(false);
   const [id, setId] = useState("");
   const [idLoading, setIdLoading] = useState(false);
   const [restaurant, setRestaurant] = useState<TypeDoc | null>(null);
   const [galerie, setGalerie] = useState<TypeGalerie[]>([]);
   const [speciality, setSpeciality] = useState<TypeSpecility[]>([]);
 
-  //getOne
+  //getOne on va prendre id de userAuth
   const getOne = async () => {
     if (!id) return toast.error("Un identifiant est nécessaire");
     setIdLoading(true);
@@ -64,18 +70,27 @@ const Dashboard = () => {
   }, [id]);
   return (
     <StyledDashboard>
-      {!actualised && <h3>Votre compte</h3>}
-      {/* <div className="box-check-account">
-        {!actualised && <p>Pour vous actualiser</p>}
-        {actualised ? (
-          <CheckedCodeNumber id={id} />
-        ) : (
-          <Actualisation setActualised={setActualised} setId={setId} />
-        )}
-      </div> */}
-      <FormSpeciality speciality={[]} id={"yoinp"} />
-      <FormProfil />
-      <FormGalerie galerie={[]} id={"ouobo"} />
+      {!actualised && <h3>Tableau de bord</h3>}
+      <div className="the-forms">
+        <span className="email">
+          Votre email (non public) :{" "}
+          {loadingUser ? <Loading /> : userAuth?.email}
+        </span>
+        {/* <SkeletonLoader /> */}
+        <FormProfil />
+        <FormSpeciality speciality={[]} id={"yoinp"} />
+        <FormGalerie galerie={[]} id={"ouobo"} />
+        <FormGlobale
+          name={userAuth?.user_metadata?.name}
+          saveur={"Guyane"}
+          villebase={"Paris"}
+          description={"Ma ptn descriptiotn"}
+          setUpdate={setUpdate}
+          id={"mon id bro"}
+          setRestaurant={setRestaurant}
+        />
+      </div>
+      <ManagerAccount />
       {restaurant && !idLoading && (
         <AllData
           restaurant={restaurant}
@@ -98,50 +113,24 @@ const StyledDashboard = styled.section`
     text-align: center;
     font-size: 2.8em;
   }
-  .box-check-account {
-    width: 40%;
-    margin: 15px auto;
-    padding: 50px;
-    border-radius: 10px;
-    background: ${COLORS.second};
-    p {
-      text-align: center;
-      color: ${COLORS.white};
-      font-size: 1.5em;
-      margin: 10px 0px;
-    }
-  }
-  .loading-data {
-    background: ${COLORS.second};
-    /* height: 30svh; */
-    width: 100%;
+  .the-forms {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
     align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    .box {
-      background: ${COLORS.main};
-      min-width: 35%;
-      min-height: 100px;
+    width: 80%;
+    margin: 0px auto;
+    .email {
+      width: 100%;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 10px;
-      margin: 20px;
+      opacity: 0.5;
+      margin-bottom: 10px;
+      font-size: 0.8em;
     }
   }
   @media screen and (max-width: 450px) {
-    .box-check-account {
-      width: 90%;
-      padding: 20px;
-    }
-    .loading-data {
-      align-items: baseline;
-      justify-content: flex-start;
-      .box {
-        margin: 15px;
-      }
+    .the-forms {
+      width: 100%;
     }
   }
 `;

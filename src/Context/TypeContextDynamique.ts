@@ -7,6 +7,8 @@ export type TypeContextDynamic = {
   setToken: React.Dispatch<React.SetStateAction<string>>;
   token: string;
   userAuth: User | null;
+  loadingUser: boolean;
+  setLoadingUser: React.Dispatch<React.SetStateAction<boolean>>;
   setUserAuth: React.Dispatch<React.SetStateAction<User | null>>;
   deleteCityCookie: () => void;
 };

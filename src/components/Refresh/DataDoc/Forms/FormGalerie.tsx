@@ -145,7 +145,7 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
 export default FormGalerie;
 const StyledFormGalerie = styled.div`
   background: ${COLORS.main};
-  margin: 10px;
+  margin: 10px 0px;
   border-radius: 10px;
   width: 55%;
   display: flex;
@@ -222,8 +222,7 @@ const StyledFormGalerie = styled.div`
     }
   }
   @media screen and (max-width: 450px) {
-    width: 100%;
-    margin: 0px;
+    width: 80%;
     .imgs-galeries {
       margin: 5px;
       min-width: 40%;
