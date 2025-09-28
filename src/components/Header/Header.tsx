@@ -2,30 +2,37 @@ import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { House } from "lucide-react";
+import { Dynamic } from "../../Context/ContextDynamique";
 type TypeProps = {
   setPopRouter: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const Header = ({ setPopRouter }: TypeProps) => {
+  const { token } = Dynamic();
   const pageActu = useLocation();
   const direction = useNavigate();
-  const returnText = () => {
-    return pageActu.pathname !== "/home" ? (
-      <House className="home-a" />
-    ) : (
-      "S'enregistrer"
-    );
-  };
-  const actionCondition = () => {
-    if (pageActu.pathname !== "/home") {
-      direction("/");
+  const conditionAction = () => {
+    if (pageActu.pathname === "/dashboard") {
+      direction("/home");
     } else {
-      setPopRouter(true);
+      direction("/dashboard");
     }
   };
   return (
     <StyledHeader>
       <div className="box first">
-        <span onClick={() => actionCondition()}>{returnText()}</span>
+        <span onClick={() => direction("/")}>
+          <House className="home-a" />
+        </span>
+        {token && (
+          <span className="u-token" onClick={() => conditionAction()}>
+            {pageActu.pathname === "/dashboard" ? "Public" : "Dashboard"}
+          </span>
+        )}
+        {!token && pageActu.pathname !== "/auth" && (
+          <span className="no-token" onClick={() => direction("/auth")}>
+            Connexion
+          </span>
+        )}
       </div>
     </StyledHeader>
   );
@@ -46,6 +53,10 @@ const StyledHeader = styled.header`
       color: ${COLORS.yellow};
       cursor: pointer;
       text-decoration: underline;
+    }
+    .u-token,
+    .no-token {
+      margin-left: 15px;
     }
   }
 `;

@@ -4,40 +4,22 @@ import { Link } from "react-router-dom";
 import { Slide } from "react-awesome-reveal";
 import Faq from "../../components/FAQ/faq";
 import AbonnementCard from "../../components/AbonnementCard/AbonnementCard";
+import Intro from "./Intro";
 
 const LandingPage = () => {
   return (
     <StyledLandingPage>
-      <div className="hero">
-        <Slide direction="down" triggerOnce>
-          <h1>Nou Link</h1>
-        </Slide>
-        <p>
-          Trouvez les spécialités culinaires de vos péyi, où que vous soyez.
-          {/* <br />
-          La plateforme connecte les Antilles/Guyane autour des spécialités
-          culinaires.
-          <br /> */}
-        </p>
-
-        <h2 className="last-p">Nou Link pou zot trouvé zot favorite food.</h2>
-        <Slide direction="down" triggerOnce>
-          <div className="departement">
-            <span className="span-countries ">Guyane</span>
-            <span className="span-countries ">Guadeloupe</span>
-            <span className="span-countries ">Martinique</span>
-            <span className="span-countries ">Mayotte</span>
-          </div>
-        </Slide>
+      <section className="hero">
+        <Intro />
         <nav className="cta">
           <Link to="/home" className="btn">
             Découvrir les saveurs près de chez vous
           </Link>
-          <Link to="/inscription" className="btn secondary">
+          <Link to="/auth" className="btn secondary">
             Publiez vos spécialités
           </Link>
         </nav>
-      </div>
+      </section>
       <section className="section-2">
         <h3>Pourquoi utiliser Nou Link ?</h3>
         <p>
@@ -67,7 +49,7 @@ const StyledLandingPage = styled.section`
     max-width: 100%;
     /* background: orange; */
     margin: 0 auto;
-    h1 {
+    /* h1 {
       color: ${COLORS.yellow};
       font-size: 5em;
       margin-bottom: 0px;
@@ -91,7 +73,7 @@ const StyledLandingPage = styled.section`
         color: #000000;
         font-size: 1.2em;
       }
-    }
+    } */
     .cta {
       position: relative;
       height: 50svh;

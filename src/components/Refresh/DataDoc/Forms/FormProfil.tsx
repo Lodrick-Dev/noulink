@@ -63,8 +63,11 @@ const FormProfil = () => {
           return toast.success(res.data.succes);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      if (error.response?.data?.message) {
+        return toast.error(error.response?.data?.message);
+      }
       return toast.error(
         "Une erreur est survenue lors de la mise jour du profil"
       );

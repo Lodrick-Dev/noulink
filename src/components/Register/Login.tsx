@@ -8,12 +8,12 @@ import { toast } from "react-toastify";
 import Loading from "../utils/Loading";
 
 const Login = () => {
+  const { setUserAuth, setToken } = Dynamic();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [initPassword, setInitPassword] = useState(false);
   const nav = useNavigate();
-  const { setUserAuth } = Dynamic();
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !password) {
@@ -39,6 +39,7 @@ const Login = () => {
       setLoading(false);
       console.log(data);
       console.log(data?.user);
+      setToken(data?.session?.access_token || "");
       setUserAuth(data?.user);
       nav("/dashboard");
     }
@@ -103,7 +104,8 @@ export default Login;
 const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
+  margin: 0px auto;
   h1 {
     text-align: center;
     color: ${COLORS.yellow};
@@ -144,5 +146,14 @@ const StyledLogin = styled.div`
     text-decoration: underline;
     cursor: pointer;
     margin: 10px auto;
+  }
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    form {
+      width: 100%;
+      .les-puts {
+        width: 100%;
+      }
+    }
   }
 `;

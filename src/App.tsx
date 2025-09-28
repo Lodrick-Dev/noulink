@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Inscription from "./components/Inscription/Inscription";
 import Refresh from "./components/Refresh/Dashboard";
-import PopRouter from "./components/PopRouter/PopRouter";
 import Home from "./Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Dynamic } from "./Context/ContextDynamique";
@@ -53,7 +52,7 @@ function App() {
       <Routes>
         {/* <Route path="/inscription" element={<Inscription />} /> */}
         <Route
-          path="/inscription"
+          path="/auth"
           element={
             <PublicRoute>
               <Auth />
@@ -81,7 +80,7 @@ function App() {
         <Route path="*" element={<LandingPage />} />
       </Routes>
       <Footer />
-      {popRouter && <PopRouter setPopRouter={setPopRouter} />}
+      {/* {popRouter && <PopRouter setPopRouter={setPopRouter} />} */}
       <ToastContainer position="top-right" />
     </StyledApp>
   );

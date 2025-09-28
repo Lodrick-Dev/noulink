@@ -87,7 +87,8 @@ export default Register;
 const StyledRegister = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
+  margin: 0px auto;
   h1 {
     text-align: center;
     color: ${COLORS.yellow};
@@ -129,10 +130,11 @@ const StyledRegister = styled.div`
     font-size: 0.8em;
   }
   @media screen and (max-width: 450px) {
+    width: 100%;
     form {
       width: 100%;
       input {
-        width: 80%;
+        width: 100%;
       }
       input:last-child {
         width: 60%;
