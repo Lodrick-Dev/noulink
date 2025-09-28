@@ -1,12 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loading from "../../../utils/Loading";
 import { isFileSizeValid, isValidImageFile } from "../../../utils/fonctions";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import COLORS from "../../../../Styles/Styles";
+import { Dynamic } from "../../../../Context/ContextDynamique";
 
 const FormProfil = () => {
+  const { token } = Dynamic();
   const [uploading, setUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [imageProfil, setImageProfil] = useState<string | undefined>();
@@ -68,6 +70,33 @@ const FormProfil = () => {
       );
     }
   };
+
+  const testProtectedRoute = async () => {
+    console.log("Test route protégée avec le token :", token);
+
+    try {
+      const res = await axios.get("http://localhost:5009/test-protected", {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ ton access_token Supabase
+        },
+      });
+      console.log("Réponse API :", res.data);
+    } catch (error: any) {
+      console.error("Erreur API :", error.response?.data || error.message);
+      toast.error(
+        error.response?.data?.message || "Erreur lors de l'appel API"
+      );
+    }
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("Token dans FormProfil :", token);
+
+      if (token) {
+        testProtectedRoute();
+      }
+    }, 5000);
+  }, [token]);
   return (
     <StyledFormProfil className="profil-img">
       {uploading && <Loading />}

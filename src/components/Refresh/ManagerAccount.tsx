@@ -85,18 +85,19 @@ const StyledManagerAccount = styled.div`
     font-weight: bold;
   }
   @media screen and (max-width: 450px) {
-    flex-direction: column;
+    /* flex-direction: column; */
+    flex-direction: column-reverse;
     align-items: flex-start;
     .delete-btn-compte {
       display: block;
       width: auto;
       margin-right: 0px;
-      margin-bottom: 15px;
+      margin-top: 15px;
     }
     .logout {
+      margin-bottom: 15px;
       display: flex;
       margin-left: 0px;
-      margin-top: 15px;
     }
   }
 `;

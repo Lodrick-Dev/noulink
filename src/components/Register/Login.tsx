@@ -40,7 +40,7 @@ const Login = () => {
       console.log(data);
       console.log(data?.user);
       setUserAuth(data?.user);
-      nav("/");
+      nav("/dashboard");
     }
   };
 

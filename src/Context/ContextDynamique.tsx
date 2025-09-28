@@ -49,8 +49,10 @@ export const ContextDynamicProvider = ({
   const refreshuser = async () => {
     const { data: sessionData } = await supabase.auth.getSession();
     if (sessionData.session) {
+      console.log(sessionData.session);
       console.log("Connecté :", sessionData.session.user);
       setUserAuth(sessionData.session.user);
+      setToken(sessionData.session.access_token);
     } else {
       // alert("Connexion échouée : aucune session trouvée");
       return;
