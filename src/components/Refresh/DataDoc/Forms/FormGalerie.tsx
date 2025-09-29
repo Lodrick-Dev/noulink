@@ -1,20 +1,22 @@
 import styled from "styled-components";
 import { CircleX, SquarePlus } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import COLORS from "../../../../Styles/Styles";
-import Loading from "../../../utils/Loading";
 import { isFileSizeValid, isValidImageFile } from "../../../utils/fonctions";
+import { Dynamic } from "../../../../Context/ContextDynamique";
+import LoadingBlue from "../../../Loading/LoadingBlue";
+import Loading from "../../../utils/Loading";
+import SkeletonLoader from "../../../utils/SkeletonLoader";
 type TypeProps = {
   galerie: string[];
   id: string;
 };
 const FormGalerie = ({ galerie, id }: TypeProps) => {
+  const { token } = Dynamic();
   const [updating, setUpdating] = useState(false);
-  const [galerieLocal, setGalerieLocal] = useState<string[]>(
-    galerie.length > 0 ? galerie : []
-  );
+  const [galerieLocal, setGalerieLocal] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleChargeImg = () => {
     if (galerieLocal.length < 3) {
@@ -57,6 +59,7 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
         data,
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res) {
@@ -65,10 +68,13 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
           return toast.success(res.data.succes);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      if (error.response.data.message) {
+        return toast.error(error.response.data.message);
+      }
       return toast.error(
-        "Une erreur est survenue lors de la mise jour du profil"
+        "Une erreur est survenue lors de la mise jour de la galerie"
       );
     }
   };
@@ -84,6 +90,9 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
         }restaurant/update-galerie/delete/${id}`,
         data: { url },
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (res) {
         if (res.data.succes) {
@@ -99,6 +108,12 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
       return toast.error("Une erreur est survenue");
     }
   };
+
+  useEffect(() => {
+    if (galerie && galerie.length > 0) {
+      setGalerieLocal(galerie);
+    }
+  }, [galerie]);
   return (
     <StyledFormGalerie>
       <div className="galerie-box">
@@ -108,15 +123,17 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
             <div className="imgs-galeries" key={i}>
               {updating && (
                 <div className="to-loading">
-                  <Loading />
+                  <SkeletonLoader />
                 </div>
               )}
-              <CircleX
-                className="icon-delete"
-                size={25}
-                onClick={() => !updating && deleteImg(el)}
-              />
-              <img src={el} alt={`img-galerie-${i}`} />
+              {!updating && (
+                <CircleX
+                  className="icon-delete"
+                  size={25}
+                  onClick={() => !updating && deleteImg(el)}
+                />
+              )}
+              {!updating && <img src={el} alt={`img-galerie-${i}`} />}
             </div>
           ))}
         {galerieLocal && galerieLocal.length < 3 && (
@@ -128,12 +145,14 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
               accept=".jpeg,.jpg,.png"
               onChange={handleCheckImg}
             />
-            {!updating && (
+            {!updating ? (
               <SquarePlus
                 className="icon-add-img"
                 size={40}
                 onClick={handleChargeImg}
               />
+            ) : (
+              <LoadingBlue />
             )}
           </div>
         )}
@@ -155,6 +174,8 @@ const StyledFormGalerie = styled.div`
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
+    /* background: red; */
+    width: 100%;
     span {
       display: block;
       width: 100%;
@@ -166,7 +187,7 @@ const StyledFormGalerie = styled.div`
     .imgs-galeries {
       display: flex;
       justify-content: center;
-      max-width: 30%;
+      width: 30%;
       margin: 10px;
       position: relative;
       .to-loading {
@@ -182,7 +203,7 @@ const StyledFormGalerie = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 21;
+        z-index: 50;
         border-radius: 10px;
       }
       .icon-delete {
@@ -204,13 +225,15 @@ const StyledFormGalerie = styled.div`
       }
     }
     .box-i-add {
-      width: 100%;
+      width: 10%;
+      height: 50px;
       padding: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       background: ${COLORS.grey};
       border-radius: 10px;
+      margin-top: 10px;
       input {
         display: none;
       }
@@ -228,6 +251,12 @@ const StyledFormGalerie = styled.div`
       min-width: 40%;
       .icon-delete {
         padding: 1px !important;
+      }
+    }
+    .galerie-box {
+      .box-i-add {
+        width: 60px;
+        height: 60px;
       }
     }
   }

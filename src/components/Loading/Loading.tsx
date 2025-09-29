@@ -11,13 +11,16 @@ const Loading = () => {
 
 export default Loading;
 const LaodingStyled = styled.div`
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   margin: 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .loader {
-    width: 25px;
-    height: 25px;
-    border: 3px solid ${COLORS.black};
+    width: 20px;
+    height: 20px;
+    border: 3px solid ${COLORS.yellow};
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;

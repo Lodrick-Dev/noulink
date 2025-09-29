@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CheckCircle } from "lucide-react";
 import COLORS from "../../Styles/Styles";
+import { useNavigate } from "react-router-dom";
 
 const Card = styled.div`
   max-width: 350px;
@@ -38,6 +39,8 @@ const Price = styled.div`
   font-size: 36px;
   font-weight: 800;
   color: ${COLORS.second};
+  display: flex;
+  flex-direction: column;
 `;
 
 const PerYear = styled.span`
@@ -78,7 +81,23 @@ const SubscribeButton = styled.button`
   }
 `;
 
+const OldPrice = styled.span`
+  font-size: 18px;
+  color: #888;
+  text-decoration: line-through;
+  margin-right: 10px;
+`;
+
+const PromoInfo = styled.p`
+  font-size: 13px;
+  color: ${COLORS.main};
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-style: italic;
+`;
+
 export default function AbonnementCard() {
+  const nav = useNavigate();
   return (
     <Card>
       <Header>
@@ -86,13 +105,18 @@ export default function AbonnementCard() {
         <Subtitle>Accédez à toutes les fonctionnalités</Subtitle>
       </Header>
 
-      <Price>39,99 €</Price>
-      <PerYear>/ an</PerYear>
-
+      <Price>
+        <OldPrice>99,99 €</OldPrice> 49,99 €<PerYear>/ an</PerYear>
+      </Price>
+      <PromoInfo>Offre valable jusqu’à fin décembre 🎉</PromoInfo>
       <Features>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
           <span>Création de profil public</span>
+        </FeatureItem>
+        <FeatureItem>
+          <CheckCircle size={18} color={COLORS.green} />
+          <span>Sans engagement</span>
         </FeatureItem>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
@@ -108,7 +132,7 @@ export default function AbonnementCard() {
         </FeatureItem>
       </Features>
 
-      <SubscribeButton>Je rejoins</SubscribeButton>
+      <SubscribeButton onClick={() => nav("/auth")}>Je rejoins</SubscribeButton>
     </Card>
   );
 }

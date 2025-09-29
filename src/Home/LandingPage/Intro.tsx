@@ -15,7 +15,7 @@ const Intro = () => {
       <p>
         {pageActu.pathname === "/auth"
           ? "Partagez vos spécialités"
-          : "Pou zot trouvé zot favorite food."}
+          : "Pou zot trouvé zot favorite food"}
       </p>
       {/* <h2 className="last-p">Pou zot trouvé zot favorite food.</h2> */}
       <Slide direction="down" triggerOnce>

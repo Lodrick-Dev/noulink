@@ -85,7 +85,6 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
           <div className="list-one">
             {getOne && (
               <Resto
-                updatedAt={getOne.updatedAt}
                 pseudo={getOne.pseudo}
                 ville={getOne.ville}
                 saveur={getOne.saveur}

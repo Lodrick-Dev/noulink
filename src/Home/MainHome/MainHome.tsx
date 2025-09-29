@@ -17,43 +17,46 @@ const MainHome = ({ setSaveur, saveur }: TypePropsHome) => {
     <StyledMainHome>
       <h1>Link up to favorite food</h1>
       <div className="liste-country">
-        <span
-          onClick={() =>
-            setSaveur((prev) => (prev === "Guyane" ? "" : "Guyane"))
-          }
-          className={saveur === "Guyane" ? "actif" : ""}
-        >
-          Guyane
-        </span>
-        <span
-          onClick={() =>
-            setSaveur((prev) => (prev === "Guadeloupe" ? "" : "Guadeloupe"))
-          }
-          className={saveur === "Guadeloupe" ? "actif" : ""}
-        >
-          Guadeloupe
-        </span>
-        <span
-          onClick={() =>
-            setSaveur((prev) => (prev === "Martinique" ? "" : "Martinique"))
-          }
-          className={saveur === "Martinique" ? "actif" : ""}
-        >
-          Martinique
-        </span>
-        <span
-          onClick={() =>
-            setSaveur((prev) => (prev === "Mayotte" ? "" : "Mayotte"))
-          }
-          className={saveur === "Mayotte" ? "actif" : ""}
-        >
-          Mayotte
-        </span>
+        <p>Les saveurs :</p>
+        <div className="liste">
+          <span
+            onClick={() =>
+              setSaveur((prev) => (prev === "Guyane" ? "" : "Guyane"))
+            }
+            className={saveur === "Guyane" ? "actif" : ""}
+          >
+            Guyane
+          </span>
+          <span
+            onClick={() =>
+              setSaveur((prev) => (prev === "Guadeloupe" ? "" : "Guadeloupe"))
+            }
+            className={saveur === "Guadeloupe" ? "actif" : ""}
+          >
+            Guadeloupe
+          </span>
+          <span
+            onClick={() =>
+              setSaveur((prev) => (prev === "Martinique" ? "" : "Martinique"))
+            }
+            className={saveur === "Martinique" ? "actif" : ""}
+          >
+            Martinique
+          </span>
+          <span
+            onClick={() =>
+              setSaveur((prev) => (prev === "Mayotte" ? "" : "Mayotte"))
+            }
+            className={saveur === "Mayotte" ? "actif" : ""}
+          >
+            Mayotte
+          </span>
+        </div>
       </div>
       {/* <BarreSearch /> */}
       <div className="position">
         <span onClick={() => cancelPositon()} className="localisation">
-          Lieu actuel : {ville ? `${ville} ✅` : <Loading />}{" "}
+          Ville actuelle : {ville ? `${ville} ✅` : <Loading />}{" "}
         </span>
         <span>Saveurs de : {saveur ? `${saveur} ✅` : "Tous"} </span>
       </div>
@@ -76,40 +79,57 @@ const StyledMainHome = styled.main`
     letter-spacing: 0.2em;
   }
   .liste-country {
-    width: 40%;
-    margin-top: 5px;
+    width: 50%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-evenly;
-    .actif {
-      transition: 0.2s;
-      background: ${COLORS.main};
-      color: ${COLORS.yellow};
-      box-shadow: 1px 1px 7px ${COLORS.yellow};
+    background: ${COLORS.main};
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 10px ${COLORS.black};
+    p {
+      color: ${COLORS.white};
+      margin-bottom: 5px;
+      font-size: 0.9em;
     }
-    span {
-      transition: 0.2s;
-      color: ${COLORS.black};
-      cursor: pointer;
-      background: ${COLORS.yellow};
-      box-shadow: 1px 1px 7px ${COLORS.black};
-      padding: 2px 15px;
-      border-radius: 5px;
-      transition: 0.2s;
-    }
-    span:active {
-      box-shadow: none;
-    }
-    span:hover {
-      transition: 0.2s;
-      transform: scale(1.05);
+    .liste {
+      margin: 5px auto;
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      .actif {
+        transition: 0.2s;
+        background: ${COLORS.main};
+        color: ${COLORS.yellow};
+        box-shadow: 1px 1px 7px ${COLORS.yellow};
+      }
+      span {
+        transition: 0.2s;
+        color: ${COLORS.black};
+        cursor: pointer;
+        background: ${COLORS.yellow};
+        box-shadow: 1px 1px 7px ${COLORS.black};
+        padding: 2px 15px;
+        border-radius: 5px;
+        transition: 0.2s;
+      }
+      span:active {
+        box-shadow: none;
+      }
+      span:hover {
+        transition: 0.2s;
+        transform: scale(1.05);
+      }
     }
   }
   .position {
     width: 100%;
     margin-top: 20px;
     .localisation {
+      display: block;
       text-decoration: underline;
+      display: flex;
+      align-items: center;
       cursor: pointer;
     }
     span {

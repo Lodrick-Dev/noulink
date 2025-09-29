@@ -7,8 +7,12 @@ import styled from "styled-components";
 import COLORS from "../../../../Styles/Styles";
 import { Dynamic } from "../../../../Context/ContextDynamique";
 
-const FormProfil = () => {
-  const { token } = Dynamic();
+const FormProfil = ({
+  imgProfilUploaded,
+}: {
+  imgProfilUploaded: string | undefined;
+}) => {
+  const { token, userAuth } = Dynamic();
   const [uploading, setUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [imageProfil, setImageProfil] = useState<string | undefined>();
@@ -48,12 +52,13 @@ const FormProfil = () => {
     try {
       const res = await axios({
         method: "post",
-        url: `${
-          import.meta.env.VITE_APP_API
-        }restaurant/update-profil/${"restaurant._id"}`,
+        url: `${import.meta.env.VITE_APP_API}restaurant/update-profil/${
+          userAuth?.id
+        }`,
         withCredentials: true,
         data,
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       });
@@ -91,22 +96,22 @@ const FormProfil = () => {
       );
     }
   };
-  useEffect(() => {
-    setTimeout(() => {
-      console.log("Token dans FormProfil :", token);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     console.log("Token dans FormProfil :", token);
 
-      if (token) {
-        testProtectedRoute();
-      }
-    }, 5000);
-  }, [token]);
+  //     if (token) {
+  //       testProtectedRoute();
+  //     }
+  //   }, 5000);
+  // }, [token]);
   return (
     <StyledFormProfil className="profil-img">
       {uploading && <Loading />}
       {!uploading && (
         <img
           // src={restaurant.profil}
-          src={imageProfil ? imageProfil : "/assets/logo.png"}
+          src={imgProfilUploaded ? imgProfilUploaded : "/assets/logo.png"}
           alt="image-profil"
           onClick={() => handleChangeProfil()}
         />

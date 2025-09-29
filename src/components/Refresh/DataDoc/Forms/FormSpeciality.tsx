@@ -1,21 +1,21 @@
 import styled from "styled-components";
 import { SquarePlus, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import COLORS from "../../../../Styles/Styles";
 import { capitalizeFirstLetter } from "../../../utils/fonctions";
 import Loading from "../../../utils/Loading";
+import { Dynamic } from "../../../../Context/ContextDynamique";
 type TypeProps = {
   speciality: string[];
   id: string;
 };
 const FormSpeciality = ({ speciality, id }: TypeProps) => {
+  const { token } = Dynamic();
   const [updating, setUpdating] = useState(false);
   const [newSpeciality, setNewSpeciality] = useState<string>("");
-  const [specialityLocal, setSpecialityLocal] = useState<string[]>(
-    speciality.length > 0 ? speciality : []
-  );
+  const [specialityLocal, setSpecialityLocal] = useState<string[]>([]);
 
   //delete
   const deleteEl = async (valueToDelete: string) => {
@@ -55,6 +55,9 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
         }restaurant/update-speciality/${id}`,
         data: { speciality: array },
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (res) {
         if (res.data.succes) {
@@ -64,12 +67,21 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
           //toast.error(res.data.succes);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       setUpdating(false);
       console.log(error);
+      setSpecialityLocal([]);
+      if (error.response.data.message) {
+        return toast.error(error.response.data.message);
+      }
       return toast.error("Une erreur est survenue");
     }
   };
+  useEffect(() => {
+    if (speciality && speciality.length > 0) {
+      setSpecialityLocal(speciality);
+    }
+  }, [speciality]);
   return (
     <StyledFormSpeciality>
       <div className="specility-box">
@@ -86,7 +98,7 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
             </div>
           ))}
       </div>
-      {specialityLocal && specialityLocal.length < 5 && (
+      {specialityLocal && specialityLocal.length < 7 && (
         <div className="add-speciality">
           <input
             type="text"
@@ -115,11 +127,19 @@ const StyledFormSpeciality = styled.div`
   margin: 10px 0px;
   border-radius: 10px;
   width: 40%;
+  max-height: 300px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
-  min-height: 200px;
   .specility-box {
-    padding: 10px;
+    padding: 10px 10px 0px 10px;
+    min-height: 80%;
+    max-height: 80%;
+    /* background: #4c4c98; */
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .box-specia {
       margin-top: 20px;
       display: flex;
@@ -147,10 +167,12 @@ const StyledFormSpeciality = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    margin-top: 20px;
     padding: 10px;
+    border-top: solid 1px ${COLORS.second};
+    min-height: 20%;
+    max-height: 20%;
     input {
-      width: 30%;
+      width: 50%;
       outline: none;
       border: none;
       padding: 5px;

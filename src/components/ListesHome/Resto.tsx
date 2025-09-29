@@ -2,25 +2,21 @@ import React from "react";
 import { Slide } from "react-awesome-reveal";
 import styled from "styled-components";
 import type { TypeDocProps } from "./ListesHome";
-import {
-  capitalizeFirstLetter,
-  getLastUpdateMessage,
-} from "../utils/fonctions";
+import { capitalizeFirstLetter } from "../utils/fonctions";
 import COLORS from "../../Styles/Styles";
 import { OctagonX } from "lucide-react";
+import { useLocation } from "react-router-dom";
 export type TypeDocPropsResto = {
-  updatedAt?: string;
   pseudo?: string;
   ville?: string;
   saveur?: string;
   profil?: string;
   galerie?: string[];
   description?: string;
-  speciality: string[];
+  speciality?: string[];
   setGetOne: React.Dispatch<React.SetStateAction<TypeDocProps | null>>;
 };
 const Resto = ({
-  updatedAt,
   pseudo,
   ville,
   saveur,
@@ -30,14 +26,12 @@ const Resto = ({
   speciality,
   setGetOne,
 }: TypeDocPropsResto) => {
-  //   const [galeries, setGaleries] = useState(galerie);
-  //   const [specialities, setSpecialities] = useState(speciality);
+  const actuPage = useLocation();
 
   return (
     <StyledResto>
       <Slide direction="left" className="div-anim" triggerOnce>
         <div className="cards-profil">
-          <span className="legend">{getLastUpdateMessage(updatedAt)}</span>
           <img src={profil} alt="img-profil" />
           <div className="infos-compte">
             <strong>{pseudo}</strong>
@@ -67,7 +61,9 @@ const Resto = ({
             ))}
         </div>
       </Slide>
-      <OctagonX className="i-con" size={40} onClick={() => setGetOne(null)} />
+      {actuPage.pathname !== "/dashboard" && (
+        <OctagonX className="i-con" size={40} onClick={() => setGetOne(null)} />
+      )}
     </StyledResto>
   );
 };
@@ -75,8 +71,12 @@ const Resto = ({
 export default Resto;
 const StyledResto = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  width: 50%;
   position: relative;
   background: ${COLORS.main};
   padding: 30px;
@@ -84,7 +84,7 @@ const StyledResto = styled.div`
   .div-anim {
     display: flex;
     /* flex-wrap: wrap; */
-    width: 50%;
+    width: 100%;
     .cards-profil {
       border: solid 1px ${COLORS.grey};
       max-width: 100%;
@@ -103,7 +103,7 @@ const StyledResto = styled.div`
       }
       img {
         display: block;
-        width: 30%;
+        min-width: 20%;
         border-radius: 15px;
         background: ${COLORS.black};
         padding: 10px;
@@ -189,6 +189,7 @@ const StyledResto = styled.div`
     flex-direction: column;
     margin: 30px 0px;
     padding: 10px;
+    width: 100%;
     .div-anim {
       width: 100%;
       .cards-profil {

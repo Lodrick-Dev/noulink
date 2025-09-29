@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import COLORS from "../../Styles/Styles";
-import Actualisation from "./Actualisation";
-import CheckedCodeNumber from "./CheckedCodeNumber";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Loading from "../Loading/Loading";
-import AllData from "./AllData";
 import FormSpeciality from "./DataDoc/Forms/FormSpeciality";
 import FormProfil from "./DataDoc/Forms/FormProfil";
 import FormGalerie from "./DataDoc/Forms/FormGalerie";
@@ -15,6 +12,7 @@ import FormGlobale from "./DataDoc/Forms/FormGlobale";
 import ManagerAccount from "./ManagerAccount";
 import { Dynamic } from "../../Context/ContextDynamique";
 import SkeletonLoader from "../utils/SkeletonLoader";
+import Resto from "../ListesHome/Resto";
 // import Loading from "../utils/Loading";
 export type TypeDoc = {
   _id: string;
@@ -23,6 +21,7 @@ export type TypeDoc = {
   pseudo?: string;
   ville?: string;
   saveur?: string;
+  statut?: number;
   profil?: string;
   galerie?: string[];
   description?: string;
@@ -35,6 +34,9 @@ const Dashboard = () => {
   const [actualised, setActualised] = useState(false);
   const [update, setUpdate] = useState(false);
   const [id, setId] = useState("");
+  const [imgProfilUploaded, setImgProfilUploaded] = useState<
+    string | undefined
+  >();
   const [idLoading, setIdLoading] = useState(false);
   const [restaurant, setRestaurant] = useState<TypeDoc | null>(null);
   const [galerie, setGalerie] = useState<TypeGalerie[]>([]);
@@ -42,15 +44,19 @@ const Dashboard = () => {
 
   //getOne on va prendre id de userAuth
   const getOne = async () => {
-    if (!id) return toast.error("Un identifiant est nécessaire");
+    if (!userAuth?.id) return toast.error("Un identifiant est nécessaire");
     setIdLoading(true);
     try {
       const res = await axios({
         method: "get",
-        url: `${import.meta.env.VITE_APP_API}restaurant/one/${id}`,
+        url: `${import.meta.env.VITE_APP_API}restaurant/one/${userAuth?.id}`,
         withCredentials: true,
       });
+      console.log(res);
+
       if (res.data) {
+        setId(res.data.idsupabase);
+        setImgProfilUploaded(res.data.profil);
         setRestaurant(res.data);
         setGalerie(res.data.galerie);
         setSpeciality(res.data.speciality);
@@ -64,10 +70,10 @@ const Dashboard = () => {
 
   //useffet
   useEffect(() => {
-    if (id) {
+    if (restaurant?._id) {
       getOne();
     }
-  }, [id]);
+  }, [userAuth?.id]);
   return (
     <StyledDashboard>
       {!actualised && <h3>Tableau de bord</h3>}
@@ -76,29 +82,38 @@ const Dashboard = () => {
           Votre email (non public) :{" "}
           {loadingUser ? <Loading /> : userAuth?.email}
         </span>
+        <span className="visible">
+          Public : {restaurant?.statut === 1 ? "Oui" : "Non"}
+        </span>
         {/* <SkeletonLoader /> */}
-        <FormProfil />
-        <FormSpeciality speciality={[]} id={"yoinp"} />
-        <FormGalerie galerie={[]} id={"ouobo"} />
+        <FormProfil imgProfilUploaded={imgProfilUploaded} />
+        <FormSpeciality speciality={speciality} id={id} />
+        <FormGalerie galerie={galerie} id={id} />
         <FormGlobale
-          name={userAuth?.user_metadata?.name}
-          saveur={"Guyane"}
-          villebase={"Paris"}
-          description={"Ma ptn descriptiotn"}
+          name={restaurant?.pseudo}
+          saveur={restaurant?.saveur}
+          villebase={restaurant?.ville}
+          description={restaurant?.description}
           setUpdate={setUpdate}
-          id={"mon id bro"}
+          id={id}
           setRestaurant={setRestaurant}
         />
       </div>
-      <ManagerAccount />
-      {restaurant && !idLoading && (
-        <AllData
-          restaurant={restaurant}
-          setRestaurant={setRestaurant}
-          galerie={galerie}
-          speciality={speciality}
-        />
+      {id && (
+        <div className="box-preview">
+          <Resto
+            pseudo={restaurant?.pseudo}
+            ville={restaurant?.ville}
+            saveur={restaurant?.saveur}
+            profil={restaurant?.profil}
+            galerie={restaurant?.galerie}
+            description={restaurant?.description}
+            speciality={restaurant?.speciality}
+            setGetOne={setRestaurant}
+          />
+        </div>
       )}
+      <ManagerAccount />
     </StyledDashboard>
   );
 };
@@ -124,9 +139,22 @@ const StyledDashboard = styled.section`
       width: 100%;
       display: flex;
       opacity: 0.5;
+      margin-bottom: 0px;
+      font-size: 0.8em;
+    }
+    .visible {
+      width: 100%;
+      display: flex;
+      opacity: 0.5;
       margin-bottom: 10px;
       font-size: 0.8em;
     }
+  }
+  .box-preview {
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    border-top: solid 3px ${COLORS.grey};
   }
   @media screen and (max-width: 450px) {
     .the-forms {

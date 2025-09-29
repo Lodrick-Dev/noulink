@@ -30,11 +30,11 @@ const FormGlobale = ({
   id,
   setRestaurant,
 }: TypeProps) => {
+  const { ville, token } = Dynamic();
   const [updating, setUpdating] = useState(false);
   const [updatePseudo, setUpdatePseudo] = useState("");
   const [updateSaveur, setUpdateSaveur] = useState("");
   const [updateDescription, setUpdateDescription] = useState("");
-  const { ville } = Dynamic();
 
   //before we save pseudo to supabase:
   const updatePseudoSupaBase = async () => {
@@ -46,6 +46,7 @@ const FormGlobale = ({
       console.error("Erreur :", error.message);
     } else {
       console.log("Profil mis à jour :", data.user);
+      handleUpdate();
     }
   };
 
@@ -93,6 +94,9 @@ const FormGlobale = ({
         url: `${import.meta.env.VITE_APP_API}restaurant/update-info/${id}`,
         data,
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (res) {
         if (res.data) {
@@ -104,15 +108,20 @@ const FormGlobale = ({
           }
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       setUpdating(false);
       console.log(error);
+      if (error.response.data.message) {
+        return toast.error(error.response.data.message);
+      }
       return toast.error("Une erreur est survenue");
     }
   };
+
   return (
     <StyledFormGlobale>
       <div className="the-inputs">
+        <span>Informations </span>
         <input
           type="text"
           placeholder="Nom (pseudo,etablissement)"
@@ -124,9 +133,7 @@ const FormGlobale = ({
           <label htmlFor="saveur">Saveurs de* : </label>
           <select
             id="saveur"
-            defaultValue={
-              updateSaveur ? updateSaveur : capitalizeFirstLetter(saveur)
-            }
+            value={updateSaveur ? updateSaveur : capitalizeFirstLetter(saveur)}
             onChange={(e) => setUpdateSaveur(e.target.value)}
           >
             <option value="">--Selection de la saveur--</option>
@@ -153,6 +160,7 @@ const FormGlobale = ({
 export default FormGlobale;
 const StyledFormGlobale = styled.div`
   background: ${COLORS.second};
+  min-width: 30%;
   padding: 10px;
   border-radius: 10px;
   .the-inputs {
@@ -160,6 +168,14 @@ const StyledFormGlobale = styled.div`
     display: flex;
     margin: 0px auto;
     flex-direction: column;
+    span {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-align: center;
+      color: ${COLORS.white};
+      font-size: 1.2em;
+    }
     input,
     textarea {
       padding: 5px;
@@ -167,6 +183,9 @@ const StyledFormGlobale = styled.div`
       outline: none;
       margin-top: 10px;
       border: none;
+    }
+    textarea {
+      min-height: 100px;
     }
     .box-saveur {
       margin: 10px 0px;
@@ -201,6 +220,7 @@ const StyledFormGlobale = styled.div`
     }
   }
   @media screen and (max-width: 450px) {
+    min-width: 80%;
     .the-inputs {
       width: 100%;
       textarea {

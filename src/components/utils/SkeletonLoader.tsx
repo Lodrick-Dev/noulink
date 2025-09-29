@@ -17,15 +17,17 @@ const shimmer = keyframes`
 `;
 
 const StyledSkeleton = styled.div`
-  width: 600px;
-  height: 250px;
+  /* width: 600px;
+  height: 250px; */
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   background: ${COLORS.grey};
   background-image: linear-gradient(
     90deg,
-    ${COLORS.grey} 0px,
-    #eceff1 40px,
-    ${COLORS.grey} 80px
+    #bfbdbd 0px,
+    #909090 40px,
+    #bfbdbd 80px
   );
   background-size: 800px 100%;
   animation: ${shimmer} 1.6s infinite linear;

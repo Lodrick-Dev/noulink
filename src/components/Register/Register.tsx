@@ -7,14 +7,13 @@ import { supabase } from "../utils/supabaseClient";
 import Loading from "../utils/Loading";
 
 const Register = () => {
-  const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!nom || !email || !password || !confirmPassword) {
+    if (!email || !password || !confirmPassword) {
       return toast.error("Tous les champs sont obligatoires");
     }
     if (password.length < 6) {
@@ -26,10 +25,7 @@ const Register = () => {
         email,
         password,
         options: {
-          emailRedirectTo: "http://localhost:5173/conf-email",
-          data: {
-            name: nom,
-          },
+          emailRedirectTo: `${import.meta.env.VITE_URL}conf-email`,
         },
       });
       if (error) {
@@ -37,7 +33,6 @@ const Register = () => {
         return alert(error.message);
       } else {
         setLoading(false);
-        setNom("");
         setEmail("");
         setPassword("");
         setConfirmPassword("");
@@ -52,12 +47,6 @@ const Register = () => {
     <StyledRegister>
       <h1>Inscription</h1>
       <form onSubmit={(e) => handleSubscribe(e)}>
-        <input
-          type="text"
-          placeholder="Nom ou pseudo*"
-          value={nom ? nom : ""}
-          onChange={(e) => setNom(e.target.value)}
-        />
         <input
           type="email"
           placeholder="Email*"
