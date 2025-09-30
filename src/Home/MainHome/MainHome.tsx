@@ -95,6 +95,7 @@ const StyledMainHome = styled.main`
     .liste {
       margin: 5px auto;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-around;
       width: 100%;
       .actif {
