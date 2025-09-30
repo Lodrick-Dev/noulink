@@ -4,8 +4,74 @@ import COLORS from "../../Styles/Styles";
 import AbonnementCard from "./AbonnementCard";
 import { LockKeyhole, LockKeyholeOpen, ShieldCheck } from "lucide-react";
 import { Dynamic } from "../../Context/ContextDynamique";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import Loading from "../Loading/Loading";
 const PopPay = () => {
-  const { setPopToPay } = Dynamic();
+  const { setPopToPay, userAuth, token } = Dynamic();
+  const [waiting, setWaiting] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  // Gestion du changement de la checkbox
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(e.target.checked);
+  };
+  //création de ssion checkout
+  const createSessionCheckout = async () => {
+    if (!isChecked) {
+      toast.warning("Vous devez accepter les conditions avant de continuer.");
+      return; // stoppe la création de session
+    }
+    if (!userAuth?.id) {
+      return toast.error("Un identifiant est nécessaire");
+    }
+    if (!userAuth?.email) {
+      return toast.error("Un email est nécessaire");
+    }
+    if (!token) {
+      return toast.error("Aucun token en cours...");
+    }
+    setWaiting(true);
+    console.log("Voici mon id : ", userAuth?.id);
+    console.log("Voici mon email : ", userAuth?.email);
+    console.log("Voici mon token : ", token);
+
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}stripe/create-checkout-session`,
+        withCredentials: true,
+        data: { email: userAuth?.email, id: userAuth?.id },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Réponse API :", res.data);
+      const sessionUrl = res.data; // supposons que l’API renvoie juste l’URL
+
+      // Vérifier si c’est bien un lien
+      const isValidUrl =
+        typeof sessionUrl === "string" && sessionUrl.startsWith("http");
+      if (isValidUrl) {
+        alert("Vous allez être redirigé vers un paiement sécurisé !");
+        window.location.href = sessionUrl; // redirection
+      } else {
+        setWaiting(false);
+        console.error("La réponse n'est pas un lien valide :", sessionUrl);
+        toast.error(
+          "Une erreur est survenue, impossible de créer le paiement."
+        );
+      }
+    } catch (error: any) {
+      setWaiting(false);
+      console.error("Erreur API :", error.response?.data || error.message);
+      toast.error(
+        error.response?.data?.message || "Erreur lors de l'appel API"
+      );
+    }
+  };
+
   return (
     <StyledPopPay onClick={() => setPopToPay(false)}>
       <Slide direction="up" className="slide-color">
@@ -16,7 +82,11 @@ const PopPay = () => {
               Profil bloqué <LockKeyhole />{" "}
             </h3>
             <div className="legals">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={handleChange}
+              />
               <strong>
                 « Je reconnais que mon profil sera mis en ligne immédiatement
                 après mon paiement et que je renonce expressément à mon droit de
@@ -24,9 +94,16 @@ const PopPay = () => {
                 Consommation. »
               </strong>
             </div>
-            <button>
-              Débloquer <LockKeyholeOpen />{" "}
-            </button>
+            {waiting && (
+              <div className="wait">
+                <Loading />
+              </div>
+            )}
+            {!waiting && (
+              <button onClick={() => createSessionCheckout()}>
+                Débloquer <LockKeyholeOpen />{" "}
+              </button>
+            )}
             <p>
               Paiement sécurisé via Stripe <ShieldCheck />
             </p>
@@ -87,6 +164,10 @@ const StyledPopPay = styled.section`
             text-align: center;
             color: ${COLORS.white};
           }
+        }
+        .wait {
+          display: flex;
+          justify-content: center;
         }
         button {
           padding: 10px 50px;

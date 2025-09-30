@@ -88,6 +88,38 @@ const Dashboard = () => {
       getOne();
     }
   }, [userAuth?.id, restaurant?._id]);
+
+  const checkIfPayOrNot = async () => {
+    const queryParams = new URLSearchParams(location.search);
+    const status = queryParams.get("status");
+
+    if (status === "succes") {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_APP_API}stripe/check-payment`,
+          {
+            params: { userId: userAuth?.id },
+            withCredentials: true,
+          }
+        );
+        console.log(res);
+
+        if (res.data.paid) {
+          toast.success("Paiement confirmé, analyse débloquée !");
+        } else {
+          toast.error("Paiement non confirmé. Veuillez contacter le support.");
+        }
+      } catch (err) {
+        console.error(err);
+        toast.error("Erreur lors de la vérification du paiement.");
+      }
+    } else if (status === "cancel") {
+      toast.warning("Paiement annulé ou non finalisé.");
+    }
+  };
+  useEffect(() => {
+    checkIfPayOrNot();
+  }, []);
   return (
     <StyledDashboard>
       <h3>Votre compte</h3>
