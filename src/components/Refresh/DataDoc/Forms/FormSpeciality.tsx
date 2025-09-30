@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import COLORS from "../../../../Styles/Styles";
 import { capitalizeFirstLetter } from "../../../utils/fonctions";
-import Loading from "../../../utils/Loading";
 import { Dynamic } from "../../../../Context/ContextDynamique";
 type TypeProps = {
   speciality: string[];
@@ -47,6 +46,8 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
 
   //speciality api
   const handleUpdate = async (array: string[]) => {
+    console.log("mon id : ", id);
+
     try {
       const res = await axios({
         method: "post",
@@ -107,7 +108,6 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
             onChange={(e) => setNewSpeciality(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addEl()}
           />
-          {updating && <Loading />}
           {!updating && (
             <SquarePlus
               className="icon-add-plat"

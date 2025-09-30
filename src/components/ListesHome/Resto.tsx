@@ -32,7 +32,7 @@ const Resto = ({
     <StyledResto>
       <Slide direction="left" className="div-anim" triggerOnce>
         <div className="cards-profil">
-          <img src={profil} alt="img-profil" />
+          <img src={profil ? profil : "/assets/logo.png"} alt="img-profil" />
           <div className="infos-compte">
             <strong>{pseudo}</strong>
             <p className="lieu-text">Lieu : {capitalizeFirstLetter(ville)}</p>
@@ -76,7 +76,7 @@ const StyledResto = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px auto;
-  width: 50%;
+  max-width: 50%;
   position: relative;
   background: ${COLORS.main};
   padding: 30px;
@@ -189,7 +189,7 @@ const StyledResto = styled.div`
     flex-direction: column;
     margin: 30px 0px;
     padding: 10px;
-    width: 100%;
+    min-width: 100%;
     .div-anim {
       width: 100%;
       .cards-profil {

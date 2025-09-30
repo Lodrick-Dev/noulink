@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import COLORS from "../../Styles/Styles";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -13,6 +13,7 @@ import ManagerAccount from "./ManagerAccount";
 import { Dynamic } from "../../Context/ContextDynamique";
 import SkeletonLoader from "../utils/SkeletonLoader";
 import Resto from "../ListesHome/Resto";
+import { Eye, LockKeyholeOpen } from "lucide-react";
 // import Loading from "../utils/Loading";
 export type TypeDoc = {
   _id: string;
@@ -30,8 +31,7 @@ export type TypeDoc = {
 export type TypeGalerie = string;
 export type TypeSpecility = string;
 const Dashboard = () => {
-  const { loadingUser, userAuth } = Dynamic();
-  const [actualised, setActualised] = useState(false);
+  const { loadingUser, userAuth, setPopToPay } = Dynamic();
   const [update, setUpdate] = useState(false);
   const [id, setId] = useState("");
   const [imgProfilUploaded, setImgProfilUploaded] = useState<
@@ -41,6 +41,15 @@ const Dashboard = () => {
   const [restaurant, setRestaurant] = useState<TypeDoc | null>(null);
   const [galerie, setGalerie] = useState<TypeGalerie[]>([]);
   const [speciality, setSpeciality] = useState<TypeSpecility[]>([]);
+
+  //scroll preview :
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollToPreview = () => {
+    if (previewRef.current) {
+      previewRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   //getOne on va prendre id de userAuth
   const getOne = async () => {
@@ -62,21 +71,26 @@ const Dashboard = () => {
         setSpeciality(res.data.speciality);
         setIdLoading(false);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      return toast.error("Un erreur est survenue");
+      if (
+        !error.response.data.error.includes("Aucun élément trouvé avec ce ID")
+      ) {
+        return toast.error("Un erreur est survenue");
+      }
     }
   };
 
   //useffet
   useEffect(() => {
-    if (restaurant?._id) {
+    if (userAuth?.id) {
+      setId(userAuth?.id);
       getOne();
     }
-  }, [userAuth?.id]);
+  }, [userAuth?.id, restaurant?._id]);
   return (
     <StyledDashboard>
-      {!actualised && <h3>Tableau de bord</h3>}
+      <h3>Votre compte</h3>
       <div className="the-forms">
         <span className="email">
           Votre email (non public) :{" "}
@@ -85,8 +99,21 @@ const Dashboard = () => {
         <span className="visible">
           Public : {restaurant?.statut === 1 ? "Oui" : "Non"}
         </span>
+        {restaurant?._id && (
+          <span className="preview">
+            <Eye className="i" onClick={handleScrollToPreview} size={40} />
+            <LockKeyholeOpen
+              className="i-pay"
+              onClick={() => setPopToPay(true)}
+              size={40}
+            />
+          </span>
+        )}
         {/* <SkeletonLoader /> */}
-        <FormProfil imgProfilUploaded={imgProfilUploaded} />
+        <FormProfil
+          imgProfilUploaded={imgProfilUploaded}
+          email={userAuth?.email}
+        />
         <FormSpeciality speciality={speciality} id={id} />
         <FormGalerie galerie={galerie} id={id} />
         <FormGlobale
@@ -99,8 +126,8 @@ const Dashboard = () => {
           setRestaurant={setRestaurant}
         />
       </div>
-      {id && (
-        <div className="box-preview">
+      {id && restaurant?._id && (
+        <div className="box-preview" ref={previewRef}>
           <Resto
             pseudo={restaurant?.pseudo}
             ville={restaurant?.ville}
@@ -141,13 +168,32 @@ const StyledDashboard = styled.section`
       opacity: 0.5;
       margin-bottom: 0px;
       font-size: 0.8em;
+      align-items: center;
     }
     .visible {
       width: 100%;
       display: flex;
       opacity: 0.5;
-      margin-bottom: 10px;
       font-size: 0.8em;
+    }
+    .preview {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 5px;
+      .i {
+        cursor: pointer;
+        color: ${COLORS.main};
+        border-bottom: solid 1px ${COLORS.main};
+        padding: 3px;
+        margin-right: 50px;
+      }
+      .i-pay {
+        padding: 3px;
+        cursor: pointer;
+        color: ${COLORS.green};
+        border-bottom: solid 1px ${COLORS.green};
+      }
     }
   }
   .box-preview {
@@ -159,6 +205,11 @@ const StyledDashboard = styled.section`
   @media screen and (max-width: 450px) {
     .the-forms {
       width: 100%;
+      .email,
+      .visible {
+        padding-left: 5px;
+        font-size: 0.7em;
+      }
     }
   }
 `;

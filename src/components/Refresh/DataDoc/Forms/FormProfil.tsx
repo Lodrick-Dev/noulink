@@ -9,8 +9,10 @@ import { Dynamic } from "../../../../Context/ContextDynamique";
 
 const FormProfil = ({
   imgProfilUploaded,
+  email,
 }: {
   imgProfilUploaded: string | undefined;
+  email: string | undefined;
 }) => {
   const { token, userAuth } = Dynamic();
   const [uploading, setUploading] = useState(false);
@@ -49,6 +51,7 @@ const FormProfil = ({
     const data = new FormData();
     // data.append("url", restaurant?.profil ? restaurant?.profil : "");
     data.append("profil", img);
+    data.append("email", email ? email : "");
     try {
       const res = await axios({
         method: "post",
@@ -96,22 +99,18 @@ const FormProfil = ({
       );
     }
   };
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     console.log("Token dans FormProfil :", token);
-
-  //     if (token) {
-  //       testProtectedRoute();
-  //     }
-  //   }, 5000);
-  // }, [token]);
+  useEffect(() => {
+    if (imgProfilUploaded) {
+      setImageProfil(imgProfilUploaded);
+    }
+  }, [imgProfilUploaded]);
   return (
     <StyledFormProfil className="profil-img">
       {uploading && <Loading />}
       {!uploading && (
         <img
           // src={restaurant.profil}
-          src={imgProfilUploaded ? imgProfilUploaded : "/assets/logo.png"}
+          src={imageProfil ? imageProfil : "/assets/logo.png"}
           alt="image-profil"
           onClick={() => handleChangeProfil()}
         />

@@ -23,12 +23,12 @@ import EmailConf from "./components/Register/EmailConf";
 import ResetPassword from "./components/Register/ResetPassword";
 import PrivateRoute from "./components/Private/PrivateRoute";
 import PublicRoute from "./components/Private/PublicRoute";
+import PopPay from "./components/AbonnementCard/PopPay";
 
 function App() {
+  const { ville, popToPay } = Dynamic();
   const [showPrompt, setShowPrompt] = useState(false);
-  const [popRouter, setPopRouter] = useState(false);
   const location = useLocation();
-  const { ville } = Dynamic();
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPrompt(true);
@@ -47,7 +47,7 @@ function App() {
           <GeolocationPrompt />
         </Slide>
       )}
-      {location.pathname !== "/" && <Header setPopRouter={setPopRouter} />}
+      {location.pathname !== "/" && <Header />}
       {location.pathname !== "/" && <PopCookies />}
       <Routes>
         {/* <Route path="/inscription" element={<Inscription />} /> */}
@@ -80,7 +80,7 @@ function App() {
         <Route path="*" element={<LandingPage />} />
       </Routes>
       <Footer />
-      {/* {popRouter && <PopRouter setPopRouter={setPopRouter} />} */}
+      {popToPay && <PopPay />}
       <ToastContainer position="top-right" />
     </StyledApp>
   );

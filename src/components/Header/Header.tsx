@@ -3,10 +3,7 @@ import COLORS from "../../Styles/Styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { House } from "lucide-react";
 import { Dynamic } from "../../Context/ContextDynamique";
-type TypeProps = {
-  setPopRouter: React.Dispatch<React.SetStateAction<boolean>>;
-};
-const Header = ({ setPopRouter }: TypeProps) => {
+const Header = () => {
   const { token } = Dynamic();
   const pageActu = useLocation();
   const direction = useNavigate();

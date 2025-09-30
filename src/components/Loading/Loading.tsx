@@ -11,21 +11,26 @@ const Loading = () => {
 
 export default Loading;
 const LaodingStyled = styled.div`
-  width: 35px;
-  height: 35px;
+  min-width: 35px;
+  min-height: 35px;
+  max-width: 35px;
+  max-height: 35px;
   margin: 0px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   .loader {
-    width: 20px;
-    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
     border: 3px solid ${COLORS.yellow};
     border-bottom-color: transparent;
     border-radius: 50%;
-    display: inline-block;
+    display: block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+    flex-shrink: 0; /* important */
   }
 
   @keyframes rotation {

@@ -10,8 +10,9 @@ import { Dynamic } from "../../../../Context/ContextDynamique";
 import { toast } from "react-toastify";
 import type { TypeDoc } from "../../Dashboard";
 import axios from "axios";
-import Loading from "../../../Loading/Loading";
 import { supabase } from "../../../utils/supabaseClient";
+import Loading from "../../../Loading/Loading";
+import LoadingBlue from "../../../Loading/LoadingBlue";
 type TypeProps = {
   name: string | undefined;
   saveur: string | undefined;
@@ -148,7 +149,11 @@ const FormGlobale = ({
           defaultValue={updateDescription ? updateDescription : description}
           onChange={(e) => setUpdateDescription(e.target.value)}
         ></textarea>
-        {updating && <Loading />}
+        {updating && (
+          <div className="loading-wrapper">
+            <Loading />
+          </div>
+        )}
         {!updating && (
           <button onClick={() => updatePseudoSupaBase()}>Enregistrer</button>
         )}
@@ -187,6 +192,15 @@ const StyledFormGlobale = styled.div`
     textarea {
       min-height: 100px;
     }
+    .loading-wrapper {
+      max-width: 45px; /* taille du loader */
+      min-height: 45px; /* même taille */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px auto;
+    }
+
     .box-saveur {
       margin: 10px 0px;
       display: flex;

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { CheckCircle } from "lucide-react";
 import COLORS from "../../Styles/Styles";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Card = styled.div`
   max-width: 350px;
+  min-width: 350px;
   margin: 20px auto;
+  /* margin: 20px; */
   border-radius: 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   background-color: ${COLORS.white};
@@ -98,6 +100,7 @@ const PromoInfo = styled.p`
 
 export default function AbonnementCard() {
   const nav = useNavigate();
+  const loc = useLocation();
   return (
     <Card>
       <Header>
@@ -112,7 +115,7 @@ export default function AbonnementCard() {
       <Features>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
-          <span>Création de profil public</span>
+          <span>Profil public</span>
         </FeatureItem>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
@@ -126,13 +129,13 @@ export default function AbonnementCard() {
           <CheckCircle size={18} color={COLORS.green} />
           <span>Galerie photos et description</span>
         </FeatureItem>
-        <FeatureItem>
-          <CheckCircle size={18} color={COLORS.green} />
-          <span>Faites découvrir vos spécialités</span>
-        </FeatureItem>
       </Features>
 
-      <SubscribeButton onClick={() => nav("/auth")}>Je rejoins</SubscribeButton>
+      {loc.pathname !== "/dashboard" && (
+        <SubscribeButton onClick={() => nav("/auth")}>
+          Je rejoins
+        </SubscribeButton>
+      )}
     </Card>
   );
 }

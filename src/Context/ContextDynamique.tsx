@@ -15,6 +15,7 @@ export const ContextDynamicProvider = ({
   const [token, setToken] = useState<string>("");
   const [userAuth, setUserAuth] = useState<User | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
+  const [popToPay, setPopToPay] = useState(false);
 
   const setCityCookie = () => {
     const now = new Date();
@@ -86,6 +87,8 @@ export const ContextDynamicProvider = ({
         setLoadingUser,
         setUserAuth,
         userAuth,
+        popToPay,
+        setPopToPay,
       }}
     >
       {children}

@@ -9,6 +9,8 @@ export type TypeContextDynamic = {
   userAuth: User | null;
   loadingUser: boolean;
   setLoadingUser: React.Dispatch<React.SetStateAction<boolean>>;
+  popToPay: boolean;
+  setPopToPay: React.Dispatch<React.SetStateAction<boolean>>;
   setUserAuth: React.Dispatch<React.SetStateAction<User | null>>;
   deleteCityCookie: () => void;
 };
