@@ -99,6 +99,7 @@ const FormGlobale = ({
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (res) {
         if (res.data) {
           if (res.data.succes) {

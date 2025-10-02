@@ -81,24 +81,6 @@ const FormProfil = ({
       );
     }
   };
-
-  const testProtectedRoute = async () => {
-    console.log("Test route protégée avec le token :", token);
-
-    try {
-      const res = await axios.get("http://localhost:5009/test-protected", {
-        headers: {
-          Authorization: `Bearer ${token}`, // ✅ ton access_token Supabase
-        },
-      });
-      console.log("Réponse API :", res.data);
-    } catch (error: any) {
-      console.error("Erreur API :", error.response?.data || error.message);
-      toast.error(
-        error.response?.data?.message || "Erreur lors de l'appel API"
-      );
-    }
-  };
   useEffect(() => {
     if (imgProfilUploaded) {
       setImageProfil(imgProfilUploaded);

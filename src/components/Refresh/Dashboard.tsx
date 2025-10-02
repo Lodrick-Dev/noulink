@@ -13,7 +13,8 @@ import ManagerAccount from "./ManagerAccount";
 import { Dynamic } from "../../Context/ContextDynamique";
 import SkeletonLoader from "../utils/SkeletonLoader";
 import Resto from "../ListesHome/Resto";
-import { Eye, Fullscreen, LockKeyholeOpen } from "lucide-react";
+import { Eye, EyeOff, Fullscreen, LockKeyholeOpen } from "lucide-react";
+import { getExpirationMessage } from "../utils/fonctions";
 // import Loading from "../utils/Loading";
 export type TypeDocDashboard = {
   _id: string;
@@ -28,11 +29,12 @@ export type TypeDocDashboard = {
   galerie?: string[];
   description?: string;
   speciality?: string[];
+  premiumExpiresAt?: string;
 };
 export type TypeGalerie = string;
 export type TypeSpecility = string;
 const Dashboard = () => {
-  const { loadingUser, userAuth, setPopToPay } = Dynamic();
+  const { loadingUser, userAuth, setPopToPay, token } = Dynamic();
   const [update, setUpdate] = useState(false);
   const [id, setId] = useState("");
   const [imgProfilUploaded, setImgProfilUploaded] = useState<
@@ -82,6 +84,39 @@ const Dashboard = () => {
     }
   };
 
+  //rendre le profil visbile ou pas
+  const visibilityProfil = async () => {
+    if (!restaurant?._id) return toast.error("Un identifiant est nécessaire");
+    if (!token) return toast.error("Token absent");
+    setIdLoading(true);
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}restaurant/visible/${
+          restaurant?._id
+        }`,
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(res);
+
+      if (res.data) {
+        if (res.data.data) {
+          setRestaurant(res.data.data);
+        }
+        return toast.success(res.data.message);
+      }
+    } catch (error: any) {
+      console.log(error);
+      if (error.response.data.message) {
+        return toast.error(error.response.data.message);
+      }
+      return toast.error("Un erreur est survenue");
+    }
+  };
+
   //useffet
   useEffect(() => {
     if (userAuth?.id) {
@@ -118,6 +153,21 @@ const Dashboard = () => {
       toast.warning("Paiement annulé ou non finalisé.");
     }
   };
+  const eyesIcons = () => {
+    return restaurant?.statut === 1 ? (
+      <Eye
+        className="visible-public"
+        size={40}
+        onClick={() => visibilityProfil()}
+      />
+    ) : (
+      <EyeOff
+        className="visible-public"
+        size={40}
+        onClick={() => visibilityProfil()}
+      />
+    );
+  };
   useEffect(() => {
     checkIfPayOrNot();
   }, []);
@@ -130,8 +180,13 @@ const Dashboard = () => {
           {loadingUser ? <Loading /> : userAuth?.email}
         </span>
         <span className="visible">
-          Public : {restaurant?.statut === 1 ? "Oui" : "Non"}
+          Bloqué : {!restaurant?.isPremium ? "Oui" : "Non"}
         </span>
+        {restaurant?.isPremium && (
+          <span className="info-date">
+            {getExpirationMessage(restaurant?.premiumExpiresAt)}
+          </span>
+        )}
         {restaurant?._id && (
           <div className="preview">
             <Fullscreen
@@ -144,9 +199,7 @@ const Dashboard = () => {
               onClick={() => setPopToPay(true)}
               size={40}
             />
-            {restaurant?.statut === 1 && restaurant?.isPremium && (
-              <Eye className="visible-public" size={40} />
-            )}
+            {restaurant?.isPremium && eyesIcons()}
           </div>
         )}
         {/* <SkeletonLoader /> */}
@@ -211,6 +264,12 @@ const StyledDashboard = styled.section`
       align-items: center;
     }
     .visible {
+      width: 100%;
+      display: flex;
+      opacity: 0.5;
+      font-size: 0.8em;
+    }
+    .info-date {
       width: 100%;
       display: flex;
       opacity: 0.5;

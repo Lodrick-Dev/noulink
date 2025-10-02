@@ -85,3 +85,26 @@ export const isFileSizeValid = (file: File, maxSizeInMB = 5): boolean => {
 export const normalizeString = (str: string): string => {
   return str.trim().toLowerCase();
 };
+
+export const getExpirationMessage = (
+  value: string | undefined,
+  months = 12
+) => {
+  if (!value) return;
+
+  const date = new Date(value);
+
+  // ajouter X mois à la date donnée
+  const expirationDate = new Date(date);
+  expirationDate.setMonth(expirationDate.getMonth() + months);
+
+  // format français (jour/mois/année)
+  const options: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  };
+  const formattedDate = expirationDate.toLocaleDateString("fr-FR", options);
+
+  return `Valable jusqu’au ${formattedDate}`;
+};
