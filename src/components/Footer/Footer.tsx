@@ -17,6 +17,12 @@ const Footer = () => {
           Instagram
         </a>
       </ul>
+      <div className="stripe">
+        <strong className="info-stripe">
+          ✅ Paiement 100% sécurisé via Stripe
+        </strong>
+        <img src="/assets/logo-stripe.webp" alt="img-stripe" />
+      </div>
       <div className="box-img">
         <img src="/svglogo.svg" alt="logo-noulink" onClick={() => nav("/")} />
       </div>
@@ -59,11 +65,33 @@ const StyledFooter = styled.div`
       cursor: pointer;
     }
   }
+  .stripe {
+    width: 50%;
+    margin: 0px auto 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 50%;
+      margin: 0px auto;
+    }
+    .info-stripe {
+      display: block;
+      text-align: center;
+      width: 100%;
+      border-radius: 5px;
+      padding: 5px;
+      color: ${COLORS.green};
+    }
+  }
   @media screen and (max-width: 450px) {
     .box-img {
       img {
         width: 50%;
       }
+    }
+    .stripe {
+      width: 100%;
     }
   }
 `;

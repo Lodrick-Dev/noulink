@@ -13,9 +13,9 @@ import ManagerAccount from "./ManagerAccount";
 import { Dynamic } from "../../Context/ContextDynamique";
 import SkeletonLoader from "../utils/SkeletonLoader";
 import Resto from "../ListesHome/Resto";
-import { Eye, LockKeyholeOpen } from "lucide-react";
+import { Eye, Fullscreen, LockKeyholeOpen } from "lucide-react";
 // import Loading from "../utils/Loading";
-export type TypeDoc = {
+export type TypeDocDashboard = {
   _id: string;
   createdAt: string;
   updatedAt: string;
@@ -23,10 +23,11 @@ export type TypeDoc = {
   ville?: string;
   saveur?: string;
   statut?: number;
+  isPremium?: boolean;
   profil?: string;
   galerie?: string[];
   description?: string;
-  speciality: string[];
+  speciality?: string[];
 };
 export type TypeGalerie = string;
 export type TypeSpecility = string;
@@ -38,7 +39,7 @@ const Dashboard = () => {
     string | undefined
   >();
   const [idLoading, setIdLoading] = useState(false);
-  const [restaurant, setRestaurant] = useState<TypeDoc | null>(null);
+  const [restaurant, setRestaurant] = useState<TypeDocDashboard | null>(null);
   const [galerie, setGalerie] = useState<TypeGalerie[]>([]);
   const [speciality, setSpeciality] = useState<TypeSpecility[]>([]);
 
@@ -132,14 +133,21 @@ const Dashboard = () => {
           Public : {restaurant?.statut === 1 ? "Oui" : "Non"}
         </span>
         {restaurant?._id && (
-          <span className="preview">
-            <Eye className="i" onClick={handleScrollToPreview} size={40} />
+          <div className="preview">
+            <Fullscreen
+              className="i"
+              onClick={handleScrollToPreview}
+              size={40}
+            />
             <LockKeyholeOpen
               className="i-pay"
               onClick={() => setPopToPay(true)}
               size={40}
             />
-          </span>
+            {restaurant?.statut === 1 && restaurant?.isPremium && (
+              <Eye className="visible-public" size={40} />
+            )}
+          </div>
         )}
         {/* <SkeletonLoader /> */}
         <FormProfil
@@ -225,6 +233,13 @@ const StyledDashboard = styled.section`
         cursor: pointer;
         color: ${COLORS.green};
         border-bottom: solid 1px ${COLORS.green};
+        margin-right: 50px;
+      }
+      .visible-public {
+        padding: 3px;
+        cursor: pointer;
+        color: ${COLORS.yellow};
+        border-bottom: solid 1px ${COLORS.yellow};
       }
     }
   }

@@ -17,7 +17,10 @@ const PolitiqueConfidentialite = () => {
       <div className="box">
         <h2>.1 Identité de l'éditeur</h2>
         <strong>Responsable du traitement des données :</strong>
-        <p>Nom : Loddman (pseudo Instagram)</p>
+        <p>Nom commercial : Losira</p>
+        <p>Nom & Prénom : JEAN-JACQUES Lodrick</p>
+        <p>Statut : Micro-entrepreneur</p>
+        <p>Numéro SIRET : </p>
         <p>Email : dev.frenchlod@gmail.com</p>
         <strong>Hébergement :</strong>
         <p>Fournisseur : OVH</p>
@@ -41,17 +44,32 @@ const PolitiqueConfidentialite = () => {
           celles que vous décidez de rendre visibles dans la description ou dans
           les champs visibles du profil.
         </strong>
+        <strong>
+          La collecte et le traitement de vos données sont nécessaires à
+          l’exécution du contrat (abonnement et publication de profil) et au
+          respect de nos obligations légales.
+        </strong>
       </div>
       <div className="box">
         <h2>.3 Abonnement annuel et conservation des données</h2>
         <p>
-          La création et la publication d’un profil nécessitent la souscription
-          d’un abonnement annuel payant.
+          La création et la publication d’un profil nécessitent un paiement
+          unique pour une durée d’un an.
         </p>
         <p>
-          Vos données sont conservées tant que votre abonnement est actif. Vous
+          À l’issue de cette période, l’utilisateur peut choisir de renouveler
+          le paiement pour une année supplémentaire afin de continuer à publier
+          et gérer son profil.
+        </p>
+        <p>
+          Vos données sont conservées tant que votre profil est actif. Vous
           pouvez demander la suppression de votre profil ou de vos données à
           tout moment en contactant : dev.frenchlod@gmail.com .
+        </p>
+        <p>
+          Nous procéderons à la suppression de vos données à l'expiration de
+          l'abonnement, sauf si vous décidez de renouveler votre profil pour une
+          nouvelle année.
         </p>
       </div>
       <div className="box">

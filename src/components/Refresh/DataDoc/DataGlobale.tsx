@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import type { TypeDoc } from "../Dashboard";
+import type { TypeDocDashboard } from "../Dashboard";
 import COLORS from "../../../Styles/Styles";
 import {
   capitalizeFirstLetter,
@@ -14,8 +14,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Loading from "../../Loading/Loading";
 type TypeProps = {
-  restaurant: TypeDoc;
-  setRestaurant: React.Dispatch<React.SetStateAction<TypeDoc | null>>;
+  restaurant: TypeDocDashboard;
+  setRestaurant: React.Dispatch<React.SetStateAction<TypeDocDashboard | null>>;
 };
 const DataGlobale = ({ restaurant, setRestaurant }: TypeProps) => {
   const [update, setUpdate] = useState(false);

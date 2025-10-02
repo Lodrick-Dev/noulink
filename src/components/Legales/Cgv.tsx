@@ -7,6 +7,7 @@ const Cgv = () => {
       <div>
         <h1>Conditions Générales de Vente (CGV) de Nou Link</h1>
       </div>
+      <span>Dernière mise à jour : 2 octobre 2025</span>
       <div>
         <h2>.1 Objet</h2>
         <p>
@@ -16,9 +17,9 @@ const Cgv = () => {
           sur la plateforme Nou Link (service exploité sous le nom commercial
           Losira).
         </p>
+        <p>L’accès au site pour la consultation reste gratuit.</p>
         <p>
-          L’accès au site pour la consultation reste gratuit, mais la
-          publication de contenus et la gestion de profil sont réservées aux
+          La création, publication et gestion de profils sont réservées aux
           abonnés payants.
         </p>
       </div>
@@ -33,14 +34,17 @@ const Cgv = () => {
         <p>
           {" "}
           <strong>Accès payant : </strong>La création et la publication d’un
-          profil nécessitent la souscription d’un abonnement annuel.
+          profil nécessitent un paiement unique pour une durée de 12 mois.
         </p>
         <p>
           {" "}
-          <strong>Renouvellement :</strong>L’abonnement est valable pour une
-          période de 12 mois à compter de la date de paiement. Il pourra être
-          renouvelé à expiration selon les modalités définies lors de la
-          souscription.{" "}
+          <strong>Renouvellement :</strong>L’utilisateur peut renouveler son
+          profil pour une année supplémentaire à l’issue de l’abonnement
+          initial.
+        </p>
+        <p>
+          Le renouvellement se fait selon les modalités et tarifs en vigueur au
+          moment du paiement.
         </p>
         <p>
           {" "}
@@ -62,15 +66,15 @@ const Cgv = () => {
           Chaque utilisateur abonné peut créer un profil public contenant :
         </strong>
         <p>Pseudo ou nom</p>
-        <p>Description personnelle ou professionnelle</p>
+        <p>Description personnelle ou professionnelle/ Contact</p>
         <p>Liste de spécialités culinaires</p>
         <p>Images et galerie</p>
-        <p>Coordonnées de contact (optionnelles)</p>
         <strong>
           L’utilisateur est responsable de l’exactitude des informations qu’il
-          publie. Toute information trompeuse, inappropriée ou illégale peut
-          entraîner la suspension ou la suppression du profil sans remboursement
-          de l’abonnement.
+          publie. Toute information trompeuse, inappropriée, illégale ou
+          contrevenant aux règles de Nou Link (ex. publicité pour des
+          concurrents non autorisés) peut entraîner la suspension ou la
+          suppression du profil sans remboursement.
         </strong>
       </div>
       <div>
@@ -171,19 +175,18 @@ const StyledCgv = styled.section`
     h1 {
       text-align: center;
       font-size: 1.3em;
+      color: ${COLORS.green};
+    }
+    h2 {
+      color: ${COLORS.green};
     }
     strong {
       display: block;
-      margin: 10px 0px;
-      color: ${COLORS.green};
+      color: ${COLORS.yellow};
     }
     p {
       margin-top: 10px;
       color: aliceblue;
-      span {
-        cursor: pointer;
-        color: ${COLORS.yellow};
-      }
     }
   }
 `;

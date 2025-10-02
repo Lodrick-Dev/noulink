@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { Dynamic } from "../../../../Context/ContextDynamique";
 import { toast } from "react-toastify";
-import type { TypeDoc } from "../../Dashboard";
+import type { TypeDocDashboard } from "../../Dashboard";
 import axios from "axios";
 import { supabase } from "../../../utils/supabaseClient";
 import Loading from "../../../Loading/Loading";
@@ -20,7 +20,7 @@ type TypeProps = {
   description: string | undefined;
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
-  setRestaurant: React.Dispatch<React.SetStateAction<TypeDoc | null>>;
+  setRestaurant: React.Dispatch<React.SetStateAction<TypeDocDashboard | null>>;
 };
 const FormGlobale = ({
   name,

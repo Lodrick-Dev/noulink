@@ -12,15 +12,21 @@ const PopPay = () => {
   const { setPopToPay, userAuth, token } = Dynamic();
   const [waiting, setWaiting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isCheckedCGU, setIsCheckedCGU] = useState(false);
 
   // Gestion du changement de la checkbox
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
   };
+  const handleChangeCGU = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCheckedCGU(e.target.checked);
+  };
   //création de ssion checkout
   const createSessionCheckout = async () => {
-    if (!isChecked) {
-      toast.warning("Vous devez accepter les conditions avant de continuer.");
+    if (!isChecked || !isCheckedCGU) {
+      toast.warning(
+        "Vous devez accepter la renonciation et les CGU/CGV avant de continuer."
+      );
       return; // stoppe la création de session
     }
     if (!userAuth?.id) {
@@ -88,10 +94,21 @@ const PopPay = () => {
                 onChange={handleChange}
               />
               <strong>
-                « Je reconnais que mon profil sera mis en ligne immédiatement
-                après mon paiement et que je renonce expressément à mon droit de
-                rétractation conformément à l’article L221-28 du Code de la
-                Consommation. »
+                « Je confirme que mon profil sera activé immédiatement après
+                paiement et que je renonce à mon droit de rétractation (art.
+                L221-28 du Code de la Consommation). »
+              </strong>
+            </div>
+            <div className="legals-cgu-v">
+              <input
+                type="checkbox"
+                checked={isCheckedCGU}
+                onChange={handleChangeCGU}
+              />
+              <strong>
+                « Je déclare avoir lu et accepté les Conditions Générales
+                d’Utilisation (CGU) et les Conditions Générales de Vente (CGV)
+                de Nou Link. »
               </strong>
             </div>
             {waiting && (
@@ -150,20 +167,25 @@ const StyledPopPay = styled.section`
           text-decoration: underline;
           margin-bottom: 10px;
         }
-        .legals {
+        .legals,
+        .legals-cgu-v {
           display: flex;
-          flex-direction: column;
+          /* flex-direction: column; */
+          margin-bottom: 10px;
           input {
-            width: 25px;
+            /* width: 25px;
             height: 25px;
-            margin: 5px auto;
+            margin: 5px auto; */
             cursor: pointer;
+            margin: 10px;
           }
           strong {
             display: block;
             text-align: center;
             color: ${COLORS.white};
           }
+        }
+        .legals-cgu-v {
         }
         .wait {
           display: flex;

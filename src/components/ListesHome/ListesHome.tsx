@@ -18,10 +18,10 @@ export type TypeDocProps = {
   profil?: string;
   galerie?: string[];
   description?: string;
-  speciality: string[];
+  speciality?: string[];
 };
 const ListesHome = ({ saveur }: { saveur: string }) => {
-  const [restaurants, setRestaurant] = useState<TypeDocProps[]>([]);
+  const [restaurants, setRestaurant] = useState<TypeDocProps[] | null>(null);
   const [getOne, setGetOne] = useState<TypeDocProps | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -59,10 +59,12 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
   };
 
   const getOneById = (id: string) => {
-    for (const resto of restaurants) {
-      if (resto._id === id) {
-        setGetOne(resto);
-        break; // On arrête la boucle dès qu'on a trouvé
+    if (restaurants) {
+      for (const resto of restaurants) {
+        if (resto._id === id) {
+          setGetOne(resto);
+          break; // On arrête la boucle dès qu'on a trouvé
+        }
       }
     }
   };

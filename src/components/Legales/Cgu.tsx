@@ -38,15 +38,20 @@ const Cgu = () => {
         <h2>.2 Accès au site</h2>
         <p>
           L’accès à Nou Link est gratuit et ouvert à tous pour la consultation.
-          Toutefois, certaines fonctionnalités — notamment la création et la
-          publication d’un profil payant — nécessitent la souscription d’un
-          abonnement annuel payant.
+        </p>
+        <p>
+          La création, publication et gestion d’un profil nécessitent un
+          paiement unique pour un an.
         </p>
         <p>
           L’utilisateur est responsable de l’exactitude et de la mise à jour des
-          informations qu’il fournit. En cas d’informations trompeuses,
-          inappropriées ou frauduleuses, Nou Link se réserve le droit de
-          suspendre ou de supprimer le profil concerné sans remboursement.
+          informations qu’il fournit.
+        </p>
+        <p>
+          En cas d’informations trompeuses, inappropriées, illégales ou
+          contraires aux règles de Nou Link (ex. publicité pour des plateformes
+          concurrentes), Nou Link se réserve le droit de suspendre ou supprimer
+          le profil concerné sans remboursement.
         </p>
       </div>
       <div>
@@ -87,8 +92,8 @@ const Cgu = () => {
           discriminatoires, ou violents)
         </p>
         <strong>
-          Nous nous réservons le droit de modérer ou de supprimer tout contenu
-          contraire à ces règles, sans préavis ni remboursement.
+          Nous nous réservons le droit de modérer, désactiver ou de supprimer
+          tout contenu contraire à ces règles, sans préavis ni remboursement.
         </strong>
       </div>
       <div>
