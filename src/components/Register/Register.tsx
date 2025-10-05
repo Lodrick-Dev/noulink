@@ -21,16 +21,23 @@ const Register = () => {
     }
     if (password === confirmPassword) {
       setLoading(true);
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           emailRedirectTo: `${import.meta.env.VITE_URL}conf-email`,
         },
       });
+      console.log(error);
+      console.log(data);
+      setLoading(false);
       if (error) {
-        setLoading(false);
+        console.log(error);
+
         return alert(error.message);
+      } else if (data?.user && data?.user?.identities?.length === 0) {
+        // Cas 2 : Email déjà inscrit et confirmé
+        alert("Cet email est déjà inscrit.");
       } else {
         setLoading(false);
         setEmail("");
@@ -106,6 +113,8 @@ const StyledRegister = styled.div`
       cursor: pointer;
       border: none;
       transition: 0.5s;
+      color: ${COLORS.main};
+      background: ${COLORS.yellow};
     }
     input:last-child:hover {
       background: ${COLORS.green};

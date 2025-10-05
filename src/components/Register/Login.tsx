@@ -25,7 +25,11 @@ const Login = () => {
       password,
     });
     console.log(error);
+    console.log(data);
+
     if (error) {
+      console.log(error);
+
       setLoading(false);
       if (error.message.includes("Invalid login")) {
         return toast.error("E-mail inconnu ou mot de passe incorrect");
@@ -54,11 +58,15 @@ const Login = () => {
       redirectTo: "http://localhost:5173/reset-password",
     });
 
+    console.log(error);
+
     if (error) {
       console.error("Erreur reset password :", error.message);
     } else {
       console.log("Email de réinitialisation envoyé !");
-      alert("Vérifiez votre email pour réinitialiser le mot de passe.");
+      alert(
+        "Si un compte existe pour cet email, vous recevrez un lien de réinitialisation."
+      );
     }
   };
   return (
@@ -134,6 +142,8 @@ const StyledLogin = styled.div`
       cursor: pointer;
       border: none;
       transition: 0.5s;
+      color: ${COLORS.main};
+      background: ${COLORS.yellow};
     }
     .btn-sub:hover {
       background: ${COLORS.green};
