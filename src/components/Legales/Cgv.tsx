@@ -15,7 +15,7 @@ const Cgv = () => {
           modalités de souscription, d’utilisation et de facturation des
           abonnements annuels payants permettant de créer et publier un profil
           sur la plateforme Nou Link (service exploité sous le nom commercial
-          Losira).
+          Loryum).
         </p>
         <p>L’accès au site pour la consultation reste gratuit.</p>
         <p>
@@ -25,7 +25,7 @@ const Cgv = () => {
       </div>
       <div>
         <h2>.2 Editeur et contact</h2>
-        <p>Éditeur : Loddman (pseudo Instagram), nom commercial : Losira</p>
+        <p>Éditeur : Loddman (pseudo Instagram), nom commercial : Loryum</p>
         <p>Email : dev.frenchlod@gmail.com</p>
         <p>Hébergement : OVH, France</p>
       </div>

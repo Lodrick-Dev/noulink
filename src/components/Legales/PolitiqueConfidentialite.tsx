@@ -17,7 +17,7 @@ const PolitiqueConfidentialite = () => {
       <div className="box">
         <h2>.1 Identité de l'éditeur</h2>
         <strong>Responsable du traitement des données :</strong>
-        <p>Nom commercial : Losira</p>
+        <p>Nom commercial : Loryum</p>
         <p>Nom & Prénom : JEAN-JACQUES Lodrick</p>
         <p>Statut : Micro-entrepreneur</p>
         <p>Numéro SIRET : </p>

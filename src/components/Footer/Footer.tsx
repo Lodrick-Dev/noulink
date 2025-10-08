@@ -26,7 +26,7 @@ const Footer = () => {
       <div className="box-img">
         <img src="/svglogo.svg" alt="logo-noulink" onClick={() => nav("/")} />
       </div>
-      <span>©copyright - Nou Link 2025 - par Losira</span>
+      <span>©copyright - Nou Link 2025 - par Loryum</span>
     </StyledFooter>
   );
 };

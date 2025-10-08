@@ -17,7 +17,7 @@ const MainHome = ({ setSaveur, saveur }: TypePropsHome) => {
     <StyledMainHome>
       <h1>Link up to favorite food</h1>
       <div className="liste-country">
-        <p>Les saveurs :</p>
+        <p>Saveurs :</p>
         <div className="liste">
           <span
             onClick={() =>

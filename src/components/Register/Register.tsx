@@ -53,6 +53,10 @@ const Register = () => {
   return (
     <StyledRegister>
       <h1>Inscription</h1>
+      <span className="indic">
+        Formulaire réservé aux personnes souhaitant proposer leurs saveurs sur
+        Nou Link.
+      </span>
       <form onSubmit={(e) => handleSubscribe(e)}>
         <input
           type="email"
@@ -88,6 +92,10 @@ const StyledRegister = styled.div`
   h1 {
     text-align: center;
     color: ${COLORS.yellow};
+  }
+  .indic {
+    text-align: center;
+    color: ${COLORS.white};
   }
   form {
     display: flex;

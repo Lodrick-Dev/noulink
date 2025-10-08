@@ -13,10 +13,10 @@ const LandingPage = () => {
         <Intro />
         <nav className="cta">
           <Link to="/home" className="btn">
-            Découvrir les saveurs près de chez vous
+            Saveurs près de chez moi
           </Link>
           <Link to="/auth" className="btn secondary">
-            Publiez vos spécialités
+            Publie tes spécialités
           </Link>
         </nav>
       </section>

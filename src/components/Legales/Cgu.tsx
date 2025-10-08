@@ -17,7 +17,7 @@ const Cgu = () => {
       <div>
         <h2>.1 Présentation du service</h2>
         <p>
-          Nou Link (service exploité sous le nom commercial Losira) est une
+          Nou Link (service exploité sous le nom commercial Loryum) est une
           plateforme destinée à mettre en avant les spécialités culinaires de
           l’Outre-mer. La consultation, la recherche et la découverte des fiches
           et profils (spécialités, photos, descriptions, localisation) sont
