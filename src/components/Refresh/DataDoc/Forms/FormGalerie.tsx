@@ -7,7 +7,6 @@ import COLORS from "../../../../Styles/Styles";
 import { isFileSizeValid, isValidImageFile } from "../../../utils/fonctions";
 import { Dynamic } from "../../../../Context/ContextDynamique";
 import LoadingBlue from "../../../Loading/LoadingBlue";
-import Loading from "../../../utils/Loading";
 import SkeletonLoader from "../../../utils/SkeletonLoader";
 type TypeProps = {
   galerie: string[];

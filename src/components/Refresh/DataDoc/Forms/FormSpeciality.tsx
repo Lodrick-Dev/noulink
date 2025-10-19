@@ -46,8 +46,6 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
 
   //speciality api
   const handleUpdate = async (array: string[]) => {
-    console.log("mon id : ", id);
-
     try {
       const res = await axios({
         method: "post",

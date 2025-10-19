@@ -1,13 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
+import { useEffect } from "react";
 
 const Cgu = () => {
   const nav = useNavigate();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <StyledCgu>
       <div>
         <strong>Conditions Générales d'Utilisation (CGU) de Nou Link</strong>
+        <span>Dernière mise à jour : 19 octobre 2025</span>
         <p>
           Bienvenue sur Nou Link ! En accédant ou en utilisant notre site, vous
           acceptez pleinement et entièrement les présentes Conditions Générales
@@ -33,6 +38,17 @@ const Cgu = () => {
           Chaque utilisateur reste responsable de l’exactitude des informations
           qu’il publie.
         </p>
+        <div className="legales">
+          <p>Nom commercial : Loryum</p>
+          <p>Entreprise Individuelle de : JEAN-JACQUES Lodrick</p>
+          <p>Numéro SIRET : 992 781 260 00011</p>
+          <p>Adresse : 16 BIS Avenue de l’Europe, 51100 Reims, France</p>
+          <p>Email : dev.frenchlod@gmail.com</p>
+          <strong>Hébergement :</strong>
+          <p>Fournisseur : OVH</p>
+          <p>Pays : France</p>
+          <p>Site web : www.ovh.com</p>
+        </div>
       </div>
       <div>
         <h2>.2 Accès au site</h2>
@@ -41,24 +57,40 @@ const Cgu = () => {
         </p>
         <p>
           La création, publication et gestion d’un profil nécessitent un
-          paiement unique pour un an.
+          paiement pour un an.
         </p>
-        <p>
-          L’utilisateur est responsable de l’exactitude et de la mise à jour des
-          informations qu’il fournit.
-        </p>
+        <ul>
+          <strong>L'utilisateur déclare</strong>
+          <li>
+            - Avoir au moins 18 ans, ou être autorisé par un représentant légal.
+          </li>
+          <li>- Fournir des informations exactes et à jour</li>
+          <li>
+            - Ne pas publier de contenu trompeur, inapproprié, illégal ou
+            contraire à la charte du site
+          </li>
+          <li>
+            - L’utilisateur est responsable de l’exactitude et de la mise à jour
+            des informations qu’il fournit.
+          </li>
+        </ul>
         <p>
           En cas d’informations trompeuses, inappropriées, illégales ou
           contraires aux règles de Nou Link (ex. publicité pour des plateformes
           concurrentes), Nou Link se réserve le droit de suspendre ou supprimer
-          le profil concerné sans remboursement.
+          le profil concerné sans remboursement. Ainsi qu’en cas de non-paiement
+          ou de fraude
         </p>
+        <strong>
+          L’inscription sur la plateforme implique l’acceptation pleine et
+          entière des CGU et des Conditions Générales de Vente (CGV).
+        </strong>
       </div>
       <div>
         <h2>.3 Données personnelles</h2>
         <p>
           L'utilisation de Nou Link implique la collecte de certaines données
-          uniquement au fonctionnement du service (téléphone, ville,
+          uniquement au fonctionnement du service (pseudo nom, ville,
           description, etc.). Celles-ci sont traitées conformément à notre{" "}
           <span onClick={() => nav("/politique-confidentialite")}>
             Politique de Confidentialité.
@@ -66,8 +98,8 @@ const Cgu = () => {
         </p>
         <p>
           Ces données sont traitées conformément à notre Politique de
-          Confidentialité et dans le respect du Règlement Général sur la
-          Protection des Données (RGPD).
+          Confidentialité, rédigée en conformité avec le Règlement Général sur
+          la Protection des Données (RGPD).
         </p>
 
         <p>
@@ -92,9 +124,29 @@ const Cgu = () => {
           discriminatoires, ou violents)
         </p>
         <strong>
-          Nous nous réservons le droit de modérer, désactiver ou de supprimer
-          tout contenu contraire à ces règles, sans préavis ni remboursement.
+          Nou Link se réserve le droit de suspendre ou supprimer tout contenu ou
+          profil en cas de non-respect de la loi, des présentes CGU, ou de tout
+          signalement légitime, sans préavis ni remboursement.
         </strong>
+        <hr />
+        <p>
+          Les contenus publiés sur Nou Link doivent être en lien avec la
+          thématique de la plateforme, à savoir la mise en avant des spécialités
+          culinaires et des saveurs issues de certains départements de
+          l’Outre-mer : Guyane, Guadeloupe, Martinique et Mayotte.
+        </p>
+        <p>
+          Tout profil publiant des contenus sans rapport avec cette thématique
+          (par exemple des spécialités provenant d’autres régions ou pays)
+          pourra être désactivé ou supprimé, même en cas d’abonnement payé.
+        </p>
+        <p>
+          Aucune demande de remboursement ne pourra être effectuée dans ce cas,
+          conformément à l’article relatif aux{" "}
+          <span onClick={() => nav("/cgv")}>
+            Conditions Générales de Vente (CGV).
+          </span>
+        </p>
       </div>
       <div>
         <h2>.5 Propriété intellectuelle</h2>
@@ -106,7 +158,9 @@ const Cgu = () => {
         <p>
           Les utilisateurs conservent leur droits d'auteur sur leur contenus,
           mais ils accordent à Nou Link une licence non exclusive, mondiale,
-          gratuite, pour les afficher sur la plateforme.
+          gratuite, pour les afficher sur la plateforme et les utiliser à des
+          fins de promotion du site (ex. : mise en avant d’un profil ou d’une
+          photo sur la page d’accueil ou les réseaux sociaux).
         </p>
       </div>
       <div>
@@ -121,10 +175,34 @@ const Cgu = () => {
           l'abri de failles ou d'attaques informatiques.
         </strong>
         <p>En utilisant le site, vous acceptez ces limites.</p>
-        <p>
-          Nou Link n'est pas responsable si les informations publiées par les
-          utilisateurs sont fausses, trompeuses ou illégales
-        </p>
+        <ul>
+          <strong>
+            Les vendeurs (particuliers ou professionnels) sont seuls
+            responsables :
+          </strong>
+          <li>- de leurs publications ;</li>
+          <li>
+            - du respect des réglementations applicables à la vente et à la
+            préparation de repas (notamment normes d’hygiène et d’étiquetage) ;
+          </li>
+          <li>- de la qualité et de la sécurité des repas proposés ;</li>
+          <li>-des informations qu’ils diffusent auprès du public;</li>
+        </ul>
+        <ul>
+          <strong>Nou Link décline toute responsabilité :</strong>
+          <li>
+            -en cas d’informations fausses, illégales ou trompeuses publiées par
+            un utilisateur ;
+          </li>
+          <li>
+            -en cas de litige entre utilisateurs (vendeur, consommateur,
+            visiteur) ;
+          </li>
+          <li>
+            -en cas de dommage résultant de l’utilisation du site ou d’une
+            impossibilité temporaire d’accès.
+          </li>
+        </ul>
         <p>
           Nou Link n’est pas garant de la disponibilité réelle des vendeurs,
           particuliers ou établissements, ni de la qualité des repas proposés.
@@ -165,6 +243,17 @@ const StyledCgu = styled.section`
       span {
         cursor: pointer;
         color: ${COLORS.yellow};
+      }
+    }
+    ul {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      strong {
+        margin-bottom: 0px;
+      }
+      li {
+        color: aliceblue;
+        list-style: none;
       }
     }
   }

@@ -12,7 +12,6 @@ import type { TypeDocDashboard } from "../../Dashboard";
 import axios from "axios";
 import { supabase } from "../../../utils/supabaseClient";
 import Loading from "../../../Loading/Loading";
-import LoadingBlue from "../../../Loading/LoadingBlue";
 type TypeProps = {
   name: string | undefined;
   saveur: string | undefined;
@@ -39,14 +38,12 @@ const FormGlobale = ({
 
   //before we save pseudo to supabase:
   const updatePseudoSupaBase = async () => {
-    const { data, error } = await supabase.auth.updateUser({
+    const { error } = await supabase.auth.updateUser({
       data: { name: updatePseudo }, // ou { pseudo: newPseudo }
     });
 
     if (error) {
-      console.error("Erreur :", error.message);
     } else {
-      console.log("Profil mis à jour :", data.user);
       handleUpdate();
     }
   };

@@ -39,17 +39,18 @@ const StyledIntro = styled.div`
   text-align: center;
   h1 {
     color: ${COLORS.yellow};
-    font-size: 5em;
+    font-size: 6em;
     margin-bottom: 0px;
   }
   p {
     text-align: center;
     width: 70%;
     /* width: 100%; */
-    font-size: 1.2em;
+    font-size: 2em;
     margin: 0px auto 0px;
     margin-top: 0px;
     color: ${COLORS.white};
+    letter-spacing: 3px;
   }
   .last-p {
     margin-bottom: 5px;
@@ -65,18 +66,19 @@ const StyledIntro = styled.div`
     .span-countries {
       margin: 0px 20px;
       color: #000000;
-      font-size: 1.2em;
+      font-size: 1.1em;
     }
   }
   @media (max-width: 450px) {
     padding: 5px;
     h1 {
-      font-size: 3em;
+      font-size: 3.6em;
+      letter-spacing: 3px;
     }
     p {
       width: 100%;
       padding: 0px 5px;
-      font-size: 0.9em;
+      font-size: 1.6em;
     }
     .departement {
       width: 100% !important;

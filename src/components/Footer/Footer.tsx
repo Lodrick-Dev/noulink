@@ -26,7 +26,12 @@ const Footer = () => {
       <div className="box-img">
         <img src="/svglogo.svg" alt="logo-noulink" onClick={() => nav("/")} />
       </div>
-      <span>©copyright - Nou Link 2025 - par Loryum</span>
+      <span className="copyright">
+        ©copyright - Nou Link 2025 - par{" "}
+        <a href="https://www.loryum.com" target="_blank">
+          Loryum
+        </a>{" "}
+      </span>
     </StyledFooter>
   );
 };
@@ -82,6 +87,13 @@ const StyledFooter = styled.div`
       border-radius: 5px;
       padding: 5px;
       color: ${COLORS.green};
+    }
+  }
+  .copyright {
+    color: ${COLORS.yellow};
+    a {
+      color: ${COLORS.green};
+      cursor: pointer;
     }
   }
   @media screen and (max-width: 450px) {

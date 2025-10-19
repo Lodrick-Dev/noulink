@@ -13,6 +13,7 @@ const PopPay = () => {
   const [waiting, setWaiting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isCheckedCGU, setIsCheckedCGU] = useState(false);
+  const [acceptCGU, setAcceptCGU] = useState(false);
 
   // Gestion du changement de la checkbox
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,9 +22,12 @@ const PopPay = () => {
   const handleChangeCGU = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsCheckedCGU(e.target.checked);
   };
+  const handleAcceptCGU = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAcceptCGU(e.target.checked);
+  };
   //création de ssion checkout
   const createSessionCheckout = async () => {
-    if (!isChecked || !isCheckedCGU) {
+    if (!isChecked || !isCheckedCGU || !acceptCGU) {
       toast.warning(
         "Vous devez accepter la renonciation et les CGU/CGV avant de continuer."
       );
@@ -111,6 +115,20 @@ const PopPay = () => {
                 de Nou Link. »
               </strong>
             </div>
+            <div className="legals-cgu-v">
+              <input
+                type="checkbox"
+                checked={acceptCGU}
+                onChange={handleAcceptCGU}
+              />
+              <strong>
+                « Je confirme que les spécialités publiées sur mon profil
+                concernent exclusivement la Guyane, la Guadeloupe, la Martinique
+                ou Mayotte. J’ai pris connaissance que tout autre contenu pourra
+                entraîner la désactivation du profil sans remboursement. Voir
+                les cgv et cgu »
+              </strong>
+            </div>
             {waiting && (
               <div className="wait">
                 <Loading />
@@ -137,6 +155,7 @@ const StyledPopPay = styled.section`
   height: 100svh;
   width: 100%;
   position: fixed;
+  z-index: 50;
   top: 0px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -155,8 +174,8 @@ const StyledPopPay = styled.section`
         margin: 20px auto;
         max-width: 50%;
         min-width: 50%;
-        max-height: 450px;
-        min-height: 450px;
+        max-height: 500px;
+        min-height: 500px;
         background: ${COLORS.second};
         padding: 20px;
         border-radius: 20px;
@@ -183,6 +202,8 @@ const StyledPopPay = styled.section`
             display: block;
             text-align: center;
             color: ${COLORS.white};
+            font-size: 0.8em;
+            border-bottom: solid 1px ${COLORS.white};
           }
         }
         .legals-cgu-v {
@@ -239,8 +260,8 @@ const StyledPopPay = styled.section`
       .all-el {
         .consentement {
           min-width: 100%;
-          max-height: 450px;
-          min-height: 450px;
+          max-height: 700px;
+          min-height: 700px;
         }
       }
     }

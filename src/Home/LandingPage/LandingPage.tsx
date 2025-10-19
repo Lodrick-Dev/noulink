@@ -20,19 +20,25 @@ const LandingPage = () => {
           </Link>
         </nav>
       </section>
-      <section className="section-2">
-        <h3>Pourquoi utiliser Nou Link ?</h3>
-        <p>
-          Nou Link est la première plateforme qui connecte les passionnés de
-          cuisine ultramarine. Retrouvez des plats traditionnels comme le{" "}
-          <strong>colombo</strong>, le <strong>bokit</strong> ou les{" "}
-          <strong>accras</strong> près de chez vous, que vous soyez à{" "}
-          <strong>Paris</strong>, <strong>Lyon</strong>,
-          <strong>Marseille</strong> ou ailleurs en France.
-        </p>
-      </section>
-      <AbonnementCard />
-      <Faq />
+      <Slide direction="up" triggerOnce>
+        <section className="section-2">
+          <h3>Pourquoi utiliser Nou Link ?</h3>
+          <p>
+            Nou Link est la première plateforme qui connecte les passionnés de
+            cuisine ultramarine. Retrouvez des plats traditionnels comme le{" "}
+            <strong>colombo</strong>, le <strong>bokit</strong> ou les{" "}
+            <strong>accras</strong> près de chez vous, que vous soyez à{" "}
+            <strong>Paris</strong>, <strong>Lyon</strong>,
+            <strong>Marseille</strong> ou ailleurs en France.
+          </p>
+        </section>
+      </Slide>
+      <Slide direction="right" triggerOnce>
+        <AbonnementCard />
+      </Slide>
+      <Slide direction="left" triggerOnce>
+        <Faq />
+      </Slide>
     </StyledLandingPage>
   );
 };
@@ -47,37 +53,10 @@ const StyledLandingPage = styled.section`
   .hero {
     text-align: center;
     max-width: 100%;
-    /* background: orange; */
     margin: 0 auto;
-    /* h1 {
-      color: ${COLORS.yellow};
-      font-size: 5em;
-      margin-bottom: 0px;
-    }
-    p {
-      text-align: center;
-      width: 70%;
-      font-size: 1.2em;
-      margin: 0px auto 0px;
-      margin-top: 0px;
-    }
-    .last-p {
-      margin-bottom: 5px;
-    }
-    .departement {
-      max-width: 70%;
-      margin: 0px auto;
-      border-bottom: solid 2px ${COLORS.yellow};
-      .span-countries {
-        margin: 0px 20px;
-        color: #000000;
-        font-size: 1.2em;
-      }
-    } */
     .cta {
       position: relative;
       height: 50svh;
-      /* border-radius: 20px; */
       margin-top: 50px;
       display: flex;
       flex-direction: column;
@@ -151,6 +130,9 @@ const StyledLandingPage = styled.section`
     justify-content: center;
     align-items: center;
     padding: 40px 10px;
+    /* background: red; */
+    width: 80%;
+    margin: 50px auto;
     > p {
       margin-top: 20px;
       text-align: center;
@@ -159,32 +141,17 @@ const StyledLandingPage = styled.section`
       }
     }
   }
-  @media (max-width: 500px) {
+  @media (max-width: 450px) {
     .hero {
-      h1 {
-        font-size: 3em;
-      }
-      p {
-        width: 100%;
-        padding: 0px 5px;
-        font-size: 0.9em;
-      }
-      .departement {
-        max-width: 90% !important;
-        .span-countries {
-          margin: 0px 5px;
-          font-size: 1em;
-        }
-      }
       .cta {
-        .btn {
-          font-size: 0.8em;
-          padding: 10px 20px;
-        }
+        font-size: 1em;
         .btn.secondary {
           margin-top: 20px;
         }
       }
+    }
+    .section-2 {
+      width: 90%;
     }
   }
 `;

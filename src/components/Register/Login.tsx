@@ -16,6 +16,11 @@ const Login = () => {
   const nav = useNavigate();
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (import.meta.env.VITE_DEV === "true") {
+      alert("En cours de maintenance, connexion désactivée.");
+      return;
+    }
+    // return;
     if (!email || !password) {
       return alert("Tous les champs sont obligatoire");
     }
@@ -24,8 +29,6 @@ const Login = () => {
       email,
       password,
     });
-    console.log(error);
-    console.log(data);
 
     if (error) {
       console.log(error);

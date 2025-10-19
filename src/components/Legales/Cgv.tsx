@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
+import { useEffect } from "react";
 
 const Cgv = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <StyledCgv>
       <div>
         <h1>Conditions Générales de Vente (CGV) de Nou Link</h1>
       </div>
-      <span>Dernière mise à jour : 2 octobre 2025</span>
+      <span>Dernière mise à jour : 19 octobre 2025</span>
       <div>
         <h2>.1 Objet</h2>
         <p>
@@ -17,15 +21,22 @@ const Cgv = () => {
           sur la plateforme Nou Link (service exploité sous le nom commercial
           Loryum).
         </p>
+        <p>
+          Nou Link permet aux particuliers et professionnels de publier un
+          profil mettant en avant leurs spécialités culinaires.
+        </p>
         <p>L’accès au site pour la consultation reste gratuit.</p>
         <p>
-          La création, publication et gestion de profils sont réservées aux
-          abonnés payants.
+          La création, la publication et la gestion d’un profil sont réservées
+          aux utilisateurs disposant d’un abonnement annuel payant
         </p>
       </div>
       <div>
         <h2>.2 Editeur et contact</h2>
-        <p>Éditeur : Loddman (pseudo Instagram), nom commercial : Loryum</p>
+        <p>Nom commercial : Loryum</p>
+        <p>Entreprise Individuelle de : JEAN-JACQUES Lodrick</p>
+        <p>Numéro SIRET : 992 781 260 00011</p>
+        <p>Adresse : 16 BIS Avenue de l’Europe, 51100 Reims, France</p>
         <p>Email : dev.frenchlod@gmail.com</p>
         <p>Hébergement : OVH, France</p>
       </div>
@@ -39,8 +50,9 @@ const Cgv = () => {
         <p>
           {" "}
           <strong>Renouvellement :</strong>L’utilisateur peut renouveler son
-          profil pour une année supplémentaire à l’issue de l’abonnement
-          initial.
+          abonnement pour une nouvelle période de 12 mois selon les tarifs en
+          vigueur au moment du renouvellement. Aucun renouvellement automatique
+          n’est effectué sans action de l’utilisateur.
         </p>
         <p>
           Le renouvellement se fait selon les modalités et tarifs en vigueur au
@@ -57,7 +69,8 @@ const Cgv = () => {
           {" "}
           <strong>Paiement : </strong>Le paiement est effectué en ligne via les
           moyens sécurisés proposés par Nou Link. La souscription n’est
-          effective qu’après validation du paiement.
+          effective qu’après validation du paiement. Une facture est émise et
+          envoyée par email après chaque paiement.
         </p>
       </div>
       <div>
@@ -89,6 +102,13 @@ const Cgv = () => {
           Aucun remboursement ne sera effectué en cas de résiliation anticipée
           ou de suspension pour non-respect des règles de la plateforme.
         </p>
+        <hr />
+        <p>
+          En cas de suppression du profil pour non-conformité avec la thématique
+          du site (ex. publication de contenus étrangers à l’Outre-mer), aucun
+          remboursement ne sera effectué, même si l’abonnement est encore en
+          cours.
+        </p>
       </div>
       <div>
         <h2>.6 Propriété intellectuelle</h2>
@@ -105,12 +125,15 @@ const Cgv = () => {
       <div>
         <h2>.7 Données personnelles et RGPD</h2>
         <p>
-          Les données collectées pour la création et gestion des profils sont
-          traitées conformément à la Politique de Confidentialité et au RGPD.
+          Les données collectées lors de la souscription (nom, email,
+          description, images, etc.) sont traitées conformément à la Politique
+          de Confidentialité de Nou Link, rédigée en conformité avec le
+          Règlement Général sur la Protection des Données (RGPD).
         </p>
         <p>
-          Elles sont conservées tant que l’abonnement est actif et supprimées à
-          la demande de l’utilisateur ou à l’expiration de l’abonnement.
+          Elles sont conservées pendant la durée de l’abonnement, puis
+          supprimées ou anonymisées à son expiration, sauf obligation légale
+          contraire.
         </p>
         <p>
           Les utilisateurs disposent des droits suivants : accès, rectification,
@@ -125,8 +148,25 @@ const Cgv = () => {
           données ou d’interruptions temporaires.
         </p>
         <p>
-          Nou Link n’est pas responsable des informations publiées par les
-          utilisateurs, ni de la qualité des repas proposés.
+          <strong>Absence de garantie de performance :</strong> Nou Link
+          (Loryum) ne garantit pas la visibilité, le trafic ou les résultats
+          commerciaux liés à la publication d’un profil.
+        </p>
+        <ul>
+          <strong>Nou Link ne saurait être tenue responsable :</strong>
+          <li>- des informations publiées par les utilisateurs,</li>
+          <li>
+            - de la qualité, de la conformité ou de la sécurité des repas
+            proposés par les vendeurs,
+          </li>
+          <li>
+            - des pertes de données ou interruptions temporaires du service.
+          </li>
+        </ul>
+        <p>
+          Les utilisateurs sont responsables du respect des réglementations
+          applicables à la préparation et à la vente de repas (hygiène, sécurité
+          alimentaire, étiquetage, etc.).
         </p>
       </div>
       <div>
@@ -144,7 +184,16 @@ const Cgv = () => {
         </p>
       </div>
       <div>
-        <h2>.10 Modification des CGV</h2>
+        <h2>.Résolution amiable des litiges</h2>
+        <p>
+          En cas de litige ou de réclamation concernant un abonnement ou
+          l’utilisation de la plateforme, l’utilisateur est invité à contacter
+          Nou Link par email à : dev.frenchlod@gmail.com pour rechercher une
+          solution amiable.
+        </p>
+      </div>
+      <div>
+        <h2>.11 Modification des CGV</h2>
         <p>
           Nou Link se réserve le droit de modifier les présentes CGV à tout
           moment. Les modifications s’appliquent uniquement aux nouvelles
@@ -152,7 +201,7 @@ const Cgv = () => {
         </p>
       </div>
       <div>
-        <h2>.11 Litiges et droit applicable</h2>
+        <h2>.12 Litiges et droit applicable</h2>
         <p>Les présentes CGV sont régies par le droit françai</p>
         <p>
           Tout litige relatif à la souscription ou à l’utilisation des
@@ -187,6 +236,13 @@ const StyledCgv = styled.section`
     p {
       margin-top: 10px;
       color: aliceblue;
+    }
+    ul {
+      margin-top: 30px;
+      li {
+        color: aliceblue;
+        list-style: none;
+      }
     }
   }
 `;

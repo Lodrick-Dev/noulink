@@ -1,15 +1,36 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
+import { useEffect } from "react";
 
 const MentionsLegales = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <StyledMentionsLegales>
       <div className="box">
         <strong>Editeur du site :</strong>
-        <p>Le site est édité par un particulier</p>
-        <p>Pseudonyme : Loddman (instagram)</p>
-        <p>Adresse e-amil de contact : dev.frenchlod@gmail.com</p>
-        <p>Statut : particulier (projet personnel sans but lucratif)</p>
+        <p className="first-p">
+          Le site www.noulink.fr est édité par Loryum, entreprise individuelle
+          enregistrée en France. Le projet Nou Link est développé et géré sous
+          la responsabilité de Loryum.
+        </p>
+        <span>
+          <strong>Nom Commercial : </strong>Loryum
+        </span>
+        <span>
+          <strong>Entreprise individuelle de : </strong>JEAN-JACQUES Lodrick
+        </span>
+        <span>
+          <strong>SIRET : </strong>992 781 260 00011
+        </span>
+        <span>
+          <strong>Adresse : </strong>16 BIS Avenue de l’Europe, 51100 Reims,
+          France
+        </span>
+        <span>
+          <strong>Adresse e-mail de contact : </strong> dev.frenchlod@gmail.com
+        </span>
       </div>
       <div className="box">
         <strong>Hébergement :</strong>
@@ -51,6 +72,18 @@ const StyledMentionsLegales = styled.section`
   border-radius: 20px;
   .box {
     margin: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    .first-p {
+      margin-bottom: 20px;
+    }
+    span {
+      color: ${COLORS.white};
+      strong {
+        font-size: 1em;
+        color: ${COLORS.black};
+      }
+    }
     strong {
       font-size: 1.2em;
     }

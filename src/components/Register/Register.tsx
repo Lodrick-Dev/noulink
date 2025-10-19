@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
-import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { supabase } from "../utils/supabaseClient";
+// import { supabase } from "../utils/supabaseClient";
 import Loading from "../utils/Loading";
 
 const Register = () => {
@@ -11,43 +10,25 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [acceptCG, setAcceptCG] = useState(false);
+  const [acceptCGU, setAcceptCGU] = useState(false);
   const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (import.meta.env.VITE_DEV === "true") {
+      alert("En cours de maintenance, inscription désactivée.");
+      setLoading(false);
+      return;
+    }
+    if (!acceptCG || !acceptCGU) {
+      return toast.error(
+        "Vous devez accepter les CGU et CGV pour vous inscrire."
+      );
+    }
     if (!email || !password || !confirmPassword) {
       return toast.error("Tous les champs sont obligatoires");
     }
     if (password.length < 6) {
       return toast.error("Mot de passe avec 6 caractères minimum");
-    }
-    if (password === confirmPassword) {
-      setLoading(true);
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${import.meta.env.VITE_URL}conf-email`,
-        },
-      });
-      console.log(error);
-      console.log(data);
-      setLoading(false);
-      if (error) {
-        console.log(error);
-
-        return alert(error.message);
-      } else if (data?.user && data?.user?.identities?.length === 0) {
-        // Cas 2 : Email déjà inscrit et confirmé
-        alert("Cet email est déjà inscrit.");
-      } else {
-        setLoading(false);
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-        alert("Confirmer votre email pour valider l'inscription");
-      }
-    } else {
-      setLoading(false);
-      alert("Mot de passe de correspond pas");
     }
   };
   return (
@@ -76,6 +57,39 @@ const Register = () => {
           value={confirmPassword ? confirmPassword : ""}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+
+        <div className="accept-cg">
+          <input
+            type="checkbox"
+            checked={acceptCG}
+            onChange={(e) => setAcceptCG(e.target.checked)}
+            style={{ marginRight: "10px" }}
+          />
+          <span>
+            J'accepte les{" "}
+            <a href="/cgu" target="_blank">
+              CGU
+            </a>{" "}
+            et{" "}
+            <a href="/cgv" target="_blank">
+              CGV
+            </a>
+          </span>
+        </div>
+        <div className="accept-cg">
+          <input
+            type="checkbox"
+            checked={acceptCG}
+            onChange={(e) => setAcceptCGU(e.target.checked)}
+            style={{ marginRight: "10px" }}
+          />
+          <span className="span-cgu">
+            Je confirme que les spécialités publiées sur mon profil concernent
+            exclusivement la Guyane, la Guadeloupe, la Martinique ou Mayotte.
+            J’ai pris connaissance que tout autre contenu pourra entraîner la
+            désactivation du profil sans remboursement. Voir les cgv et cgu
+          </span>
+        </div>
         {loading && <Loading />}
         {!loading && <input type="submit" value="S'enregistrer" />}
       </form>
@@ -127,6 +141,23 @@ const StyledRegister = styled.div`
     input:last-child:hover {
       background: ${COLORS.green};
       color: ${COLORS.white};
+    }
+    .accept-cg {
+      background: ${COLORS.green};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px auto;
+      padding: 10px;
+      border-radius: 10px;
+      input {
+        cursor: pointer;
+        width: unset;
+        margin: 0px;
+      }
+      .span-cgu {
+        font-size: 0.9em;
+      }
     }
   }
   .bar-or {
