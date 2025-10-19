@@ -115,7 +115,6 @@ const DataGlobale = ({ restaurant, setRestaurant }: TypeProps) => {
             saveur={restaurant.saveur}
             villebase={restaurant.ville}
             description={restaurant.description}
-            setUpdate={setUpdate}
             id={restaurant._id}
             setRestaurant={setRestaurant}
           />
