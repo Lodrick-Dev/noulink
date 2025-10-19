@@ -5,7 +5,6 @@ import { Slide } from "react-awesome-reveal";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Inscription from "./components/Inscription/Inscription";
 import Refresh from "./components/Refresh/Dashboard";
 import Home from "./Home/Home";
 import Footer from "./components/Footer/Footer";

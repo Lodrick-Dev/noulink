@@ -7,11 +7,10 @@ import Loading from "../Loading/Loading";
 import FormSpeciality from "./DataDoc/Forms/FormSpeciality";
 import FormProfil from "./DataDoc/Forms/FormProfil";
 import FormGalerie from "./DataDoc/Forms/FormGalerie";
-import LoadingBlue from "../Loading/LoadingBlue";
 import FormGlobale from "./DataDoc/Forms/FormGlobale";
 import ManagerAccount from "./ManagerAccount";
 import { Dynamic } from "../../Context/ContextDynamique";
-import SkeletonLoader from "../utils/SkeletonLoader";
+// import SkeletonLoader from "../utils/SkeletonLoader";
 import Resto from "../ListesHome/Resto";
 import { Eye, EyeOff, Fullscreen, LockKeyholeOpen } from "lucide-react";
 import { getExpirationMessage } from "../utils/fonctions";
@@ -35,12 +34,10 @@ export type TypeGalerie = string;
 export type TypeSpecility = string;
 const Dashboard = () => {
   const { loadingUser, userAuth, setPopToPay, token } = Dynamic();
-  const [update, setUpdate] = useState(false);
   const [id, setId] = useState("");
   const [imgProfilUploaded, setImgProfilUploaded] = useState<
     string | undefined
   >();
-  const [idLoading, setIdLoading] = useState(false);
   const [restaurant, setRestaurant] = useState<TypeDocDashboard | null>(null);
   const [galerie, setGalerie] = useState<TypeGalerie[]>([]);
   const [speciality, setSpeciality] = useState<TypeSpecility[]>([]);
@@ -57,14 +54,12 @@ const Dashboard = () => {
   //getOne on va prendre id de userAuth
   const getOne = async () => {
     if (!userAuth?.id) return toast.error("Un identifiant est nécessaire");
-    setIdLoading(true);
     try {
       const res = await axios({
         method: "get",
         url: `${import.meta.env.VITE_APP_API}restaurant/one/${userAuth?.id}`,
         withCredentials: true,
       });
-      console.log(res);
 
       if (res.data) {
         setId(res.data.idsupabase);
@@ -72,7 +67,6 @@ const Dashboard = () => {
         setRestaurant(res.data);
         setGalerie(res.data.galerie);
         setSpeciality(res.data.speciality);
-        setIdLoading(false);
       }
     } catch (error: any) {
       console.log(error);
@@ -88,7 +82,6 @@ const Dashboard = () => {
   const visibilityProfil = async () => {
     if (!restaurant?._id) return toast.error("Un identifiant est nécessaire");
     if (!token) return toast.error("Token absent");
-    setIdLoading(true);
     try {
       const res = await axios({
         method: "post",
@@ -100,7 +93,6 @@ const Dashboard = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
 
       if (res.data) {
         if (res.data.data) {
@@ -138,7 +130,6 @@ const Dashboard = () => {
             withCredentials: true,
           }
         );
-        console.log(res);
 
         if (res.data.paid) {
           toast.success("Paiement confirmé, analyse débloquée !");
@@ -214,7 +205,6 @@ const Dashboard = () => {
           saveur={restaurant?.saveur}
           villebase={restaurant?.ville}
           description={restaurant?.description}
-          setUpdate={setUpdate}
           id={id}
           setRestaurant={setRestaurant}
         />

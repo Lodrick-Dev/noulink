@@ -17,7 +17,6 @@ type TypeProps = {
   saveur: string | undefined;
   villebase: string | undefined;
   description: string | undefined;
-  setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
   setRestaurant: React.Dispatch<React.SetStateAction<TypeDocDashboard | null>>;
 };
@@ -26,7 +25,6 @@ const FormGlobale = ({
   saveur,
   villebase,
   description,
-  setUpdate,
   id,
   setRestaurant,
 }: TypeProps) => {
@@ -74,7 +72,7 @@ const FormGlobale = ({
       !hasChangedDescription &&
       !hasChangedVille
     ) {
-      setUpdate(false);
+      setUpdating(false);
       return toast.info("Aucune modification n’a été apportée.");
     }
 
@@ -101,7 +99,6 @@ const FormGlobale = ({
         if (res.data) {
           if (res.data.succes) {
             setUpdating(false);
-            setUpdate(false);
             setRestaurant(res.data.doc);
             return toast.success(res.data.succes);
           }

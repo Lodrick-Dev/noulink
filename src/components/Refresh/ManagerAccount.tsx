@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { supabase } from "../utils/supabaseClient";
+import Loading from "../utils/Loading";
 
 const ManagerAccount = () => {
   const [loading, setLoading] = useState(false);
@@ -49,7 +50,7 @@ const ManagerAccount = () => {
   return (
     <StyledManagerAccount>
       <span className="delete-btn-compte" onClick={() => deleteAccount()}>
-        Supprimer mon compte
+        {loading ? <Loading /> : " Supprimer mon compte"}
       </span>
       <span className="logout" onClick={() => handleLogout()}>
         Déconnexion
