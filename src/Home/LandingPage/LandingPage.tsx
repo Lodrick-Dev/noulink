@@ -5,6 +5,8 @@ import { Slide } from "react-awesome-reveal";
 import Faq from "../../components/FAQ/faq";
 import AbonnementCard from "../../components/AbonnementCard/AbonnementCard";
 import Intro from "./Intro";
+import HowItWorks from "./HowItWorks";
+import NewsletterWaitlist from "./NewsletterWaitlist";
 
 const LandingPage = () => {
   return (
@@ -35,6 +37,12 @@ const LandingPage = () => {
       </Slide>
       <Slide direction="right" triggerOnce>
         <AbonnementCard />
+      </Slide>
+      <Slide direction="up" triggerOnce>
+        <HowItWorks />
+      </Slide>
+      <Slide direction="down" triggerOnce>
+        <NewsletterWaitlist />
       </Slide>
       <Slide direction="left" triggerOnce>
         <Faq />

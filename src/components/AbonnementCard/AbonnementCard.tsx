@@ -109,7 +109,7 @@ export default function AbonnementCard() {
       </Header>
 
       <Price>
-        <OldPrice>120,00 €</OldPrice> 49,99 €<PerYear>pour 1 an</PerYear>
+        <OldPrice>160,00 €</OldPrice> 99,99 €<PerYear>pour 1 an</PerYear>
       </Price>
       <PromoInfo>Offre valable jusqu’à fin décembre 🎉</PromoInfo>
       <Features>
