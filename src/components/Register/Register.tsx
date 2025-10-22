@@ -2,7 +2,7 @@ import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { useState } from "react";
 import { toast } from "react-toastify";
-// import { supabase } from "../utils/supabaseClient";
+import { supabase } from "../utils/supabaseClient";
 import Loading from "../utils/Loading";
 
 const Register = () => {
@@ -16,7 +16,6 @@ const Register = () => {
     e.preventDefault();
     if (import.meta.env.VITE_DEV === "true") {
       alert("En cours de maintenance, inscription désactivée.");
-      setLoading(false);
       return;
     }
     if (!acceptCG || !acceptCGU) {
@@ -29,6 +28,36 @@ const Register = () => {
     }
     if (password.length < 6) {
       return toast.error("Mot de passe avec 6 caractères minimum");
+    }
+    if (password === confirmPassword) {
+      setLoading(true);
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${import.meta.env.VITE_URL}conf-email`,
+        },
+      });
+      setLoading(false);
+      if (error) {
+        console.log(error);
+
+        return alert(error.message);
+      } else if (data?.user && data?.user?.identities?.length === 0) {
+        // Cas 2 : Email déjà inscrit et confirmé
+        alert("Cet email est déjà inscrit.");
+      } else {
+        setLoading(false);
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setAcceptCG(false);
+        setAcceptCGU(false);
+        alert("Confirmer votre email pour valider l'inscription");
+      }
+    } else {
+      setLoading(false);
+      alert("Mot de passe de correspond pas");
     }
   };
   return (
@@ -79,7 +108,7 @@ const Register = () => {
         <div className="accept-cg">
           <input
             type="checkbox"
-            checked={acceptCG}
+            checked={acceptCGU}
             onChange={(e) => setAcceptCGU(e.target.checked)}
             style={{ marginRight: "10px" }}
           />

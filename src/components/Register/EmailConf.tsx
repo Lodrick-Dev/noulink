@@ -8,7 +8,7 @@ const EmailConf = () => {
     <StyledEmailConfirmer>
       <div className="conf-mail">
         <h1>Email confirmer ! </h1>
-        <span onClick={() => nav("/inscription")}>Connectez-vous</span>
+        <span onClick={() => nav("/auth")}>Connectez-vous</span>
       </div>
     </StyledEmailConfirmer>
   );

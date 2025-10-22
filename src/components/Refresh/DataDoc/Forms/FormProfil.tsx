@@ -6,13 +6,16 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import COLORS from "../../../../Styles/Styles";
 import { Dynamic } from "../../../../Context/ContextDynamique";
+import { X } from "lucide-react";
 
 const FormProfil = ({
   imgProfilUploaded,
   email,
+  setCallA,
 }: {
   imgProfilUploaded: string | undefined;
   email: string | undefined;
+  setCallA: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { token, userAuth } = Dynamic();
   const [uploading, setUploading] = useState(false);
@@ -66,6 +69,7 @@ const FormProfil = ({
         },
       });
       if (res) {
+        setCallA((prev) => !prev);
         if (res.data) {
           setImageProfil(res.data.url);
           return toast.success(res.data.succes);
@@ -73,12 +77,52 @@ const FormProfil = ({
       }
     } catch (error: any) {
       console.log(error);
+      setCallA((prev) => !prev);
       if (error.response?.data?.message) {
         return toast.error(error.response?.data?.message);
       }
       return toast.error(
         "Une erreur est survenue lors de la mise jour du profil"
       );
+    }
+  };
+
+  const deleteImageProfil = async () => {
+    if (imageProfil) {
+      setUploading(true);
+      try {
+        const res = await axios({
+          method: "post",
+          url: `${import.meta.env.VITE_APP_API}restaurant/delete-profil/${
+            userAuth?.id
+          }`,
+          withCredentials: true,
+          data: {
+            url: imageProfil,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (res) {
+          setUploading(false);
+          setCallA((prev) => !prev);
+          if (res.data) {
+            setImageProfil("");
+            return toast.success(res.data.succes);
+          }
+        }
+      } catch (error: any) {
+        console.log(error);
+        setUploading(false);
+        setCallA((prev) => !prev);
+        if (error.response?.data?.message) {
+          return toast.error(error.response?.data?.message);
+        }
+        return toast.error(
+          "Une erreur est survenue lors de la mise jour du profil"
+        );
+      }
     }
   };
   useEffect(() => {
@@ -89,6 +133,7 @@ const FormProfil = ({
   return (
     <StyledFormProfil className="profil-img">
       {uploading && <Loading />}
+      {imageProfil && <X className="red" onClick={() => deleteImageProfil()} />}
       {!uploading && (
         <img
           // src={restaurant.profil}
@@ -122,6 +167,10 @@ const StyledFormProfil = styled.div`
   border-radius: 10px;
   margin: 10px 0px;
   min-height: 200px;
+  .red {
+    color: ${COLORS.red};
+    cursor: pointer;
+  }
   img {
     width: 30%;
     border-radius: 10px;

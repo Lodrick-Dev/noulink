@@ -9,8 +9,9 @@ import { Dynamic } from "../../../../Context/ContextDynamique";
 type TypeProps = {
   speciality: string[];
   id: string;
+  setCallA: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const FormSpeciality = ({ speciality, id }: TypeProps) => {
+const FormSpeciality = ({ speciality, id, setCallA }: TypeProps) => {
   const { token } = Dynamic();
   const [updating, setUpdating] = useState(false);
   const [newSpeciality, setNewSpeciality] = useState<string>("");
@@ -59,6 +60,7 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
         },
       });
       if (res) {
+        setCallA((prev) => !prev);
         if (res.data.succes) {
           setSpecialityLocal(res.data.speciality);
           setNewSpeciality("");
@@ -67,6 +69,7 @@ const FormSpeciality = ({ speciality, id }: TypeProps) => {
         }
       }
     } catch (error: any) {
+      setCallA((prev) => !prev);
       setUpdating(false);
       console.log(error);
       setSpecialityLocal([]);

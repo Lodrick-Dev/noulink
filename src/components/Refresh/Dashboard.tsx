@@ -14,6 +14,7 @@ import { Dynamic } from "../../Context/ContextDynamique";
 import Resto from "../ListesHome/Resto";
 import { Eye, EyeOff, Fullscreen, LockKeyholeOpen } from "lucide-react";
 import { getExpirationMessage } from "../utils/fonctions";
+import { useNavigate } from "react-router-dom";
 // import Loading from "../utils/Loading";
 export type TypeDocDashboard = {
   _id: string;
@@ -41,6 +42,8 @@ const Dashboard = () => {
   const [restaurant, setRestaurant] = useState<TypeDocDashboard | null>(null);
   const [galerie, setGalerie] = useState<TypeGalerie[]>([]);
   const [speciality, setSpeciality] = useState<TypeSpecility[]>([]);
+  const [callA, setCallA] = useState(false);
+  const navigate = useNavigate();
 
   //scroll preview :
   const previewRef = useRef<HTMLDivElement>(null);
@@ -53,6 +56,8 @@ const Dashboard = () => {
 
   //getOne on va prendre id de userAuth
   const getOne = async () => {
+    console.log("je joue");
+
     if (!userAuth?.id) return toast.error("Un identifiant est nécessaire");
     try {
       const res = await axios({
@@ -111,11 +116,10 @@ const Dashboard = () => {
 
   //useffet
   useEffect(() => {
-    if (userAuth?.id) {
-      setId(userAuth?.id);
-      getOne();
-    }
-  }, [userAuth?.id, restaurant?._id]);
+    if (!userAuth?.id) return;
+    setId(userAuth.id);
+    getOne();
+  }, [userAuth?.id, callA]);
 
   const checkIfPayOrNot = async () => {
     const queryParams = new URLSearchParams(location.search);
@@ -130,11 +134,14 @@ const Dashboard = () => {
             withCredentials: true,
           }
         );
+        console.log(res);
 
         if (res.data.paid) {
-          toast.success("Paiement confirmé, analyse débloquée !");
+          toast.success("Paiement confirmé !");
+          navigate("/dashboard");
         } else {
           toast.error("Paiement non confirmé. Veuillez contacter le support.");
+          navigate("/dashboard");
         }
       } catch (err) {
         console.error(err);
@@ -159,9 +166,24 @@ const Dashboard = () => {
       />
     );
   };
+  const checkIfAllreadyPayed = () => {
+    if (restaurant?.isPremium) {
+      return null;
+    } else {
+      return (
+        <LockKeyholeOpen
+          className="i-pay"
+          onClick={() => setPopToPay(true)}
+          size={40}
+        />
+      );
+    }
+  };
   useEffect(() => {
-    checkIfPayOrNot();
-  }, []);
+    if (userAuth?.id) {
+      checkIfPayOrNot();
+    }
+  }, [userAuth?.id]);
   return (
     <StyledDashboard>
       <h3>Votre compte</h3>
@@ -172,6 +194,9 @@ const Dashboard = () => {
         </span>
         <span className="visible">
           Bloqué : {!restaurant?.isPremium ? "Oui" : "Non"}
+        </span>
+        <span className="visible">
+          Visible : {restaurant?.statut === 1 ? "Oui" : "Non"}
         </span>
         {restaurant?.isPremium && (
           <span className="info-date">
@@ -185,11 +210,12 @@ const Dashboard = () => {
               onClick={handleScrollToPreview}
               size={40}
             />
-            <LockKeyholeOpen
+            {/* <LockKeyholeOpen
               className="i-pay"
               onClick={() => setPopToPay(true)}
               size={40}
-            />
+            /> */}
+            {checkIfAllreadyPayed()}
             {restaurant?.isPremium && eyesIcons()}
           </div>
         )}
@@ -197,15 +223,17 @@ const Dashboard = () => {
         <FormProfil
           imgProfilUploaded={imgProfilUploaded}
           email={userAuth?.email}
+          setCallA={setCallA}
         />
-        <FormSpeciality speciality={speciality} id={id} />
-        <FormGalerie galerie={galerie} id={id} />
+        <FormSpeciality speciality={speciality} id={id} setCallA={setCallA} />
+        <FormGalerie galerie={galerie} id={id} setCallA={setCallA} />
         <FormGlobale
           name={restaurant?.pseudo}
           saveur={restaurant?.saveur}
           villebase={restaurant?.ville}
           description={restaurant?.description}
           id={id}
+          setCallA={setCallA}
           setRestaurant={setRestaurant}
         />
       </div>

@@ -18,6 +18,7 @@ type TypeProps = {
   villebase: string | undefined;
   description: string | undefined;
   id: string;
+  setCallA: React.Dispatch<React.SetStateAction<boolean>>;
   setRestaurant: React.Dispatch<React.SetStateAction<TypeDocDashboard | null>>;
 };
 const FormGlobale = ({
@@ -26,6 +27,7 @@ const FormGlobale = ({
   villebase,
   description,
   id,
+  setCallA,
   setRestaurant,
 }: TypeProps) => {
   const { ville, token } = Dynamic();
@@ -96,6 +98,7 @@ const FormGlobale = ({
       });
 
       if (res) {
+        setCallA((prev) => !prev);
         if (res.data) {
           if (res.data.succes) {
             setUpdating(false);
@@ -105,6 +108,7 @@ const FormGlobale = ({
         }
       }
     } catch (error: any) {
+      setCallA((prev) => !prev);
       setUpdating(false);
       console.log(error);
       if (error.response.data.message) {

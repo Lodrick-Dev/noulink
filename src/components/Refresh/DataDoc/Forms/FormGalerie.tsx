@@ -11,8 +11,9 @@ import SkeletonLoader from "../../../utils/SkeletonLoader";
 type TypeProps = {
   galerie: string[];
   id: string;
+  setCallA: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const FormGalerie = ({ galerie, id }: TypeProps) => {
+const FormGalerie = ({ galerie, id, setCallA }: TypeProps) => {
   const { token } = Dynamic();
   const [updating, setUpdating] = useState(false);
   const [galerieLocal, setGalerieLocal] = useState<string[]>([]);
@@ -62,12 +63,14 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
         },
       });
       if (res) {
+        setCallA((prev) => !prev);
         if (res.data) {
           setGalerieLocal(res.data.galerie);
           return toast.success(res.data.succes);
         }
       }
     } catch (error: any) {
+      setCallA((prev) => !prev);
       console.log(error);
       if (error.response.data.message) {
         return toast.error(error.response.data.message);
@@ -94,6 +97,7 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
         },
       });
       if (res) {
+        setCallA((prev) => !prev);
         if (res.data.succes) {
           setGalerieLocal(res.data.galerie);
           setUpdating(false);
@@ -102,6 +106,7 @@ const FormGalerie = ({ galerie, id }: TypeProps) => {
         }
       }
     } catch (error) {
+      setCallA((prev) => !prev);
       setUpdating(false);
       console.log(error);
       return toast.error("Une erreur est survenue");
