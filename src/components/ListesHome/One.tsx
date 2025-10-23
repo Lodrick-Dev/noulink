@@ -40,6 +40,7 @@ const StyledOne = styled.div`
   }
   strong {
     text-align: center;
+    border-top: solid 1px ${COLORS.main};
   }
   .the-span {
     display: block;
@@ -51,7 +52,7 @@ const StyledOne = styled.div`
     background: ${COLORS.yellow};
   }
   @media screen and (max-width: 450px) {
-    width: 30%;
+    min-width: 45%;
     height: 25vh;
     margin: 5px;
     .the-span {
