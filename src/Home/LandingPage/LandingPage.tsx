@@ -33,10 +33,10 @@ const LandingPage = () => {
           <p>
             Nou Link est la première plateforme qui connecte les passionnés de
             cuisine ultramarine. Retrouvez des plats traditionnels comme le{" "}
-            <strong>colombo</strong>, le <strong>bokit</strong> ou les{" "}
-            <strong>accras</strong> près de chez vous, que vous soyez à{" "}
-            <strong>Paris</strong>, <strong>Lyon</strong>,
-            <strong>Marseille</strong> ou ailleurs en France.
+            <strong>colombo</strong>, le <strong>bokit</strong>, le{" "}
+            <strong>bami</strong> ou les <strong>accras</strong> près de chez
+            vous, que vous soyez à <strong>Paris</strong>, <strong>Lyon</strong>
+            ,<strong>Marseille</strong> ou ailleurs en France.
           </p>
         </section>
       </Slide>
