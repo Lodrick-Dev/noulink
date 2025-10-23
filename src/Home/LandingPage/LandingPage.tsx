@@ -7,6 +7,7 @@ import AbonnementCard from "../../components/AbonnementCard/AbonnementCard";
 import Intro from "./Intro";
 import HowItWorks from "./HowItWorks";
 import NewsletterWaitlist from "./NewsletterWaitlist";
+import Story from "./Story";
 
 const LandingPage = () => {
   return (
@@ -22,6 +23,10 @@ const LandingPage = () => {
           </Link>
         </nav>
       </section>
+      <Slide direction="up" triggerOnce>
+        <Story />
+      </Slide>
+
       <Slide direction="up" triggerOnce>
         <section className="section-2">
           <h3>Pourquoi utiliser Nou Link ?</h3>
