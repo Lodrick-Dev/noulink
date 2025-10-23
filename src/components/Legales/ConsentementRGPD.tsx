@@ -9,6 +9,7 @@ declare global {
 
 const ConsentementRGPD = () => {
   const [consentGiven, setConsentGiven] = useState<boolean | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("ga_consent");
@@ -32,6 +33,7 @@ const ConsentementRGPD = () => {
         localStorage.removeItem("ga_consent");
       }
     }
+    setIsReady(true); // on affiche le bandeau si rien n'est trouvé
   }, []);
 
   const handleAccept = () => {
@@ -75,6 +77,9 @@ const ConsentementRGPD = () => {
     document.head.appendChild(script2);
   };
 
+  // Tant qu’on n’a pas fini de lire le localStorage, on ne rend rien
+  if (!isReady) return null;
+  // Si le consentement a déjà été donné ou refusé, on ne rend rien non plus
   if (consentGiven !== null) return null;
 
   return (

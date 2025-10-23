@@ -58,15 +58,15 @@ const Story = () => {
         Ce jour-là, je me suis dit :
         <br />
         <em>
-          “Je ne dois pas être le seul à galérer à trouver nos plats ultramarins
-          en métropole.”
+          “Je ne dois pas être le seul à galérer à trouver nos plats
+          ultramarins”
         </em>
       </p>
       <p>
         Alors j’ai décidé de créer <strong>Nou Link</strong> : une plateforme
         pour <strong>connecter les passionnés de cuisine ultramarine</strong> et{" "}
-        <strong>rendre visibles nos talents culinaires</strong>, partout en
-        France. 🌍
+        <strong>rendre visibles nos talents culinaires</strong>, partout où nous
+        y sommes. 🌍
       </p>
     </StorySection>
   );
