@@ -17,7 +17,10 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (import.meta.env.VITE_DEV === "true") {
-      alert("En cours de maintenance, connexion désactivée.");
+      alert(
+        "🚧 En cours de maintenance. " +
+          "Inscrivez-vous à la newsletter sur la page d’accueil pour être informé du lancement 🎉"
+      );
       return;
     }
     // return;
