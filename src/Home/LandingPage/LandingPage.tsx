@@ -146,6 +146,9 @@ const StyledLandingPage = styled.section`
     /* background: red; */
     width: 80%;
     margin: 50px auto;
+    h3 {
+      font-size: 2rem;
+    }
     > p {
       margin-top: 20px;
       text-align: center;
@@ -165,6 +168,10 @@ const StyledLandingPage = styled.section`
     }
     .section-2 {
       width: 90%;
+      h3 {
+        font-size: 2em;
+        text-align: center;
+      }
     }
   }
 `;
