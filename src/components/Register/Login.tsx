@@ -19,7 +19,7 @@ const Login = () => {
     if (import.meta.env.VITE_DEV === "true") {
       alert(
         "🚧 En cours de maintenance. " +
-          "Inscrivez-vous à la newsletter sur la page d’accueil pour être informé du lancement 🎉"
+          "Inscrivez-vous à la newsletter pour être informé du lancement 🎉"
       );
       return;
     }

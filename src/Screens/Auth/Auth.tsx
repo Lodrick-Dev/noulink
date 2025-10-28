@@ -4,6 +4,8 @@ import COLORS from "../../Styles/Styles";
 import { useState } from "react";
 import Login from "../../components/Register/Login";
 import Intro from "../../Home/LandingPage/Intro";
+import { Slide } from "react-awesome-reveal";
+import NewsletterWaitlist from "../../Home/LandingPage/NewsletterWaitlist";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,6 +18,9 @@ const Auth = () => {
       <span className="what-action" onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? "S'inscrire" : "Se connecter"}
       </span>
+      <Slide direction="right" triggerOnce>
+        <NewsletterWaitlist />
+      </Slide>
     </StyledAuth>
   );
 };
@@ -35,6 +40,8 @@ const StyledAuth = styled.section`
   }
   .what-action {
     cursor: pointer;
+    margin-bottom: 20px;
+    color: ${COLORS.yellow};
     text-decoration: underline;
   }
   @media screen and (max-width: 450px) {

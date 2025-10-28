@@ -23,10 +23,12 @@ const LandingPage = () => {
           </Link>
         </nav>
       </section>
+      <Slide direction="right" triggerOnce>
+        <NewsletterWaitlist />
+      </Slide>
       <Slide direction="up" triggerOnce>
         <Story />
       </Slide>
-
       <Slide direction="up" triggerOnce>
         <section className="section-2">
           <h3>Pourquoi utiliser Nou Link ?</h3>
@@ -46,7 +48,7 @@ const LandingPage = () => {
       <Slide direction="up" triggerOnce>
         <HowItWorks />
       </Slide>
-      <Slide direction="down" triggerOnce>
+      <Slide direction="right" triggerOnce>
         <NewsletterWaitlist />
       </Slide>
       <Slide direction="left" triggerOnce>

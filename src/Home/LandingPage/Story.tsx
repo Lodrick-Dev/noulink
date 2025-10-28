@@ -52,7 +52,7 @@ const Story = () => {
       <p>
         Finalement, c’est un <strong>pote qui connaît un pote</strong> qui m’a
         dépanné — et c’est comme ça que j’ai découvert un super{" "}
-        <strong>#Bokit</strong> 🤣👌🏼
+        <strong>#Bokit</strong>👌🏼
       </p>
       <p>
         Ce jour-là, je me suis dit :
