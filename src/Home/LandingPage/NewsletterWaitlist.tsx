@@ -123,7 +123,8 @@ const NewsletterWaitlist = () => {
         .insert([{ email: trimmedEmail }]);
       if (error) throw error;
 
-      setMessage("Merci ! Vous serez informé dès le lancement 🎉");
+      // setMessage("Merci ! Vous serez informé dès le lancement 🎉");
+      setMessage("Merci ! Vous serez informé dès un nouvel événement 🎉");
       setSuccess(true);
       setEmail("");
     } catch (err) {
@@ -137,10 +138,15 @@ const NewsletterWaitlist = () => {
 
   return (
     <Section>
-      <Title>Reste informé du lancement 🚀</Title>
+      {/* <Title>Reste informé du lancement 🚀</Title> */}
+      <Title>Reste informé des événements 🚀</Title>
       <Subtitle>
-        Laisse ton e-mail pour être averti dès que la plateforme sera en ligne !
+        Inscris-toi pour recevoir une alerte dès qu’un nouvel événement arrive
+        sur Nou Link !
       </Subtitle>
+      {/* <Subtitle>
+        Laisse ton e-mail pour être averti dès que la plateforme sera en ligne !
+      </Subtitle> */}
       <Form onSubmit={handleSubmit}>
         <Input
           type="email"

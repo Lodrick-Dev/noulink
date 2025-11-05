@@ -46,7 +46,9 @@ function App() {
           <GeolocationPrompt />
         </Slide>
       )}
-      {location.pathname !== "/" && <Header />}
+      {location.pathname !== "/" && location.pathname !== "/conf-email" && (
+        <Header />
+      )}
       {location.pathname !== "/" && <PopCookies />}
       <Routes>
         {/* <Route path="/inscription" element={<Inscription />} /> */}

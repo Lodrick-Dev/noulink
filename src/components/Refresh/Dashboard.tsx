@@ -134,7 +134,6 @@ const Dashboard = () => {
             withCredentials: true,
           }
         );
-        console.log(res);
 
         if (res.data.paid) {
           toast.success("Paiement confirmé !");
