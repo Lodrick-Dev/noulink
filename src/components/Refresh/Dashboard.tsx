@@ -56,8 +56,6 @@ const Dashboard = () => {
 
   //getOne on va prendre id de userAuth
   const getOne = async () => {
-    console.log("je joue");
-
     if (!userAuth?.id) return toast.error("Un identifiant est nécessaire");
     try {
       const res = await axios({
