@@ -149,6 +149,7 @@ const Dashboard = () => {
       }
     } else if (status === "cancel") {
       toast.warning("Paiement annulé ou non finalisé.");
+      navigate("/dashboard");
     }
   };
   const eyesIcons = () => {
