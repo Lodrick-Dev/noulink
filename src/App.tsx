@@ -49,7 +49,7 @@ function App() {
       {location.pathname !== "/" && location.pathname !== "/conf-email" && (
         <Header />
       )}
-      {location.pathname !== "/" && <PopCookies />}
+      {/* {location.pathname !== "/" && <PopCookies />} */}
       <Routes>
         {/* <Route path="/inscription" element={<Inscription />} /> */}
         <Route

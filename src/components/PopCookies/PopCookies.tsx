@@ -34,6 +34,7 @@ const StyledPopCookies = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 79;
   right: 0;
   background: ${COLORS.second};
   color: ${COLORS.white};
@@ -41,7 +42,7 @@ const StyledPopCookies = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50svh;
+  height: 30svh;
   p {
     margin: 0;
     font-size: 0.9em;
