@@ -14,7 +14,7 @@ import MentionsLegales from "./components/Legales/MentionsLegales";
 import PolitiqueConfidentialite from "./components/Legales/PolitiqueConfidentialite";
 import Cgu from "./components/Legales/Cgu";
 import LandingPage from "./Home/LandingPage/LandingPage";
-import { PopCookies } from "./components/PopCookies/PopCookies";
+// import { PopCookies } from "./components/PopCookies/PopCookies";
 import ConsentementRGPD from "./components/Legales/ConsentementRGPD";
 import Cgv from "./components/Legales/Cgv";
 import Auth from "./Screens/Auth/Auth";
