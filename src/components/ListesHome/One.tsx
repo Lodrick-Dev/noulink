@@ -53,8 +53,12 @@ const StyledOne = styled.div`
   }
   @media screen and (max-width: 450px) {
     min-width: 45%;
-    height: 25vh;
+    max-height: 25vh;
     margin: 5px;
+    strong {
+      width: 100%;
+      font-size: 0.9em;
+    }
     .the-span {
       border-radius: 0px;
       width: 100%;

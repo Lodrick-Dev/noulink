@@ -103,7 +103,8 @@ const StyledResto = styled.div`
       }
       img {
         display: block;
-        min-width: 20%;
+        min-width: 30%;
+        max-height: 30vh;
         border-radius: 15px;
         background: ${COLORS.black};
         padding: 10px;
@@ -131,8 +132,9 @@ const StyledResto = styled.div`
             color: ${COLORS.white};
           }
           .el {
-            margin: 0px 5px;
+            margin: 5px;
             color: ${COLORS.green};
+            border-bottom: solid 1px ${COLORS.green};
           }
         }
       }
