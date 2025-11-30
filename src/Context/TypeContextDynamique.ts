@@ -13,6 +13,8 @@ export type TypeContextDynamic = {
   setPopToPay: React.Dispatch<React.SetStateAction<boolean>>;
   setUserAuth: React.Dispatch<React.SetStateAction<User | null>>;
   deleteCityCookie: () => void;
+  isPremium: boolean;
+  setIsPremium: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type TypeContextDynamicProviderProps = {

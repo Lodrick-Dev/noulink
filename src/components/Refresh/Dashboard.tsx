@@ -12,7 +12,13 @@ import ManagerAccount from "./ManagerAccount";
 import { Dynamic } from "../../Context/ContextDynamique";
 // import SkeletonLoader from "../utils/SkeletonLoader";
 import Resto from "../ListesHome/Resto";
-import { Eye, EyeOff, Fullscreen, LockKeyholeOpen } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  FileText,
+  Fullscreen,
+  LockKeyholeOpen,
+} from "lucide-react";
 import { getExpirationMessage } from "../utils/fonctions";
 import { useNavigate } from "react-router-dom";
 // import Loading from "../utils/Loading";
@@ -33,8 +39,12 @@ export type TypeDocDashboard = {
 };
 export type TypeGalerie = string;
 export type TypeSpecility = string;
-const Dashboard = () => {
-  const { loadingUser, userAuth, setPopToPay, token } = Dynamic();
+const Dashboard = ({
+  setPopFacture,
+}: {
+  setPopFacture: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const { loadingUser, userAuth, setPopToPay, token, setIsPremium } = Dynamic();
   const [id, setId] = useState("");
   const [imgProfilUploaded, setImgProfilUploaded] = useState<
     string | undefined
@@ -63,13 +73,13 @@ const Dashboard = () => {
         url: `${import.meta.env.VITE_APP_API}restaurant/one/${userAuth?.id}`,
         withCredentials: true,
       });
-
       if (res.data) {
         setId(res.data.idsupabase);
         setImgProfilUploaded(res.data.profil);
         setRestaurant(res.data);
         setGalerie(res.data.galerie);
         setSpeciality(res.data.speciality);
+        setIsPremium(res.data.isPremium);
       }
     } catch (error: any) {
       console.log(error);
@@ -215,8 +225,16 @@ const Dashboard = () => {
             /> */}
             {checkIfAllreadyPayed()}
             {restaurant?.isPremium && eyesIcons()}
+            {restaurant?.isPremium && (
+              <FileText
+                className="i-fact"
+                size={40}
+                onClick={() => setPopFacture(true)}
+              />
+            )}
           </div>
         )}
+
         {/* <SkeletonLoader /> */}
         <FormProfil
           imgProfilUploaded={imgProfilUploaded}
@@ -303,6 +321,14 @@ const StyledDashboard = styled.section`
         padding: 3px;
         margin-right: 50px;
       }
+      .i-fact {
+        cursor: pointer;
+        color: ${COLORS.green};
+        border: solid 2px ${COLORS.green};
+        padding: 3px;
+        border-radius: 5px;
+        margin-left: 50px;
+      }
       .i-pay {
         padding: 3px;
         cursor: pointer;
@@ -331,6 +357,9 @@ const StyledDashboard = styled.section`
       .visible {
         padding-left: 5px;
         font-size: 0.7em;
+      }
+      .preview {
+        justify-content: center;
       }
     }
   }

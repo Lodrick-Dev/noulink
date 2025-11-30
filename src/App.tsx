@@ -5,7 +5,7 @@ import { Slide } from "react-awesome-reveal";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Refresh from "./components/Refresh/Dashboard";
+// import dashboard from "./components/Refresh/Dashboard";
 import Home from "./Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Dynamic } from "./Context/ContextDynamique";
@@ -23,11 +23,14 @@ import ResetPassword from "./components/Register/ResetPassword";
 import PrivateRoute from "./components/Private/PrivateRoute";
 import PublicRoute from "./components/Private/PublicRoute";
 import PopPay from "./components/AbonnementCard/PopPay";
+import FormFacture from "./components/FormFacture/FormFacture";
+import Dashboard from "./components/Refresh/Dashboard";
 
 function App() {
   const { ville, popToPay } = Dynamic();
   const [showPrompt, setShowPrompt] = useState(false);
   const location = useLocation();
+  const [popFacture, setPopFacture] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPrompt(true);
@@ -41,6 +44,7 @@ function App() {
   return (
     <StyledApp>
       <ConsentementRGPD />
+      {popFacture && <FormFacture setPopFacture={setPopFacture} />}
       {showPrompt && !ville && location.pathname === "/home" && (
         <Slide direction="down" triggerOnce>
           <GeolocationPrompt />
@@ -64,7 +68,7 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Refresh />
+              <Dashboard setPopFacture={setPopFacture} />
             </PrivateRoute>
           }
         />

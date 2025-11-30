@@ -47,8 +47,6 @@ const Login = () => {
       alert(error.message);
     } else if (data?.user) {
       setLoading(false);
-      console.log(data);
-      console.log(data?.user);
       setToken(data?.session?.access_token || "");
       setUserAuth(data?.user);
       nav("/dashboard");
