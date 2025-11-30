@@ -111,7 +111,7 @@ export default function AbonnementCard() {
       <Price>
         <OldPrice>160,00 €</OldPrice> 99,99 €<PerYear>pour 1 an</PerYear>
       </Price>
-      <PromoInfo>Offre valable jusqu’à fin décembre 🎉</PromoInfo>
+      <PromoInfo>Offre valable jusqu’à fin janvier 🎉</PromoInfo>
       <Features>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
