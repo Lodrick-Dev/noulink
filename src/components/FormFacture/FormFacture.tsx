@@ -41,6 +41,12 @@ const Container = styled.div`
       }
     }
   }
+  @media screen and (max-width: 450px) {
+    .sous-b {
+      max-height: 500px;
+      min-height: 500px;
+    }
+  }
 `;
 
 const Title = styled.h2`
