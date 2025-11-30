@@ -33,6 +33,13 @@ const Container = styled.div`
       text-align: center;
       display: block;
     }
+    form {
+      .code-ville {
+        @media screen and (max-width: 450px) {
+          flex-direction: column;
+        }
+      }
+    }
   }
 `;
 
@@ -232,7 +239,10 @@ export default function FormFacture({
               />
             </Field>
 
-            <div style={{ display: "flex", gap: "12px" }}>
+            <div
+              className="code-ville"
+              style={{ display: "flex", gap: "12px" }}
+            >
               <Field style={{ flex: 1 }}>
                 <Label>Code Postal*</Label>
                 <Input
