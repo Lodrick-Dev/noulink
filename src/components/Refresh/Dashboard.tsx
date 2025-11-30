@@ -226,11 +226,14 @@ const Dashboard = ({
             {checkIfAllreadyPayed()}
             {restaurant?.isPremium && eyesIcons()}
             {restaurant?.isPremium && (
-              <FileText
-                className="i-fact"
-                size={40}
-                onClick={() => setPopFacture(true)}
-              />
+              <div className="facture-i">
+                <FileText
+                  className="i-fact"
+                  size={40}
+                  onClick={() => setPopFacture(true)}
+                />
+                <em>Facture</em>
+              </div>
             )}
           </div>
         )}
@@ -321,13 +324,24 @@ const StyledDashboard = styled.section`
         padding: 3px;
         margin-right: 50px;
       }
-      .i-fact {
-        cursor: pointer;
-        color: ${COLORS.green};
-        border: solid 2px ${COLORS.green};
-        padding: 3px;
-        border-radius: 5px;
+      .facture-i {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         margin-left: 50px;
+
+        em {
+          font-size: 0.7em;
+          color: ${COLORS.green};
+        }
+        .i-fact {
+          cursor: pointer;
+          color: ${COLORS.green};
+          border: solid 2px ${COLORS.green};
+          padding: 3px;
+          border-radius: 5px;
+        }
       }
       .i-pay {
         padding: 3px;
