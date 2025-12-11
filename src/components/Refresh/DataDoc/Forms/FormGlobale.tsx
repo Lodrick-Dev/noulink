@@ -141,6 +141,7 @@ const FormGlobale = ({
             <option value="Guadeloupe">Guadeloupe</option>
             <option value="Martinique">Martinique</option>
             <option value="Mayotte">Mayotte</option>
+            <option value="Madagascar">Madagascar</option>
           </select>
         </div>
         <textarea

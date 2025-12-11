@@ -51,6 +51,14 @@ const MainHome = ({ setSaveur, saveur }: TypePropsHome) => {
           >
             Mayotte
           </span>
+          <span
+            onClick={() =>
+              setSaveur((prev) => (prev === "Madagascar" ? "" : "Madagascar"))
+            }
+            className={saveur === "Madagascar" ? "actif" : ""}
+          >
+            Madagascar
+          </span>
         </div>
       </div>
       {/* <BarreSearch /> */}

@@ -24,6 +24,7 @@ const Intro = () => {
           <span className="span-countries ">Guadeloupe</span>
           <span className="span-countries ">Martinique</span>
           <span className="span-countries ">Mayotte</span>
+          <span className="span-countries ">Madagascar</span>
         </div>
       </Slide>
     </StyledIntro>
