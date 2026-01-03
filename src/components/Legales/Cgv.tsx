@@ -11,7 +11,7 @@ const Cgv = () => {
       <div>
         <h1>Conditions Générales de Vente (CGV) de Nou Link</h1>
       </div>
-      <span>Dernière mise à jour : 19 octobre 2025</span>
+      <span>Dernière mise à jour : 03 janvier 2026</span>
       <div>
         <h2>.1 Objet</h2>
         <p>
@@ -64,6 +64,10 @@ const Cgv = () => {
           communiqués lors de l’inscription et consultables sur la plateforme.
           Ils peuvent être modifiés pour les nouvelles souscriptions, mais les
           abonnements en cours restent au tarif initial jusqu’à expiration.{" "}
+          <br />
+    Des offres promotionnelles temporaires peuvent être proposées. Elles
+    sont valables uniquement pendant la période indiquée et ne
+    s’appliquent pas rétroactivement.
         </p>
         <p>
           {" "}

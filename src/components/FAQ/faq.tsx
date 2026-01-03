@@ -73,7 +73,8 @@ const Faq = () => {
         </h4>
         <p className={activeIndex === 4 ? "show" : ""}>
           Oui, vous pouvez supprimer votre profil et résilier votre abonnement à
-          tout moment. Les abonnements ne sont pas remboursables.
+          tout moment. Les abonnements ne sont pas remboursables. Abonnement non
+          renouvelé automatiquement.
         </p>
       </div>
     </StyledFaq>

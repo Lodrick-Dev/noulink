@@ -47,7 +47,7 @@ const Story = () => {
       <p>
         Un jour, je cherchais simplement où acheter un <strong>bami</strong> ou
         un <strong>nasi</strong>. J’ai fouillé Facebook, Instagram… mais c’était
-        la galère 😅
+        la galère
       </p>
       <p>
         Finalement, c’est un <strong>pote qui connaît un pote</strong> qui m’a

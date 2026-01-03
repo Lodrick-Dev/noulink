@@ -8,6 +8,7 @@ import Intro from "./Intro";
 import HowItWorks from "./HowItWorks";
 import NewsletterWaitlist from "./NewsletterWaitlist";
 import Story from "./Story";
+import PromoBanner from "./PromoBanner";
 
 const LandingPage = () => {
   return (
@@ -18,14 +19,15 @@ const LandingPage = () => {
           <Link to="/home" className="btn">
             Saveurs près de chez moi
           </Link>
-          <Link to="/auth" className="btn secondary">
+          {/* <Link to="/auth" className="btn secondary">
             Publie tes spécialités
-          </Link>
+          </Link> */}
+        <PromoBanner />
         </nav>
       </section>
-      <Slide direction="right" triggerOnce>
+      {/* <Slide direction="right" triggerOnce>
         <NewsletterWaitlist />
-      </Slide>
+      </Slide> */}
       <Slide direction="up" triggerOnce>
         <Story />
       </Slide>
@@ -79,7 +81,7 @@ const StyledLandingPage = styled.section`
       align-items: center;
       color: ${COLORS.black};
       font-size: 1.2em;
-      padding: 50px;
+      /* padding: 50px; */
       border: none;
       cursor: pointer;
       &::before {
@@ -119,7 +121,7 @@ const StyledLandingPage = styled.section`
         padding: 10px 40px;
         border-radius: 10px;
         background: ${COLORS.yellow};
-        box-shadow: 0 0 10px ${COLORS.yellow};
+        box-shadow: 0 0 10px ${COLORS.main};
         color: ${COLORS.main};
         transition: 0.2s;
       }
