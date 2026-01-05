@@ -47,11 +47,11 @@ strong {
 const Button = styled.button`
   background-color: ${COLORS.green};
   color: ${COLORS.white};
-  font-weight: 600;
   border: none;
   /* border-radius: 9999px; */
   border-radius: 10px;
   padding: 0.6rem 1.5rem;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
 

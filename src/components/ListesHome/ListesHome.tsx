@@ -106,6 +106,7 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
                   profil={resto.profil}
                   name={resto.pseudo}
                   saveur={resto.saveur}
+                  localisation={resto.ville}
                   id={resto._id}
                   actionClick={getOneById}
                 />
@@ -161,6 +162,8 @@ const StyledListesHome = styled.section`
     padding: 5px;
     .list-one {
       padding: 0px;
+      flex-direction: column;
+      align-items: center;
     }
   }
 `;
