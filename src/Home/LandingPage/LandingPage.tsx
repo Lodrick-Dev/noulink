@@ -44,16 +44,16 @@ const LandingPage = () => {
           </p>
         </section>
       </Slide>
-      <Slide direction="right" triggerOnce>
+      <Slide direction="up" triggerOnce>
         <AbonnementCard />
       </Slide>
       <Slide direction="up" triggerOnce>
         <HowItWorks />
       </Slide>
-      <Slide direction="right" triggerOnce>
+      <Slide direction="up" triggerOnce>
         <NewsletterWaitlist />
       </Slide>
-      <Slide direction="left" triggerOnce>
+      <Slide direction="down" triggerOnce>
         <Faq />
       </Slide>
     </StyledLandingPage>

@@ -43,12 +43,14 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
       if (res.data) {
         setRestaurant(res.data);
       }
+      console.log(res);
+      
     } catch (error: any) {
       console.log(error);
 
       console.error("Erreur lors de la récupération des restaurants :", error);
       if (error.response.data.error) {
-        toast.info(error.response.data.error);
+        // toast.info(error.response.data.error);
         setRestaurant([]);
       } else {
         toast.error("Oups, une erreur !");
