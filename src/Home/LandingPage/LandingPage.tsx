@@ -8,7 +8,7 @@ import Intro from "./Intro";
 import HowItWorks from "./HowItWorks";
 import NewsletterWaitlist from "./NewsletterWaitlist";
 import Story from "./Story";
-import PromoBanner from "./PromoBanner";
+// import PromoBanner from "./PromoBanner";
 
 const LandingPage = () => {
   return (
@@ -19,10 +19,10 @@ const LandingPage = () => {
           <Link to="/home" className="btn">
             Saveurs près de chez moi
           </Link>
-          {/* <Link to="/auth" className="btn secondary">
+          <Link to="/auth" className="btn secondary">
             Publie tes spécialités
-          </Link> */}
-        <PromoBanner />
+          </Link>
+        {/* <PromoBanner /> */}
         </nav>
       </section>
       {/* <Slide direction="right" triggerOnce>
@@ -31,7 +31,7 @@ const LandingPage = () => {
       <Slide direction="up" triggerOnce>
         <Story />
       </Slide>
-      <Slide direction="up" triggerOnce>
+      {/* <Slide direction="up" triggerOnce>
         <section className="section-2">
           <h3>Pourquoi utiliser Nou Link ?</h3>
           <p>
@@ -43,7 +43,7 @@ const LandingPage = () => {
             ,<strong>Marseille</strong> ou ailleurs en France.
           </p>
         </section>
-      </Slide>
+      </Slide> */}
       <Slide direction="up" triggerOnce>
         <AbonnementCard />
       </Slide>
@@ -119,7 +119,7 @@ const StyledLandingPage = styled.section`
       .btn {
         display: inline-block;
         padding: 10px 40px;
-        border-radius: 10px;
+        border-radius: 9999px;
         background: ${COLORS.yellow};
         box-shadow: 0 0 10px ${COLORS.main};
         color: ${COLORS.main};
