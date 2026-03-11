@@ -84,20 +84,20 @@ const SubscribeButton = styled.button`
   }
 `;
 
-// const OldPrice = styled.span`
-//   font-size: 18px;
-//   color: #888;
-//   text-decoration: line-through;
-//   margin-right: 10px;
-// `;
+const OldPrice = styled.span`
+  font-size: 18px;
+  color: #888;
+  text-decoration: line-through;
+  margin-right: 10px;
+`;
 
-// const PromoInfo = styled.p`
-//   font-size: 13px;
-//   color: ${COLORS.main};
-//   margin-top: -10px;
-//   margin-bottom: 20px;
-//   font-style: italic;
-// `;
+const PromoInfo = styled.p`
+  font-size: 13px;
+  color: ${COLORS.main};
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-style: italic;
+`;
 
 export default function AbonnementCard() {
   const nav = useNavigate();
@@ -110,10 +110,14 @@ export default function AbonnementCard() {
       </Header>
 
       <Price>
-        {/* <OldPrice>160,00 €</OldPrice> */}
-         160,00 €<PerYear>pour 1 an</PerYear>
+        <OldPrice>160,00 €</OldPrice>
+        99,99 €<PerYear>pour 1 an</PerYear>
       </Price>
-      {/* <PromoInfo>Offre valable jusqu’à fin janvier 🎉</PromoInfo> */}
+      <PromoInfo>
+        Offre du moment
+        {/* valable jusqu’à fin janvier  */}
+        🎉
+      </PromoInfo>
       <Features>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />

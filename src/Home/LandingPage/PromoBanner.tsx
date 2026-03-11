@@ -7,10 +7,10 @@ const PromoBanner = () => {
 
   return (
     <Banner>
-        <p>
-
-      🎉 Offre spéciale : <strong>99,99 € au lieu de 160 €</strong> jusqu’au 31 janvier !
-        </p>
+      <p>
+        🎉 Offre spéciale du moment : <strong>99,99 € au lieu de 160 €</strong>
+        {/* jusqu’au 31 janvier ! */}
+      </p>
       <Button onClick={() => nav("/auth")}>Je rejoins maintenant</Button>
     </Banner>
   );
@@ -32,7 +32,7 @@ const Banner = styled.div`
   align-items: center;
   gap: 0.1rem;
   width: 50%;
-strong {
+  strong {
     color: ${COLORS.yellow}; // Montre le prix promo
   }
   @media (max-width: 768px) {
@@ -56,7 +56,7 @@ const Button = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-   transform: scale(1.05);
-        box-shadow: 0 0 20px ${COLORS.green};
+    transform: scale(1.05);
+    box-shadow: 0 0 20px ${COLORS.green};
   }
 `;

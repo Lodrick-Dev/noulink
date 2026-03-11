@@ -8,7 +8,7 @@ import Intro from "./Intro";
 import HowItWorks from "./HowItWorks";
 import NewsletterWaitlist from "./NewsletterWaitlist";
 import Story from "./Story";
-// import PromoBanner from "./PromoBanner";
+import PromoBanner from "./PromoBanner";
 
 const LandingPage = () => {
   return (
@@ -19,10 +19,10 @@ const LandingPage = () => {
           <Link to="/home" className="btn">
             Saveurs près de chez moi
           </Link>
-          <Link to="/auth" className="btn secondary">
+          {/* <Link to="/auth" className="btn secondary">
             Publie tes spécialités
-          </Link>
-        {/* <PromoBanner /> */}
+          </Link> */}
+          <PromoBanner />
         </nav>
       </section>
       {/* <Slide direction="right" triggerOnce>
