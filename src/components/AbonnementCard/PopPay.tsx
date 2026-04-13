@@ -29,7 +29,7 @@ const PopPay = () => {
   const createSessionCheckout = async () => {
     if (!isChecked || !isCheckedCGU || !acceptCGU) {
       toast.warning(
-        "Vous devez accepter la renonciation et les CGU/CGV avant de continuer."
+        "Vous devez accepter la renonciation et les CGU/CGV avant de continuer.",
       );
       return; // stoppe la création de session
     }
@@ -43,9 +43,6 @@ const PopPay = () => {
       return toast.error("Aucun token en cours...");
     }
     setWaiting(true);
-    console.log("Voici mon id : ", userAuth?.id);
-    console.log("Voici mon email : ", userAuth?.email);
-    console.log("Voici mon token : ", token);
 
     try {
       const res = await axios({
@@ -70,14 +67,14 @@ const PopPay = () => {
         setWaiting(false);
         console.error("La réponse n'est pas un lien valide :", sessionUrl);
         toast.error(
-          "Une erreur est survenue, impossible de créer le paiement."
+          "Une erreur est survenue, impossible de créer le paiement.",
         );
       }
     } catch (error: any) {
       setWaiting(false);
       console.error("Erreur API :", error.response?.data || error.message);
       toast.error(
-        error.response?.data?.message || "Erreur lors de l'appel API"
+        error.response?.data?.message || "Erreur lors de l'appel API",
       );
     }
   };

@@ -8,10 +8,10 @@ const PromoBanner = () => {
   return (
     <Banner>
       <p>
-        🎉 Offre spéciale du moment : <strong>99,99 € au lieu de 160 €</strong>
+        🎉 Offre qui tue Nou Link : <strong>25,00 € au lieu de 160 €</strong>
         {/* jusqu’au 31 janvier ! */}
       </p>
-      <Button onClick={() => nav("/auth")}>Je rejoins maintenant</Button>
+      <Button onClick={() => nav("/auth")}>Go !</Button>
     </Banner>
   );
 };

@@ -111,12 +111,11 @@ export default function AbonnementCard() {
 
       <Price>
         <OldPrice>160,00 €</OldPrice>
-        99,99 €<PerYear>pour 1 an</PerYear>
+        25,00 €<PerYear>pour 1 an</PerYear>
       </Price>
       <PromoInfo>
-        Offre du moment
+        Offre qui tue Nou Link
         {/* valable jusqu’à fin janvier  */}
-        🎉
       </PromoInfo>
       <Features>
         <FeatureItem>
@@ -139,7 +138,7 @@ export default function AbonnementCard() {
 
       {loc.pathname !== "/dashboard" && (
         <SubscribeButton onClick={() => nav("/auth")}>
-          Je rejoins
+          Je découvre
         </SubscribeButton>
       )}
     </Card>
