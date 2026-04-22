@@ -17,13 +17,13 @@ const Register = () => {
     if (import.meta.env.VITE_DEV === "true") {
       alert(
         "🚧 En cours de maintenance. " +
-          "Inscrivez-vous à la newsletter pour être informé du lancement 🎉"
+          "Inscrivez-vous à la newsletter pour être informé du lancement 🎉",
       );
       return;
     }
     if (!acceptCG || !acceptCGU) {
       return toast.error(
-        "Vous devez accepter les CGU et CGV pour vous inscrire."
+        "Vous devez accepter les CGU et CGV pour vous inscrire.",
       );
     }
     if (!email || !password || !confirmPassword) {
@@ -119,7 +119,8 @@ const Register = () => {
             Je confirme que les spécialités publiées sur mon profil concernent
             exclusivement la Guyane, la Guadeloupe, la Martinique ou Mayotte.
             J’ai pris connaissance que tout autre contenu pourra entraîner la
-            désactivation du profil sans remboursement. Voir les cgv et cgu
+            désactivation du profil sans remboursement. Les produits vendus dans
+            les départements cités sont acceptés. Voir les cgv et cgu
           </span>
         </div>
         {loading && <Loading />}

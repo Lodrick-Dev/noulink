@@ -32,11 +32,14 @@ const StyledAuth = styled.section`
   margin: 10px auto;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 5px;
   border-radius: 20px;
   .box-i {
+    padding: 20px;
+    border-radius: 25px;
     width: 100%;
     margin-bottom: 50px;
+    background: url("/assets/img3.png") center/cover no-repeat;
   }
   .what-action {
     cursor: pointer;

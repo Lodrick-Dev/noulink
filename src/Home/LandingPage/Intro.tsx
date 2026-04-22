@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const Intro = () => {
   const nav = useNavigate();
+  const path = window.location.pathname;
+  console.log("Intro path", path);
   return (
     <StyledIntro>
       <Slide direction="down" triggerOnce>
@@ -21,20 +23,31 @@ const Intro = () => {
         </h1>
       </Slide>
       <p className="hero-tagline">
-        Tu vis dans ta ville et tu cherches{" "}
-        <strong>un plat de chez toi&nbsp;?</strong>
+        {path === "/"
+          ? "Tu vis dans ta ville et tu cherches"
+          : "Tu cuisines dans ta ville et tu veux"}
+        <strong>
+          {" "}
+          {path === "/"
+            ? "un plat de chez toi?"
+            : "proposer tes plats à la communauté ?"}{" "}
+        </strong>
+        &nbsp;
         <br />
-        Retrouve ceux qui cuisinent près de toi.
+        {path === "/"
+          ? "Retrouve ceux qui cuisinent près de toi."
+          : "Fais découvrir les plats locaux autour de toi."}
       </p>
       <Slide direction="down" triggerOnce className="slid-up">
         <ListCountry />
       </Slide>
-
-      <div className="hero-cta">
-        <button className="btn-primary" onClick={() => nav("/home")}>
-          🍽️ Trouver des repas près de moi
-        </button>
-      </div>
+      {path === "/" && (
+        <div className="hero-cta">
+          <button className="btn-primary" onClick={() => nav("/home")}>
+            🍽️ Trouver des repas près de moi
+          </button>
+        </div>
+      )}
     </StyledIntro>
   );
 };
