@@ -8,6 +8,7 @@ import COLORS from "../../Styles/Styles";
 import { useNavigate } from "react-router-dom";
 import Resto from "./Resto";
 import LoadingBlue from "../Loading/LoadingBlue";
+import { FormClient } from "../Refresh/DataDoc/Forms/FormClient";
 export type TypeDocProps = {
   _id: string;
   createdAt: string;
@@ -24,6 +25,7 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
   const [restaurants, setRestaurant] = useState<TypeDocProps[] | null>(null);
   const [getOne, setGetOne] = useState<TypeDocProps | null>(null);
   const [loading, setLoading] = useState(true);
+  const [formClient, setFormClient] = useState(false);
 
   const nav = useNavigate();
   const { ville } = Dynamic();
@@ -44,7 +46,6 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
         setRestaurant(res.data);
       }
       console.log(res);
-      
     } catch (error: any) {
       console.log(error);
 
@@ -85,7 +86,19 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
         </div>
       ) : (
         <>
-          {!getOne && <span className="legend-sub">Inscrits: </span>}
+          {!getOne && (
+            <div className="legend-sub">
+              {" "}
+              <span className="legend-text">Inscrits : </span>{" "}
+              <button
+                className="not-found"
+                onClick={() => setFormClient((prev) => !prev)}
+              >
+                {formClient ? "Fermer" : "Pas de vendeur dans ta ville ?"}
+              </button>{" "}
+            </div>
+          )}
+          {formClient && <FormClient />}
           <div className="list-one">
             {getOne && (
               <Resto
@@ -125,7 +138,7 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
 
 export default ListesHome;
 const StyledListesHome = styled.section`
-  padding: 20px;
+  padding: 5px 20px;
   display: flex;
   flex-direction: column;
   .loading-blue {
@@ -137,6 +150,37 @@ const StyledListesHome = styled.section`
   }
   .legend-sub {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    span {
+      font-size: 0.9em;
+    }
+    .not-found {
+      background: ${COLORS.green};
+      color: ${COLORS.white};
+      box-shadow: 1px 1px 5px ${COLORS.green};
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 1s;
+      animation: pulseShadow 2.8s 1.8s infinite;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+      text-decoration: none;
+      border: none;
+    }
+    @keyframes pulseShadow {
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(94, 244, 94, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 0 16px rgba(94, 244, 94, 0);
+      }
+    }
   }
   .list-one {
     display: flex;
@@ -161,7 +205,7 @@ const StyledListesHome = styled.section`
     }
   }
   @media screen and (max-width: 450px) {
-    padding: 5px;
+    padding: 10px 5px;
     .list-one {
       padding: 0px;
       flex-direction: column;
