@@ -1,34 +1,34 @@
-import COLORS from '../../Styles/Styles';
-import styled from 'styled-components';
-import { saveurs } from '../MainHome/SaveurSelector/SaveurSelector';
+import COLORS from "../../Styles/Styles";
+import styled from "styled-components";
+import { saveurs } from "../MainHome/SaveurSelector/SaveurSelector";
 
 const ListCountry = () => {
   return (
     <ListeCountryStryle>
-        <div className="liste">
-                {saveurs.map((item) => (
-                  <div
-                    key={item.name}
-                  >
-                    <img src={item.flag} alt={item.name} />
-                  </div>
-                ))}
-              </div>
+      <div className="liste">
+        {saveurs.map((item) => (
+          <div key={item.name}>
+            <img src={item.flag} alt={item.name} />
+          </div>
+        ))}
+      </div>
     </ListeCountryStryle>
-  )
-}
+  );
+};
 
-export default ListCountry
+export default ListCountry;
 
 const ListeCountryStryle = styled.div`
-width: 100%;
-  background: linear-gradient(135deg, ${COLORS.main}, ${COLORS.second});
+  width: 100%;
+  /* background: linear-gradient(135deg, ${COLORS.main}, ${COLORS.second}); */
+  background: rgba(244, 211, 94, 0.12); //rgb(244 211 94 / 53%)
+  border: 1px solid rgba(244, 211, 94, 0.3);
   border-radius: 18px;
-   /* background: ${COLORS.main}; */
+  /* background: ${COLORS.main}; */
   padding: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
   .liste {
     display: flex;

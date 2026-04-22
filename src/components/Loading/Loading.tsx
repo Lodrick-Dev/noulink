@@ -19,18 +19,19 @@ const LaodingStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  /* background: ${COLORS.second}; */
   .loader {
-    min-width: 20px;
-    min-height: 20px;
-    max-width: 20px;
-    max-height: 20px;
-    border: 3px solid ${COLORS.yellow};
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    border: 2px solid ${COLORS.yellow};
     border-bottom-color: transparent;
     border-radius: 50%;
     display: block;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     animation: rotation 1s linear infinite;
-    flex-shrink: 0; /* important */
+    flex-shrink: 0 !important;
   }
 
   @keyframes rotation {

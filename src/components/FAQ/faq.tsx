@@ -22,9 +22,9 @@ const Faq = () => {
           Q1 : Qu’est-ce que Nou Link ?
         </h4>
         <p className={activeIndex === 0 ? "show" : ""}>
-          Nou Link est une plateforme qui met en avant les spécialités
-          culinaires de l’Outre-mer. Vous pouvez rechercher et découvrir des
-          repas gratuitement.
+          Un annuaire gratuit qui recense les personnes qui cuisinent des plats
+          antillais, guyanais et ultramarins en France métropole. Tu cherches,
+          tu trouves, tu contactes directement.
         </p>
       </div>
       <div className="second">
@@ -32,11 +32,11 @@ const Faq = () => {
           onClick={() => toggleFAQ(1)}
           className={activeIndex === 1 ? "active" : ""}
         >
-          Q2 : Qui peut publier un profil ?
+          Q2 : La consultation est-elle gratuite ?
         </h4>
         <p className={activeIndex === 1 ? "show" : ""}>
-          Toute personne souhaitant présenter ses repas peut créer un profil,
-          qu’il s’agisse d’un particulier ou d’un établissement.
+          Oui, chercher et consulter les profils est 100% gratuit. Aucun compte
+          nécessaire pour trouver des repas près de toi.
         </p>
       </div>
       <div className="second">
@@ -44,12 +44,11 @@ const Faq = () => {
           onClick={() => toggleFAQ(2)}
           className={activeIndex === 2 ? "active" : ""}
         >
-          Q3 : Un investissement pour publier un profil ?
+          Q3 : Je cuisine chez moi, puis-je m'inscrire ?
         </h4>
         <p className={activeIndex === 2 ? "show" : ""}>
-          {" "}
-          Oui, la création et la gestion d’un profil sont soumises à un
-          abonnement annuel payant. La consultation reste gratuite.{" "}
+          Absolument. Particulier ou professionnel, tu peux créer un profil et
+          être visible auprès de toute la communauté en France.
         </p>
       </div>
       <div className="second">
@@ -73,8 +72,7 @@ const Faq = () => {
         </h4>
         <p className={activeIndex === 4 ? "show" : ""}>
           Oui, vous pouvez supprimer votre profil et résilier votre abonnement à
-          tout moment. Les abonnements ne sont pas remboursables. Abonnement non
-          renouvelé automatiquement.
+          tout moment. Pas de renouvellement automatique de l'abonnement.
         </p>
       </div>
     </StyledFaq>
@@ -97,7 +95,7 @@ const StyledFaq = styled.section`
     margin-top: 10px;
     h4 {
       font-size: 1.3em;
-      color: ${COLORS.main};
+      color: ${COLORS.grey};
       cursor: pointer;
       transition: 1s;
     }

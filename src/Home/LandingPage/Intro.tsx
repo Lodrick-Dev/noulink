@@ -1,27 +1,40 @@
 import { Slide } from "react-awesome-reveal";
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
-import { useLocation } from "react-router-dom";
 import ListCountry from "./ListCountry";
+import { useNavigate } from "react-router-dom";
 
 const Intro = () => {
-  const pageActu = useLocation();
+  const nav = useNavigate();
   return (
     <StyledIntro>
       <Slide direction="down" triggerOnce>
-        <h1>Nou Link</h1>
+        <div className="hero-eyebrow">
+          <div className="eyebrow-pill">
+            🌴 Diaspora Antilles · Guyane · DOM-TOM
+          </div>
+        </div>
       </Slide>
-      {/* <p>Trouvez les spécialités culinaires de vos péyi, où que vous soyez.</p> */}
-
-      <p>
-        {pageActu.pathname === "/auth"
-          ? "Partagez vos spécialités"
-          : "Pou zot trouvé zot favorite food"}
+      <Slide direction="down" triggerOnce>
+        <h1>
+          Nou <span>Link</span>{" "}
+        </h1>
+      </Slide>
+      <p className="hero-tagline">
+        Tu vis dans ta ville et tu cherches{" "}
+        <strong>un plat de chez toi&nbsp;?</strong>
+        <br />
+        Retrouve ceux qui cuisinent près de toi.
       </p>
-      {/* <h2 className="last-p">Pou zot trouvé zot favorite food.</h2> */}
       <Slide direction="down" triggerOnce className="slid-up">
-        <ListCountry/>
+        <ListCountry />
       </Slide>
+
+      <div className="hero-cta">
+        <button className="btn-primary" onClick={() => nav("/home")}>
+          🍽️ Trouver des repas près de moi
+        </button>
+      </div>
     </StyledIntro>
   );
 };
@@ -33,10 +46,44 @@ const StyledIntro = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  /* padding-bottom: 50px; */
+  width: 100%;
+  height: 100%;
+  color: ${COLORS.white};
+  backdrop-filter: blur(1px);
+  .eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(244, 211, 94, 0.12); //rgb(244 211 94 / 53%)
+    border: 1px solid rgba(244, 211, 94, 0.3);
+    border-radius: 9999px;
+    padding: 7px 18px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: ${COLORS.yellow}; //#a5d8ff
+    margin-bottom: 28px;
+  }
   h1 {
     color: ${COLORS.yellow};
     font-size: 6em;
     margin-bottom: 0px;
+    span {
+      color: ${COLORS.white};
+    }
+  }
+  .hero-tagline {
+    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    color: rgba(253, 253, 253, 0.72);
+    min-width: 100%;
+    margin: 20px auto;
+    line-height: 1.65;
+  }
+  .hero-tagline strong {
+    color: ${COLORS.white};
+    font-weight: 600;
   }
   p {
     text-align: center;
@@ -51,8 +98,45 @@ const StyledIntro = styled.div`
   .last-p {
     margin-bottom: 5px;
   }
-  .slid-up{
-  width: 50%;}
+  .slid-up {
+    width: 50%;
+  }
+  .hero-cta {
+    margin-top: 40px;
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: ${COLORS.yellow};
+      color: ${COLORS.main};
+      font-family: "DM Sans", sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 16px 42px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      animation: pulseShadow 2.8s 1.8s infinite;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 36px rgba(244, 211, 94, 0.45);
+      animation: none;
+    }
+    @keyframes pulseShadow {
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(244, 211, 94, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 0 16px rgba(244, 211, 94, 0);
+      }
+    }
+  }
   @media (max-width: 450px) {
     padding: 5px;
     h1 {
@@ -64,7 +148,8 @@ const StyledIntro = styled.div`
       padding: 0px 5px;
       font-size: 1.6em;
     }
-    .slid-up{
-  width: 100%;}
+    .slid-up {
+      width: 100%;
+    }
   }
 `;

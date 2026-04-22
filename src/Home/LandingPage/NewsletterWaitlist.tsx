@@ -5,12 +5,12 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
+  import.meta.env.VITE_SUPABASE_ANON_KEY,
 );
 
 const Section = styled.section`
   width: 100%;
-  background-color: ${COLORS.main};
+  background-color: ${COLORS.second};
   color: ${COLORS.white};
   text-align: center;
   padding: 5rem 1.5rem;
@@ -139,10 +139,9 @@ const NewsletterWaitlist = () => {
   return (
     <Section>
       {/* <Title>Reste informé du lancement 🚀</Title> */}
-      <Title>Reste informé des événements 🚀</Title>
+      <Title>Reste dans la boucle 📬</Title>
       <Subtitle>
-        Inscris-toi pour recevoir une alerte dès qu’un nouvel événement arrive
-        sur Nou Link !
+        Nouveaux vendeurs dans ta ville, actu Nou Link — on te tient au courant.
       </Subtitle>
       {/* <Subtitle>
         Laisse ton e-mail pour être averti dès que la plateforme sera en ligne !

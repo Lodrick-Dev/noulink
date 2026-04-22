@@ -6,10 +6,16 @@ export const saveurs = [
   { name: "Guadeloupe", flag: "https://flagcdn.com/w80/gp.png" },
   { name: "Martinique", flag: "https://flagcdn.com/w80/mq.png" },
   { name: "Mayotte", flag: "https://flagcdn.com/w80/yt.png" },
-  { name: "Madagascar", flag: "https://flagcdn.com/w80/mg.png" },
+  // { name: "Madagascar", flag: "https://flagcdn.com/w80/mg.png" },
 ];
 
-const SaveurSelector = ({ saveur, setSaveur }:{ saveur: string; setSaveur: React.Dispatch<React.SetStateAction<string>> }) => {
+const SaveurSelector = ({
+  saveur,
+  setSaveur,
+}: {
+  saveur: string;
+  setSaveur: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   return (
     <ListeCountry>
       <p>Saveurs :</p>
@@ -35,12 +41,15 @@ export default SaveurSelector;
 const ListeCountry = styled.div`
   width: 50%;
   /* background: linear-gradient(135deg, ${COLORS.main}, ${COLORS.second}); */
+  background: rgba(70, 224, 255, 0.12); //rgb(244 211 94 / 53%)
+  border: 1px solid rgba(4, 97, 125, 0.575);
+  backdrop-filter: blur(3px);
   border-radius: 18px;
-   background: ${COLORS.main};
+  /* background: ${COLORS.main}; */
   padding: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
   p {
     color: ${COLORS.white};
@@ -90,8 +99,9 @@ const ListeCountry = styled.div`
 
   .actif img {
     border-color: ${COLORS.yellow};
-    box-shadow: 0 0 0 3px rgba(244, 211, 94, 0.6),
-                0 7px 10px rgba(244, 211, 94, 0.5);
+    box-shadow:
+      0 0 0 3px rgba(244, 211, 94, 0.6),
+      0 7px 10px rgba(244, 211, 94, 0.5);
     transform: scale(1.05);
   }
 

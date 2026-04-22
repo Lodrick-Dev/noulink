@@ -14,6 +14,22 @@ const Card = styled.div`
   color: ${COLORS.black};
   padding: 24px;
   text-align: center;
+  .offre-badge {
+    display: inline-block;
+    background: ${COLORS.yellow};
+    color: ${COLORS.main};
+    font-weight: 800;
+    font-size: 0.76rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    border-radius: 9999px;
+    margin-bottom: 24px;
+  }
+  em {
+    font-size: 10px;
+    opacity: 0.8;
+  }
 `;
 
 const Header = styled.div`
@@ -104,6 +120,7 @@ export default function AbonnementCard() {
   const loc = useLocation();
   return (
     <Card>
+      <div className="offre-badge">🔥 Offre lancement</div>
       <Header>
         <Title>Pack Découverte</Title>
         <Subtitle>Pour les vendeurs(particuliers et pros)</Subtitle>
@@ -141,6 +158,7 @@ export default function AbonnementCard() {
           Je découvre
         </SubscribeButton>
       )}
+      <em>✅ Paiement sécurisé · Pas de renouvellement automatique</em>
     </Card>
   );
 }

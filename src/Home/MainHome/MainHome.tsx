@@ -37,6 +37,7 @@ const StyledMainHome = styled.main`
   align-items: center;
   background: ${COLORS.second};
   flex-direction: column;
+  background: url("/assets/img3.png") center/cover no-repeat;
   h1 {
     color: ${COLORS.white};
     font-size: 3.7em;
@@ -47,18 +48,24 @@ const StyledMainHome = styled.main`
     width: 100%;
     margin-top: 20px;
     .localisation {
-      display: block;
       text-decoration: underline;
       display: flex;
       align-items: center;
       cursor: pointer;
     }
-    span {
+    > span {
+      width: fit-content;
+      background: rgba(70, 224, 255, 0.12); //rgb(244 211 94 / 53%)
+      border: 1px solid rgba(4, 97, 125, 0.575);
+      backdrop-filter: blur(3px);
       font-size: 0.8em;
       display: flex;
+      border-radius: 18px;
       align-items: center;
       margin: 5px;
       display: flex;
+      color: ${COLORS.white};
+      padding: 5px 10px;
     }
   }
   @media screen and (max-width: 450px) {
