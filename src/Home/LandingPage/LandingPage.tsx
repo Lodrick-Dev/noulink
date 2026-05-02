@@ -87,6 +87,7 @@ const StyledLandingPage = styled.section`
   @media (max-width: 450px) {
     .hero {
       height: 90svh;
+      background: url("/assets/img4.png");
     }
     .story-landing {
       height: auto;
