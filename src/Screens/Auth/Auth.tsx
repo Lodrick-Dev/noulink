@@ -18,7 +18,7 @@ const Auth = () => {
       <span className="what-action" onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? "S'inscrire" : "Se connecter"}
       </span>
-      <Slide direction="right" triggerOnce>
+      <Slide direction="up" triggerOnce>
         <NewsletterWaitlist />
       </Slide>
     </StyledAuth>

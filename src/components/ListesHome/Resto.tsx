@@ -31,6 +31,7 @@ const Resto = ({
   return (
     <StyledResto>
       <Slide direction="left" className="div-anim" triggerOnce>
+        <em>Dites que vous venez de Nou Link</em>
         <div className="cards-profil">
           <img src={profil ? profil : "/assets/logo.png"} alt="img-profil" />
           <div className="infos-compte">
@@ -71,7 +72,6 @@ const Resto = ({
 export default Resto;
 const StyledResto = styled.div`
   display: flex;
-  /* flex-wrap: wrap; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -81,6 +81,22 @@ const StyledResto = styled.div`
   background: ${COLORS.main};
   padding: 30px;
   border-radius: 20px;
+  overflow: hidden;
+  em {
+    color: ${COLORS.yellow};
+    display: inline-block;
+    white-space: nowrap;
+    animation: defilement 20s linear infinite;
+  }
+  @keyframes defilement {
+    0% {
+      transform: translateX(300%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
   .div-anim {
     display: flex;
     /* flex-wrap: wrap; */
@@ -165,7 +181,8 @@ const StyledResto = styled.div`
     top: 0px;
     color: ${COLORS.red};
     filter: drop-shadow(2px 2px 3px rgba(244, 79, 79, 0.8));
-    animation: rotateInfinitely 5s linear infinite,
+    animation:
+      rotateInfinitely 5s linear infinite,
       pulseGlow 1.5s ease-in-out infinite;
   }
   @keyframes rotateInfinitely {

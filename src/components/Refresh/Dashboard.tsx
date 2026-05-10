@@ -140,7 +140,7 @@ const Dashboard = ({
           {
             params: { userId: userAuth?.id },
             withCredentials: true,
-          }
+          },
         );
 
         if (res.data.paid) {
@@ -347,8 +347,80 @@ const StyledDashboard = styled.section`
         padding: 3px;
         cursor: pointer;
         color: ${COLORS.green};
-        border-bottom: solid 1px ${COLORS.green};
+        /* border-bottom: solid 1px ${COLORS.green}; */
         margin-right: 50px;
+        display: inline-block;
+        transform-origin: top center;
+        animation: bellShake 2s ease-in-out infinite;
+        /* box-shadow: 0 0 5px ${COLORS.green};
+        transition: 0.3s ease; */
+        /* filter: drop-shadow(0 0 5px ${COLORS.green}); */
+      }
+      .i-pay::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 100%;
+        height: 1px;
+        background: ${COLORS.green};
+
+        box-shadow:
+          0 0 5px ${COLORS.green},
+          0 0 10px ${COLORS.green},
+          0 0 15px ${COLORS.green};
+
+        animation: glowBorder 1.5s ease-in-out infinite alternate;
+      }
+
+      /* effet secousse cloche */
+      @keyframes bellShake {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        10% {
+          transform: rotate(15deg);
+        }
+
+        20% {
+          transform: rotate(-12deg);
+        }
+
+        30% {
+          transform: rotate(10deg);
+        }
+
+        40% {
+          transform: rotate(-8deg);
+        }
+
+        50% {
+          transform: rotate(5deg);
+        }
+
+        60%,
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+
+      /* effet glow */
+      @keyframes glowBorder {
+        from {
+          opacity: 0.5;
+          box-shadow:
+            0 0 5px ${COLORS.green},
+            0 0 10px ${COLORS.green};
+        }
+
+        to {
+          opacity: 1;
+          box-shadow:
+            0 0 10px ${COLORS.green},
+            0 0 20px ${COLORS.green},
+            0 0 30px ${COLORS.green};
+        }
       }
       .visible-public {
         padding: 3px;
