@@ -14,6 +14,11 @@ const LandingPage = () => {
       <section className="hero">
         <Intro />
       </section>
+      <div className="compo-letters">
+        <Slide direction="up" triggerOnce>
+          <NewsletterWaitlist />
+        </Slide>
+      </div>
       <Slide direction="up" triggerOnce>
         <div className="story-landing">
           <Story />
