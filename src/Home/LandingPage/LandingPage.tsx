@@ -51,7 +51,10 @@ const StyledLandingPage = styled.section`
     max-width: 100%;
     margin: 0 auto;
     height: 100svh;
-    background: url("/assets/img4.png") center/cover no-repeat;
+    background: url("/assets/imgbg11.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .story-landing {
     height: 100svh;
@@ -87,7 +90,10 @@ const StyledLandingPage = styled.section`
   @media (max-width: 450px) {
     .hero {
       height: 90svh;
-      background: url("/assets/img4.png");
+      background: url("/assets/imgbg11.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
     .story-landing {
       height: auto;
