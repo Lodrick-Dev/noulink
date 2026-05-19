@@ -131,8 +131,7 @@ export default function AbonnementCard() {
         25,00 €<PerYear>pour 1 an</PerYear>
       </Price>
       <PromoInfo>
-        Offre qui tue Nou Link
-        {/* valable jusqu’à fin janvier  */}
+        Offre qui tue Nou Link - valable jusqu’au 25/05/2026
       </PromoInfo>
       <Features>
         <FeatureItem>
