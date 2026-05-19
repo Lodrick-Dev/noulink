@@ -7,6 +7,7 @@ import Intro from "./Intro";
 import HowItWorks from "./HowItWorks";
 import NewsletterWaitlist from "./NewsletterWaitlist";
 import Story from "./Story";
+import Feedback from "./Feedback";
 
 const LandingPage = () => {
   return (
@@ -19,6 +20,11 @@ const LandingPage = () => {
           <NewsletterWaitlist />
         </Slide>
       </div>
+      <Slide direction="up" triggerOnce>
+        <div className="feed-landing">
+          <Feedback />
+        </div>
+      </Slide>
       <Slide direction="up" triggerOnce>
         <div className="story-landing">
           <Story />
@@ -56,10 +62,19 @@ const StyledLandingPage = styled.section`
     max-width: 100%;
     margin: 0 auto;
     height: 100svh;
-    background: url("/assets/imgbg11.png");
+    /* background: url("/assets/imgbg11.png"); */
+    background: url("/assets/imgland.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+  .feed-landing {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url("/assets/imgbg11.png") center/cover no-repeat;
   }
   .story-landing {
     height: 100svh;
@@ -95,7 +110,8 @@ const StyledLandingPage = styled.section`
   @media (max-width: 450px) {
     .hero {
       height: 90svh;
-      background: url("/assets/imgbg11.png");
+      background: url("/assets/imgland.png");
+      /* background: url("/assets/imgbg11.png"); */
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
