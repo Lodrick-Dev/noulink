@@ -100,12 +100,14 @@ const Story = () => {
   const PLATS = [
     "🥩 Colombo",
     "🥐 Bokit",
+    "🍚 Cook-up",
     "🍲 Blaff",
     "🍛 Bami",
     "🌿 Accras",
     "🍌 Banane Pesé",
     "🥘 Boudin",
     "🍚 Nasi",
+    "🍛 Chowmein",
   ];
   return (
     <StorySection>
