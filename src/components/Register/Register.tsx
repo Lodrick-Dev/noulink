@@ -71,12 +71,18 @@ const Register = () => {
         Nou Link.
       </span>
       <form onSubmit={(e) => handleSubscribe(e)}>
-        <input
-          type="email"
-          placeholder="Email*"
-          value={email ? email : ""}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <div className="email-info-conf">
+          <input
+            type="email"
+            placeholder="Email*"
+            value={email ? email : ""}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <em>
+            Utilisez une adresse email valide. Vous recevrez un email de
+            confirmation.
+          </em>
+        </div>
         <input
           type="password"
           placeholder="Mot de passe*"
@@ -147,8 +153,22 @@ const StyledRegister = styled.div`
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 80%;
     margin: 0px auto;
+    .email-info-conf {
+      width: 55%;
+      margin-bottom: 10px;
+      > input {
+        width: 100%;
+        margin-bottom: 0px;
+      }
+      > em {
+        font-size: 0.8em;
+        text-align: center;
+        color: ${COLORS.yellow};
+      }
+    }
     input {
       width: 55%;
       margin: 10px auto;
@@ -203,6 +223,10 @@ const StyledRegister = styled.div`
     width: 100%;
     form {
       width: 100%;
+      .email-info-conf {
+        width: 100%;
+        margin-bottom: 10px;
+      }
       input {
         width: 100%;
       }
