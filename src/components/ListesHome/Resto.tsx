@@ -267,6 +267,7 @@ const StyledResto = styled.div`
         padding: 30px 0px;
         flex-wrap: nowrap;
         flex-direction: row;
+        justify-content: flex-start;
         overflow: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
