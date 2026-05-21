@@ -6,6 +6,10 @@ import { capitalizeFirstLetter } from "../utils/fonctions";
 import COLORS from "../../Styles/Styles";
 import { OctagonX } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { MdPhoneIphone } from "react-icons/md";
+import { RiWhatsappLine } from "react-icons/ri";
+import { GrInstagram } from "react-icons/gr";
+import { PiSnapchatLogoBold } from "react-icons/pi";
 export type TypeDocPropsResto = {
   pseudo?: string;
   ville?: string;
@@ -43,20 +47,12 @@ const Resto = ({
             <div className="info-description">
               <p>Info : {description}</p>
             </div>
-            {/* <div className="info-wrapper">
-              <p className={`info-text ${expanded ? "open" : ""}`}>
-                Info : {description}
-              </p>
-
-              {description && description?.length > 300 && (
-                <button
-                  onClick={() => setExpanded(!expanded)}
-                  className="toggle-btn"
-                >
-                  {expanded ? "Voir moins" : "Voir plus"}
-                </button>
-              )}
-            </div> */}
+            <div className="contact">
+              <MdPhoneIphone className="i-contact" />
+              <RiWhatsappLine className="i-contact" />
+              <GrInstagram className="i-contact" />
+              <PiSnapchatLogoBold className="i-contact" />
+            </div>
             <div className="specialities">
               <span className="title">
                 Spécialité{speciality && speciality.length > 1 ? "s" : ""} (
@@ -168,6 +164,38 @@ const StyledResto = styled.div`
           box-shadow:
             inset 20px 20px 60px #1a3658,
             inset -20px -20px 60px #244a78;
+          margin-bottom: 15px;
+        }
+        .contact {
+          display: flex;
+          margin: 0px auto;
+          border-bottom: solid 1px ${COLORS.grey};
+          .i-contact {
+            font-size: 2em;
+            margin: 0px 10px;
+            cursor: pointer;
+            transition: 0.5s;
+          }
+          .i-contact:hover {
+            transition: 0.5s;
+            transform: scale(1.2);
+          }
+          .i-contact:active {
+            transition: 0.5s;
+            transform: scale(1.2);
+          }
+          .i-contact:nth-child(1) {
+            color: ${COLORS.white};
+          }
+          .i-contact:nth-child(2) {
+            color: ${COLORS.green};
+          }
+          .i-contact:nth-child(3) {
+            color: #8c45cf;
+          }
+          .i-contact:nth-child(4) {
+            color: ${COLORS.yellow};
+          }
         }
         .specialities {
           display: flex;
