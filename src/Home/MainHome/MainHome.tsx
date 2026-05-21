@@ -16,7 +16,7 @@ const MainHome = ({ setSaveur, saveur }: TypePropsHome) => {
   };
   return (
     <StyledMainHome>
-      <h1>Link up to favorite food</h1>
+      {/* <h1>Link up to favorite food</h1> */}
       <SaveurSelector saveur={saveur} setSaveur={setSaveur} />
       {/* <BarreSearch /> */}
       <div className="position">

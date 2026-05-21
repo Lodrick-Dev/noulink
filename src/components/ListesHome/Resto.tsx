@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Slide } from "react-awesome-reveal";
 import styled from "styled-components";
 import type { TypeDocProps } from "./ListesHome";
@@ -26,6 +26,7 @@ const Resto = ({
   speciality,
   setGetOne,
 }: TypeDocPropsResto) => {
+  const [expanded, setExpanded] = useState(false);
   const actuPage = useLocation();
 
   return (
@@ -36,25 +37,47 @@ const Resto = ({
           <img src={profil ? profil : "/assets/logo.png"} alt="img-profil" />
           <div className="infos-compte">
             <strong>{pseudo}</strong>
-            <p className="lieu-text">Lieu : {capitalizeFirstLetter(ville)}</p>
+            <p className="lieu-text">📍 {capitalizeFirstLetter(ville)}</p>
             <p className="saveur-text">
               Saveur : {capitalizeFirstLetter(saveur)}
             </p>
-            <p>Info : {description}</p>
+            <div className="info-description">
+              <p>Info : {description}</p>
+            </div>
+            {/* <div className="info-wrapper">
+              <p className={`info-text ${expanded ? "open" : ""}`}>
+                Info : {description}
+              </p>
+
+              {description && description?.length > 300 && (
+                <button
+                  onClick={() => setExpanded(!expanded)}
+                  className="toggle-btn"
+                >
+                  {expanded ? "Voir moins" : "Voir plus"}
+                </button>
+              )}
+            </div> */}
             <div className="specialities">
-              <span className="title">Spécialité(s) : </span>
+              <span className="title">
+                Spécialité{speciality && speciality.length > 1 ? "s" : ""} (
+                {speciality?.length || 0}) :{" "}
+              </span>
               {speciality &&
                 speciality.length > 0 &&
                 speciality.map((spec, i) => (
                   <span key={i} className="el">
-                    {capitalizeFirstLetter(spec)}
+                    ⭐ {capitalizeFirstLetter(spec)}
                   </span>
                 ))}
             </div>
           </div>
         </div>
         <div className="galerie">
-          <span className="legend-galerie">Galerie</span>
+          <span className="legend-galerie">
+            Galerie{galerie && galerie.length > 1 ? "s" : ""} (
+            {galerie?.length || 0})
+          </span>
           {galerie &&
             galerie.length > 0 &&
             galerie.map((img, i) => (
@@ -138,10 +161,34 @@ const StyledResto = styled.div`
           margin-top: 5px;
           color: white;
         }
+        .info-description {
+          max-height: 300px;
+          /* min-height: 300px; */
+          overflow: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 10px;
+          border-radius: 10px;
+          background: #1f4068;
+          box-shadow:
+            inset 20px 20px 60px #1a3658,
+            inset -20px -20px 60px #244a78;
+        }
         .specialities {
           display: flex;
-          flex-wrap: wrap;
+          flex-direction: column;
           margin-top: 15px;
+          max-height: 300px;
+          min-height: 300px;
+          overflow: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          border-radius: 10px;
+          padding: 10px;
+          background: #1f4068;
+          box-shadow:
+            inset 20px 20px 60px #1a3658,
+            inset -20px -20px 60px #244a78;
           .title {
             display: block;
             width: 100%;
@@ -230,9 +277,22 @@ const StyledResto = styled.div`
       .galerie {
         margin-top: 30px;
         padding: 30px 0px;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        position: relative;
+        > span {
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+        }
         img {
           margin: 10px;
-          min-width: 70%;
+          min-width: 80%;
         }
       }
     }
