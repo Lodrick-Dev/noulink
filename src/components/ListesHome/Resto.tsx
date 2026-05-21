@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Slide } from "react-awesome-reveal";
 import styled from "styled-components";
 import type { TypeDocProps } from "./ListesHome";
@@ -26,7 +26,6 @@ const Resto = ({
   speciality,
   setGetOne,
 }: TypeDocPropsResto) => {
-  const [expanded, setExpanded] = useState(false);
   const actuPage = useLocation();
 
   return (
