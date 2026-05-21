@@ -73,10 +73,6 @@ const Resto = ({
           </div>
         </div>
         <div className="galerie">
-          <span className="legend-galerie">
-            Galerie{galerie && galerie.length > 1 ? "s" : ""} (
-            {galerie?.length || 0})
-          </span>
           {galerie &&
             galerie.length > 0 &&
             galerie.map((img, i) => (
@@ -207,12 +203,6 @@ const StyledResto = styled.div`
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      .legend-galerie {
-        display: block;
-        color: white;
-        width: 100%;
-        text-align: center;
-      }
       img {
         margin: 10px;
         width: 30%;
@@ -274,21 +264,12 @@ const StyledResto = styled.div`
         }
       }
       .galerie {
-        margin-top: 30px;
         padding: 30px 0px;
         flex-wrap: nowrap;
         flex-direction: row;
         overflow: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
-        position: relative;
-        > span {
-          position: fixed;
-          top: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          text-align: center;
-        }
         img {
           margin: 10px;
           min-width: 80%;
