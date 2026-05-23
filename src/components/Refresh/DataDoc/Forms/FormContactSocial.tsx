@@ -431,6 +431,7 @@ const StyledFormContactSocial = styled.div`
     .tel-n-what {
       > .icon {
         input {
+          width: 200px;
           font-size: 1em;
         }
       }
@@ -438,9 +439,14 @@ const StyledFormContactSocial = styled.div`
     .insta,
     .snap {
       margin-bottom: 20px;
-      > .icon {
+      width: 100%;
+
+      .box-snap,
+      .box-insta {
+        width: 100%;
+        padding: 0px 10px;
         input {
-          font-size: 1em;
+          width: 70%;
         }
       }
     }
