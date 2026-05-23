@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { getExpirationMessage } from "../utils/fonctions";
 import { useNavigate } from "react-router-dom";
+import { FormContactSocial } from "./DataDoc/Forms/FormContactSocial";
 // import Loading from "../utils/Loading";
 export type TypeDocDashboard = {
   _id: string;
@@ -36,6 +37,9 @@ export type TypeDocDashboard = {
   description?: string;
   speciality?: string[];
   premiumExpiresAt?: string;
+  whatsapp?: string;
+  instagram?: string;
+  snapchat?: string;
 };
 export type TypeGalerie = string;
 export type TypeSpecility = string;
@@ -255,9 +259,17 @@ const Dashboard = ({
           setCallA={setCallA}
           setRestaurant={setRestaurant}
         />
+        <FormContactSocial
+          id={id}
+          whatsapp={restaurant?.whatsapp}
+          instagram={restaurant?.instagram}
+          snapchat={restaurant?.snapchat}
+          setRestaurant={setRestaurant}
+        />
       </div>
       {id && restaurant?._id && (
         <div className="box-preview" ref={previewRef}>
+          <p>Apperçu</p>
           <Resto
             pseudo={restaurant?.pseudo}
             ville={restaurant?.ville}
@@ -266,6 +278,9 @@ const Dashboard = ({
             galerie={restaurant?.galerie}
             description={restaurant?.description}
             speciality={restaurant?.speciality}
+            whatsapp={restaurant?.whatsapp}
+            instagram={restaurant?.instagram}
+            snapchat={restaurant?.snapchat}
             setGetOne={setRestaurant}
           />
         </div>

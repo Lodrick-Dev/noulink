@@ -18,6 +18,9 @@ export type TypeDocPropsResto = {
   galerie?: string[];
   description?: string;
   speciality?: string[];
+  whatsapp?: string;
+  instagram?: string;
+  snapchat?: string;
   setGetOne: React.Dispatch<React.SetStateAction<TypeDocProps | null>>;
 };
 const Resto = ({
@@ -28,10 +31,61 @@ const Resto = ({
   galerie,
   description,
   speciality,
+  whatsapp,
+  instagram,
+  snapchat,
   setGetOne,
 }: TypeDocPropsResto) => {
   const actuPage = useLocation();
 
+  const handleTel = (v: string) => {
+    if (!v) {
+      alert("Numéro de téléphone non disponible");
+      return;
+    }
+    const phone = v.replace(/\s/g, "");
+    window.location.href = `tel:${phone}`;
+  };
+  const handleWhatsapp = (v: string) => {
+    if (!v) {
+      alert("Numéro de WhatsApp non disponible");
+      return;
+    }
+
+    const phone = v.replace(/[^\d+]/g, "");
+
+    const formattedPhone = phone.replace("+", "");
+
+    const encodedMessage = encodeURIComponent(
+      "Bonjour ! Je vous contacte depuis Nou Link. J'aimerais en savoir plus sur vos plats et passer une commande. Merci !",
+    );
+
+    const url = `https://wa.me/${formattedPhone}?text=${encodedMessage}`;
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+  const handleInstagram = (v: string) => {
+    if (!v) {
+      alert("Compte Instagram non disponible");
+      return;
+    }
+    window.open(
+      `https://www.instagram.com/${v}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
+  const handleSnapchat = (v: string) => {
+    if (!v) {
+      alert("Compte Snapchat non disponible");
+      return;
+    }
+    window.open(
+      `https://www.snapchat.com/add/${v}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
   return (
     <StyledResto>
       <Slide direction="left" className="div-anim" triggerOnce>
@@ -46,10 +100,22 @@ const Resto = ({
               <p>Info : {description}</p>
             </div>
             <div className="contact">
-              <MdPhoneIphone className="i-contact" />
-              <RiWhatsappLine className="i-contact" />
-              <GrInstagram className="i-contact" />
-              <PiSnapchatLogoBold className="i-contact" />
+              <MdPhoneIphone
+                className="i-contact"
+                onClick={() => handleTel(whatsapp ? whatsapp : "")}
+              />
+              <RiWhatsappLine
+                className="i-contact"
+                onClick={() => handleWhatsapp(whatsapp ? whatsapp : "")}
+              />
+              <GrInstagram
+                className="i-contact"
+                onClick={() => handleInstagram(instagram ? instagram : "")}
+              />
+              <PiSnapchatLogoBold
+                className="i-contact"
+                onClick={() => handleSnapchat(snapchat ? snapchat : "")}
+              />
             </div>
             <div className="specialities">
               <span className="title">
@@ -211,7 +277,7 @@ const StyledResto = styled.div`
             color: ${COLORS.green};
           }
           .i-contact:nth-child(3) {
-            color: #8c45cf;
+            color: ${COLORS.purple};
           }
           .i-contact:nth-child(4) {
             color: ${COLORS.yellow};

@@ -20,6 +20,9 @@ export type TypeDocProps = {
   galerie?: string[];
   description?: string;
   speciality?: string[];
+  whatsapp?: string;
+  instagram?: string;
+  snapchat?: string;
 };
 const ListesHome = ({ saveur }: { saveur: string }) => {
   const [restaurants, setRestaurant] = useState<TypeDocProps[] | null>(null);
@@ -109,6 +112,9 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
                 galerie={getOne.galerie}
                 description={getOne.description}
                 speciality={getOne.speciality}
+                whatsapp={getOne.whatsapp}
+                instagram={getOne.instagram}
+                snapchat={getOne.snapchat}
                 setGetOne={setGetOne}
               />
             )}
