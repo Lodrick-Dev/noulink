@@ -28,7 +28,7 @@ function GeolocationPrompt() {
         setError("Impossible d'accéder à votre position.");
         console.error(err);
         setAskPermission(false);
-      }
+      },
     );
   };
   const fetchCity = async (latitude: number, longitude: number) => {
@@ -36,7 +36,7 @@ function GeolocationPrompt() {
       const res = await fetch(
         `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${
           import.meta.env.VITE_OPENCAGE_KEY
-        }&language=fr`
+        }&language=fr`,
       );
       const data = await res.json();
       const city =
@@ -70,7 +70,7 @@ function GeolocationPrompt() {
             borderRadius: "8px",
           }}
         >
-          <p>👋 Votre position nous aidera a mieux vous servir</p>
+          {/* <p>👋 Votre position nous aidera a mieux vous servir</p> */}
           <button onClick={handleGeolocation}>
             Autoriser la géolocalisation de ma ville
           </button>
@@ -87,5 +87,12 @@ export default GeolocationPrompt;
 const StyledGeolocationPrompt = styled.div`
   button {
     cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8em;
+    transition: background-color 0.3s ease;
   }
 `;
