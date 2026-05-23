@@ -15,21 +15,26 @@ const LandingPage = () => {
       <section className="hero">
         <Intro />
       </section>
-      <div className="compo-letters">
+      {/* <div className="compo-letters">
         <Slide direction="up" triggerOnce>
           <NewsletterWaitlist />
         </Slide>
-      </div>
+      </div> */}
       <Slide direction="up" triggerOnce>
         <div className="feed-landing">
           <Feedback />
         </div>
       </Slide>
-      <Slide direction="up" triggerOnce>
-        <div className="story-landing">
+      <div className="story-landing">
+        <Slide direction="up" triggerOnce>
           <Story />
-        </div>
-      </Slide>
+        </Slide>
+      </div>
+      <div className="compo-letters">
+        <Slide direction="up" triggerOnce>
+          <NewsletterWaitlist />
+        </Slide>
+      </div>
       <Slide direction="up" triggerOnce>
         <HowItWorks />
       </Slide>
@@ -38,12 +43,9 @@ const LandingPage = () => {
           <AbonnementCard />
         </Slide>
       </div>
-      <Slide direction="up" triggerOnce>
-        <Faq />
-      </Slide>
-      <div className="compo-letters">
+      <div className="faq">
         <Slide direction="up" triggerOnce>
-          <NewsletterWaitlist />
+          <Faq />
         </Slide>
       </div>
     </StyledLandingPage>
@@ -57,24 +59,23 @@ const StyledLandingPage = styled.section`
   position: relative;
   background: ${COLORS.main};
   .hero {
-    /* padding: 50px 0px; */
     text-align: center;
     max-width: 100%;
     margin: 0 auto;
     height: 100svh;
-    /* background: url("/assets/imgbg11.png"); */
     background: url("/assets/imgland.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
   .feed-landing {
+    width: 100%;
     height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("/assets/imgbg11.png") center/cover no-repeat;
+    /* background: url("/assets/imgbg11.png") center/cover no-repeat; */
   }
   .story-landing {
     height: 100svh;
@@ -105,6 +106,10 @@ const StyledLandingPage = styled.section`
   } */
   .car-ab {
     background: ${COLORS.second};
+    padding: 50px 20px;
+  }
+  .faq {
+    height: auto;
     padding: 50px 20px;
   }
   @media (max-width: 450px) {

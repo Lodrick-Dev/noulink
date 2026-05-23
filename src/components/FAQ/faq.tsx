@@ -84,6 +84,7 @@ const StyledFaq = styled.section`
   width: 90%;
   padding: 10px;
   border-top: 1px solid white;
+  border-bottom: 1px solid white;
   border-radius: 3px;
   margin: 30px auto;
   .first {

@@ -37,7 +37,7 @@ const Footer = () => {
 };
 
 export default Footer;
-const StyledFooter = styled.div`
+const StyledFooter = styled.footer`
   background: ${COLORS.main};
   display: flex;
   flex-direction: column;

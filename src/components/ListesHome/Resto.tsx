@@ -41,9 +41,7 @@ const Resto = ({
           <div className="infos-compte">
             <strong>{pseudo}</strong>
             <p className="lieu-text">📍 {capitalizeFirstLetter(ville)}</p>
-            <p className="saveur-text">
-              Saveur : {capitalizeFirstLetter(saveur)}
-            </p>
+            <p className="saveur-text">🌍 {capitalizeFirstLetter(saveur)}</p>
             <div className="info-description">
               <p>Info : {description}</p>
             </div>
@@ -116,7 +114,7 @@ const StyledResto = styled.div`
     /* flex-wrap: wrap; */
     width: 100%;
     .cards-profil {
-      border: solid 1px ${COLORS.grey};
+      /* border: solid 1px ${COLORS.grey}; */
       max-width: 100%;
       position: relative;
       padding: 15px;
@@ -170,17 +168,39 @@ const StyledResto = styled.div`
           display: flex;
           margin: 0px auto;
           border-bottom: solid 1px ${COLORS.grey};
+          background: #1f4068;
+          padding: 10px;
+          border-radius: 10px;
+          box-shadow:
+            20px 20px 60px #1a3658,
+            -20px -20px 60px #244a78;
           .i-contact {
-            font-size: 2em;
+            font-size: 2.8em;
             margin: 0px 10px;
             cursor: pointer;
             transition: 0.5s;
+            border-radius: 5px;
+            /* border: solid 1px white; */
+            padding: 5px;
+            background: #1f4068;
+            box-shadow:
+              20px 20px 60px #1a3658,
+              -20px -20px 60px #244a78;
           }
           .i-contact:hover {
+            background: linear-gradient(145deg, #1c3a5e, #21446f);
+            box-shadow:
+              20px 20px 60px #1a3658,
+              -20px -20px 60px #244a78;
             transition: 0.5s;
             transform: scale(1.2);
           }
           .i-contact:active {
+            background: linear-gradient(145deg, #1c3a5e, #21446f);
+            box-shadow:
+              20px 20px 60px #1a3658,
+              -20px -20px 60px #244a78;
+            transition: 0.5s;
             transition: 0.5s;
             transform: scale(1.2);
           }
@@ -289,6 +309,12 @@ const StyledResto = styled.div`
         }
         .infos-compte {
           margin: 0px;
+          .contact {
+            .i-contact {
+              border-radius: 10px;
+              font-size: 3.4em;
+            }
+          }
         }
       }
       .galerie {
