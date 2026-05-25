@@ -229,6 +229,7 @@ const StyledResto = styled.div`
             inset 20px 20px 60px #1a3658,
             inset -20px -20px 60px #244a78;
           margin-bottom: 15px;
+          border-bottom: solid 1px ${COLORS.grey};
         }
         .contact {
           display: flex;
@@ -295,6 +296,7 @@ const StyledResto = styled.div`
           border-radius: 10px;
           padding: 10px;
           background: #1f4068;
+          border-bottom: solid 1px ${COLORS.grey};
           box-shadow:
             inset 20px 20px 60px #1a3658,
             inset -20px -20px 60px #244a78;
@@ -378,7 +380,7 @@ const StyledResto = styled.div`
           .contact {
             .i-contact {
               border-radius: 10px;
-              font-size: 3.4em;
+              font-size: 2.8em;
             }
           }
         }

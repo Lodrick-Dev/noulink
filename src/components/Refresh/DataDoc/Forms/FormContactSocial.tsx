@@ -185,7 +185,7 @@ export const FormContactSocial = ({
           <GrInstagram className="i" />
           <input
             type="text"
-            placeholder="noulink"
+            placeholder="pseudo"
             value={instagramLocal}
             onChange={(e) => setInstagramLocal(e.target.value)}
           />
@@ -201,7 +201,7 @@ export const FormContactSocial = ({
           <PiSnapchatLogoBold className="i" />
           <input
             type="text"
-            placeholder="noulink"
+            placeholder="pseudo"
             value={snapchatLocal}
             onChange={(e) => setSnapchatLocal(e.target.value)}
           />
