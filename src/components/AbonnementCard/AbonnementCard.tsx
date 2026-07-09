@@ -100,20 +100,20 @@ const SubscribeButton = styled.button`
   }
 `;
 
-const OldPrice = styled.span`
+/* const OldPrice = styled.span`
   font-size: 18px;
   color: #888;
   text-decoration: line-through;
   margin-right: 10px;
-`;
+`; */
 
-const PromoInfo = styled.p`
+/* const PromoInfo = styled.p`
   font-size: 13px;
   color: ${COLORS.main};
   margin-top: -10px;
   margin-bottom: 20px;
   font-style: italic;
-`;
+`; */
 
 export default function AbonnementCard() {
   const nav = useNavigate();

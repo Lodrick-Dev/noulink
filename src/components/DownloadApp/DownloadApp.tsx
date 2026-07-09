@@ -114,7 +114,7 @@ const Description = styled.p`
   margin: 25px 0;
 `;
 
-const Features = styled.div`
+/* const Features = styled.div`
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
@@ -131,7 +131,7 @@ const Feature = styled.div`
   padding: 10px 18px;
   border-radius: 30px;
   font-size: 15px;
-`;
+`; */
 
 const Button = styled.a`
   display: inline-flex;
