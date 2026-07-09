@@ -127,16 +127,16 @@ export default function AbonnementCard() {
       </Header>
 
       <Price>
-        <OldPrice>160,00 €</OldPrice>
-        65,00 €<PerYear>pour 1 an</PerYear>
+        {/* <OldPrice>160,00 €</OldPrice> */}
+        160,00 €<PerYear>pour 1 an</PerYear>
       </Price>
-      <PromoInfo>
+      {/* <PromoInfo>
         Offre qui tue Nou Link - valable jusqu’au 30/06/2026
-      </PromoInfo>
+      </PromoInfo> */}
       <Features>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
-          <span>Profil public</span>
+          <span>Profil public(web & app mobile)</span>
         </FeatureItem>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />

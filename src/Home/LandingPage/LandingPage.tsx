@@ -8,6 +8,7 @@ import HowItWorks from "./HowItWorks";
 import NewsletterWaitlist from "./NewsletterWaitlist";
 import Story from "./Story";
 import Feedback from "./Feedback";
+import DownloadApp from "../../components/DownloadApp/DownloadApp";
 
 const LandingPage = () => {
   return (
@@ -15,6 +16,7 @@ const LandingPage = () => {
       <section className="hero">
         <Intro />
       </section>
+      <DownloadApp />
       {/* <div className="compo-letters">
         <Slide direction="up" triggerOnce>
           <NewsletterWaitlist />
