@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import { Slide } from "react-awesome-reveal";
 import COLORS from "../../Styles/Styles";
 import AbonnementCard from "./AbonnementCard";
 import { LockKeyhole, LockKeyholeOpen, ShieldCheck } from "lucide-react";
@@ -276,15 +275,4 @@ const StyledPopPay = styled.section`
       }
     }
   }
-`;
-
-const SlideUp = styled.div`
-  margin: 50px auto;
-  background: ${COLORS.main};
-  /* background: red; */
-  width: 70%;
-  border-radius: 20px;
-  padding: 10px;
-  animation: ${slideUp} 450ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, opacity;
 `;
