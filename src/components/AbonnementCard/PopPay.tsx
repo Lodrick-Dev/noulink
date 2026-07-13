@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Slide } from "react-awesome-reveal";
 import COLORS from "../../Styles/Styles";
 import AbonnementCard from "./AbonnementCard";
@@ -81,7 +81,7 @@ const PopPay = () => {
 
   return (
     <StyledPopPay onClick={() => setPopToPay(false)}>
-      <Slide direction="up" className="slide-color">
+      <div className="slideUp">
         <div className="all-el" onClick={(e) => e.stopPropagation()}>
           <AbonnementCard />
           <div className="consentement">
@@ -141,12 +141,23 @@ const PopPay = () => {
             </p>
           </div>
         </div>
-      </Slide>
+      </div>
     </StyledPopPay>
   );
 };
 
 export default PopPay;
+const slideUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(80px) scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+`;
 const StyledPopPay = styled.section`
   background: #5b5a5a88;
   height: 100svh;
@@ -156,13 +167,15 @@ const StyledPopPay = styled.section`
   top: 0px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  .slide-color {
+  .slideUp {
     margin: 50px auto;
     background: ${COLORS.main};
     /* background: red; */
     width: 70%;
     border-radius: 20px;
     padding: 10px;
+    animation: ${slideUp} 450ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
     .all-el {
       display: flex;
       flex-wrap: wrap;
@@ -249,7 +262,7 @@ const StyledPopPay = styled.section`
   @media screen and (max-width: 450px) {
     display: flex;
     justify-content: center;
-    .slide-color {
+    .slideUp {
       margin: 50px auto;
       background: ${COLORS.main};
       width: 95%;
@@ -263,4 +276,15 @@ const StyledPopPay = styled.section`
       }
     }
   }
+`;
+
+const SlideUp = styled.div`
+  margin: 50px auto;
+  background: ${COLORS.main};
+  /* background: red; */
+  width: 70%;
+  border-radius: 20px;
+  padding: 10px;
+  animation: ${slideUp} 450ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
 `;
