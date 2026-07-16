@@ -1,41 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 import styled, { keyframes } from "styled-components";
 
-type FeedbackItem = {
-  id: number;
-  image: string;
-  alt: string;
-};
-
-const feedbacks: FeedbackItem[] = [
-  {
-    id: 1,
-    image: "assets/feedbacks/feed01.jpeg",
-    alt: "Feedback Instagram 1",
-  },
-  {
-    id: 2,
-    image: "assets/feedbacks/feed02.jpeg",
-    alt: "Feedback Instagram 2",
-  },
-  {
-    id: 3,
-    image: "assets/feedbacks/feed03.jpeg",
-    alt: "Feedback Instagram 3",
-  },
-  {
-    id: 4,
-    image: "assets/feedbacks/feed04.jpeg",
-    alt: "Feedback Instagram 4",
-  },
-  {
-    id: 5,
-    image: "assets/feedbacks/feed05.jpeg",
-    alt: "Feedback Instagram 5",
-  },
-];
-
 const Feedback: React.FC = () => {
+  const [feedback, setFeedback] = useState<string[]>([]);
+  const [message, setMessage] = useState("");
+
+  const getAll = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API}feedback/all`,
+      );
+
+      if (res.data.message) {
+        setMessage(res.data.message);
+      }
+
+      if (res.data.galerie) {
+        setFeedback(res.data.galerie);
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message ??
+          "Impossible de récupérer les feedbacks.",
+      );
+    }
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
+
+  if (feedback.length === 0) {
+    return null;
+  }
+
   return (
     <Section>
       <Container>
@@ -49,15 +49,21 @@ const Feedback: React.FC = () => {
 
         <Grid>
           <Track>
-            {[...feedbacks, ...feedbacks].map((item, index) => (
-              <Card key={`${item.id}-${index}`}>
+            {[...feedback, ...feedback].map((image, index) => (
+              <Card key={`${image}-${index}`}>
                 <ImageWrapper>
-                  <Image src={item.image} alt={item.alt} />
+                  <Image
+                    src={image}
+                    alt={`Feedback Instagram ${index + 1}`}
+                    loading="lazy"
+                  />
                 </ImageWrapper>
               </Card>
             ))}
           </Track>
         </Grid>
+
+        {message && feedback.length === 0 && <NoFeedback>{message}</NoFeedback>}
       </Container>
     </Section>
   );
@@ -70,9 +76,6 @@ const Section = styled.section`
   padding: 100px 20px;
   background: #0f0f0f;
   color: white;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(1px);
 `;
 
 const Container = styled.div`
@@ -100,22 +103,24 @@ const Subtitle = styled.p`
 `;
 
 const scroll = keyframes`
-  0% {
-    transform: translateX(0);
+  0%{
+    transform:translateX(0);
   }
-  100% {
-    transform: translateX(-50%);
+
+  100%{
+    transform:translateX(-50%);
   }
 `;
+
 const Grid = styled.div`
   width: 100%;
   overflow: hidden;
   padding: 20px;
 `;
+
 const Track = styled.div`
   display: flex;
   gap: 20px;
-  width: max-content;
   width: max-content;
   animation: ${scroll} 30s linear infinite;
 
@@ -125,17 +130,18 @@ const Track = styled.div`
 `;
 
 const Card = styled.div`
-  /* background: pink; */
-  padding: 10px;
   flex: 0 0 auto;
-  margin: 0px;
   width: 320px;
+  padding: 10px;
+
   background: #18181b;
   border: 1px solid #27272a;
+  border-radius: 24px;
+
   transition:
     transform 0.35s ease,
     border-color 0.35s ease;
-  border-radius: 24px;
+
   &:hover {
     transform: translateY(-6px);
     border-color: #3f3f46;
@@ -143,11 +149,12 @@ const Card = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
+
   overflow: hidden;
   border-radius: 16px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,10 +163,18 @@ const ImageWrapper = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+
   transition: transform 0.5s ease;
 
   ${Card}:hover & {
     transform: scale(1.05);
   }
+`;
+
+const NoFeedback = styled.p`
+  margin-top: 20px;
+  text-align: center;
+  color: #a1a1aa;
 `;

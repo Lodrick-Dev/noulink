@@ -22,6 +22,7 @@ import {
 import { getExpirationMessage } from "../utils/fonctions";
 import { useNavigate } from "react-router-dom";
 import { FormContactSocial } from "./DataDoc/Forms/FormContactSocial";
+import { Admin } from "../Admin/Admin";
 // import Loading from "../utils/Loading";
 export type TypeDocDashboard = {
   _id: string;
@@ -266,6 +267,7 @@ const Dashboard = ({
           snapchat={restaurant?.snapchat}
           setRestaurant={setRestaurant}
         />
+        {userAuth?.email === import.meta.env.VITE_EMAIL && <Admin />}
       </div>
       {id && restaurant?._id && (
         <div className="box-preview" ref={previewRef}>
