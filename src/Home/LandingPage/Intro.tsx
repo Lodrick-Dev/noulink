@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const Intro = () => {
   const nav = useNavigate();
   const path = window.location.pathname;
-  console.log("Intro path", path);
   return (
     <StyledIntro>
       <Slide direction="down" triggerOnce>

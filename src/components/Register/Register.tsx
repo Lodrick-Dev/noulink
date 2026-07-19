@@ -78,10 +78,10 @@ const Register = () => {
             value={email ? email : ""}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <em>
+          <span className="em">
             Utilisez une adresse email valide. Vous recevrez un email de
             confirmation.
-          </em>
+          </span>
         </div>
         <input
           type="password"
@@ -140,47 +140,50 @@ export default Register;
 const StyledRegister = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   margin: 0px auto;
   h1 {
     text-align: center;
-    color: ${COLORS.yellow};
+    color: ${COLORS.green};
   }
   .indic {
     text-align: center;
-    color: ${COLORS.white};
+    color: ${COLORS.main};
   }
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 90%;
     margin: 0px auto;
     .email-info-conf {
-      width: 55%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: 75%;
       margin-bottom: 10px;
       > input {
         width: 100%;
         margin-bottom: 0px;
+        border: solid 1px grey;
       }
-      > em {
-        font-size: 0.8em;
-        text-align: center;
-        color: ${COLORS.yellow};
+      > .em {
+        font-size: 0.7em;
+        color: ${COLORS.green};
       }
     }
     input {
-      width: 55%;
+      border: solid 1px grey;
+      width: 75%;
       margin: 10px auto;
       padding: 3px;
       font-size: 1.2em;
       border-radius: 7px;
       outline: none;
-      border: none;
     }
 
     input:last-child {
-      width: 30%;
+      width: 55%;
       padding: 5px;
       font-size: 1.2em;
       border-radius: 10px;

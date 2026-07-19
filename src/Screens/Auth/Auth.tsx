@@ -6,7 +6,7 @@ import Login from "../../components/Register/Login";
 import Intro from "../../Home/LandingPage/Intro";
 import { Slide } from "react-awesome-reveal";
 import NewsletterWaitlist from "../../Home/LandingPage/NewsletterWaitlist";
-
+import { BoxSwitchFormRegister } from "../../components/Register/BoxSwitchFormRegister";
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   return (
@@ -14,7 +14,7 @@ const Auth = () => {
       <div className="box-i">
         <Intro />
       </div>
-      {isLogin ? <Login /> : <Register />}
+      {isLogin ? <Login /> : <BoxSwitchFormRegister setIsLogin={setIsLogin} />}
       <span className="what-action" onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? "S'inscrire" : "Se connecter"}
       </span>
