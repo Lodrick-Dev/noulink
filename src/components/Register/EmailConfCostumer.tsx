@@ -2,16 +2,41 @@ import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { Dynamic } from "../../Context/ContextDynamique";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 export const EmailConfCostumer = () => {
-  const location = useLocation();
-  const { userAuth } = Dynamic();
+  const { token } = Dynamic();
   const nav = useNavigate();
+  const createCustomer = async () => {
+    if (!token) return toast.error("Token absent");
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}customer/create`,
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.data) {
+        toast.success(res.data.message);
+        return true;
+      }
+    } catch (error: any) {
+      console.log(error);
+      if (error.response?.data?.message) {
+        return toast.error(error.response.data.message);
+      }
+      return toast.error("Une erreur est survenue");
+    }
+  };
   useEffect(() => {
-    console.log(userAuth);
-    console.log(location);
-  }, []);
+    if (token) {
+      createCustomer();
+    }
+  }, [token]);
   return (
     <StyledEmailConfCostumer>
       <h1>Email confirmer !</h1>

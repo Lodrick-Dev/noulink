@@ -13,16 +13,13 @@ const DashboardRouter = ({
     return <div>Chargement...</div>;
   }
 
-  /*  if (accountType === "restaurant") {
-    return <Dashboard setPopFacture={setPopFacture} />;
-  } */
-
   if (accountType === "restaurant") {
+    return <Dashboard setPopFacture={setPopFacture} />;
+  }
+
+  if (accountType === "customer") {
     return <DashboardCustomer />;
   }
-  /* if (accountType === "customer") {
-    return <DashboardCustomer />;
-  } */
 
   return <div>Aucun profil trouvé.</div>;
 };

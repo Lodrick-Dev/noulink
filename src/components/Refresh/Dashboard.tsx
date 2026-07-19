@@ -71,7 +71,7 @@ const Dashboard = ({
   };
 
   //getOne on va prendre id de userAuth
-  const getOne = async () => {
+  /* const getOne = async () => {
     if (!userAuth?.id) return toast.error("Un identifiant est nécessaire");
     try {
       const res = await axios({
@@ -95,7 +95,7 @@ const Dashboard = ({
         return toast.error("Un erreur est survenue");
       }
     }
-  };
+  }; */
 
   //rendre le profil visbile ou pas
   const visibilityProfil = async () => {

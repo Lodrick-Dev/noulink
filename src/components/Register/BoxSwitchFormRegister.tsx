@@ -11,7 +11,6 @@ export const BoxSwitchFormRegister = ({
 }: {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [formChose, setFormChose] = useState(false);
   const [searchParams] = useSearchParams();
   const [valueParams, setValueParams] = useState<string | null>("");
   const nav = useNavigate();

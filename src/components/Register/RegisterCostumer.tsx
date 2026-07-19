@@ -39,7 +39,7 @@ export const RegisterCostumer = () => {
         email,
         password,
         options: {
-          emailRedirectTo: `${import.meta.env.VITE_URL}conf-email/customer?type=customer`,
+          emailRedirectTo: `${import.meta.env.VITE_URL}conf-email/customer`,
         },
       });
       setLoading(false);
