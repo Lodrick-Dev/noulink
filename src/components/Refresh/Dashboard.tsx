@@ -23,6 +23,7 @@ import { getExpirationMessage } from "../utils/fonctions";
 import { useNavigate } from "react-router-dom";
 import { FormContactSocial } from "./DataDoc/Forms/FormContactSocial";
 import { Admin } from "../Admin/Admin";
+import { useAccount } from "../../Context/AccountContext";
 // import Loading from "../utils/Loading";
 export type TypeDocDashboard = {
   _id: string;
@@ -49,7 +50,6 @@ const Dashboard = ({
 }: {
   setPopFacture: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { loadingUser, userAuth, setPopToPay, token, setIsPremium } = Dynamic();
   const [id, setId] = useState("");
   const [imgProfilUploaded, setImgProfilUploaded] = useState<
     string | undefined
@@ -59,7 +59,8 @@ const Dashboard = ({
   const [speciality, setSpeciality] = useState<TypeSpecility[]>([]);
   const [callA, setCallA] = useState(false);
   const navigate = useNavigate();
-
+  const { loadingUser, userAuth, setPopToPay, token, setIsPremium } = Dynamic();
+  const { account, loadingAccount } = useAccount();
   //scroll preview :
   const previewRef = useRef<HTMLDivElement>(null);
 
@@ -127,12 +128,30 @@ const Dashboard = ({
     }
   };
 
+  const catchDateToDisplay = () => {
+    console.log(account);
+    if (account) {
+      console.log(account);
+      setId(account.idsupabase);
+      setImgProfilUploaded(account.profil);
+      setRestaurant(account);
+      setGalerie(account.galerie);
+      setSpeciality(account.speciality);
+      setIsPremium(account.isPremium);
+    }
+  };
+
   //useffet
   useEffect(() => {
     if (!userAuth?.id) return;
     setId(userAuth.id);
-    getOne();
+    //getOne();
   }, [userAuth?.id, callA]);
+  useEffect(() => {
+    if (!loadingAccount) {
+      catchDateToDisplay();
+    }
+  }, [loadingAccount]);
 
   const checkIfPayOrNot = async () => {
     const queryParams = new URLSearchParams(location.search);

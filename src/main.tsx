@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { ContextDynamicProvider } from "./Context/ContextDynamique.tsx";
+import { AccountContextProvider } from "./Context/AccountContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <ContextDynamicProvider>
-        <App />
+        <AccountContextProvider>
+          <App />
+        </AccountContextProvider>
       </ContextDynamicProvider>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );

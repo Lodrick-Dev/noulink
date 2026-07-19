@@ -26,7 +26,7 @@ import PopPay from "./components/AbonnementCard/PopPay";
 import FormFacture from "./components/FormFacture/FormFacture";
 import Dashboard from "./components/Refresh/Dashboard";
 import { EmailConfCostumer } from "./components/Register/EmailConfCostumer";
-
+import DashboardRouter from "./components/Refresh/DashboardRouter/dashboardRouter";
 function App() {
   const { ville, popToPay } = Dynamic();
   const [showPrompt, setShowPrompt] = useState(false);
@@ -69,9 +69,14 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard setPopFacture={setPopFacture} />
+              <DashboardRouter setPopFacture={setPopFacture} />
             </PrivateRoute>
           }
+          /*  element={
+            <PrivateRoute>
+              <Dashboard setPopFacture={setPopFacture} />
+            </PrivateRoute>
+          } */
         />
         <Route path="/mentions" element={<MentionsLegales />} />
         <Route path="/cgu" element={<Cgu />} />

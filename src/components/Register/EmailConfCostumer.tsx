@@ -2,13 +2,15 @@ import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { Dynamic } from "../../Context/ContextDynamique";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const EmailConfCostumer = () => {
+  const location = useLocation();
   const { userAuth } = Dynamic();
   const nav = useNavigate();
   useEffect(() => {
     console.log(userAuth);
+    console.log(location);
   }, []);
   return (
     <StyledEmailConfCostumer>
