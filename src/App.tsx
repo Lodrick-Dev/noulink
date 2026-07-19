@@ -25,6 +25,7 @@ import PublicRoute from "./components/Private/PublicRoute";
 import PopPay from "./components/AbonnementCard/PopPay";
 import FormFacture from "./components/FormFacture/FormFacture";
 import Dashboard from "./components/Refresh/Dashboard";
+import { EmailConfCostumer } from "./components/Register/EmailConfCostumer";
 
 function App() {
   const { ville, popToPay } = Dynamic();
@@ -50,9 +51,9 @@ function App() {
           <GeolocationPrompt />
         </Slide>
       )}
-      {location.pathname !== "/" && location.pathname !== "/conf-email" && (
-        <Header />
-      )}
+      {location.pathname !== "/" &&
+        location.pathname !== "/conf-email" &&
+        location.pathname !== "/conf-email/customer" && <Header />}
       {/* {location.pathname !== "/" && <PopCookies />} */}
       <Routes>
         {/* <Route path="/inscription" element={<Inscription />} /> */}
@@ -76,6 +77,7 @@ function App() {
         <Route path="/cgu" element={<Cgu />} />
         <Route path="/cgv" element={<Cgv />} />
         <Route path="/conf-email" element={<EmailConf />} />
+        <Route path="/conf-email/customer" element={<EmailConfCostumer />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/politique-confidentialite"
