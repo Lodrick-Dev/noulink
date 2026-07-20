@@ -2,7 +2,7 @@ import { useAccount } from "../../../Context/AccountContext";
 import Dashboard from "../Dashboard";
 import { DashboardCustomer } from "../DashboardCustomer";
 
-const DashboardRouter = ({
+const DashBoardRouter = ({
   setPopFacture,
 }: {
   setPopFacture: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,4 +24,4 @@ const DashboardRouter = ({
   return <div>Aucun profil trouvé.</div>;
 };
 
-export default DashboardRouter;
+export default DashBoardRouter;

@@ -161,7 +161,7 @@ const StyledRegister = styled.div`
       flex-direction: column;
       justify-content: flex-start;
       width: 75%;
-      margin-bottom: 10px;
+      margin-bottom: 11px;
       > input {
         width: 100%;
         margin-bottom: 0px;

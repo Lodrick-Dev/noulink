@@ -5,7 +5,6 @@ import { Slide } from "react-awesome-reveal";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-// import dashboard from "./components/Refresh/Dashboard";
 import Home from "./Home/Home";
 import Footer from "./components/Footer/Footer";
 import { Dynamic } from "./Context/ContextDynamique";
@@ -25,7 +24,7 @@ import PublicRoute from "./components/Private/PublicRoute";
 import PopPay from "./components/AbonnementCard/PopPay";
 import FormFacture from "./components/FormFacture/FormFacture";
 import { EmailConfCostumer } from "./components/Register/EmailConfCostumer";
-import DashboardRouter from "./components/Refresh/DashboardRouter/dashboardRouter";
+import DashBoardRouter from "./components/Refresh/DashBoardRouter/DashboardRouter";
 function App() {
   const { ville, popToPay } = Dynamic();
   const [showPrompt, setShowPrompt] = useState(false);
@@ -68,7 +67,7 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <DashboardRouter setPopFacture={setPopFacture} />
+              <DashBoardRouter setPopFacture={setPopFacture} />
             </PrivateRoute>
           }
           /*  element={
