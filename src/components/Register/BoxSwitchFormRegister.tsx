@@ -39,7 +39,7 @@ export const BoxSwitchFormRegister = ({
             <h2>Vous etes : </h2>
             <div className="btns">
               <button onClick={() => nav("/auth?type=seller")}>Vendeur</button>
-              <button onClick={() => nav("/auth?type=costumer")}>Client</button>
+              {/* <button onClick={() => nav("/auth?type=costumer")}>Client</button> */}
             </div>
           </div>
         ))}
