@@ -39,10 +39,14 @@ export const RegisterCostumer = () => {
         email,
         password,
         options: {
-          emailRedirectTo: `${import.meta.env.VITE_URL}conf-email/customer`,
+          //emailRedirectTo: `${import.meta.env.VITE_URL}conf-email/customer`,
+          emailRedirectTo: `https://www.noulink.fr/conf-email/customer`,
         },
       });
       setLoading(false);
+      console.log(data);
+      console.log(error);
+
       if (error) {
         console.log(error);
 

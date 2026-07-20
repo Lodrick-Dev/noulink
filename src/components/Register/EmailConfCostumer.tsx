@@ -67,4 +67,12 @@ const StyledEmailConfCostumer = styled.section`
     cursor: pointer;
     background: ${COLORS.yellow};
   }
+
+  @media screen and (max-width: 450px) {
+    padding-top: 20px;
+    width: 100%;
+    button {
+      width: 50%;
+    }
+  }
 `;
