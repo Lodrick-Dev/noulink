@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Register from "../../components/Register/Register";
 import COLORS from "../../Styles/Styles";
 import { useState } from "react";
 import Login from "../../components/Register/Login";

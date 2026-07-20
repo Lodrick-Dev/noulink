@@ -24,7 +24,6 @@ import PrivateRoute from "./components/Private/PrivateRoute";
 import PublicRoute from "./components/Private/PublicRoute";
 import PopPay from "./components/AbonnementCard/PopPay";
 import FormFacture from "./components/FormFacture/FormFacture";
-import Dashboard from "./components/Refresh/Dashboard";
 import { EmailConfCostumer } from "./components/Register/EmailConfCostumer";
 import DashboardRouter from "./components/Refresh/DashboardRouter/dashboardRouter";
 function App() {
