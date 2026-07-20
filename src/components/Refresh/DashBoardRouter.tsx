@@ -1,6 +1,6 @@
-import { useAccount } from "../../../Context/AccountContext";
-import Dashboard from "../Dashboard";
-import { DashboardCustomer } from "../DashboardCustomer";
+import { useAccount } from "../../Context/AccountContext";
+import Dashboard from "./Dashboard";
+import { DashboardCustomer } from "./DashboardCustomer";
 
 const DashBoardRouter = ({
   setPopFacture,
