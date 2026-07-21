@@ -34,7 +34,11 @@ export const ContextDynamicProvider = ({
     document.cookie = "city=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   };
   const signOut = async () => {
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Erreur lors de la déconnexion :", error);
+      return;
+    }
     setUserAuth(null);
     setToken("");
   };

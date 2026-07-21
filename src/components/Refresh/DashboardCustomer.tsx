@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MapPin, User, Home, ShoppingBag } from "lucide-react";
+import { MapPin, User, Home, ShoppingBag, LogOut } from "lucide-react";
 import COLORS from "../../Styles/Styles";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -43,6 +43,10 @@ export const DashboardCustomer = () => {
       }
     }
   };
+  const logoutUser = async () => {
+    await signOut();
+    nav("/auth");
+  };
   return (
     <StyledDashboardCustomer>
       <Header>
@@ -50,6 +54,7 @@ export const DashboardCustomer = () => {
           <h1>Bonjour 👋</h1>
           <p>Bienvenue sur votre espace client.</p>
           <p className="dev">⚠️En cours de développement ⚠️</p>
+          <LogOut className="i" onClick={logoutUser} />
         </div>
 
         <div className="btns">
@@ -140,7 +145,12 @@ const Header = styled.div`
     margin: 0;
     color: ${COLORS.black};
   }
-
+  div {
+    .i {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  }
   p {
     margin-top: 8px;
     color: #666;
