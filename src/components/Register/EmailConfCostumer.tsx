@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { Dynamic } from "../../Context/ContextDynamique";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
 
 export const EmailConfCostumer = () => {
+  const [loading, setLoading] = useState(false);
   const { token } = Dynamic();
   const nav = useNavigate();
   const createCustomer = async () => {
@@ -20,8 +22,11 @@ export const EmailConfCostumer = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(res);
+
       if (res.data) {
         toast.success(res.data.message);
+        setLoading(true);
         return true;
       }
     } catch (error: any) {
@@ -29,7 +34,9 @@ export const EmailConfCostumer = () => {
       if (error.response?.data?.message) {
         return toast.error(error.response.data.message);
       }
-      return toast.error("Une erreur est survenue");
+      return toast.error(
+        "Une erreur est survenue lors de la création du profil",
+      );
     }
   };
   useEffect(() => {
@@ -39,8 +46,12 @@ export const EmailConfCostumer = () => {
   }, [token, location.pathname]);
   return (
     <StyledEmailConfCostumer>
-      <h1>Email confirmer !</h1>
-      <button onClick={() => nav("/auth")}>Connectez-vous</button>
+      <h1>Confirmation en cours</h1>
+      {!loading ? (
+        <LoadingHorizontal />
+      ) : (
+        <button onClick={() => nav("/auth")}>Connectez-vous</button>
+      )}
     </StyledEmailConfCostumer>
   );
 };
