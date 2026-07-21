@@ -33,10 +33,10 @@ export const EmailConfCostumer = () => {
     }
   };
   useEffect(() => {
-    if (token) {
+    if (token && location.pathname === "/conf-email/customer") {
       createCustomer();
     }
-  }, [token]);
+  }, [token, location.pathname]);
   return (
     <StyledEmailConfCostumer>
       <h1>Email confirmer !</h1>

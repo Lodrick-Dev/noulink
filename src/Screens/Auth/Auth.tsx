@@ -13,7 +13,7 @@ const Auth = () => {
       <div className="box-i">
         <Intro />
       </div>
-      {isLogin ? <Login /> : <BoxSwitchFormRegister setIsLogin={setIsLogin} />}
+      {isLogin ? <Login /> : <BoxSwitchFormRegister />}
       <span className="what-action" onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? "S'inscrire" : "Se connecter"}
       </span>

@@ -1,10 +1,11 @@
-import { Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { toast } from "react-toastify";
 import { supabase } from "../utils/supabaseClient";
 import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterCostumer = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ export const RegisterCostumer = () => {
   const [showPass, setShowPass] = useState(false);
   const [acceptCG, setAcceptCG] = useState(false);
   const [loading, setLoading] = useState(false);
+  const nav = useNavigate();
   const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (import.meta.env.VITE_DEV === "true") {
@@ -39,13 +41,10 @@ export const RegisterCostumer = () => {
         email,
         password,
         options: {
-          //emailRedirectTo: `${import.meta.env.VITE_URL}conf-email/customer`,
-          emailRedirectTo: `https://www.noulink.fr/conf-email/customer`,
+          emailRedirectTo: `${import.meta.env.VITE_URL}conf-email/customer`,
         },
       });
       setLoading(false);
-      console.log(data);
-      console.log(error);
 
       if (error) {
         console.log(error);
@@ -70,6 +69,8 @@ export const RegisterCostumer = () => {
   return (
     <StyledRegisterCostumer>
       <h1>Inscription</h1>
+      <ArrowLeft size={35} className="icon" onClick={() => nav("/auth")} />
+
       <form onSubmit={(e) => handleSubscribe(e)}>
         <div className="input email">
           <input
@@ -148,6 +149,9 @@ const StyledRegisterCostumer = styled.section`
   h1 {
     color: ${COLORS.green};
     text-align: center;
+  }
+  .icon {
+    cursor: pointer;
   }
   form {
     display: flex;

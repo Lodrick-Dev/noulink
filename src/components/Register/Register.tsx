@@ -4,6 +4,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { supabase } from "../utils/supabaseClient";
 import Loading from "../utils/Loading";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +14,8 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [acceptCG, setAcceptCG] = useState(false);
   const [acceptCGU, setAcceptCGU] = useState(false);
+  const nav = useNavigate();
+
   const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (import.meta.env.VITE_DEV === "true") {
@@ -63,9 +67,14 @@ const Register = () => {
       alert("Mot de passe de correspond pas");
     }
   };
+
+  const returnBack = () => {
+    nav("/auth");
+  };
   return (
     <StyledRegister>
       <h1>Inscription</h1>
+      <ArrowLeft size={35} className="icon" onClick={() => returnBack()} />
       <span className="indic">
         Formulaire réservé aux personnes souhaitant proposer leurs saveurs sur
         Nou Link.
@@ -145,6 +154,9 @@ const StyledRegister = styled.div`
   h1 {
     text-align: center;
     color: ${COLORS.green};
+  }
+  .icon {
+    cursor: pointer;
   }
   .indic {
     text-align: center;

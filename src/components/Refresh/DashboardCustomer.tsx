@@ -9,6 +9,7 @@ export const DashboardCustomer = () => {
         <div>
           <h1>Bonjour 👋</h1>
           <p>Bienvenue sur votre espace client.</p>
+          <p>⚠️En cours de développement ⚠️</p>
         </div>
 
         <SaveButton>Enregistrer</SaveButton>

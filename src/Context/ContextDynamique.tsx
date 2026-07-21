@@ -22,7 +22,7 @@ export const ContextDynamicProvider = ({
     const now = new Date();
     now.setMonth(now.getMonth() + 3); // expire dans 3 mois
     document.cookie = `city=${encodeURIComponent(
-      ville
+      ville,
     )}; expires=${now.toUTCString()}; path=/`;
   };
 
@@ -66,7 +66,8 @@ export const ContextDynamicProvider = ({
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUserAuth(session?.user ?? null);
-      }
+        setToken(session?.access_token ?? "");
+      },
     );
 
     // 3. Nettoie le listener quand le composant est démonté
@@ -101,7 +102,7 @@ export const Dynamic = () => {
   const context = useContext(ContextDynamic);
   if (!context) {
     throw new Error(
-      "useContextDynamic must be used within a ContextDynamicProvider"
+      "useContextDynamic must be used within a ContextDynamicProvider",
     );
   }
 
