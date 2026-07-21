@@ -33,7 +33,11 @@ export const ContextDynamicProvider = ({
   const deleteCityCookie = () => {
     document.cookie = "city=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   };
-
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    setUserAuth(null);
+    setToken("");
+  };
   useEffect(() => {
     if (ville) {
       setCityCookie();
@@ -91,6 +95,7 @@ export const ContextDynamicProvider = ({
         setPopToPay,
         isPremium,
         setIsPremium,
+        signOut,
       }}
     >
       {children}

@@ -15,6 +15,7 @@ export type TypeContextDynamic = {
   deleteCityCookie: () => void;
   isPremium: boolean;
   setIsPremium: React.Dispatch<React.SetStateAction<boolean>>;
+  signOut: () => Promise<void>;
 };
 
 export type TypeContextDynamicProviderProps = {

@@ -1,18 +1,67 @@
 import styled from "styled-components";
 import { MapPin, User, Home, ShoppingBag } from "lucide-react";
 import COLORS from "../../Styles/Styles";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Dynamic } from "../../Context/ContextDynamique";
+import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
+import { useAccount } from "../../Context/AccountContext";
 
 export const DashboardCustomer = () => {
+  const [loading, setLoading] = useState(false);
+  const nav = useNavigate();
+  const { signOut, token } = Dynamic();
+  const { account } = useAccount();
+
+  const deleteAccount = async () => {
+    if (window.confirm("Supprimer votre compte ? ")) {
+      setLoading(true);
+      try {
+        const res = await axios({
+          method: "delete",
+          url: `${import.meta.env.VITE_APP_API}customer/delete/${account._id}`,
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(res);
+        if (res.data) {
+          setLoading(false);
+          if (res.data.success) {
+            toast.warning(res.data.message);
+            signOut();
+            nav("/auth");
+          }
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+        return toast.error("Une erreur est survenue");
+      }
+    }
+  };
   return (
     <StyledDashboardCustomer>
       <Header>
         <div>
           <h1>Bonjour 👋</h1>
           <p>Bienvenue sur votre espace client.</p>
-          <p>⚠️En cours de développement ⚠️</p>
+          <p className="dev">⚠️En cours de développement ⚠️</p>
         </div>
 
-        <SaveButton>Enregistrer</SaveButton>
+        <div className="btns">
+          {loading ? (
+            <LoadingHorizontal />
+          ) : (
+            <SaveButton onClick={deleteAccount}>
+              Supprimer mon compte
+            </SaveButton>
+          )}
+          <SaveButton>Enregistrer</SaveButton>
+        </div>
       </Header>
 
       <Content>
@@ -96,11 +145,37 @@ const Header = styled.div`
     margin-top: 8px;
     color: #666;
   }
+  .dev {
+    background: ${COLORS.red};
+    color: white;
+  }
+  .btns {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    button:first-child {
+      background: ${COLORS.red};
+    }
+    button {
+      margin: 0px 5px;
+    }
+  }
 
   @media screen and (max-width: 450px) {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    .btns {
+      margin: 0px auto;
+      width: 80%;
+      flex-direction: column;
+      button:first-child {
+        margin-bottom: 20px;
+      }
+      button:last-child {
+        margin-top: 20px;
+      }
+    }
   }
 `;
 
@@ -227,3 +302,6 @@ const Empty = styled.div`
   text-align: center;
   color: #777;
 `;
+function useAuth(): { restaurant: any; accessToken: any; signOut: any } {
+  throw new Error("Function not implemented.");
+}
