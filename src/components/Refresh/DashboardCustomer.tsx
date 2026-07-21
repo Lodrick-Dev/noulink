@@ -302,6 +302,3 @@ const Empty = styled.div`
   text-align: center;
   color: #777;
 `;
-function useAuth(): { restaurant: any; accessToken: any; signOut: any } {
-  throw new Error("Function not implemented.");
-}
