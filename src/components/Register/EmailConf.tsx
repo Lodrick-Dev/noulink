@@ -1,15 +1,19 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Dynamic } from "../../Context/ContextDynamique";
+import { useAccount } from "../../Context/AccountContext";
+import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
 
 const EmailConf = () => {
   const nav = useNavigate();
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const { token } = Dynamic();
+  const { getAccount } = useAccount();
   const createSeller = async () => {
     if (!token) {
       toast.error("Token absent");
@@ -24,8 +28,12 @@ const EmailConf = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Email confirmé : ", res.data);
-      toast.success("Email confirmé ! ");
+      if (res.data) {
+        toast.success(res.data.message);
+        getAccount();
+        setLoading(true);
+        return true;
+      }
     } catch (err) {
       console.error(err);
       toast.error("Erreur lors de la validation de l'email");
@@ -39,33 +47,45 @@ const EmailConf = () => {
   }, [token, location.pathname]);
   return (
     <StyledEmailConfirmer>
-      <div className="conf-mail">
-        <h1>Email confirmer ! </h1>
-        <span onClick={() => nav("/auth")}>Connectez-vous</span>
-      </div>
+      <h1>Confirmation en cours</h1>
+      {!loading ? (
+        <LoadingHorizontal />
+      ) : (
+        <button onClick={() => nav("/auth")}>Connectez-vous</button>
+      )}
     </StyledEmailConfirmer>
   );
 };
 
 export default EmailConf;
 const StyledEmailConfirmer = styled.section`
-  .conf-mail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px auto;
+  width: 60%;
+  h1 {
+    font-size: 2em;
+    color: ${COLORS.green};
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  button {
+    width: 30%;
     margin: 10px auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.3em;
-    }
-    span {
-      display: block;
-      text-align: center;
-      cursor: pointer;
-      font-size: 1.2;
-      color: ${COLORS.green};
-      text-decoration: underline;
+    padding: 7px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    background: ${COLORS.yellow};
+  }
+
+  @media screen and (max-width: 450px) {
+    padding-top: 20px;
+    width: 100%;
+    button {
+      width: 50%;
     }
   }
 `;

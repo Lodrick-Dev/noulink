@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
+import { useAccount } from "../../Context/AccountContext";
 
 export const EmailConfCostumer = () => {
   const [loading, setLoading] = useState(false);
   const { token } = Dynamic();
+  const { getAccount } = useAccount();
   const nav = useNavigate();
   const createCustomer = async () => {
     if (!token) return toast.error("Token absent");
@@ -26,6 +28,7 @@ export const EmailConfCostumer = () => {
 
       if (res.data) {
         toast.success(res.data.message);
+        getAccount();
         setLoading(true);
         return true;
       }
