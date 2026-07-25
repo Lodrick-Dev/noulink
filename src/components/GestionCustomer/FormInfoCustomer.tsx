@@ -96,6 +96,19 @@ export const FormInfoCustomer = () => {
             onChange={(e) => setAdresse(e.target.value)}
           />
         </div>
+        {adresse && city && (
+          <div className="location">
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                `${account.road}, ${account.ville}`,
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Voir l'emplacement
+            </a>
+          </div>
+        )}
         {sending ? (
           <LoadingHorizontal />
         ) : (
@@ -162,6 +175,10 @@ const StyledFormInfoCustomer = styled.div`
       @media screen and (max-width: 450px) {
         width: 100%;
       }
+    }
+    .location {
+      margin-bottom: 10px;
+      text-align: center;
     }
   }
   @media screen and (max-width: 450px) {
