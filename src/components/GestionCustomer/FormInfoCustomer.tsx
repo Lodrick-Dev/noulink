@@ -1,34 +1,67 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { User } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
+import { toast } from "react-toastify";
+import { Dynamic } from "../../Context/ContextDynamique";
+import axios from "axios";
+import { useAccount } from "../../Context/AccountContext";
+import { capitalizeFirstLetter } from "../utils/fonctions";
 
 export const FormInfoCustomer = () => {
   const [sending, setSending] = useState(false);
   const [pseudo, setPseudo] = useState("");
   const [city, setCity] = useState("");
   const [adresse, setAdresse] = useState("");
-
+  const { token } = Dynamic();
+  const { account, getAccount } = useAccount();
   const saveInfo = async () => {
     setSending(true);
     try {
-      console.log(
-        "mon pseudo : ",
-        pseudo + " ma ville : " + city + " mon adresse : " + adresse,
-      );
-      setPseudo("");
-      setCity("");
-      setAdresse("");
-      console.log(
-        "mon pseudo : ",
-        pseudo + " ma ville : " + city + " mon adresse : " + adresse,
-      );
-    } catch (error) {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}customer/update-customer`,
+        withCredentials: true,
+        data: {
+          pseudo: pseudo,
+          ville: city,
+          road: adresse,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.data) {
+        if (res.data.success) {
+          toast.success(res.data.success);
+          setPseudo("");
+          setCity("");
+          setAdresse("");
+          getAccount();
+        }
+      }
+    } catch (error: any) {
+      toast.error("Une erreur est survenue lors de la mise à jour du profil");
     } finally {
       setSending(false);
     }
   };
+  useEffect(() => {
+    if (token) {
+      if (account) {
+        if (account.pseudo) {
+          setPseudo(capitalizeFirstLetter(account.pseudo));
+        }
+        if (account.ville) {
+          setCity(capitalizeFirstLetter(account.ville));
+        }
+        if (account.road) {
+          setAdresse(capitalizeFirstLetter(account.road));
+        }
+      }
+    }
+  }, []);
   return (
     <StyledFormInfoCustomer>
       <div className="sous-box">
