@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MapPin, User, Home, ShoppingBag, LogOut } from "lucide-react";
+import { MapPin, Home, ShoppingBag, LogOut } from "lucide-react";
 import COLORS from "../../Styles/Styles";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Dynamic } from "../../Context/ContextDynamique";
 import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
 import { useAccount } from "../../Context/AccountContext";
+import { FormInfoCustomer } from "../GestionCustomer/FormInfoCustomer";
 
 export const DashboardCustomer = () => {
   const [loading, setLoading] = useState(false);
@@ -61,39 +62,15 @@ export const DashboardCustomer = () => {
           {loading ? (
             <LoadingHorizontal />
           ) : (
-            <SaveButton onClick={deleteAccount}>
+            <DeleteAccountButton onClick={deleteAccount}>
               Supprimer mon compte
-            </SaveButton>
+            </DeleteAccountButton>
           )}
-          <SaveButton>Enregistrer</SaveButton>
         </div>
       </Header>
-
+      {account && <span>{account.email}</span>}
       <Content>
-        <Left>
-          <Card>
-            <Title>
-              <User size={20} />
-              Mon profil
-            </Title>
-            <strong>Pour la livraison</strong>
-            <Field>
-              <label>Pseudo</label>
-              <input placeholder="Votre pseudo" />
-            </Field>
-
-            <Field>
-              <label>Ville</label>
-              <input placeholder="Votre ville" />
-            </Field>
-
-            <Field>
-              <label>Adresse</label>
-              <input placeholder="Votre adresse" />
-            </Field>
-          </Card>
-        </Left>
-
+        <FormInfoCustomer />
         <Right>
           <Stats>
             <StatCard>
@@ -133,13 +110,19 @@ const StyledDashboardCustomer = styled.section`
   min-height: 100vh;
   background: ${COLORS.grey};
   padding: 35px;
+  span {
+    display: block;
+    text-align: center;
+    opacity: 0.3;
+    font-size: 0.7em;
+  }
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 35px;
+  margin-bottom: 10px;
 
   h1 {
     margin: 0;
@@ -180,16 +163,16 @@ const Header = styled.div`
       width: 80%;
       flex-direction: column;
       button:first-child {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
       }
       button:last-child {
-        margin-top: 20px;
+        margin-top: 10px;
       }
     }
   }
 `;
 
-const SaveButton = styled.button`
+const DeleteAccountButton = styled.button`
   border: none;
   cursor: pointer;
   background: ${COLORS.green};
@@ -211,14 +194,6 @@ const Content = styled.div`
   display: flex;
   @media screen and (max-width: 450px) {
     flex-direction: column;
-  }
-`;
-
-const Left = styled.div`
-  width: 30%;
-  @media screen and (max-width: 450px) {
-    width: 100%;
-    margin: 0px auto;
   }
 `;
 
@@ -248,30 +223,6 @@ const Title = styled.h2`
   gap: 10px;
   margin-bottom: 25px;
   color: ${COLORS.main};
-`;
-
-const Field = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-
-  label {
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: ${COLORS.black};
-  }
-
-  input {
-    border: 1px solid ${COLORS.grey};
-    border-radius: 10px;
-    padding: 14px;
-    outline: none;
-    font-size: 15px;
-
-    &:focus {
-      border-color: ${COLORS.second};
-    }
-  }
 `;
 
 const Stats = styled.div`
