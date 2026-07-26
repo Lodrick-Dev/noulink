@@ -5,7 +5,7 @@ import type { TypeDocProps, TypeSpecialities } from "./ListesHome";
 import { capitalizeFirstLetter } from "../utils/fonctions";
 import COLORS from "../../Styles/Styles";
 import { OctagonX } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MdPhoneIphone } from "react-icons/md";
 import { RiWhatsappLine } from "react-icons/ri";
 import { GrInstagram } from "react-icons/gr";
@@ -46,7 +46,11 @@ const Resto = ({
       quantity: number;
     }[]
   >([]);
+  const navigate = useNavigate();
 
+  const handleLogin = () => {
+    navigate("/auth");
+  };
   const handleAddToCart = (speciality: TypeSpecialities) => {
     setCartItems((prev) => {
       const existingItem = prev.find(
@@ -190,6 +194,7 @@ const Resto = ({
             onAddToCart={handleAddToCart}
             onRemoveFromCart={handleRemoveFromCart}
             cartItems={cartItems}
+            onLogin={handleLogin}
           />
         )}
         <div className="galerie">

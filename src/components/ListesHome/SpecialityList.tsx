@@ -1,26 +1,19 @@
 import styled from "styled-components";
-import {
-  Check,
-  Image as ImageIcon,
-  Minus,
-  Plus,
-  ShoppingCart,
-  X,
-} from "lucide-react";
+import { Check, Image as ImageIcon, ShoppingCart, X } from "lucide-react";
 
 import COLORS from "../../Styles/Styles";
 import type { TypeSpecialities } from "./ListesHome";
-
-type CartItem = {
-  specialityId: string;
-  quantity: number;
-};
+import { SpecialityCartButton } from "./SpecialityCartButton";
 
 type SpecialityListProps = {
   specialities: TypeSpecialities[];
   onAddToCart: (speciality: TypeSpecialities) => void;
   onRemoveFromCart: (specialityId: string) => void;
-  cartItems?: CartItem[];
+  cartItems?: {
+    specialityId: string;
+    quantity: number;
+  }[];
+  onLogin: () => void;
 };
 
 export const SpecialityList = ({
@@ -28,6 +21,7 @@ export const SpecialityList = ({
   onAddToCart,
   onRemoveFromCart,
   cartItems = [],
+  onLogin,
 }: SpecialityListProps) => {
   const getQuantity = (specialityId: string) => {
     return (
@@ -113,40 +107,13 @@ export const SpecialityList = ({
                   {speciality.description || "Aucune description"}
                 </Description>
 
-                {speciality.available ? (
-                  quantity === 0 ? (
-                    <AddButton
-                      type="button"
-                      onClick={() => onAddToCart(speciality)}
-                    >
-                      <ShoppingCart size={18} />
-                      Ajouter au panier
-                    </AddButton>
-                  ) : (
-                    <QuantityContainer>
-                      <QuantityButton
-                        type="button"
-                        onClick={() => onRemoveFromCart(speciality.id)}
-                      >
-                        <Minus size={18} />
-                      </QuantityButton>
-
-                      <Quantity>{quantity}</Quantity>
-
-                      <QuantityButton
-                        type="button"
-                        onClick={() => onAddToCart(speciality)}
-                      >
-                        <Plus size={18} />
-                      </QuantityButton>
-                    </QuantityContainer>
-                  )
-                ) : (
-                  <UnavailableButton type="button" disabled>
-                    <X size={18} />
-                    Indisponible
-                  </UnavailableButton>
-                )}
+                <SpecialityCartButton
+                  speciality={speciality}
+                  quantity={quantity}
+                  onAddToCart={onAddToCart}
+                  onRemoveFromCart={onRemoveFromCart}
+                  onLogin={onLogin}
+                />
               </CardContent>
             </SpecialityCard>
           );
@@ -162,7 +129,6 @@ const StyledSpecialityList = styled.section`
   width: 100%;
   max-width: 1200px;
   margin: 30px auto;
-  background: red;
 `;
 const Header = styled.div`
   display: flex;

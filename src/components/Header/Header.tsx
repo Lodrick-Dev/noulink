@@ -1,10 +1,18 @@
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { useLocation, useNavigate } from "react-router-dom";
-import { House } from "lucide-react";
+import {
+  ChefHat,
+  CircleUserRound,
+  House,
+  LogIn,
+  ShoppingCart,
+} from "lucide-react";
 import { Dynamic } from "../../Context/ContextDynamique";
+import { useAccount } from "../../Context/AccountContext";
 const Header = () => {
   const { token } = Dynamic();
+  const { accountType } = useAccount();
   const pageActu = useLocation();
   const direction = useNavigate();
   const conditionAction = () => {
@@ -22,12 +30,19 @@ const Header = () => {
         </span>
         {token && (
           <span className="u-token" onClick={() => conditionAction()}>
-            {pageActu.pathname === "/dashboard" ? "Public" : "Dashboard"}
+            {pageActu.pathname === "/dashboard" ? (
+              <ChefHat />
+            ) : (
+              <CircleUserRound />
+            )}
           </span>
+        )}
+        {token && accountType === "customer" && (
+          <ShoppingCart className="shoop" />
         )}
         {!token && pageActu.pathname !== "/auth" && (
           <span className="no-token" onClick={() => direction("/auth")}>
-            Connexion
+            <LogIn />
           </span>
         )}
       </div>
@@ -52,8 +67,12 @@ const StyledHeader = styled.header`
       text-decoration: underline;
     }
     .u-token,
-    .no-token {
-      margin-left: 15px;
+    .no-token,
+    .shoop {
+      margin-left: 30px;
+    }
+    .shoop {
+      color: ${COLORS.yellow};
     }
   }
 `;

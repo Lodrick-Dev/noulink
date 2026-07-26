@@ -204,7 +204,7 @@ const StyledListesHome = styled.section`
     justify-content: center;
     flex-wrap: wrap;
     padding: 20px;
-    button {
+    > button {
       padding: 5px 25px;
       border: none;
       outline: none;
@@ -215,7 +215,7 @@ const StyledListesHome = styled.section`
       box-shadow: 1px 1px 5px ${COLORS.green};
       transition: 1s;
     }
-    button:hover {
+    > button:hover {
       transition: 1s;
       transform: scale(1.1);
       background: ${COLORS.yellow};
