@@ -9,6 +9,15 @@ import { useNavigate } from "react-router-dom";
 import Resto from "./Resto";
 import LoadingBlue from "../Loading/LoadingBlue";
 import { FormClient } from "../Refresh/DataDoc/Forms/FormClient";
+
+export type TypeSpecialities = {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  available: boolean;
+  image: string;
+};
 export type TypeDocProps = {
   _id: string;
   createdAt: string;
@@ -20,6 +29,7 @@ export type TypeDocProps = {
   galerie?: string[];
   description?: string;
   speciality?: string[];
+  specialities?: TypeSpecialities[];
   whatsapp?: string;
   instagram?: string;
   snapchat?: string;
@@ -116,6 +126,7 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
                 instagram={getOne.instagram}
                 snapchat={getOne.snapchat}
                 setGetOne={setGetOne}
+                specialities={getOne.specialities && getOne.specialities}
               />
             )}
             {restaurants &&

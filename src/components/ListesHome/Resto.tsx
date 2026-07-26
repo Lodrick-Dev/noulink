@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Slide } from "react-awesome-reveal";
 import styled from "styled-components";
-import type { TypeDocProps } from "./ListesHome";
+import type { TypeDocProps, TypeSpecialities } from "./ListesHome";
 import { capitalizeFirstLetter } from "../utils/fonctions";
 import COLORS from "../../Styles/Styles";
 import { OctagonX } from "lucide-react";
@@ -10,6 +10,7 @@ import { MdPhoneIphone } from "react-icons/md";
 import { RiWhatsappLine } from "react-icons/ri";
 import { GrInstagram } from "react-icons/gr";
 import { PiSnapchatLogoBold } from "react-icons/pi";
+import { SpecialityList } from "./SpecialityList";
 export type TypeDocPropsResto = {
   pseudo?: string;
   ville?: string;
@@ -22,6 +23,7 @@ export type TypeDocPropsResto = {
   instagram?: string;
   snapchat?: string;
   setGetOne: React.Dispatch<React.SetStateAction<TypeDocProps | null>>;
+  specialities?: TypeSpecialities[];
 };
 const Resto = ({
   pseudo,
@@ -35,9 +37,57 @@ const Resto = ({
   instagram,
   snapchat,
   setGetOne,
+  specialities,
 }: TypeDocPropsResto) => {
   const actuPage = useLocation();
+  const [cartItems, setCartItems] = useState<
+    {
+      specialityId: string;
+      quantity: number;
+    }[]
+  >([]);
 
+  const handleAddToCart = (speciality: TypeSpecialities) => {
+    setCartItems((prev) => {
+      const existingItem = prev.find(
+        (item) => item.specialityId === speciality.id,
+      );
+
+      if (existingItem) {
+        return prev.map((item) =>
+          item.specialityId === speciality.id
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+              }
+            : item,
+        );
+      }
+
+      return [
+        ...prev,
+        {
+          specialityId: speciality.id,
+          quantity: 1,
+        },
+      ];
+    });
+  };
+
+  const handleRemoveFromCart = (specialityId: string) => {
+    setCartItems((prev) =>
+      prev
+        .map((item) =>
+          item.specialityId === specialityId
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item,
+        )
+        .filter((item) => item.quantity > 0),
+    );
+  };
   const handleTel = (v: string) => {
     if (!v) {
       alert("Numéro de téléphone non disponible");
@@ -117,21 +167,31 @@ const Resto = ({
                 onClick={() => handleSnapchat(snapchat ? snapchat : "")}
               />
             </div>
-            <div className="specialities">
-              <span className="title">
-                Spécialité{speciality && speciality.length > 1 ? "s" : ""} (
-                {speciality?.length || 0}) :{" "}
-              </span>
-              {speciality &&
-                speciality.length > 0 &&
-                speciality.map((spec, i) => (
-                  <span key={i} className="el">
-                    ⭐ {capitalizeFirstLetter(spec)}
-                  </span>
-                ))}
-            </div>
+            {!specialities && (
+              <div className="specialities">
+                <span className="title">
+                  Spécialité{speciality && speciality.length > 1 ? "s" : ""} (
+                  {speciality?.length || 0}) :{" "}
+                </span>
+                {speciality &&
+                  speciality.length > 0 &&
+                  speciality.map((spec, i) => (
+                    <span key={i} className="el">
+                      ⭐ {capitalizeFirstLetter(spec)}
+                    </span>
+                  ))}
+              </div>
+            )}
           </div>
         </div>
+        {specialities && (
+          <SpecialityList
+            specialities={specialities}
+            onAddToCart={handleAddToCart}
+            onRemoveFromCart={handleRemoveFromCart}
+            cartItems={cartItems}
+          />
+        )}
         <div className="galerie">
           {galerie &&
             galerie.length > 0 &&
