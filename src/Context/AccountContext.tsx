@@ -29,7 +29,6 @@ export const AccountContextProvider = ({
   const getAccount = async () => {
     if (!token) return;
     setLoadingAccount(true);
-    console.log(token);
 
     try {
       const res = await axios({

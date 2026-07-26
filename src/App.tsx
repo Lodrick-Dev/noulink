@@ -38,7 +38,9 @@ function App() {
     return () => clearTimeout(timer); // bonne pratique pour nettoyer si le composant est démonté
   }, []);
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (location.pathname !== "dashboard") {
+      window.scrollTo(0, 0);
+    }
   }, [location]);
   return (
     <StyledApp>

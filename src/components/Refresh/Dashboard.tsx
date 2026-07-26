@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { FormContactSocial } from "./DataDoc/Forms/FormContactSocial";
 import { Admin } from "../Admin/Admin";
 import { useAccount } from "../../Context/AccountContext";
+import { ManageSpecialities } from "./DataDoc/Forms/ManagerSpecialities/ManageSpecialities";
 // import Loading from "../utils/Loading";
 export type TypeDocDashboard = {
   _id: string;
@@ -129,9 +130,7 @@ const Dashboard = ({
   };
 
   const catchDateToDisplay = () => {
-    console.log(account);
     if (account) {
-      console.log(account);
       setId(account.idsupabase);
       setImgProfilUploaded(account.profil);
       setRestaurant(account);
@@ -286,6 +285,7 @@ const Dashboard = ({
           snapchat={restaurant?.snapchat}
           setRestaurant={setRestaurant}
         />
+        <ManageSpecialities />
         {userAuth?.email === import.meta.env.VITE_EMAIL && <Admin />}
       </div>
       {id && restaurant?._id && (
