@@ -1,0 +1,114 @@
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+
+export type CartItem = {
+  idrestaurant: string;
+  specialityId: string;
+  quantity: number;
+};
+
+type CartContextType = {
+  cartItems: CartItem[];
+  addToCart: (specialityId: string, idrestaurant: string) => void;
+  removeFromCart: (specialityId: string, idrestaurant: string) => void;
+  getQuantity: (specialityId: string, idrestaurant: string) => number;
+  clearCart: () => void;
+};
+
+const CartContext = createContext<CartContextType | undefined>(undefined);
+
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  const addToCart = (specialityId: string, idrestaurant: string) => {
+    setCartItems((prev) => {
+      const existingItem = prev.find(
+        (item) =>
+          item.specialityId === specialityId &&
+          item.idrestaurant === idrestaurant,
+      );
+
+      if (existingItem) {
+        return prev.map((item) =>
+          item.specialityId === specialityId &&
+          item.idrestaurant === idrestaurant
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+              }
+            : item,
+        );
+      }
+
+      return [
+        ...prev,
+        {
+          specialityId,
+          idrestaurant,
+          quantity: 1,
+        },
+      ];
+    });
+  };
+
+  const removeFromCart = (specialityId: string, idrestaurant: string) => {
+    setCartItems((prev) =>
+      prev
+        .map((item) =>
+          item.specialityId === specialityId &&
+          item.idrestaurant === idrestaurant
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item,
+        )
+        .filter((item) => item.quantity > 0),
+    );
+  };
+
+  const getQuantity = (specialityId: string, idrestaurant: string) => {
+    return (
+      cartItems.find(
+        (item) =>
+          item.specialityId === specialityId &&
+          item.idrestaurant === idrestaurant,
+      )?.quantity ?? 0
+    );
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
+  return (
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        getQuantity,
+        clearCart,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+export const useCart = () => {
+  const context = useContext(CartContext);
+
+  if (!context) {
+    throw new Error("useCart doit être utilisé à l'intérieur de CartProvider");
+  }
+
+  return context;
+};

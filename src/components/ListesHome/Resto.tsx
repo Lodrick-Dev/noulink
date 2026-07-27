@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Slide } from "react-awesome-reveal";
 import styled from "styled-components";
 import type { TypeDocProps, TypeSpecialities } from "./ListesHome";
@@ -12,6 +12,7 @@ import { GrInstagram } from "react-icons/gr";
 import { PiSnapchatLogoBold } from "react-icons/pi";
 import { SpecialityList } from "./SpecialityList";
 export type TypeDocPropsResto = {
+  _id: string;
   pseudo?: string;
   ville?: string;
   saveur?: string;
@@ -25,7 +26,13 @@ export type TypeDocPropsResto = {
   setGetOne: React.Dispatch<React.SetStateAction<TypeDocProps | null>>;
   specialities?: TypeSpecialities[];
 };
+export type CartItem = {
+  idrestaurant: string;
+  specialityId: string;
+  quantity: number;
+};
 const Resto = ({
+  _id,
   pseudo,
   ville,
   saveur,
@@ -40,57 +47,10 @@ const Resto = ({
   specialities,
 }: TypeDocPropsResto) => {
   const actuPage = useLocation();
-  const [cartItems, setCartItems] = useState<
-    {
-      specialityId: string;
-      quantity: number;
-    }[]
-  >([]);
   const navigate = useNavigate();
 
   const handleLogin = () => {
     navigate("/auth");
-  };
-  const handleAddToCart = (speciality: TypeSpecialities) => {
-    setCartItems((prev) => {
-      const existingItem = prev.find(
-        (item) => item.specialityId === speciality.id,
-      );
-
-      if (existingItem) {
-        return prev.map((item) =>
-          item.specialityId === speciality.id
-            ? {
-                ...item,
-                quantity: item.quantity + 1,
-              }
-            : item,
-        );
-      }
-
-      return [
-        ...prev,
-        {
-          specialityId: speciality.id,
-          quantity: 1,
-        },
-      ];
-    });
-  };
-
-  const handleRemoveFromCart = (specialityId: string) => {
-    setCartItems((prev) =>
-      prev
-        .map((item) =>
-          item.specialityId === specialityId
-            ? {
-                ...item,
-                quantity: item.quantity - 1,
-              }
-            : item,
-        )
-        .filter((item) => item.quantity > 0),
-    );
   };
   const handleTel = (v: string) => {
     if (!v) {
@@ -190,10 +150,8 @@ const Resto = ({
         </div>
         {specialities && (
           <SpecialityList
+            idrestaurant={_id}
             specialities={specialities}
-            onAddToCart={handleAddToCart}
-            onRemoveFromCart={handleRemoveFromCart}
-            cartItems={cartItems}
             onLogin={handleLogin}
           />
         )}

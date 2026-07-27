@@ -4,24 +4,22 @@ import type { TypeSpecialities } from "./ListesHome";
 import { Dynamic } from "../../Context/ContextDynamique";
 import { useAccount } from "../../Context/AccountContext";
 import { Minus, Plus, ShoppingCart, X } from "lucide-react";
+import { useCart } from "../../Context/CartContext";
 
 type SpecialityCartButtonProps = {
+  idrestaurant: string;
   speciality: TypeSpecialities;
-  quantity: number;
-  onAddToCart: (speciality: TypeSpecialities) => void;
-  onRemoveFromCart: (specialityId: string) => void;
   onLogin: () => void;
 };
 
 export const SpecialityCartButton = ({
+  idrestaurant,
   speciality,
-  quantity,
-  onAddToCart,
-  onRemoveFromCart,
   onLogin,
 }: SpecialityCartButtonProps) => {
   const { token } = Dynamic();
   const { accountType } = useAccount();
+  const { addToCart, removeFromCart, getQuantity } = useCart();
   const messageDisplay = (status: boolean) => {
     if (!token) {
       return "Connectez-vous";
@@ -34,6 +32,7 @@ export const SpecialityCartButton = ({
     }
     return "Indisponible";
   };
+  const quantity = getQuantity(speciality.id, idrestaurant);
 
   // Utilisateur non connecté
   if (!token) {
@@ -68,7 +67,10 @@ export const SpecialityCartButton = ({
   // Client connecté - Aucun article
   if (quantity === 0) {
     return (
-      <AddButton type="button" onClick={() => onAddToCart(speciality)}>
+      <AddButton
+        type="button"
+        onClick={() => addToCart(speciality.id, idrestaurant)}
+      >
         <ShoppingCart size={18} />
         {messageDisplay(speciality.available)}
       </AddButton>
@@ -80,14 +82,17 @@ export const SpecialityCartButton = ({
     <QuantityContainer>
       <QuantityButton
         type="button"
-        onClick={() => onRemoveFromCart(speciality.id)}
+        onClick={() => removeFromCart(speciality.id, idrestaurant)}
       >
         <Minus size={18} className="i-c" />
       </QuantityButton>
 
       <Quantity>{quantity}</Quantity>
 
-      <QuantityButton type="button" onClick={() => onAddToCart(speciality)}>
+      <QuantityButton
+        type="button"
+        onClick={() => addToCart(speciality.id, idrestaurant)}
+      >
         <Plus size={18} />
       </QuantityButton>
     </QuantityContainer>

@@ -115,6 +115,7 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
           <div className="list-one">
             {getOne && (
               <Resto
+                _id={getOne._id}
                 pseudo={getOne.pseudo}
                 ville={getOne.ville}
                 saveur={getOne.saveur}

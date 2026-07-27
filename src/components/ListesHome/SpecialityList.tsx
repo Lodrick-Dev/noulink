@@ -6,30 +6,16 @@ import type { TypeSpecialities } from "./ListesHome";
 import { SpecialityCartButton } from "./SpecialityCartButton";
 
 type SpecialityListProps = {
+  idrestaurant: string;
   specialities: TypeSpecialities[];
-  onAddToCart: (speciality: TypeSpecialities) => void;
-  onRemoveFromCart: (specialityId: string) => void;
-  cartItems?: {
-    specialityId: string;
-    quantity: number;
-  }[];
   onLogin: () => void;
 };
 
 export const SpecialityList = ({
+  idrestaurant,
   specialities,
-  onAddToCart,
-  onRemoveFromCart,
-  cartItems = [],
   onLogin,
 }: SpecialityListProps) => {
-  const getQuantity = (specialityId: string) => {
-    return (
-      cartItems.find((item) => item.specialityId === specialityId)?.quantity ||
-      0
-    );
-  };
-
   if (specialities.length === 0) {
     return (
       <StyledSpecialityList>
@@ -56,8 +42,6 @@ export const SpecialityList = ({
 
       <SpecialitiesGrid>
         {specialities.map((speciality) => {
-          const quantity = getQuantity(speciality.id);
-
           return (
             <SpecialityCard
               key={speciality.id}
@@ -108,10 +92,8 @@ export const SpecialityList = ({
                 </Description>
 
                 <SpecialityCartButton
+                  idrestaurant={idrestaurant}
                   speciality={speciality}
-                  quantity={quantity}
-                  onAddToCart={onAddToCart}
-                  onRemoveFromCart={onRemoveFromCart}
                   onLogin={onLogin}
                 />
               </CardContent>

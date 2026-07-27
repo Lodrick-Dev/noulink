@@ -10,11 +10,17 @@ import {
 } from "lucide-react";
 import { Dynamic } from "../../Context/ContextDynamique";
 import { useAccount } from "../../Context/AccountContext";
+import { useCart } from "../../Context/CartContext";
 const Header = () => {
   const { token } = Dynamic();
   const { accountType } = useAccount();
+  const { cartItems } = useCart();
   const pageActu = useLocation();
   const direction = useNavigate();
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
   const conditionAction = () => {
     if (pageActu.pathname === "/dashboard") {
       direction("/home");
@@ -38,7 +44,10 @@ const Header = () => {
           </span>
         )}
         {token && accountType === "customer" && (
-          <ShoppingCart className="shoop" />
+          <div className="icon-shop">
+            <ShoppingCart className="shoop" />
+            {totalQuantity > 0 && <em>{totalQuantity}</em>}
+          </div>
         )}
         {!token && pageActu.pathname !== "/auth" && (
           <span className="no-token" onClick={() => direction("/auth")}>
@@ -67,12 +76,37 @@ const StyledHeader = styled.header`
       text-decoration: underline;
     }
     .u-token,
-    .no-token,
-    .shoop {
+    .no-token {
       margin-left: 30px;
     }
     .shoop {
       color: ${COLORS.yellow};
+    }
+
+    .icon-shop {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-left: 30px;
+      .shoop {
+        color: ${COLORS.yellow};
+      }
+      em {
+        position: absolute;
+        background: #f5f5f5;
+        padding: 2px;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        bottom: -10px;
+        font-size: 1em;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 `;
