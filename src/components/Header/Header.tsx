@@ -44,7 +44,7 @@ const Header = () => {
           </span>
         )}
         {token && accountType === "customer" && (
-          <div className="icon-shop">
+          <div className="icon-shop" onClick={() => direction("/cart")}>
             <ShoppingCart className="shoop" />
             {totalQuantity > 0 && <em>{totalQuantity}</em>}
           </div>
@@ -90,6 +90,7 @@ const StyledHeader = styled.header`
       justify-content: center;
       align-items: center;
       margin-left: 30px;
+      cursor: pointer;
       .shoop {
         color: ${COLORS.yellow};
       }

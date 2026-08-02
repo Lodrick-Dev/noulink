@@ -14,6 +14,7 @@ export const FormInfoCustomer = () => {
   const [pseudo, setPseudo] = useState("");
   const [city, setCity] = useState("");
   const [adresse, setAdresse] = useState("");
+  const [contact, setContact] = useState("");
   const { token } = Dynamic();
   const { account, getAccount } = useAccount();
   const saveInfo = async () => {
@@ -27,6 +28,7 @@ export const FormInfoCustomer = () => {
           pseudo: pseudo,
           ville: city,
           road: adresse,
+          contact,
         },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -38,6 +40,7 @@ export const FormInfoCustomer = () => {
           setPseudo("");
           setCity("");
           setAdresse("");
+          setContact("");
           getAccount();
         }
       }
@@ -58,6 +61,9 @@ export const FormInfoCustomer = () => {
         }
         if (account.road) {
           setAdresse(capitalizeFirstLetter(account.road));
+        }
+        if (account.contact) {
+          setContact(account.contact);
         }
       }
     }
@@ -94,6 +100,15 @@ export const FormInfoCustomer = () => {
             placeholder="Adresse"
             value={adresse ? adresse : ""}
             onChange={(e) => setAdresse(e.target.value)}
+          />
+        </div>
+        <div className="field">
+          <label>Contact</label>
+          <input
+            type="tel"
+            placeholder="Numéro de téléphone"
+            value={contact ? contact : ""}
+            onChange={(e) => setContact(e.target.value)}
           />
         </div>
         {adresse && city && (

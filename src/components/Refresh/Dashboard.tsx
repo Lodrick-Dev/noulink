@@ -292,6 +292,7 @@ const Dashboard = ({
         <div className="box-preview" ref={previewRef}>
           <p>Apperçu</p>
           <Resto
+            _id={restaurant?._id}
             pseudo={restaurant?.pseudo}
             ville={restaurant?.ville}
             saveur={restaurant?.saveur}
