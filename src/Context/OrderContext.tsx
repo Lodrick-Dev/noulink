@@ -7,8 +7,10 @@ import {
   type ReactNode,
 } from "react";
 import axios from "axios";
+import { io, type Socket } from "socket.io-client";
 import { Dynamic } from "./ContextDynamique";
 import { useAccount } from "./AccountContext";
+import { toast } from "react-toastify";
 
 type OrderStatus =
   | "waiting"
@@ -151,6 +153,102 @@ export const OrderProvider = ({ children }: OrderProviderProps) => {
     }
   }, [token, accountType, refreshOrders, refreshSellerOrders]);
 
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    const socket: Socket = io(import.meta.env.VITE_APP_API, {
+      auth: {
+        token,
+      },
+    });
+
+    socket.on("connect", () => {
+      console.log("🟢 Socket.IO connecté :", socket.id);
+    });
+
+    socket.on("connect_error", (error) => {
+      console.error("🔴 Erreur Socket.IO :", error.message);
+    });
+
+    socket.on("disconnect", (reason) => {
+      console.log("🟠 Socket.IO déconnecté :", reason);
+    });
+
+    // ==========================================
+    // NOUVELLE COMMANDE - CÔTÉ RESTAURANT
+    // ==========================================
+
+    socket.on("newOrder", (newOrder: Order) => {
+      console.log("🆕 Nouvelle commande reçue :", newOrder);
+
+      setOrders((currentOrders) => {
+        const alreadyExists = currentOrders.some(
+          (order) => order._id === newOrder._id,
+        );
+
+        if (alreadyExists) {
+          return currentOrders;
+        }
+
+        return [newOrder, ...currentOrders];
+      });
+
+      toast.success(
+        `Nouvelle commande reçue ! ${newOrder.total.toLocaleString("fr-FR", {
+          style: "currency",
+          currency: "EUR",
+        })}`,
+      );
+    });
+
+    // ==========================================
+    // STATUT MODIFIÉ - CÔTÉ CLIENT
+    // ==========================================
+
+    socket.on("orderStatusUpdated", (updatedOrder: Order) => {
+      console.log("🔄 Statut de commande mis à jour :", updatedOrder);
+
+      setOrders((currentOrders) =>
+        currentOrders.map((order) =>
+          order._id === updatedOrder._id ? updatedOrder : order,
+        ),
+      );
+
+      const statusMessages: Record<OrderStatus, string> = {
+        waiting: "Votre commande est en attente.",
+        preparing: "Votre commande est en préparation.",
+        ready: "Votre commande est prête !",
+        delivered: "Votre commande a été livrée !",
+        refused: "Votre commande a été refusée.",
+        cancelled: "Votre commande a été annulée.",
+      };
+
+      const message = statusMessages[updatedOrder.status];
+
+      if (
+        updatedOrder.status === "refused" ||
+        updatedOrder.status === "cancelled"
+      ) {
+        toast.error(message);
+      } else if (updatedOrder.status === "delivered") {
+        toast.success(message);
+      } else {
+        toast.info(message);
+      }
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("connect_error");
+      socket.off("disconnect");
+      socket.off("newOrder");
+      socket.off("orderStatusUpdated");
+
+      socket.disconnect();
+    };
+  }, [token]);
   return (
     <OrderContext.Provider
       value={{
