@@ -1,6 +1,12 @@
 import styled from "styled-components";
-import { MapPin, Home, ShoppingBag, LogOut } from "lucide-react";
 import COLORS from "../../Styles/Styles";
+import {
+  ShoppingBag,
+  LogOut,
+  PackageCheck,
+  Truck,
+  XCircle,
+} from "lucide-react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useState } from "react";
@@ -9,16 +15,22 @@ import { Dynamic } from "../../Context/ContextDynamique";
 import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
 import { useAccount } from "../../Context/AccountContext";
 import { FormInfoCustomer } from "../GestionCustomer/FormInfoCustomer";
+import { useOrder } from "../../Context/OrderContext";
 
 export const DashboardCustomer = () => {
   const [loading, setLoading] = useState(false);
+
   const nav = useNavigate();
+
   const { signOut, token } = Dynamic();
   const { account } = useAccount();
+
+  const { orders, loadingOrders } = useOrder();
 
   const deleteAccount = async () => {
     if (window.confirm("Supprimer votre compte ? ")) {
       setLoading(true);
+
       try {
         const res = await axios({
           method: "delete",
@@ -28,33 +40,99 @@ export const DashboardCustomer = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(res);
-        if (res.data) {
-          setLoading(false);
-          if (res.data.success) {
-            toast.warning(res.data.message);
-            signOut();
-            nav("/auth");
-          }
+
+        if (res.data?.success) {
+          toast.warning(res.data.message);
+
+          await signOut();
+
+          nav("/auth");
         }
       } catch (error) {
-        setLoading(false);
         console.log(error);
-        return toast.error("Une erreur est survenue");
+
+        toast.error("Une erreur est survenue");
+      } finally {
+        setLoading(false);
       }
     }
   };
+
   const logoutUser = async () => {
     await signOut();
     nav("/auth");
   };
+
+  const totalOrders = orders.length;
+
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case "waiting":
+        return "En attente";
+
+      case "preparing":
+        return "En préparation";
+
+      case "ready":
+        return "Prête";
+
+      case "delivered":
+        return "Livrée";
+
+      case "refused":
+        return "Refusée";
+
+      case "cancelled":
+        return "Annulée";
+
+      default:
+        return "Statut inconnu";
+    }
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case "waiting":
+        return <PackageCheck size={20} />;
+
+      case "preparing":
+        return <PackageCheck size={20} />;
+
+      case "ready":
+        return <PackageCheck size={20} />;
+
+      case "delivered":
+        return <Truck size={20} />;
+
+      case "refused":
+      case "cancelled":
+        return <XCircle size={20} />;
+
+      default:
+        return <PackageCheck size={20} />;
+    }
+  };
+
+  if (loadingOrders) {
+    return (
+      <StyledDashboardCustomer>
+        <LoadingContainer>
+          <LoadingHorizontal />
+        </LoadingContainer>
+      </StyledDashboardCustomer>
+    );
+  }
+
   return (
     <StyledDashboardCustomer>
       <Header>
         <div>
           <h1>Bonjour 👋</h1>
+
           <p>Bienvenue sur votre espace client.</p>
-          <p className="dev">⚠️En cours de développement ⚠️</p>
+
+          <p className="dev">⚠️ En cours de développement ⚠️</p>
+
           <LogOut className="i" onClick={logoutUser} />
         </div>
 
@@ -68,37 +146,110 @@ export const DashboardCustomer = () => {
           )}
         </div>
       </Header>
-      {account && <span>{account.email}</span>}
+
+      {account && <CustomerEmail>{account.email}</CustomerEmail>}
+
       <Content>
-        <FormInfoCustomer />
+        <div className="left">
+          <FormInfoCustomer />
+        </div>
         <Right>
-          <Stats>
-            <StatCard>
-              <ShoppingBag size={26} />
-              <h2>0</h2>
-              <span>Commandes</span>
-            </StatCard>
-
-            <StatCard>
-              <MapPin size={26} />
-              <h2>0</h2>
-              <span>Livraisons</span>
-            </StatCard>
-
-            <StatCard>
-              <Home size={26} />
-              <h2>0</h2>
-              <span>À récupérer</span>
-            </StatCard>
-          </Stats>
-
           <Card>
             <Title>
               <ShoppingBag size={20} />
-              Historique
+              Commandes
             </Title>
 
-            <Empty>Aucune commande pour le moment.</Empty>
+            {orders.length === 0 ? (
+              <Empty>Aucune commande pour le moment.</Empty>
+            ) : (
+              <OrdersList>
+                {orders.map((order) => (
+                  <OrderCard key={order._id}>
+                    <OrderHeader>
+                      <OrderInfo>
+                        <OrderNumber>
+                          Commande #{order._id.slice(-6).toUpperCase()}
+                        </OrderNumber>
+
+                        <OrderDate>
+                          {order.createdAt
+                            ? new Date(order.createdAt).toLocaleDateString(
+                                "fr-FR",
+                                {
+                                  day: "2-digit",
+                                  month: "long",
+                                  year: "numeric",
+                                },
+                              )
+                            : ""}
+                        </OrderDate>
+                      </OrderInfo>
+
+                      <StatusBadge $status={order.status}>
+                        {getStatusIcon(order.status)}
+
+                        <span>{getStatusLabel(order.status)}</span>
+                      </StatusBadge>
+                    </OrderHeader>
+
+                    <OrderBody>
+                      <RestaurantInfo>
+                        <strong>Restaurant</strong>
+
+                        <span>{order.restaurantId}</span>
+                      </RestaurantInfo>
+
+                      <DeliveryInfo>
+                        {order.delivery ? (
+                          <>
+                            <Truck size={18} />
+
+                            <span>Livraison</span>
+                          </>
+                        ) : (
+                          <>
+                            <PackageCheck size={18} />
+
+                            <span>À récupérer sur place</span>
+                          </>
+                        )}
+                      </DeliveryInfo>
+
+                      <OrderItems>
+                        {order.items.map((item) => (
+                          <OrderItem key={item.id}>
+                            <div>
+                              <strong>{item.name}</strong>
+
+                              <span>Quantité : {item.quantity}</span>
+                            </div>
+
+                            <strong>
+                              {item.totalPrice.toLocaleString("fr-FR", {
+                                style: "currency",
+                                currency: "EUR",
+                              })}
+                            </strong>
+                          </OrderItem>
+                        ))}
+                      </OrderItems>
+
+                      <OrderFooter>
+                        <span>Total</span>
+
+                        <strong>
+                          {order.total.toLocaleString("fr-FR", {
+                            style: "currency",
+                            currency: "EUR",
+                          })}
+                        </strong>
+                      </OrderFooter>
+                    </OrderBody>
+                  </OrderCard>
+                ))}
+              </OrdersList>
+            )}
           </Card>
         </Right>
       </Content>
@@ -107,159 +258,274 @@ export const DashboardCustomer = () => {
 };
 
 const StyledDashboardCustomer = styled.section`
-  min-height: 100vh;
-  background: ${COLORS.grey};
-  padding: 35px;
-  span {
-    display: block;
-    text-align: center;
-    opacity: 0.3;
-    font-size: 0.7em;
-  }
+  width: 90%;
+  max-width: 1400px;
+  margin: 30px auto;
+  padding-bottom: 50px;
 `;
 
-const Header = styled.div`
+const Header = styled.header`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
 
-  h1 {
-    margin: 0;
-    color: ${COLORS.black};
+  .i {
+    cursor: pointer;
   }
-  div {
-    .i {
-      margin-top: 10px;
-      cursor: pointer;
-    }
-  }
-  p {
-    margin-top: 8px;
-    color: #666;
-  }
+
   .dev {
-    background: ${COLORS.red};
-    color: white;
-  }
-  .btns {
-    width: 30%;
-    display: flex;
-    justify-content: space-around;
-    button:first-child {
-      background: ${COLORS.red};
-    }
-    button {
-      margin: 0px 5px;
-    }
+    color: ${COLORS.Inactif};
+    font-weight: 600;
   }
 
-  @media screen and (max-width: 450px) {
+  .btns {
+    display: flex;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 700px) {
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
-    .btns {
-      margin: 0px auto;
-      width: 80%;
-      flex-direction: column;
-      button:first-child {
-        margin-bottom: 10px;
-      }
-      button:last-child {
-        margin-top: 10px;
-      }
-    }
   }
 `;
 
-const DeleteAccountButton = styled.button`
-  border: none;
-  cursor: pointer;
-  background: ${COLORS.green};
-  color: white;
-  padding: 14px 24px;
-  border-radius: 10px;
-  font-weight: bold;
-
-  &:hover {
-    opacity: 0.9;
-  }
-
-  @media screen and (max-width: 450px) {
-    width: 100%;
-  }
+const CustomerEmail = styled.span`
+  display: block;
+  margin-bottom: 25px;
+  color: ${COLORS.TexteSecondaire};
 `;
 
 const Content = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: start;
+  .left {
+    width: 30%;
+  }
+
   @media screen and (max-width: 450px) {
+    display: flex;
     flex-direction: column;
+    .left {
+      width: 100%;
+    }
   }
 `;
 
 const Right = styled.div`
-  width: 60%;
-  margin: 0px auto;
+  display: flex;
+  width: 65%;
+  flex-direction: column;
   @media screen and (max-width: 450px) {
     width: 100%;
-    margin: 50px 0px;
   }
 `;
 
 const Card = styled.div`
-  background: ${COLORS.white};
-  border-radius: 18px;
   padding: 25px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  strong {
-    display: block;
-    text-align: center;
-  }
+
+  background: ${COLORS.Carte};
+  border: 1px solid ${COLORS.Bordure};
+  border-radius: 15px;
+
+  box-shadow: 0 4px 12px rgba(31, 64, 104, 0.08);
 `;
 
 const Title = styled.h2`
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 25px;
-  color: ${COLORS.main};
-`;
+  gap: 8px;
 
-const Stats = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-bottom: 25px;
+  margin: 0 0 25px;
 
-  @media screen and (max-width: 450px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const StatCard = styled.div`
-  background: ${COLORS.white};
-  border-radius: 18px;
-  padding: 25px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-
-  svg {
-    color: ${COLORS.main};
-  }
-
-  h2 {
-    margin: 15px 0 8px;
-    color: ${COLORS.black};
-    font-size: 34px;
-  }
-
-  span {
-    color: #666;
-  }
+  color: ${COLORS.Texte};
 `;
 
 const Empty = styled.div`
-  padding: 50px 0;
+  padding: 50px 20px;
+
+  color: ${COLORS.TexteSecondaire};
+
   text-align: center;
-  color: #777;
+`;
+
+const OrdersList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const OrderCard = styled.article`
+  overflow: hidden;
+
+  background: ${COLORS.Fond};
+
+  border: 1px solid ${COLORS.Bordure};
+  border-radius: 15px;
+`;
+
+const OrderHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 18px 20px;
+
+  background: ${COLORS.Carte};
+
+  border-bottom: 1px solid ${COLORS.Bordure};
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const OrderInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+const OrderNumber = styled.strong`
+  color: ${COLORS.Texte};
+`;
+
+const OrderDate = styled.span`
+  color: ${COLORS.TexteSecondaire};
+  font-size: 0.85em;
+`;
+
+const StatusBadge = styled.div<{ $status: string }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 15px;
+
+  border-radius: 10px;
+
+  font-weight: 700;
+
+  color: ${({ $status }) =>
+    $status === "refused" || $status === "cancelled"
+      ? COLORS.white
+      : COLORS.black};
+
+  background: ${({ $status }) =>
+    $status === "waiting"
+      ? COLORS.yellow
+      : $status === "preparing"
+        ? COLORS.second
+        : $status === "ready"
+          ? COLORS.green
+          : $status === "delivered"
+            ? COLORS.green
+            : COLORS.Inactif};
+`;
+
+const OrderBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  padding: 20px;
+`;
+
+const RestaurantInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  color: ${COLORS.TexteSecondaire};
+
+  strong {
+    color: ${COLORS.Texte};
+  }
+`;
+
+const DeliveryInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: ${COLORS.TexteSecondaire};
+
+  font-size: 0.9em;
+`;
+
+const OrderItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid ${COLORS.Bordure};
+`;
+
+const OrderItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  strong {
+    color: ${COLORS.Texte};
+  }
+
+  span {
+    color: ${COLORS.TexteSecondaire};
+    font-size: 0.85em;
+  }
+`;
+
+const OrderFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 15px;
+
+  border-top: 1px solid ${COLORS.Bordure};
+
+  color: ${COLORS.Texte};
+
+  strong {
+    color: ${COLORS.green};
+    font-size: 1.2em;
+  }
+`;
+
+const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 300px;
+`;
+
+const DeleteAccountButton = styled.button`
+  padding: 10px 15px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: ${COLORS.white};
+  background: ${COLORS.Inactif};
+
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;

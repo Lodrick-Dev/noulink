@@ -134,7 +134,7 @@ export const FormInfoCustomer = () => {
   );
 };
 const StyledFormInfoCustomer = styled.div`
-  width: 30%;
+  width: 100%;
   .sous-box {
     background: ${COLORS.white};
     border-radius: 18px;

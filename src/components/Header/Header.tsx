@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   ChefHat,
   CircleUserRound,
+  ClipboardList,
   House,
   LogIn,
   ShoppingCart,
@@ -11,12 +12,18 @@ import {
 import { Dynamic } from "../../Context/ContextDynamique";
 import { useAccount } from "../../Context/AccountContext";
 import { useCart } from "../../Context/CartContext";
+import { useOrder } from "../../Context/OrderContext";
 const Header = () => {
   const { token } = Dynamic();
   const { accountType } = useAccount();
   const { cartItems } = useCart();
   const pageActu = useLocation();
   const direction = useNavigate();
+  const { orders } = useOrder();
+
+  const pendingOrdersCount = orders.filter(
+    (order) => order.status === "waiting",
+  ).length;
   const totalQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
     0,
@@ -47,6 +54,16 @@ const Header = () => {
           <div className="icon-shop" onClick={() => direction("/cart")}>
             <ShoppingCart className="shoop" />
             {totalQuantity > 0 && <em>{totalQuantity}</em>}
+          </div>
+        )}
+        {token && accountType === "restaurant" && (
+          <div
+            className="icon-orders"
+            onClick={() => direction("/seller/orders")}
+          >
+            <ClipboardList />
+
+            {pendingOrdersCount > 0 && <em>{pendingOrdersCount}</em>}
           </div>
         )}
         {!token && pageActu.pathname !== "/auth" && (
@@ -82,7 +99,10 @@ const StyledHeader = styled.header`
     .shoop {
       color: ${COLORS.yellow};
     }
-
+    .icon-orders {
+      color: ${COLORS.yellow};
+    }
+    .icon-orders,
     .icon-shop {
       position: relative;
       display: flex;
@@ -107,6 +127,7 @@ const StyledHeader = styled.header`
         display: flex;
         justify-content: center;
         align-items: center;
+        color: ${COLORS.main};
       }
     }
   }

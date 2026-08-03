@@ -26,6 +26,9 @@ import FormFacture from "./components/FormFacture/FormFacture";
 import { EmailConfCostumer } from "./components/Register/EmailConfCostumer";
 import DashBoardRouter from "./components/Refresh/DashBoardRouter";
 import { Cart } from "./Screens/Cart/Cart";
+import PrivateCustomer from "./components/Private/PrivateCustomer";
+import PrivateSeller from "./components/Private/PrivateSeller";
+import { Orders } from "./Screens/Orders/Orders";
 function App() {
   const { ville, popToPay } = Dynamic();
   const [showPrompt, setShowPrompt] = useState(false);
@@ -77,9 +80,17 @@ function App() {
         <Route
           path="/cart"
           element={
-            <PrivateRoute>
+            <PrivateCustomer>
               <Cart />
-            </PrivateRoute>
+            </PrivateCustomer>
+          }
+        />
+        <Route
+          path="/seller/orders"
+          element={
+            <PrivateSeller>
+              <Orders />
+            </PrivateSeller>
           }
         />
         <Route path="/mentions" element={<MentionsLegales />} />

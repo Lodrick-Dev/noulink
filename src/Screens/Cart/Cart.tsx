@@ -16,6 +16,7 @@ import { useCart } from "../../Context/CartContext";
 import { Dynamic } from "../../Context/ContextDynamique";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useOrder } from "../../Context/OrderContext";
 
 type OrderItem = {
   restaurantId: string;
@@ -38,7 +39,6 @@ type DeliveryOption = {
 
 export const Cart = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
-  const { token } = Dynamic();
 
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOption[]>([]);
@@ -46,11 +46,8 @@ export const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  /**
-   * Récupération des informations complètes
-   * des spécialités présentes dans le panier.
-   */
+  const { token } = Dynamic();
+  const { refreshOrders } = useOrder();
   const getCartItems = async () => {
     if (cartItems.length === 0) {
       setOrderItems([]);
@@ -79,13 +76,6 @@ export const Cart = () => {
 
         setOrderItems(items);
 
-        /**
-         * On récupère les restaurants uniques.
-         *
-         * Par défaut :
-         * delivery = false
-         * => retrait sur place
-         */
         const uniqueRestaurants = Array.from(
           new Map(
             items.map((item) => [
@@ -117,19 +107,10 @@ export const Cart = () => {
     }
   }, [cartItems, token]);
 
-  /**
-   * Retirer une unité d'une spécialité.
-   */
   const handleRemoveItem = (specialityId: string, restaurantId: string) => {
     removeFromCart(specialityId, restaurantId);
   };
 
-  /**
-   * Regroupe les produits par restaurant.
-   *
-   * Cela permet d'afficher le choix de livraison
-   * une seule fois pour chaque restaurant.
-   */
   const restaurants = useMemo(() => {
     const grouped = new Map<
       string,
@@ -182,10 +163,6 @@ export const Cart = () => {
     );
   };
 
-  /**
-   * Vérifie que chaque restaurant possède
-   * une option de livraison valide.
-   */
   const hasValidDeliveryOptions = () => {
     return restaurants.every((restaurant) => {
       const option = deliveryOptions.find(
@@ -196,9 +173,6 @@ export const Cart = () => {
     });
   };
 
-  /**
-   * Envoi définitif de la commande.
-   */
   const handleSendOrder = async () => {
     if (cartItems.length === 0) {
       return;
@@ -233,6 +207,7 @@ export const Cart = () => {
         clearCart();
         setOrderItems([]);
         setDeliveryOptions([]);
+        await refreshOrders();
       } else {
         setError("Impossible d'envoyer la commande.");
       }

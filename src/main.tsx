@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ContextDynamicProvider } from "./Context/ContextDynamique.tsx";
 import { AccountContextProvider } from "./Context/AccountContext.tsx";
 import { CartProvider } from "./Context/CartContext.tsx";
+import { OrderProvider } from "./Context/OrderContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById("root")!).render(
       <ContextDynamicProvider>
         <AccountContextProvider>
           <CartProvider>
-            <App />
+            <OrderProvider>
+              <App />
+            </OrderProvider>
           </CartProvider>
         </AccountContextProvider>
       </ContextDynamicProvider>
