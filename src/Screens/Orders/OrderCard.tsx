@@ -11,7 +11,9 @@ import {
 import { toast } from "react-toastify";
 
 import COLORS from "../../Styles/Styles";
-import { type Order } from "../../Context/OrderContext";
+import { useOrder, type Order } from "../../Context/OrderContext";
+import axios from "axios";
+import { Dynamic } from "../../Context/ContextDynamique";
 
 type OrderCardProps = {
   order: Order;
@@ -19,6 +21,8 @@ type OrderCardProps = {
 
 export const OrderCard = ({ order }: OrderCardProps) => {
   const [updating, setUpdating] = useState(false);
+  const { token } = Dynamic();
+  const { refreshSellerOrders } = useOrder();
 
   const handleUpdateStatus = async (status: Order["status"]) => {
     if (status === "refused") {
@@ -34,21 +38,32 @@ export const OrderCard = ({ order }: OrderCardProps) => {
     try {
       setUpdating(true);
 
-      /*
-       * Ici viendra l'appel API :
-       *
-       * await axios.patch(
-       *   `${import.meta.env.VITE_APP_API}order/${order._id}/status`,
-       *   { status },
-       *   ...
-       * );
-       */
+      const res = await axios.patch(
+        `${import.meta.env.VITE_APP_API}order/${order._id}/status`,
+        {
+          status,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-      console.log(`Commande ${order._id} : ${order.status} -> ${status}`);
+      if (res.data.success) {
+        toast.success(res.data.message);
 
-      toast.info("L'API de changement de statut sera connectée ici.");
+        // Recharge les commandes du restaurant
+        // pour afficher immédiatement le nouveau statut
+        await refreshSellerOrders();
+      }
     } catch (error) {
-      console.error(error);
+      console.error(
+        "Erreur lors de la modification du statut de la commande :",
+        error,
+      );
+
       toast.error("Impossible de modifier le statut de la commande.");
     } finally {
       setUpdating(false);
