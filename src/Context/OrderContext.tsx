@@ -38,6 +38,7 @@ type CustomerInfo = {
 export type Order = {
   _id: string;
   restaurantId: string;
+  restaurantName?: string;
   customerId: string;
   restaurantSupabaseId: string;
   customerSupabaseId: string;

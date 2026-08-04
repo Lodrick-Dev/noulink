@@ -195,7 +195,7 @@ export const DashboardCustomer = () => {
                       <RestaurantInfo>
                         <strong>Restaurant</strong>
 
-                        <span>{order.restaurantId}</span>
+                        <span>{order.restaurantName}</span>
                       </RestaurantInfo>
 
                       <DeliveryInfo>
