@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Slide } from "react-awesome-reveal";
 import styled from "styled-components";
 import type { TypeDocProps, TypeSpecialities } from "./ListesHome";

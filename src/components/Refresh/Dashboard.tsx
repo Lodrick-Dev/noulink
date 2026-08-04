@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { FormContactSocial } from "./DataDoc/Forms/FormContactSocial";
 import { Admin } from "../Admin/Admin";
 import { useAccount } from "../../Context/AccountContext";
-import { ManageSpecialities } from "./DataDoc/Forms/ManagerSpecialities/ManageSpecialities";
+// import { ManageSpecialities } from "./DataDoc/Forms/ManagerSpecialities/ManageSpecialities";
 // import Loading from "../utils/Loading";
 export type TypeDocDashboard = {
   _id: string;

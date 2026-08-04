@@ -67,14 +67,6 @@ export const SpecialityForm = ({
     onChange("image", file);
   };
 
-  const handleRemoveImage = () => {
-    onChange("image", null);
-
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
-
   return (
     <Overlay onClick={onClose}>
       <Modal onClick={(e) => e.stopPropagation()}>
@@ -510,36 +502,6 @@ const ImagePreview = styled.img`
   height: 100%;
 
   object-fit: cover;
-`;
-
-const RemoveImageButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 34px;
-  height: 34px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: ${COLORS.Inactif};
-  color: ${COLORS.white};
-
-  cursor: pointer;
-
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
-
-  &:hover {
-    transform: scale(1.08);
-    opacity: 0.9;
-  }
 `;
 
 const ModalActions = styled.div`
