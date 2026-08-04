@@ -85,9 +85,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const clearCart = () => {
     setCartItems([]);
   };
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
   return (
     <CartContext.Provider
       value={{

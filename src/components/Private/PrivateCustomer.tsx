@@ -16,7 +16,6 @@ const PrivateCustomer = ({ children }: { children: ReactNode }) => {
   }, []);
 
   if (isAuthenticated === null) return null; // ou un loader
-  console.log(accountType);
 
   return isAuthenticated && accountType !== "customer" ? (
     <Navigate to="/dashboard" />

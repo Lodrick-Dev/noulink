@@ -40,19 +40,13 @@ export const AccountContextProvider = ({
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data);
-
       setAccount(res.data.data);
       setAccountType(res.data.type);
       if (res.data.type === "restaurant") {
-        console.log("tu joue ?");
-
         nav("/seller/orders");
       } else if (res.data.type === "customer") {
-        console.log("tu joue ?");
         nav("/dashboard");
       } else {
-        console.log("tu joue ?");
         nav("/auth");
       }
     } catch (err) {

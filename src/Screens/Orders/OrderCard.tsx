@@ -7,6 +7,8 @@ import {
   ShoppingBag,
   X,
   XCircle,
+  User,
+  Phone,
 } from "lucide-react";
 import { toast } from "react-toastify";
 
@@ -108,7 +110,53 @@ export const OrderCard = ({ order }: OrderCardProps) => {
           })}
         </OrderTotal>
       </OrderInfo>
+      {(order.customerInfo?.pseudo ||
+        order.customerInfo?.ville ||
+        order.customerInfo?.road ||
+        order.customerInfo?.contact) && (
+        <CustomerInfoContainer>
+          <CustomerInfoTitle>
+            <User size={18} />
+            Informations du client
+          </CustomerInfoTitle>
 
+          <CustomerInfoGrid>
+            {order.customerInfo?.pseudo && (
+              <CustomerInfoItem>
+                <strong>Client</strong>
+                <span>{order.customerInfo.pseudo}</span>
+              </CustomerInfoItem>
+            )}
+
+            {order.customerInfo?.contact && (
+              <CustomerInfoItem>
+                <strong>Contact</strong>
+                <span>
+                  <Phone size={15} />
+                  {order.customerInfo.contact}
+                </span>
+              </CustomerInfoItem>
+            )}
+
+            {order.delivery && order.customerInfo?.ville && (
+              <CustomerInfoItem>
+                <strong>Ville</strong>
+                <span>
+                  <MapPin size={15} />
+                  {order.customerInfo.ville}
+                </span>
+              </CustomerInfoItem>
+            )}
+
+            {order.delivery && order.customerInfo?.road && (
+              <CustomerInfoItem>
+                <strong>Adresse</strong>
+                <span>{order.customerInfo.road}</span>
+              </CustomerInfoItem>
+            )}
+          </CustomerInfoGrid>
+        </CustomerInfoContainer>
+      )}
       <ItemsList>
         {order.items.map((item) => (
           <OrderItem key={item.id}>
@@ -240,13 +288,10 @@ const getStatusLabel = (status: Order["status"]) => {
 };
 
 const OrderCardContainer = styled.article`
-  overflow: hidden;
   background: ${COLORS.Carte};
   border: 1px solid ${COLORS.Bordure};
   border-radius: 16px;
   box-shadow: 0 5px 18px rgba(31, 64, 104, 0.07);
-  min-height: 400px;
-  overflow-y: scroll;
 `;
 
 const OrderTop = styled.div`
@@ -333,7 +378,57 @@ const OrderInfo = styled.div`
 
   background: ${COLORS.Fond};
 `;
+const CustomerInfoContainer = styled.div`
+  padding: 18px 20px;
 
+  border-bottom: 1px solid ${COLORS.Bordure};
+`;
+
+const CustomerInfoTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 15px;
+
+  color: ${COLORS.Texte};
+  font-size: 0.95rem;
+  font-weight: 700;
+`;
+
+const CustomerInfoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const CustomerInfoItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  strong {
+    color: ${COLORS.TexteSecondaire};
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: ${COLORS.Texte};
+    font-size: 0.9rem;
+    font-weight: 600;
+    word-break: break-word;
+  }
+`;
 const OrderType = styled.span`
   display: flex;
   align-items: center;

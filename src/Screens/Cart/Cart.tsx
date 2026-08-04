@@ -17,6 +17,7 @@ import { Dynamic } from "../../Context/ContextDynamique";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useOrder } from "../../Context/OrderContext";
+import { useAccount } from "../../Context/AccountContext";
 
 type OrderItem = {
   restaurantId: string;
@@ -48,6 +49,7 @@ export const Cart = () => {
   const [error, setError] = useState<string | null>(null);
   const { token } = Dynamic();
   const { refreshOrders } = useOrder();
+  const { account } = useAccount();
   const getCartItems = async () => {
     if (cartItems.length === 0) {
       setOrderItems([]);
@@ -175,6 +177,23 @@ export const Cart = () => {
 
   const handleSendOrder = async () => {
     if (cartItems.length === 0) {
+      return;
+    }
+
+    if (
+      !account?.pseudo?.trim() ||
+      !account?.ville?.trim() ||
+      !account?.road?.trim() ||
+      !account?.contact?.trim()
+    ) {
+      setError(
+        "Veuillez compléter votre pseudo, votre ville, votre adresse et votre numéro de contact avant de passer commande.",
+      );
+
+      toast.warning(
+        "Veuillez compléter vos informations personnelles avant de passer commande.",
+      );
+
       return;
     }
 
@@ -381,6 +400,9 @@ export const Cart = () => {
                             <strong>Livraison</strong>
                             <span>
                               Le restaurant vous livre votre commande.
+                            </span>
+                            <span>
+                              Adresse : {account?.road}, {account?.ville}
                             </span>
                           </div>
                         </DeliveryChoice>

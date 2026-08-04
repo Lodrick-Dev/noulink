@@ -29,7 +29,12 @@ type OrderItem = {
   totalPrice: number;
   description?: string;
 };
-
+type CustomerInfo = {
+  pseudo: string;
+  ville: string;
+  road: string;
+  contact: string;
+};
 export type Order = {
   _id: string;
   restaurantId: string;
@@ -40,6 +45,7 @@ export type Order = {
   delivery: boolean;
   status: OrderStatus;
   items: OrderItem[];
+  customerInfo: CustomerInfo;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -120,7 +126,6 @@ export const OrderProvider = ({ children }: OrderProviderProps) => {
       });
 
       if (res.data.success) {
-        console.log(res);
         setOrders(res.data.orders ?? []);
       } else {
         setOrders([]);

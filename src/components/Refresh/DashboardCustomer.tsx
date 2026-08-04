@@ -63,8 +63,6 @@ export const DashboardCustomer = () => {
     nav("/auth");
   };
 
-  const totalOrders = orders.length;
-
   const getStatusLabel = (status: string) => {
     switch (status) {
       case "waiting":
@@ -318,6 +316,8 @@ const Right = styled.div`
   display: flex;
   width: 65%;
   flex-direction: column;
+  height: 140vh;
+  overflow-y: scroll;
   @media screen and (max-width: 450px) {
     width: 100%;
   }
