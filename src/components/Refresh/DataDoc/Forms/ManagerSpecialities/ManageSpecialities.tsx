@@ -14,25 +14,6 @@ import { Dynamic } from "../../../../../Context/ContextDynamique";
 import { useAccount } from "../../../../../Context/AccountContext";
 import { toast } from "react-toastify";
 
-const initialSpecialities: Speciality[] = [
-  {
-    id: "1",
-    name: "Colombo de poulet",
-    price: 15,
-    description: "Poulet mariné aux épices accompagné de riz.",
-    available: true,
-    image: "",
-  },
-  {
-    id: "2",
-    name: "Blaff de poisson",
-    price: 18,
-    description: "Poisson frais préparé avec une sauce créole.",
-    available: true,
-    image: "",
-  },
-];
-
 const initialForm: SpecialityFormData = {
   name: "",
   price: "",
