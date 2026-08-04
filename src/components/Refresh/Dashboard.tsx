@@ -35,6 +35,7 @@ export type TypeDocDashboard = {
   saveur?: string;
   statut?: number;
   isPremium?: boolean;
+  deliveryAvailable?: boolean;
   profil?: string;
   galerie?: string[];
   description?: string;
@@ -140,6 +141,34 @@ const Dashboard = ({
     }
   };
 
+  //delivery
+  const deliveryStatus = async () => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}restaurant/delivery/${
+          restaurant?._id
+        }`,
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.data) {
+        if (res.data.data) {
+          setRestaurant(res.data.data);
+        }
+        return toast.success(res.data.message);
+      }
+    } catch (error: any) {
+      console.log(error);
+      if (error.response.data.message) {
+        return toast.error(error.response.data.message);
+      }
+      return toast.error("Un erreur est survenue");
+    }
+  };
+
   //useffet
   useEffect(() => {
     if (!userAuth?.id) return;
@@ -228,6 +257,11 @@ const Dashboard = ({
         </span>
         <span className="visible">
           Visible : {restaurant?.statut === 1 ? "Oui" : "Non"}
+        </span>
+        <span className="visible">
+          <em className="delivery" onClick={() => deliveryStatus()}>
+            Livraison : {restaurant?.deliveryAvailable ? "Oui" : "Non"}
+          </em>
         </span>
         {restaurant?.isPremium && (
           <span className="info-date">
@@ -342,6 +376,15 @@ const StyledDashboard = styled.section`
       display: flex;
       opacity: 0.5;
       font-size: 0.8em;
+      .delivery {
+        background: ${COLORS.green};
+        color: ${COLORS.white};
+        border-radius: 5px;
+        padding: 3px 10px 5px 0px;
+        margin-bottom: 10px;
+        color: ${COLORS.black};
+        cursor: pointer;
+      }
     }
     .info-date {
       width: 100%;

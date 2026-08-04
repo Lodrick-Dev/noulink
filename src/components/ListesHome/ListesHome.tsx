@@ -28,6 +28,7 @@ export type TypeDocProps = {
   profil?: string;
   galerie?: string[];
   description?: string;
+  deliveryAvailable?: boolean;
   speciality?: string[];
   specialities?: TypeSpecialities[];
   whatsapp?: string;
@@ -126,6 +127,7 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
                 whatsapp={getOne.whatsapp}
                 instagram={getOne.instagram}
                 snapchat={getOne.snapchat}
+                deliveryAvailable={getOne.deliveryAvailable}
                 setGetOne={setGetOne}
                 specialities={getOne.specialities && getOne.specialities}
               />

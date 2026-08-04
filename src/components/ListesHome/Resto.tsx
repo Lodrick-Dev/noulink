@@ -23,6 +23,7 @@ export type TypeDocPropsResto = {
   whatsapp?: string;
   instagram?: string;
   snapchat?: string;
+  deliveryAvailable?: boolean;
   setGetOne: React.Dispatch<React.SetStateAction<TypeDocProps | null>>;
   specialities?: TypeSpecialities[];
 };
@@ -43,6 +44,7 @@ const Resto = ({
   whatsapp,
   instagram,
   snapchat,
+  deliveryAvailable,
   setGetOne,
   specialities,
 }: TypeDocPropsResto) => {
@@ -110,6 +112,12 @@ const Resto = ({
             <strong>{pseudo}</strong>
             <p className="lieu-text">📍 {capitalizeFirstLetter(ville)}</p>
             <p className="saveur-text">🌍 {capitalizeFirstLetter(saveur)}</p>
+            <p className="saveur-text">
+              🚛{" "}
+              {deliveryAvailable
+                ? "Livraison disponible"
+                : "Livraison non disponible"}
+            </p>
             <div className="info-description">
               <p>Info : {description}</p>
             </div>
