@@ -319,7 +319,7 @@ const Dashboard = ({
           snapchat={restaurant?.snapchat}
           setRestaurant={setRestaurant}
         />
-        <ManageSpecialities />
+        {/* <ManageSpecialities /> */}
         {userAuth?.email === import.meta.env.VITE_EMAIL && <Admin />}
       </div>
       {id && restaurant?._id && (
