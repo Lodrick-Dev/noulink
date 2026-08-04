@@ -8,10 +8,11 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
-      setIsAuthenticated(!!data.session); // true si connecté, false sinon
+      setIsAuthenticated(!!data.session);
     };
+
     checkSession();
-  }, [isAuthenticated]);
+  }, []);
 
   if (isAuthenticated === null) return null; // ou un loader ici
 

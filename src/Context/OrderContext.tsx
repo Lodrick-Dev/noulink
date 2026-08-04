@@ -11,6 +11,7 @@ import { io, type Socket } from "socket.io-client";
 import { Dynamic } from "./ContextDynamique";
 import { useAccount } from "./AccountContext";
 import { toast } from "react-toastify";
+import newOrderSound from "../assets/sounds/notification.mp3";
 
 type OrderStatus =
   | "waiting"
@@ -176,10 +177,6 @@ export const OrderProvider = ({ children }: OrderProviderProps) => {
       console.log("🟠 Socket.IO déconnecté :", reason);
     });
 
-    // ==========================================
-    // NOUVELLE COMMANDE - CÔTÉ RESTAURANT
-    // ==========================================
-
     socket.on("newOrder", (newOrder: Order) => {
       console.log("🆕 Nouvelle commande reçue :", newOrder);
 
@@ -195,6 +192,12 @@ export const OrderProvider = ({ children }: OrderProviderProps) => {
         return [newOrder, ...currentOrders];
       });
 
+      const audio = new Audio(newOrderSound);
+
+      audio.play().catch((error) => {
+        console.warn("Impossible de jouer le son de notification :", error);
+      });
+
       toast.success(
         `Nouvelle commande reçue ! ${newOrder.total.toLocaleString("fr-FR", {
           style: "currency",
@@ -202,10 +205,6 @@ export const OrderProvider = ({ children }: OrderProviderProps) => {
         })}`,
       );
     });
-
-    // ==========================================
-    // STATUT MODIFIÉ - CÔTÉ CLIENT
-    // ==========================================
 
     socket.on("orderStatusUpdated", (updatedOrder: Order) => {
       console.log("🔄 Statut de commande mis à jour :", updatedOrder);

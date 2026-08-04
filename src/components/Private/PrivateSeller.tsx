@@ -1,28 +1,35 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { Navigate } from "react-router-dom";
-import { supabase } from "../utils/supabaseClient";
 import { useAccount } from "../../Context/AccountContext";
+import { supabase } from "../utils/supabaseClient";
+import { Navigate } from "react-router-dom";
 
 const PrivateSeller = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  const { accountType } = useAccount(); // Assuming you have a context that provides accountType
+
+  const { accountType } = useAccount();
 
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
-      setIsAuthenticated(!!data.session); // true si connecté, false sinon
+
+      setIsAuthenticated(!!data.session);
     };
+
     checkSession();
   }, []);
 
-  if (isAuthenticated === null) return null; // ou un loader
-  console.log(accountType);
+  if (isAuthenticated === null || accountType === null) {
+    return null;
+  }
 
-  return isAuthenticated && accountType !== "restaurant" ? (
-    <Navigate to="/dashboard" />
-  ) : (
-    children
-  );
+  if (!isAuthenticated) {
+    return <Navigate to="/auth" />;
+  }
+
+  if (accountType !== "restaurant") {
+    return <Navigate to="/dashboard" />;
+  }
+
+  return <>{children}</>;
 };
-
 export default PrivateSeller;

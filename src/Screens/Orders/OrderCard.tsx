@@ -241,13 +241,12 @@ const getStatusLabel = (status: Order["status"]) => {
 
 const OrderCardContainer = styled.article`
   overflow: hidden;
-
   background: ${COLORS.Carte};
-
   border: 1px solid ${COLORS.Bordure};
   border-radius: 16px;
-
   box-shadow: 0 5px 18px rgba(31, 64, 104, 0.07);
+  min-height: 400px;
+  overflow-y: scroll;
 `;
 
 const OrderTop = styled.div`

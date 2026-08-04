@@ -7,6 +7,7 @@ import {
 } from "react";
 import axios from "axios";
 import { Dynamic } from "./ContextDynamique";
+import { useNavigate } from "react-router-dom";
 export type TypeAccount = {
   account: any;
   accountType: "restaurant" | "customer" | null;
@@ -25,6 +26,7 @@ export const AccountContextProvider = ({
   const [accountType, setAccountType] = useState<
     "restaurant" | "customer" | null
   >(null);
+  const nav = useNavigate();
   const { token } = Dynamic();
   const getAccount = async () => {
     if (!token) return;
@@ -42,6 +44,17 @@ export const AccountContextProvider = ({
 
       setAccount(res.data.data);
       setAccountType(res.data.type);
+      if (res.data.type === "restaurant") {
+        console.log("tu joue ?");
+
+        nav("/seller/orders");
+      } else if (res.data.type === "customer") {
+        console.log("tu joue ?");
+        nav("/dashboard");
+      } else {
+        console.log("tu joue ?");
+        nav("/auth");
+      }
     } catch (err) {
       console.error(err);
     } finally {

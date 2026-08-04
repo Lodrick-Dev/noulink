@@ -180,6 +180,10 @@ const OrdersList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 140vh;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+  border-bottom: 1px solid ${COLORS.Bordure};
 `;
 
 const EmptyState = styled.div`

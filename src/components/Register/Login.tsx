@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { supabase } from "../utils/supabaseClient";
-import { useNavigate } from "react-router-dom";
 import { Dynamic } from "../../Context/ContextDynamique";
 import { toast } from "react-toastify";
 import Loading from "../utils/Loading";
@@ -13,13 +12,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [initPassword, setInitPassword] = useState(false);
-  const nav = useNavigate();
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (import.meta.env.VITE_DEV === "true") {
       alert(
         "🚧 En cours de maintenance. " +
-          "Inscrivez-vous à la newsletter pour être informé du lancement 🎉"
+          "Inscrivez-vous à la newsletter pour être informé du lancement 🎉",
       );
       return;
     }
@@ -49,7 +47,6 @@ const Login = () => {
       setLoading(false);
       setToken(data?.session?.access_token || "");
       setUserAuth(data?.user);
-      nav("/dashboard");
     }
   };
 
@@ -69,7 +66,7 @@ const Login = () => {
     } else {
       console.log("Email de réinitialisation envoyé !");
       alert(
-        "Si un compte existe pour cet email, vous recevrez un lien de réinitialisation."
+        "Si un compte existe pour cet email, vous recevrez un lien de réinitialisation.",
       );
     }
   };
