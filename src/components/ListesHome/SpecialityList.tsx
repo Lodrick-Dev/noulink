@@ -169,10 +169,6 @@ const SpecialityCard = styled.article<{
   }
 `;
 
-/* ==========================================
-   Image
-========================================== */
-
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
@@ -202,10 +198,6 @@ const ImagePlaceholder = styled.div`
   }
 `;
 
-/* ==========================================
-   Status
-========================================== */
-
 const Status = styled.div<{
   $available: boolean;
 }>`
@@ -227,10 +219,6 @@ const Status = styled.div<{
   font-size: 0.8em;
   font-weight: 600;
 `;
-
-/* ==========================================
-   Content
-========================================== */
 
 const CardContent = styled.div`
   display: flex;

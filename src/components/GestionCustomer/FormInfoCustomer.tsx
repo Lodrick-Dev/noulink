@@ -45,7 +45,28 @@ export const FormInfoCustomer = () => {
         }
       }
     } catch (error: any) {
-      toast.error("Une erreur est survenue lors de la mise à jour du profil");
+      console.log("Erreur complète :", error);
+
+      if (error.response) {
+        // Erreur envoyée par ton API (400, 401, 500...)
+        console.log("Status :", error.response.status);
+        console.log("Data backend :", error.response.data);
+
+        toast.error(
+          error.response.data?.message ||
+            "Erreur serveur lors de la mise à jour du profil",
+        );
+      } else if (error.request) {
+        // La requête est partie mais aucune réponse
+        console.log("Pas de réponse du serveur :", error.request);
+
+        toast.error("Le serveur ne répond pas");
+      } else {
+        // Erreur côté configuration Axios
+        console.log("Erreur Axios :", error.message);
+
+        toast.error(error.message);
+      }
     } finally {
       setSending(false);
     }
