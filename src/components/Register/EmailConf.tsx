@@ -10,15 +10,20 @@ import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
 
 const EmailConf = () => {
   const nav = useNavigate();
-  const [loading, setLoading] = useState(false);
   const location = useLocation();
+
+  const [loading, setLoading] = useState(false);
+
   const { token } = Dynamic();
-  const { getAccount } = useAccount();
+
+  const { getAccount, accountType, loadingAccount } = useAccount();
+
   const createSeller = async () => {
     if (!token) {
       toast.error("Token absent");
       return;
     }
+
     try {
       const res = await axios({
         method: "post",
@@ -28,11 +33,13 @@ const EmailConf = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (res.data) {
         toast.success(res.data.message);
-        getAccount();
+
+        await getAccount();
+
         setLoading(true);
-        return true;
       }
     } catch (err) {
       console.error(err);
@@ -41,13 +48,23 @@ const EmailConf = () => {
   };
 
   useEffect(() => {
-    if (token && location.pathname === "/conf-email") {
-      createSeller();
+    if (!token || loadingAccount || location.pathname !== "/conf-email") {
+      return;
     }
-  }, [token, location.pathname]);
+
+    if (accountType) {
+      toast.info("Vous avez déjà un compte");
+      setLoading(true);
+      return;
+    }
+
+    createSeller();
+  }, [token, accountType, loadingAccount, location.pathname]);
+
   return (
     <StyledEmailConfirmer>
       <h1>Confirmation en cours</h1>
+
       {!loading ? (
         <LoadingHorizontal />
       ) : (
@@ -58,18 +75,21 @@ const EmailConf = () => {
 };
 
 export default EmailConf;
+
 const StyledEmailConfirmer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 20px auto;
   width: 60%;
+
   h1 {
     font-size: 2em;
     color: ${COLORS.green};
     margin-bottom: 10px;
     text-align: center;
   }
+
   button {
     width: 30%;
     margin: 10px auto;
@@ -84,6 +104,7 @@ const StyledEmailConfirmer = styled.section`
   @media screen and (max-width: 450px) {
     padding-top: 20px;
     width: 100%;
+
     button {
       width: 50%;
     }

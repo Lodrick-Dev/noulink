@@ -42,7 +42,7 @@ function App() {
     return () => clearTimeout(timer); // bonne pratique pour nettoyer si le composant est démonté
   }, []);
   useEffect(() => {
-    if (location.pathname !== "dashboard") {
+    if (location.pathname !== "/dashboard") {
       window.scrollTo(0, 0);
     }
   }, [location]);

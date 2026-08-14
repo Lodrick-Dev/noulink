@@ -1,20 +1,27 @@
 import styled from "styled-components";
-import COLORS from "../../Styles/Styles";
-import { Dynamic } from "../../Context/ContextDynamique";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import axios from "axios";
 import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
+import { toast } from "react-toastify";
+import COLORS from "../../Styles/Styles";
+import { useEffect, useState } from "react";
 import { useAccount } from "../../Context/AccountContext";
+import { Dynamic } from "../../Context/ContextDynamique";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const EmailConfCostumer = () => {
   const [loading, setLoading] = useState(false);
+
+  const { accountType, loadingAccount } = useAccount();
   const { token } = Dynamic();
-  const { getAccount } = useAccount();
+
+  const location = useLocation();
   const nav = useNavigate();
+
   const createCustomer = async () => {
-    if (!token) return toast.error("Token absent");
+    if (!token) {
+      return toast.error("Token absent");
+    }
+
     try {
       const res = await axios({
         method: "post",
@@ -24,32 +31,48 @@ export const EmailConfCostumer = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       console.log(res);
 
       if (res.data) {
         toast.success(res.data.message);
-        getAccount();
         setLoading(true);
         return true;
       }
     } catch (error: any) {
       console.log(error);
+
       if (error.response?.data?.message) {
         return toast.error(error.response.data.message);
       }
+
       return toast.error(
         "Une erreur est survenue lors de la création du profil",
       );
     }
   };
+
   useEffect(() => {
-    if (token && location.pathname === "/conf-email/customer") {
+    if (
+      !token ||
+      loadingAccount ||
+      location.pathname !== "/conf-email/customer"
+    ) {
+      return;
+    }
+
+    if (accountType) {
+      toast.info("Vous avez déjà un compte");
+      setLoading(true);
+    } else {
       createCustomer();
     }
-  }, [token, location.pathname]);
+  }, [token, accountType, loadingAccount, location.pathname]);
+
   return (
     <StyledEmailConfCostumer>
       <h1>Confirmation en cours</h1>
+
       {!loading ? (
         <LoadingHorizontal />
       ) : (

@@ -11,7 +11,7 @@ export type SpecialityFormData = {
   name: string;
   price: string;
   description: string;
-  image: File | null | string;
+  image: File | null;
   currentImage: string;
   available: boolean;
 };

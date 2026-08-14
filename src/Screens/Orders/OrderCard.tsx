@@ -60,13 +60,30 @@ export const OrderCard = ({ order }: OrderCardProps) => {
         // pour afficher immédiatement le nouveau statut
         await refreshSellerOrders();
       }
-    } catch (error) {
-      console.error(
-        "Erreur lors de la modification du statut de la commande :",
-        error,
-      );
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error(
+          "❌ Erreur modification statut",
+          "\nSTATUS:",
+          error.response?.status,
+          "\nDATA:",
+          error.response?.data,
+          "\nMESSAGE:",
+          error.response?.data?.message,
+        );
+      } else {
+        console.error(
+          "❌ Erreur inconnue lors de la modification du statut:",
+          error,
+        );
+      }
 
-      toast.error("Impossible de modifier le statut de la commande.");
+      toast.error(
+        axios.isAxiosError(error)
+          ? error.response?.data?.message ||
+              "Impossible de modifier le statut de la commande."
+          : "Impossible de modifier le statut de la commande.",
+      );
     } finally {
       setUpdating(false);
     }

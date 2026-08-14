@@ -3,10 +3,12 @@ import COLORS from "../../Styles/Styles";
 import { supabase } from "../utils/supabaseClient";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [newPasswordConf, setNewPasswordConf] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const handleUpdatePassword = async () => {
     if (!newPassword || !newPasswordConf) {
       return toast.error("Tous les champs sont obligatoires");
@@ -17,6 +19,7 @@ const ResetPassword = () => {
     if (newPassword !== newPasswordConf) {
       return toast.error("Les mots de passe ne correspondent pas");
     }
+    setLoading(true);
     const { error } = await supabase.auth.updateUser({
       password: newPassword,
     });
@@ -27,6 +30,7 @@ const ResetPassword = () => {
     } else {
       alert("Mot de passe mis à jour avec succès !");
     }
+    setLoading(false);
   };
 
   return (
@@ -42,7 +46,11 @@ const ResetPassword = () => {
           placeholder="Confirmer de mot de passe"
           onChange={(e) => setNewPasswordConf(e.target.value)}
         />
-        <button onClick={() => handleUpdatePassword()}>Changer</button>
+        {loading ? (
+          <LoadingHorizontal />
+        ) : (
+          <button onClick={() => handleUpdatePassword()}>Changer</button>
+        )}
       </div>
     </StyledInitPassword>
   );
