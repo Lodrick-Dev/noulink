@@ -26,9 +26,17 @@ const ResetPassword = () => {
 
     if (error) {
       console.error("Erreur mise à jour mot de passe :", error.message);
-      toast.error("Erreur mise à jour mot de passe ");
+
+      if (
+        error.message ===
+        "New password should be different from the old password."
+      ) {
+        toast.error("Le nouveau mot de passe doit être différent de l'ancien.");
+      } else {
+        toast.error("Erreur lors de la mise à jour du mot de passe.");
+      }
     } else {
-      alert("Mot de passe mis à jour avec succès !");
+      toast.success("Mot de passe mis à jour avec succès !");
     }
     setLoading(false);
   };
