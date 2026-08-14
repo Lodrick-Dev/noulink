@@ -18,7 +18,7 @@ const initialForm: SpecialityFormData = {
   name: "",
   price: "",
   description: "",
-  image: "",
+  image: null,
   currentImage: "",
   available: true,
 };
