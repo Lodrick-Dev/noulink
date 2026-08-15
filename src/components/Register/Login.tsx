@@ -5,6 +5,7 @@ import { supabase } from "../utils/supabaseClient";
 import { Dynamic } from "../../Context/ContextDynamique";
 import { toast } from "react-toastify";
 import Loading from "../utils/Loading";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { setUserAuth, setToken } = Dynamic();
@@ -12,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [initPassword, setInitPassword] = useState(false);
+  const nav = useNavigate();
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (import.meta.env.VITE_DEV === "true") {
@@ -47,6 +49,7 @@ const Login = () => {
       setLoading(false);
       setToken(data?.session?.access_token || "");
       setUserAuth(data?.user);
+      nav("/dashboard");
     }
   };
 
