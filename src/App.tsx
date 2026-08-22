@@ -29,6 +29,7 @@ import { Cart } from "./Screens/Cart/Cart";
 import PrivateCustomer from "./components/Private/PrivateCustomer";
 import PrivateSeller from "./components/Private/PrivateSeller";
 import { Orders } from "./Screens/Orders/Orders";
+import LegalUpdateModal from "./components/Legales/LegalUpdateModale";
 function App() {
   const { ville, popToPay } = Dynamic();
   const [showPrompt, setShowPrompt] = useState(false);
@@ -49,6 +50,7 @@ function App() {
   return (
     <StyledApp>
       <ConsentementRGPD />
+      <LegalUpdateModal />
       {popFacture && <FormFacture setPopFacture={setPopFacture} />}
       {showPrompt && !ville && location.pathname === "/home" && (
         <Slide direction="down" triggerOnce>

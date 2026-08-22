@@ -7,6 +7,7 @@ import { ContextDynamicProvider } from "./Context/ContextDynamique.tsx";
 import { AccountContextProvider } from "./Context/AccountContext.tsx";
 import { CartProvider } from "./Context/CartContext.tsx";
 import { OrderProvider } from "./Context/OrderContext.tsx";
+import { LegalProvider } from "./Context/LegalContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")!).render(
         <AccountContextProvider>
           <CartProvider>
             <OrderProvider>
-              <App />
+              <LegalProvider>
+                <App />
+              </LegalProvider>
             </OrderProvider>
           </CartProvider>
         </AccountContextProvider>
