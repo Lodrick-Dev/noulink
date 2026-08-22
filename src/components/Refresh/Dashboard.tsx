@@ -254,7 +254,10 @@ const Dashboard = ({
           {loadingUser ? <Loading /> : userAuth?.email}
         </span>
         <span className="visible">
-          Bloqué : {!restaurant?.isPremium ? "Oui" : "Non"}
+          Bloqué :{" "}
+          {!restaurant?.isPremium
+            ? "Oui. Débloquez votre compte en cliquant sur le cadenas"
+            : "Non"}
         </span>
         <span className="visible">
           Visible : {restaurant?.statut === 1 ? "Oui" : "Non"}
