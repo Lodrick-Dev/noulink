@@ -3,23 +3,22 @@ import { CheckCircle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import COLORS from "../../Styles/Styles";
+import { useEffect, useState } from "react";
+import { LoadingHorizontal } from "../Loading/LoadingHorizontal";
+import { useAccount } from "../../Context/AccountContext";
+import { Dynamic } from "../../Context/ContextDynamique";
+import axios from "axios";
 
 const Card = styled.div`
   max-width: 350px;
   min-width: 350px;
   margin: 20px auto;
-
   border-radius: 20px;
-
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-
   background-color: ${COLORS.white};
   color: ${COLORS.black};
-
   padding: 24px;
-
   text-align: center;
-
   .offre-badge {
     display: inline-block;
 
@@ -37,6 +36,37 @@ const Card = styled.div`
     border-radius: 9999px;
 
     margin-bottom: 24px;
+  }
+  .box-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    em {
+      color: ${COLORS.red};
+    }
+    .emm {
+      color: ${COLORS.green};
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: ${COLORS.main};
+      color: ${COLORS.white};
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      transition: all 0.3s ease;
+      background-color: ${COLORS.second};
+    }
   }
 
   em {
@@ -185,12 +215,105 @@ const SubscribeButton = styled.button`
 `;
 
 export default function AbonnementCard() {
+  const [promoCode, setPromoCode] = useState("");
+  const [message, setMessage] = useState("");
+  const [codeValide, setCodeValide] = useState(false);
+  const [load, setLoad] = useState(false);
   const nav = useNavigate();
   const loc = useLocation();
+  const { account, getAccount } = useAccount();
+  const { token } = Dynamic();
 
+  const codePrompo = async () => {
+    if (account?.codePromo) {
+      setLoad(true);
+      await removeCode();
+    } else {
+      if (!promoCode) {
+        alert("Veuillez entrer un code promo.");
+        return;
+      }
+      setLoad(true);
+      await putCode();
+    }
+  };
+
+  const putCode = async () => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}restaurant/add/code-promo`,
+        data: {
+          code: promoCode,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.data.success) {
+        setMessage(res.data.message);
+        setCodeValide(true);
+        await getAccount();
+      }
+    } catch (error: any) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data.message) {
+          setMessage(error.response?.data.message);
+        }
+        console.log("❌ Message :", error.message);
+        console.log("❌ Status :", error.response?.status);
+        console.log("❌ Réponse backend :", error.response?.data);
+        console.log("❌ Headers :", error.response?.headers);
+        console.log("❌ Request :", error.request);
+      } else {
+        console.log("❌ Erreur inconnue :", error);
+      }
+    } finally {
+      setLoad(false);
+    }
+  };
+  const removeCode = async () => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API}restaurant/remove/code-promo`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.data.success) {
+        if (res.data.success) {
+          setMessage(res.data.message);
+          setPromoCode("");
+          setCodeValide(true);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data.message) {
+          setMessage(error.response?.data.message);
+        }
+        console.log("❌ Message :", error.message);
+        console.log("❌ Status :", error.response?.status);
+        console.log("❌ Réponse backend :", error.response?.data);
+        console.log("❌ Headers :", error.response?.headers);
+        console.log("❌ Request :", error.request);
+      } else {
+        console.log("❌ Erreur inconnue :", error);
+      }
+    } finally {
+      setLoad(false);
+      await getAccount();
+    }
+  };
+  useEffect(() => {
+    setPromoCode(account?.codePromo || "");
+  }, [account?.codePromo]);
   return (
     <Card>
-      <div className="offre-badge">🔥 Offre lancement</div>
+      {/* <div className="offre-badge">🔥 Offre lancement</div> */}
 
       <Header>
         <Title>Pack Découverte</Title>
@@ -200,15 +323,15 @@ export default function AbonnementCard() {
 
       <Price>
         <PriceLine>
-          <OldPrice>160,00 €</OldPrice>
+          {/* <OldPrice>160,00 €</OldPrice> */}
 
-          <span>65,00 €</span>
+          <span>124,99 €</span>
         </PriceLine>
 
         <PerYear>pour 1 an</PerYear>
       </Price>
 
-      <PromoInfo>Offre limitée · valable jusqu'au 20/09/2026</PromoInfo>
+      {/* <PromoInfo>Offre limitée · valable jusqu'au 20/09/2026</PromoInfo> */}
 
       <Features>
         <FeatureItem>
@@ -246,6 +369,24 @@ export default function AbonnementCard() {
         <SubscribeButton onClick={() => nav("/auth")}>
           Je découvre
         </SubscribeButton>
+      )}
+      {loc.pathname === "/dashboard" && (
+        <div className="box-code">
+          {message && <em className={codeValide ? "emm" : ""}>{message}</em>}
+          <input
+            type="text"
+            value={promoCode}
+            placeholder="Code promo"
+            onChange={(e) => setPromoCode(e.target.value)}
+          />
+          {load ? (
+            <LoadingHorizontal />
+          ) : (
+            <button onClick={() => codePrompo()}>
+              {account?.codePromo ? "Retirer" : "Valider"}
+            </button>
+          )}
+        </div>
       )}
 
       <em>✅ Paiement sécurisé · Sans engagement</em>

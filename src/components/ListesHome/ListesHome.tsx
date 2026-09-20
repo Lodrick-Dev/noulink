@@ -59,7 +59,6 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
       if (res.data) {
         setRestaurant(res.data);
       }
-      console.log(res);
     } catch (error: any) {
       console.log(error);
 

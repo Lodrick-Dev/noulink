@@ -9,7 +9,6 @@ const PrivateSeller = ({ children }: { children: ReactNode }) => {
   const { accountType } = useAccount();
 
   useEffect(() => {
-    console.log("🔥 PrivateSeller RENDER", window.location.pathname);
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
 

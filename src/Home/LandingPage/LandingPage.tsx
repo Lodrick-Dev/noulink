@@ -32,11 +32,6 @@ const LandingPage = () => {
           <Story />
         </Slide>
       </div>
-      <div className="compo-letters">
-        <Slide direction="up" triggerOnce>
-          <NewsletterWaitlist />
-        </Slide>
-      </div>
       <Slide direction="up" triggerOnce>
         <HowItWorks />
       </Slide>
@@ -126,12 +121,5 @@ const StyledLandingPage = styled.section`
     .story-landing {
       height: auto;
     }
-    /* .section-2 {
-      width: 90%;
-      h3 {
-        font-size: 2em;
-        text-align: center;
-      }
-    } */
   }
 `;

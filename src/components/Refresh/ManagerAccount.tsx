@@ -35,16 +35,69 @@ const ManagerAccount = () => {
     }
   };
 
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
+  // const handleLogout = async () => {
+  //   try {
+  //     console.log("🔵 Début de la déconnexion...");
 
-    if (error) {
-      console.error("Erreur lors de la déconnexion :", error.message);
-      alert("Erreur lors de la déconnexion");
-    } else {
-      alert("Vous avez été déconnecté");
-      // optionnel : redirige l'utilisateur
+  //     const { error } = await supabase.auth.signOut();
+
+  //     console.log("🔵 Résultat signOut :", { error });
+
+  //     if (error) {
+  //       console.error("❌ Erreur déconnexion complète :", error);
+  //       console.error("❌ Message :", error.message);
+  //       console.error("❌ Code :", error.code);
+  //       console.error("❌ Status :", error.status);
+
+  //       alert(`Erreur déconnexion : ${error.message}`);
+  //       return;
+  //     }
+
+  //     console.log("✅ Déconnexion Supabase réussie");
+
+  //     alert("Vous avez été déconnecté");
+
+  //     window.location.href = "/";
+  //   } catch (error) {
+  //     console.error("🔥 Exception pendant la déconnexion :", error);
+
+  //     if (error instanceof Error) {
+  //       console.error("🔥 Message :", error.message);
+  //       console.error("🔥 Stack :", error.stack);
+  //       alert(`Erreur inattendue : ${error.message}`);
+  //     } else {
+  //       console.error("🔥 Erreur inconnue :", error);
+  //       alert("Erreur inattendue lors de la déconnexion");
+  //     }
+  //   }
+  // };
+
+  const handleLogout = async () => {
+    try {
+      console.log("🔵 Début de la déconnexion...");
+
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession();
+
+      console.log("🟢 Session avant signOut :", sessionData);
+      console.log("🟢 Erreur session :", sessionError);
+
+      const { error } = await supabase.auth.signOut();
+
+      console.log("🔵 Résultat signOut :", { error });
+
+      if (error) {
+        console.error("❌ Erreur déconnexion :", error);
+        console.error("❌ Message :", error.message);
+        console.error("❌ Status :", error.status);
+        return;
+      }
+
+      console.log("✅ Déconnexion Supabase réussie");
+
       window.location.href = "/";
+    } catch (error) {
+      console.error("🔥 Exception pendant la déconnexion :", error);
     }
   };
   return (

@@ -129,7 +129,7 @@ export const DashboardCustomer = () => {
 
           <p>Bienvenue sur votre espace client.</p>
 
-          <p className="dev">⚠️ En cours de développement ⚠️</p>
+          {/* <p className="dev">⚠️ En cours de développement ⚠️</p> */}
 
           <LogOut className="i" onClick={logoutUser} />
         </div>

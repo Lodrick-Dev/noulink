@@ -7,7 +7,7 @@ export const formatRelativeDate = (value: string, label: string) => {
   const inputDate = new Date(
     date.getFullYear(),
     date.getMonth(),
-    date.getDate()
+    date.getDate(),
   );
 
   const yesterday = new Date(today);
@@ -36,7 +36,7 @@ export const getLastUpdateMessage = (value: string | undefined) => {
     const inputDate = new Date(
       date.getFullYear(),
       date.getMonth(),
-      date.getDate()
+      date.getDate(),
     );
 
     const diffInMs = today.getTime() - inputDate.getTime();
@@ -69,7 +69,7 @@ export const isValidImageFile = (file: File): boolean => {
 
   const originalName = file.name.toLowerCase();
   const hasValidExtension = allowedExtensions.some((ext) =>
-    originalName.endsWith(ext)
+    originalName.endsWith(ext),
   );
 
   return isMimeOk && hasValidExtension;
@@ -88,7 +88,7 @@ export const normalizeString = (str: string): string => {
 
 export const getExpirationMessage = (
   value: string | undefined,
-  months = 12
+  months = 12,
 ) => {
   if (!value) return;
 
@@ -106,5 +106,5 @@ export const getExpirationMessage = (
   };
   const formattedDate = expirationDate.toLocaleDateString("fr-FR", options);
 
-  return `Valable jusqu’au ${formattedDate}`;
+  return `Profil débloqué jusqu’au ${formattedDate}`;
 };

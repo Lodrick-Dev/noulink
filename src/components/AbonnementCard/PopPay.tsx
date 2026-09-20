@@ -166,6 +166,7 @@ const StyledPopPay = styled.section`
   top: 0px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+  overflow-x: scroll;
   .slideUp {
     margin: 50px auto;
     background: ${COLORS.main};

@@ -388,6 +388,7 @@ const StyledDashboard = styled.section`
         margin-bottom: 10px;
         color: ${COLORS.black};
         cursor: pointer;
+        text-decoration: underline;
       }
     }
     .info-date {
