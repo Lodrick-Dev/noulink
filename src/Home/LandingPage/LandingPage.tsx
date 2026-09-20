@@ -5,7 +5,6 @@ import Faq from "../../components/FAQ/faq";
 import AbonnementCard from "../../components/AbonnementCard/AbonnementCard";
 import Intro from "./Intro";
 import HowItWorks from "./HowItWorks";
-import NewsletterWaitlist from "./NewsletterWaitlist";
 import Story from "./Story";
 import Feedback from "./Feedback";
 import DownloadApp from "../../components/DownloadApp/DownloadApp";
@@ -17,11 +16,6 @@ const LandingPage = () => {
         <Intro />
       </section>
       <DownloadApp />
-      {/* <div className="compo-letters">
-        <Slide direction="up" triggerOnce>
-          <NewsletterWaitlist />
-        </Slide>
-      </div> */}
       <Slide direction="up" triggerOnce>
         <div className="feed-landing">
           <Feedback />

@@ -130,13 +130,13 @@ const PriceLine = styled.div`
   gap: 8px;
 `;
 
-const OldPrice = styled.span`
-  font-size: 18px;
+// const OldPrice = styled.span`
+//   font-size: 18px;
 
-  color: #888;
+//   color: #888;
 
-  text-decoration: line-through;
-`;
+//   text-decoration: line-through;
+// `;
 
 const PerYear = styled.span`
   display: block;
@@ -148,17 +148,17 @@ const PerYear = styled.span`
   opacity: 0.7;
 `;
 
-const PromoInfo = styled.p`
-  font-size: 13px;
+// const PromoInfo = styled.p`
+//   font-size: 13px;
 
-  color: ${COLORS.main};
+//   color: ${COLORS.main};
 
-  margin-top: -10px;
+//   margin-top: -10px;
 
-  margin-bottom: 20px;
+//   margin-bottom: 20px;
 
-  font-style: italic;
-`;
+//   font-style: italic;
+// `;
 
 const Features = styled.ul`
   list-style: none;
