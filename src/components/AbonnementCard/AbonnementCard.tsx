@@ -68,7 +68,9 @@ const Card = styled.div`
       background-color: ${COLORS.second};
     }
   }
-
+  .promo-info {
+    opacity: 0.4;
+  }
   em {
     display: block;
 
@@ -383,10 +385,17 @@ export default function AbonnementCard() {
             <LoadingHorizontal />
           ) : (
             <button onClick={() => codePrompo()}>
-              {account?.codePromo ? "Retirer" : "Valider"}
+              {account?.codePromo ? "Retirer*" : "Valider"}
             </button>
           )}
         </div>
+      )}
+      {account?.codePromo && (
+        <em className="promo-info">
+          *Ce code peut être associé à un programme d’affiliation. La personne
+          vous ayant communiqué ce code peut percevoir une commission de la part
+          de Nou Link en cas de souscription.
+        </em>
       )}
 
       <em>✅ Paiement sécurisé · Sans engagement</em>
