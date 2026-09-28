@@ -54,19 +54,22 @@ Une confirmation de souscription et, le cas échéant, une facture sont transmis
 
     {
       title: "4. Tarif et paiement",
+
       content: `Le tarif de l’abonnement est celui indiqué sur le site web de Nou Link au moment de la souscription.
 
 Les tarifs peuvent être modifiés à tout moment pour les nouvelles souscriptions. Toute modification de tarif n’affecte pas la période d’abonnement déjà payée.
 
-Le paiement de l’abonnement restaurant est effectué sur le site web de Nou Link au moyen des solutions de paiement proposées lors de la souscription.
+Le paiement de l’abonnement restaurant est effectué sur le site web de Nou Link, au moyen des solutions de paiement proposées lors de la souscription. Le paiement de l’abonnement est exigible au moment de la souscription.
 
 Le paiement de l’abonnement n’est pas effectué directement dans l’application mobile.
 
 L’abonnement permettant au restaurant d’être référencé sur Nou Link est distinct du paiement des commandes passées par les clients.
 
-Nou Link n’encaisse pas, dans le cadre de cet abonnement, le prix des repas commandés auprès des restaurants.
+NOU LINK n’encaisse pas le paiement des commandes alimentaires et n’intervient pas dans la transaction financière entre le client et le restaurant.
 
-Les modalités de paiement des commandes alimentaires sont déterminées directement entre le restaurant et le client, selon les moyens de paiement proposés par le restaurant.`,
+Le paiement des commandes alimentaires est effectué directement entre le client et le restaurant, selon les modalités et les moyens de paiement proposés par ce dernier.
+
+Le restaurant est responsable de communiquer au client les modalités de règlement applicables à sa commande et, le cas échéant, les informations nécessaires à son paiement.`,
     },
 
     {
@@ -109,11 +112,12 @@ L’abonnement ne constitue pas une garantie de visibilité, de nombre de visite
 
     {
       title: "7. Commandes des clients",
+
       content: `Lorsque la fonctionnalité de commande est disponible, les utilisateurs peuvent transmettre des commandes au restaurant depuis Nou Link.
 
 Nou Link fournit les outils techniques permettant notamment la transmission de la commande et le suivi de son statut.
 
-Le restaurant reste seul responsable :
+Le restaurant reste seul responsable de la gestion et de l’exécution des commandes reçues, notamment :
 
 • de l’acceptation ou du refus des commandes ;
 
@@ -133,9 +137,11 @@ Le restaurant reste seul responsable :
 
 • du respect de la réglementation applicable à son activité.
 
-Nou Link n’est pas le vendeur des repas proposés par les restaurants et n’est pas responsable de leur préparation ou de leur livraison.
+Le restaurant reste libre d’accepter ou de refuser une commande, notamment en fonction de ses disponibilités, de sa capacité de production ou de toute autre contrainte liée à son activité.
 
-Tout litige relatif à une commande alimentaire doit être traité directement entre le restaurant et le client, sous réserve des droits légaux applicables.`,
+NOU LINK n’est pas le vendeur des repas proposés par les restaurants, n’encaisse pas le paiement des commandes alimentaires et n’est pas responsable de leur préparation, de leur livraison ou de leur règlement.
+
+Tout litige relatif à une commande alimentaire, notamment concernant sa préparation, sa qualité, sa livraison ou son paiement, doit être traité directement entre le restaurant et le client, sous réserve des droits légaux applicables.`,
     },
 
     {

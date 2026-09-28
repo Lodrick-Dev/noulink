@@ -99,17 +99,22 @@ Nou Link ne prépare pas les repas et n’est pas le vendeur des produits propos
 
   {
     title: "4. Paiement des commandes",
-    content: `La fonctionnalité de commande disponible dans l’application permet actuellement au client de transmettre sa commande au restaurant.
 
-Nou Link n’encaisse pas le paiement de la commande alimentaire dans l’application.
+    content: `La fonctionnalité de commande permet au client de transmettre une commande au restaurant concerné.
 
-Les modalités de paiement de la commande sont déterminées directement entre le client et le restaurant concerné, selon les moyens de paiement proposés par celui-ci.
+NOU LINK n’encaisse pas le paiement des commandes alimentaires et n’intervient pas dans la transaction financière entre le client et le restaurant.
 
-Le restaurant est responsable de communiquer au client les conditions applicables au paiement de sa commande ainsi que, le cas échéant, les informations nécessaires à son règlement.
+Le paiement de la commande est effectué directement entre le client et le restaurant, selon les modalités et les moyens de paiement proposés par ce dernier.
 
-L’abonnement permettant au restaurant d’être référencé et de bénéficier des fonctionnalités associées est distinct du paiement des commandes passées par les clients.
+Le restaurant est responsable de communiquer au client les modalités de règlement applicables à sa commande et, le cas échéant, les informations nécessaires à son paiement.
 
-Le paiement de l’abonnement restaurant est effectué sur le site web de Nou Link et non dans l’application mobile.`,
+Pour les commandes importantes, le restaurant reste libre de définir avec le client les modalités de règlement qu’il estime appropriées avant la préparation de la commande.
+
+NOU LINK ne garantit pas le paiement d’une commande par le client et ne peut être tenue responsable d’un impayé, d’un refus de paiement ou de tout litige relatif au règlement d’une commande.
+
+L’abonnement permettant au restaurant d’être référencé sur NOU LINK et de bénéficier des fonctionnalités associées est distinct du paiement des commandes passées par les clients.
+
+Le paiement de l’abonnement du restaurant est effectué sur le site web de NOU LINK, selon les conditions prévues dans les Conditions Générales de Vente (CGV).`,
   },
 
   {
