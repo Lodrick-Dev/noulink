@@ -124,43 +124,31 @@ const Price = styled.div`
 
 const PriceLine = styled.div`
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 8px;
 `;
 
-// const OldPrice = styled.span`
-//   font-size: 18px;
-
-//   color: #888;
-
-//   text-decoration: line-through;
-// `;
+const OldPrice = styled.span`
+  font-size: 18px;
+  color: #888;
+  text-decoration: line-through;
+`;
 
 const PerYear = styled.span`
   display: block;
-
   font-size: 14px;
-
   font-weight: 500;
-
   opacity: 0.7;
 `;
 
-// const PromoInfo = styled.p`
-//   font-size: 13px;
-
-//   color: ${COLORS.main};
-
-//   margin-top: -10px;
-
-//   margin-bottom: 20px;
-
-//   font-style: italic;
-// `;
+const PromoInfo = styled.p`
+  font-size: 13px;
+  color: ${COLORS.main};
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-style: italic;
+`;
 
 const Features = styled.ul`
   list-style: none;
@@ -315,7 +303,7 @@ export default function AbonnementCard() {
   }, [account?.codePromo]);
   return (
     <Card>
-      {/* <div className="offre-badge">🔥 Offre lancement</div> */}
+      <div className="offre-badge">🎉 Nou Link fête ses 1 an ! </div>
 
       <Header>
         <Title>Pack Découverte</Title>
@@ -325,15 +313,15 @@ export default function AbonnementCard() {
 
       <Price>
         <PriceLine>
-          {/* <OldPrice>160,00 €</OldPrice> */}
+          <OldPrice>124,99 €</OldPrice>
 
-          <span>124,99 €</span>
+          <span>25,00 €</span>
         </PriceLine>
 
         <PerYear>pour 1 an</PerYear>
       </Price>
 
-      {/* <PromoInfo>Offre limitée · valable jusqu'au 20/09/2026</PromoInfo> */}
+      <PromoInfo>Offre limitée · valable jusqu'au 17/11/2026</PromoInfo>
 
       <Features>
         <FeatureItem>
