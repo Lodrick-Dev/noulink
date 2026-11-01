@@ -8,6 +8,7 @@ import HowItWorks from "./HowItWorks";
 import Story from "./Story";
 import Feedback from "./Feedback";
 import DownloadApp from "../../components/DownloadApp/DownloadApp";
+import ActivitySection from "./ActivitySection";
 
 const LandingPage = () => {
   return (
@@ -29,11 +30,15 @@ const LandingPage = () => {
       <Slide direction="up" triggerOnce>
         <HowItWorks />
       </Slide>
+      <Slide direction="up" triggerOnce>
+        <ActivitySection />
+      </Slide>
       <div className="car-ab">
         <Slide direction="up" triggerOnce>
           <AbonnementCard />
         </Slide>
       </div>
+      <DownloadApp />
       <div className="faq">
         <Slide direction="up" triggerOnce>
           <Faq />
@@ -74,7 +79,7 @@ const StyledLandingPage = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("/assets/img1.png") center/cover no-repeat;
+    background: url("/assets/imglanding.jpg") center/cover no-repeat;
   }
   /* .section-2 {
     display: flex;

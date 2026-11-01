@@ -19,22 +19,22 @@ const HowItWorks = () => {
       desc: "Découvre leurs spécialités, photos et plats du moment.",
     },
   ];
-  const sell = [
-    {
-      icon: "👩🏽‍🍳",
-      step: "Étape 1",
-      title: "Crée ton profil",
-      desc: "Présente-toi et liste tes spécialités avec de belles photos.",
-      accent: true,
-    },
-    {
-      icon: "🌍",
-      step: "Étape 2",
-      title: "Sois visible partout",
-      desc: "Les gens de ta ville — et de toute la France — te trouvent.",
-      accent: true,
-    },
-  ];
+  // const sell = [
+  //   {
+  //     icon: "👩🏽‍🍳",
+  //     step: "Étape 1",
+  //     title: "Crée ton profil",
+  //     desc: "Présente-toi et liste tes spécialités avec de belles photos.",
+  //     accent: true,
+  //   },
+  //   {
+  //     icon: "🌍",
+  //     step: "Étape 2",
+  //     title: "Sois visible partout",
+  //     desc: "Les gens de ta ville — et de toute la France — te trouvent.",
+  //     accent: true,
+  //   },
+  // ];
   return (
     <HowItWorksSection className="section-how">
       <Slide direction="up" triggerOnce>
@@ -59,7 +59,7 @@ const HowItWorks = () => {
             </div>
           </Slide>
         ))}
-        <div className="full">
+        {/* <div className="full">
           <Slide direction="up" triggerOnce>
             <div className="how-divider">
               <span>👨‍🍳 Tu cuisines &amp; vends</span>
@@ -75,11 +75,12 @@ const HowItWorks = () => {
               <p>{s.desc}</p>
             </div>
           </Slide>
-        ))}
+        ))} */}
         <div className="full" style={{ textAlign: "center", marginTop: 8 }}>
           <Slide direction="up" triggerOnce>
-            <button className="btn-green" onClick={() => nav("/auth")}>
-              🍽️ Publier mes spécialités
+            <button className="btn-green" onClick={() => nav("/home")}>
+              Explorer les profils
+              <span>→</span>
             </button>
           </Slide>
         </div>
@@ -132,7 +133,7 @@ const HowItWorksSection = styled.section`
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.38);
+    color: ${COLORS.yellow};
     white-space: nowrap;
   }
 

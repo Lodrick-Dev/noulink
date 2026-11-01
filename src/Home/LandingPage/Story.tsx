@@ -15,13 +15,12 @@ const StorySection = styled.section`
   justify-content: center;
   text-align: center;
   padding: 80px 20px;
-  height: 90%;
   .em-eyebrow {
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: ${COLORS.second};
+    color: ${COLORS.black};
     margin-bottom: 14px;
   }
   .em-title {
@@ -115,16 +114,16 @@ const Story = () => {
         <p className="em-eyebrow">Pourquoi Nou Link existe</p>
         <h2 className="em-title">
           <em>
-            "Recherche un bon restaurant
+            "Où on trouve ça ?
             <br />
-            créole sur paris, des idées ?"
+            un contact ? des idées ?"
           </em>
         </h2>
         <p className="em-body">
-          Loin du péyi, le manque est réel. Pas juste la nourriture —{" "}
+          Loin du péyi, le manque est là. Pas juste la nourriture —{" "}
           <strong>les odeurs, les saveurs, les souvenirs.</strong> Sauf que ces
-          plats existent déjà en métropole. Des gens comme toi les cuisinent. Il
-          manquait juste un endroit pour les trouver.
+          plats on les vend autour de toi. Il manquait juste un endroit pour les
+          trouver.
         </p>
       </Slide>
 
