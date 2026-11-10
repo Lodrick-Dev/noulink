@@ -2,6 +2,7 @@ import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
 import { Slide } from "react-awesome-reveal";
 import { useNavigate } from "react-router-dom";
+import ListCountry from "./ListCountry";
 
 const ActivitySection = () => {
   const nav = useNavigate();
@@ -37,7 +38,7 @@ const ActivitySection = () => {
             <p className="section-label">
               Tu proposes des spécialités de chez nous ?
             </p>
-
+            <ListCountry />
             <h2 className="section-title">
               Fais découvrir ton activité
               <span> avec Nou Link !</span>

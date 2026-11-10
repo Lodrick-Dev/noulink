@@ -13,6 +13,9 @@ import ActivitySection from "./ActivitySection";
 const LandingPage = () => {
   return (
     <StyledLandingPage>
+      <Slide direction="up" triggerOnce>
+        <ActivitySection />
+      </Slide>
       <section className="hero">
         <Intro />
       </section>
@@ -30,9 +33,9 @@ const LandingPage = () => {
       <Slide direction="up" triggerOnce>
         <HowItWorks />
       </Slide>
-      <Slide direction="up" triggerOnce>
+      {/* <Slide direction="up" triggerOnce>
         <ActivitySection />
-      </Slide>
+      </Slide> */}
       <div className="car-ab">
         <Slide direction="up" triggerOnce>
           <AbonnementCard />
