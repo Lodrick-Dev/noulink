@@ -83,7 +83,7 @@ const ActivitySection = () => {
               <span>→</span>
             </button>
 
-            <small>Simple et rapide · Ton activité sur Nou Link</small>
+            <small>Simple et rapide - Ton activité sur Nou Link</small>
           </div>
         </Slide>
       </div>
