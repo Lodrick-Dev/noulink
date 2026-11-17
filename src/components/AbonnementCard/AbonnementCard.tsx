@@ -303,7 +303,7 @@ export default function AbonnementCard() {
   }, [account?.codePromo]);
   return (
     <Card>
-      <div className="offre-badge">🎉 Nou Link fête ses 1 an ! </div>
+      <div className="offre-badge">suivez-nous ! </div>
 
       <Header>
         <Title>Pack Découverte</Title>
@@ -313,15 +313,15 @@ export default function AbonnementCard() {
 
       <Price>
         <PriceLine>
-          <OldPrice>124,99 €</OldPrice>
+          {/* <OldPrice>124,99 €</OldPrice> */}
 
-          <span>25,00 €</span>
+          <span>124,99 €</span>
         </PriceLine>
 
         <PerYear>pour 1 an</PerYear>
       </Price>
 
-      <PromoInfo>Offre limitée · valable jusqu'au 17/11/2026</PromoInfo>
+      <PromoInfo>Retrouvez -20% dans bio instagram </PromoInfo>
 
       <Features>
         <FeatureItem>
