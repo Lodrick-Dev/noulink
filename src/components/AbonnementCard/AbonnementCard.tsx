@@ -129,11 +129,11 @@ const PriceLine = styled.div`
   gap: 8px;
 `;
 
-const OldPrice = styled.span`
-  font-size: 18px;
-  color: #888;
-  text-decoration: line-through;
-`;
+// const OldPrice = styled.span`
+//   font-size: 18px;
+//   color: #888;
+//   text-decoration: line-through;
+// `;
 
 const PerYear = styled.span`
   display: block;
