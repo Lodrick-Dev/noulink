@@ -13,6 +13,7 @@ const COLORS = {
   Fond: "#f5f7fa",
   Actif: "#21bf73",
   Inactif: "#ee6c4d",
+  redlogo: "#a22607",
   Texte: "#1a1a1a",
   Premium: "#f4d35e",
   TexteSecondaire: "#6b7280",

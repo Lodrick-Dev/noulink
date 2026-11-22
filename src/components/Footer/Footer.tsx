@@ -66,7 +66,7 @@ const StyledFooter = styled.footer`
     justify-content: center;
     align-items: center;
     img {
-      width: 40%;
+      width: 25%;
       cursor: pointer;
     }
   }

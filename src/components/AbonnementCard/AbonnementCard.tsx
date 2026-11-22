@@ -10,197 +10,237 @@ import { Dynamic } from "../../Context/ContextDynamique";
 import axios from "axios";
 
 const Card = styled.div`
-  max-width: 350px;
-  min-width: 350px;
-  margin: 20px auto;
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  background-color: ${COLORS.white};
+  position: relative;
+  width: min(100%, 410px);
+  min-width: 0;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(39, 142, 165, 0.16);
+  border-radius: 26px;
+  background: ${COLORS.white};
+  box-shadow: 0 24px 70px rgba(31, 64, 104, 0.15);
   color: ${COLORS.black};
-  padding: 24px;
-  text-align: center;
-  .offre-badge {
-    display: inline-block;
+  padding: 28px;
+  text-align: left;
 
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 145px;
+    background: linear-gradient(
+      135deg,
+      rgba(39, 142, 165, 0.12),
+      rgba(244, 211, 94, 0.13)
+    );
+    content: "";
+  }
+
+  > * {
+    position: relative;
+  }
+
+  .offre-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 13px;
+    border: 1px solid rgba(244, 211, 94, 0.7);
+    border-radius: 9999px;
     background: ${COLORS.yellow};
     color: ${COLORS.main};
-
+    font-size: 0.68rem;
     font-weight: 800;
-    font-size: 0.76rem;
-
-    letter-spacing: 1px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-
-    padding: 7px 18px;
-
-    border-radius: 9999px;
-
-    margin-bottom: 24px;
+    margin-bottom: 17px;
   }
+
   .box-code {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    em {
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 20px;
+
+    .code-message {
+      margin: 0;
       color: ${COLORS.red};
+      font-size: 0.82rem;
+      line-height: 1.5;
     }
-    .emm {
+
+    .code-message.success {
       color: ${COLORS.green};
     }
+
     input {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 10px;
+      padding: 13px 15px;
+      border: 1px solid ${COLORS.Bordure};
+      border-radius: 12px;
+      background: ${COLORS.white};
+      color: ${COLORS.Texte};
+      font: inherit;
+      outline: none;
+
+      &:focus {
+        border-color: ${COLORS.second};
+        box-shadow: 0 0 0 3px rgba(39, 142, 165, 0.13);
+      }
     }
+
     button {
+      min-height: 44px;
       padding: 10px 20px;
-      background-color: ${COLORS.main};
+      background: ${COLORS.main};
       color: ${COLORS.white};
       border: none;
-      border-radius: 4px;
+      border-radius: 12px;
+      font: inherit;
+      font-weight: 700;
       cursor: pointer;
-    }
-    button:hover {
-      transition: all 0.3s ease;
-      background-color: ${COLORS.second};
+
+      &:hover {
+        background: ${COLORS.second};
+      }
     }
   }
-  .promo-info {
-    opacity: 0.4;
+
+  .affiliate-info {
+    margin: 14px 0 0;
+    color: ${COLORS.TexteSecondaire};
+    font-size: 0.68rem;
+    line-height: 1.6;
   }
-  em {
-    display: block;
 
-    margin-top: 16px;
+  .payment-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 19px;
+    padding-top: 16px;
+    border-top: 1px solid ${COLORS.Bordure};
+    color: ${COLORS.TexteSecondaire};
+    font-size: 0.73rem;
+    line-height: 1.5;
 
-    font-size: 10px;
-
-    opacity: 0.8;
+    svg {
+      flex: 0 0 auto;
+      color: ${COLORS.green};
+    }
   }
 `;
 
 const Header = styled.div`
-  background-color: ${COLORS.main};
-
-  color: ${COLORS.white};
-
-  border-radius: 16px;
-
-  padding: 16px;
-
-  margin-bottom: 20px;
+  color: ${COLORS.main};
+  margin-bottom: 18px;
 `;
 
 const Title = styled.h2`
-  font-size: 22px;
-  font-weight: bold;
+  font-family: Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
   margin: 0;
 `;
 
 const Subtitle = styled.p`
-  font-size: 14px;
-
-  opacity: 0.85;
-
-  margin: 5px 0 0;
+  color: ${COLORS.TexteSecondaire};
+  font-size: 0.83rem;
+  line-height: 1.6;
+  margin: 7px 0 0;
 `;
 
 const Price = styled.div`
-  margin: 20px 0;
-
-  font-size: 36px;
-
-  font-weight: 800;
-
-  color: ${COLORS.second};
-
-  display: flex;
-
-  flex-direction: column;
+  padding: 18px 0 16px;
+  border-top: 1px solid rgba(31, 64, 104, 0.09);
+  border-bottom: 1px solid rgba(31, 64, 104, 0.09);
+  color: ${COLORS.main};
 `;
 
 const PriceLine = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-`;
+  gap: 6px;
 
-// const OldPrice = styled.span`
-//   font-size: 18px;
-//   color: #888;
-//   text-decoration: line-through;
-// `;
+  .amount {
+    color: ${COLORS.second};
+    font-size: clamp(2.6rem, 11vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.065em;
+    line-height: 1;
+  }
+
+  .per-month {
+    color: ${COLORS.TexteSecondaire};
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+`;
 
 const PerYear = styled.span`
   display: block;
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.7;
+  margin-top: 9px;
+  color: ${COLORS.Texte};
+  font-size: 0.82rem;
+  font-weight: 700;
 `;
 
 const PromoInfo = styled.p`
-  font-size: 13px;
+  padding: 11px 13px;
+  border-radius: 12px;
+  background: rgba(244, 211, 94, 0.2);
   color: ${COLORS.main};
-  margin-top: -10px;
-  margin-bottom: 20px;
-  font-style: italic;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 15px 0;
 `;
 
 const Features = styled.ul`
+  display: grid;
+  gap: 13px;
   list-style: none;
-
   padding: 0;
-
   margin: 20px 0;
-
   text-align: left;
 `;
 
 const FeatureItem = styled.li`
   display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  margin-bottom: 13px;
-
-  font-size: 15px;
-
-  line-height: 1.3;
+  align-items: flex-start;
+  gap: 10px;
+  color: ${COLORS.Texte};
+  font-size: 0.84rem;
+  line-height: 1.45;
 
   svg {
-    flex-shrink: 0;
+    flex: 0 0 auto;
   }
 `;
 
 const SubscribeButton = styled.button`
   width: 100%;
-
-  padding: 14px;
-
+  min-height: 51px;
+  padding: 13px 18px;
   border: none;
-
   border-radius: 9999px;
-
-  font-weight: 600;
-
-  font-size: 16px;
-
-  background-color: ${COLORS.second};
-
+  background: ${COLORS.main};
   color: ${COLORS.white};
-
+  font-size: 0.92rem;
+  font-weight: 700;
   cursor: pointer;
-
-  transition: background-color 0.3s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
-    background-color: ${COLORS.main};
+    background: ${COLORS.second};
+    box-shadow: 0 10px 24px rgba(39, 142, 165, 0.22);
+    transform: translateY(-2px);
   }
 `;
 
@@ -308,20 +348,21 @@ export default function AbonnementCard() {
       <Header>
         <Title>Pack Découverte</Title>
 
-        <Subtitle>Faites découvrir votre restaurant sur Nou Link</Subtitle>
+        <Subtitle>
+          Faites découvrir votre restaurant sur Nou Link, toute l’année.
+        </Subtitle>
       </Header>
 
       <Price>
         <PriceLine>
-          {/* <OldPrice>124,99 €</OldPrice> */}
-
-          <span>124,99 €</span>
+          <span className="amount">10,42 €</span>
+          <span className="per-month">/ mois</span>
         </PriceLine>
 
-        <PerYear>pour 1 an</PerYear>
+        <PerYear>124,99 € facturés en une fois pour 1 an</PerYear>
       </Price>
 
-      <PromoInfo>Retrouvez -20% dans bio instagram </PromoInfo>
+      <PromoInfo>Retrouve -20 % dans la bio Instagram.</PromoInfo>
 
       <Features>
         <FeatureItem>
@@ -362,31 +403,39 @@ export default function AbonnementCard() {
       )}
       {loc.pathname === "/dashboard" && (
         <div className="box-code">
-          {message && <em className={codeValide ? "emm" : ""}>{message}</em>}
+          {message && (
+            <p className={`code-message ${codeValide ? "success" : ""}`}>
+              {message}
+            </p>
+          )}
           <input
             type="text"
             value={promoCode}
-            placeholder="Code promo"
+            placeholder="Saisis ton code promo"
+            aria-label="Code promo"
             onChange={(e) => setPromoCode(e.target.value)}
           />
           {load ? (
             <LoadingHorizontal />
           ) : (
-            <button onClick={() => codePrompo()}>
+            <button type="button" onClick={() => codePrompo()}>
               {account?.codePromo ? "Retirer*" : "Valider"}
             </button>
           )}
         </div>
       )}
       {account?.codePromo && (
-        <em className="promo-info">
+        <p className="affiliate-info">
           *Ce code peut être associé à un programme d’affiliation. La personne
           vous ayant communiqué ce code peut percevoir une commission de la part
           de Nou Link en cas de souscription.
-        </em>
+        </p>
       )}
 
-      <em>✅ Paiement sécurisé · Sans engagement</em>
+      <div className="payment-note">
+        <CheckCircle size={17} aria-hidden="true" />
+        <span>Paiement sécurisé · Sans renouvellement automatique</span>
+      </div>
     </Card>
   );
 }

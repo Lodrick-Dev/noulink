@@ -12,7 +12,7 @@ import { ToastContainer } from "react-toastify";
 import MentionsLegales from "./components/Legales/MentionsLegales";
 import PolitiqueConfidentialite from "./components/Legales/PolitiqueConfidentialite";
 import Cgu from "./components/Legales/Cgu";
-import LandingPage from "./Home/LandingPage/LandingPage";
+import LandingPage from "./Home/LandingPageV2/LandingPage";
 // import { PopCookies } from "./components/PopCookies/PopCookies";
 import ConsentementRGPD from "./components/Legales/ConsentementRGPD";
 import Cgv from "./components/Legales/Cgv";
