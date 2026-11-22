@@ -19,16 +19,16 @@ const LandingHero = () => {
             <span className="eyebrow-dot" />
           </div>
           <h1>
-            Fais découvrir <em>tes spécialités</em>.
+            Tes spécialités, <em>plus visibles.</em>
           </h1>
           <p className="intro">
-            Présente ton activité, tes plats et tes photos sur Nou Link. Les
-            personnes qui cherchent les saveurs ultramarines près de chez elles
-            pourront découvrir ton savoir-faire.
+            Présente ton activité, tes plats et tes photos sur Nou Link. Ton
+            profil aide les personnes qui recherchent des saveurs ultramarines
+            près de chez elles à te découvrir et à te contacter.
           </p>
           <p className="seller-audience">
-            Restaurant, traiteur, food truck ou cuisine à domicile : ta place
-            est sur Nou Link.
+            Restaurant, traiteur, food truck ou cuisine à domicile : présente
+            ton savoir-faire à celles et ceux qui cherchent ces saveurs.
           </p>
           <div className="actions">
             <button className="primary" onClick={() => navigate("/auth")}>
@@ -40,7 +40,7 @@ const LandingHero = () => {
           </div>
           <div className="reassurance">
             <span>
-              <MapPin size={16} /> Visible près de chez toi
+              <MapPin size={16} /> Découverte par ville
             </span>
             <span>
               <Utensils size={16} /> Profil, photos et spécialités
@@ -61,8 +61,8 @@ const LandingHero = () => {
               <Utensils size={18} />
             </span>
             <span>
-              <strong>Les saveurs de chez toi</strong>
-              <small>ton activité, visible sur Nou Link</small>
+              <strong>Ta vitrine Nou Link</strong>
+              <small>plats, photos et spécialités</small>
             </span>
           </div>
           <div className="visual-stamp">Fais découvrir ton savoir-faire</div>
