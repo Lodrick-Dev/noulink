@@ -17,14 +17,14 @@ const LandingPage = () => (
     <LandingHeader />
     <main>
       <LandingHero />
+      <Feedback />
       <BusinessBenefitsSection />
       <StepsSection />
       <PricingSection />
-      <QuestionsSection />
       <DiscoverSection />
       <DownloadApp />
       <CommunitySection />
-      <Feedback />
+      <QuestionsSection />
       <FinalCta />
     </main>
   </Page>
