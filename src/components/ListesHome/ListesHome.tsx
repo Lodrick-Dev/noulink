@@ -79,6 +79,9 @@ const ListesHome = ({ saveur }: { saveur: string }) => {
       for (const resto of restaurants) {
         if (resto._id === id) {
           setGetOne(resto);
+          window.gtag?.("event", "restaurantOpen", {
+            restaurant_id: resto._id,
+          });
           break; // On arrête la boucle dès qu'on a trouvé
         }
       }

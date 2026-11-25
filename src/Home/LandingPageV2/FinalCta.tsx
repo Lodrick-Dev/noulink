@@ -9,12 +9,20 @@ const FinalCta = () => {
   return (
     <Section>
       <div className="cta-content">
-        <span>Ta prochaine découverte commence ici</span>
-        <h2>Retrouve le goût de chez toi.</h2>
-        <p>Parcours les profils et les spécialités autour de toi.</p>
-        <button onClick={() => navigate("/home")}>
-          Trouver un plat <ArrowRight size={18} />
-        </button>
+        <span>Tu proposes des plats ?</span>
+        <h2>Fais découvrir tes spécialités.</h2>
+        <p>
+          Présente ton activité sur Nou Link et reçois les commandes passées
+          sur la plateforme.
+        </p>
+        <div className="actions">
+          <button className="primary" onClick={() => navigate("/auth")}>
+            Référencer mon activité <ArrowRight size={18} />
+          </button>
+          <button className="secondary" onClick={() => navigate("/home")}>
+            Je cherche un plat
+          </button>
+        </div>
       </div>
       <div className="decor decor-one" />
       <div className="decor decor-two" />
@@ -59,17 +67,22 @@ const Section = styled.section`
     font-size: 0.96rem;
   }
 
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+  }
+
   button {
     display: inline-flex;
+    justify-content: center;
     align-items: center;
     gap: 10px;
     min-height: 50px;
-    margin-top: 25px;
     padding: 0 23px;
-    border: 0;
     border-radius: 999px;
-    background: ${COLORS.yellow};
-    color: ${COLORS.main};
     font-size: 0.9rem;
     font-weight: 800;
     cursor: pointer;
@@ -78,9 +91,29 @@ const Section = styled.section`
       box-shadow 0.2s ease;
   }
 
-  button:hover {
+  .primary {
+    border: 0;
+    background: ${COLORS.yellow};
+    color: ${COLORS.main};
+  }
+
+  .primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(31, 64, 104, 0.22);
+  }
+
+  .secondary {
+    border: 1px solid rgba(253, 253, 253, 0.55);
+    background: transparent;
+    color: ${COLORS.white};
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .secondary:hover {
+    transform: translateY(-3px);
+    background: rgba(253, 253, 253, 0.12);
   }
 
   .decor {

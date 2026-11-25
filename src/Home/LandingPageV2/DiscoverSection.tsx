@@ -5,9 +5,9 @@ import COLORS from "../../Styles/Styles";
 const highlights = [
   {
     icon: MapPin,
-    title: "Près de chez toi",
+    title: "Autour de toi",
     description:
-      "Indique ta ville et explore les profils qui partagent leurs spécialités autour de toi.",
+      "Choisis ta ville pour parcourir les profils et les plats proposés près de chez toi.",
   },
   {
     icon: Compass,
@@ -17,9 +17,9 @@ const highlights = [
   },
   {
     icon: Heart,
-    title: "Un lien direct",
+    title: "Contact ou commande",
     description:
-      "Découvre les profils et prends contact avec les personnes qui cuisinent.",
+      "Échange directement avec la personne ou passe commande sur Nou Link, selon les plats proposés.",
   },
 ];
 

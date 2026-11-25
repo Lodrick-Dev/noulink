@@ -18,18 +18,18 @@ const LandingHeader = () => {
         </span>
       </a>
       <nav aria-label="Navigation principale">
-        <a href="#decouvrir">Découvrir</a>
+        <a href="#vendeurs">Pour les vendeurs</a>
         <a href="#comment-ca-marche">Comment ça marche</a>
-        <a href="#histoire">Notre histoire</a>
         <a href="#offre">L’offre</a>
+        <a href="#decouvrir">Découvrir</a>
       </nav>
       <button className="header-cta" onClick={() => navigate("/auth")}>
-        Je propose mes plats <ArrowUpRight size={17} aria-hidden="true" />
+        Référencer mon activité <ArrowUpRight size={17} aria-hidden="true" />
       </button>
       <a
         className="mobile-menu"
-        href="#decouvrir"
-        aria-label="Aller aux contenus"
+        href="#vendeurs"
+        aria-label="Voir les avantages pour les vendeurs"
       >
         <Menu size={23} aria-hidden="true" />
       </a>

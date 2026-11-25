@@ -27,7 +27,7 @@ const Footer = () => {
         <img src="/svglogo.svg" alt="logo-noulink" onClick={() => nav("/")} />
       </div>
       <span className="copyright">
-        ©copyright - Nou Link 2025 - par{" "}
+        © {new Date().getFullYear()} Nou Link · Par{" "}
         <a href="https://www.loryum.com" target="_blank">
           Loryum
         </a>{" "}

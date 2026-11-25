@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import COLORS from "../../Styles/Styles";
+const CONSENT_STORAGE_KEY = "ga_consent_v2";
+
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
@@ -12,7 +14,7 @@ const ConsentementRGPD = () => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("ga_consent");
+    const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
     if (stored) {
       try {
         const { value, timestamp } = JSON.parse(stored);
@@ -28,9 +30,9 @@ const ConsentementRGPD = () => {
         }
 
         // Expiré → on redemande
-        localStorage.removeItem("ga_consent");
+        localStorage.removeItem(CONSENT_STORAGE_KEY);
       } catch {
-        localStorage.removeItem("ga_consent");
+        localStorage.removeItem(CONSENT_STORAGE_KEY);
       }
     }
     setIsReady(true); // on affiche le bandeau si rien n'est trouvé
@@ -38,7 +40,7 @@ const ConsentementRGPD = () => {
 
   const handleAccept = () => {
     localStorage.setItem(
-      "ga_consent",
+      CONSENT_STORAGE_KEY,
       JSON.stringify({
         value: "true",
         timestamp: Date.now(),
@@ -50,7 +52,7 @@ const ConsentementRGPD = () => {
 
   const handleRefuse = () => {
     localStorage.setItem(
-      "ga_consent",
+      CONSENT_STORAGE_KEY,
       JSON.stringify({
         value: "false",
         timestamp: Date.now(),
@@ -85,9 +87,9 @@ const ConsentementRGPD = () => {
   return (
     <StyledConsentementRGPD>
       <p>
-        Pour mieux comprendre comment notre site est utilisé et l’améliorer,
-        nous recueillons des données anonymes de navigation. Souhaitez-vous y
-        contribuer ?
+        Pour mieux comprendre comment notre site est utilisé, Google Analytics
+        mesure la navigation et certaines interactions, comme l’ouverture d’un
+        profil. Souhaites-tu accepter cette mesure d’audience ?
       </p>
       <a
         className="a-direct"

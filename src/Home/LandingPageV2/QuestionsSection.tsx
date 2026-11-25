@@ -23,6 +23,11 @@ const questions = [
     answer:
       "Les personnes découvrent ton profil et prennent contact directement avec toi pour échanger sur tes spécialités.",
   },
+  {
+    question: "Comment se passent les commandes sur Nou Link ?",
+    answer:
+      "Les personnes peuvent ajouter tes plats au panier et envoyer leur commande depuis la plateforme. Tu la reçois dans ton espace vendeur et peux en suivre le statut. Le mode de remise ou de livraison dépend des options que tu proposes.",
+  },
 ];
 
 const QuestionsSection = () => (

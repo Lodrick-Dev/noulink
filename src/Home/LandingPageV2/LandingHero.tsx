@@ -24,11 +24,12 @@ const LandingHero = () => {
           <p className="intro">
             Présente ton activité, tes plats et tes photos sur Nou Link. Ton
             profil aide les personnes qui recherchent des saveurs ultramarines
-            près de chez elles à te découvrir et à te contacter.
+            près de chez elles à te découvrir, te contacter ou passer commande
+            sur la plateforme.
           </p>
           <p className="seller-audience">
             Restaurant, traiteur, food truck ou cuisine à domicile : présente
-            ton savoir-faire à celles et ceux qui cherchent ces saveurs.
+            ton savoir-faire sur une vitrine dédiée.
           </p>
           <div className="actions">
             <button className="primary" onClick={() => navigate("/auth")}>

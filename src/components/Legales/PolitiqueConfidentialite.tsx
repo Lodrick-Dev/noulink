@@ -176,7 +176,7 @@ Nou Link limite la collecte des données de localisation aux informations néces
 
 Lorsque des traceurs nécessitant un consentement sont utilisés, ils sont soumis aux règles applicables en matière de consentement aux cookies et autres traceurs.
 
-Les données collectées peuvent notamment concerner les pages consultées, les interactions avec le site, le type de terminal utilisé et certaines informations techniques.
+Les données collectées peuvent notamment concerner les pages consultées, certaines interactions avec le site (dont l'ouverture d'un profil), l'identifiant du profil consulté, le type de terminal utilisé et certaines informations techniques.
 
 Les données de mesure d'audience ne sont utilisées que pour les finalités indiquées lors de leur collecte et ne sont pas utilisées par Nou Link pour vendre les données personnelles des utilisateurs.`,
     },

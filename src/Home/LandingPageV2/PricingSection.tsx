@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Check, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import AbonnementCard from "../../components/AbonnementCard/AbonnementCard";
 import COLORS from "../../Styles/Styles";
 
@@ -17,31 +17,14 @@ const PricingSection = () => (
           tes spécialités.
         </h2>
         <p>
-          Présente ton activité aux personnes qui recherchent les saveurs
-          ultramarines près de chez elles. Ton profil réunit tes informations,
-          tes spécialités et tes photos au même endroit.
+          Fais découvrir tes spécialités aux personnes qui les recherchent près
+          de chez elles. Elles peuvent consulter tes plats et passer commande
+          depuis Nou Link.
         </p>
-        <ul>
-          <li>
-            <Check size={18} aria-hidden="true" />
-            Un profil visible sur web et mobile
-          </li>
-          <li>
-            <Check size={18} aria-hidden="true" />
-            Tes spécialités et ta galerie photos
-          </li>
-          <li>
-            <Check size={18} aria-hidden="true" />
-            Les commandes et notifications réunies
-          </li>
-          <li>
-            <Check size={18} aria-hidden="true" />
-            Pas de renouvellement automatique
-          </li>
-        </ul>
-        <p className="price-context">
-          Le montant affiché par mois est une moyenne : le règlement se fait en
-          une seule fois pour l’année.
+        <p className="payment-context">
+          Pour les commandes, le règlement se fait directement entre toi et ton
+          client, avec les moyens que tu proposes. Nou Link ne l’encaisse pas :
+          tu gardes la main.
         </p>
       </div>
       <AbonnementCard />
@@ -100,32 +83,12 @@ const Section = styled.section`
     line-height: 1.8;
   }
 
-  ul {
-    display: grid;
-    gap: 14px;
-    margin: 25px 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    color: ${COLORS.main};
-    font-size: 0.89rem;
-    font-weight: 600;
-  }
-
-  li svg {
-    flex: 0 0 auto;
-    color: ${COLORS.green};
-  }
-
-  .pricing-copy > .price-context {
-    max-width: 470px;
-    padding-left: 14px;
-    border-left: 3px solid ${COLORS.yellow};
+  .pricing-copy > .payment-context {
+    max-width: 500px;
+    margin: 15px 0 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(39, 142, 165, 0.08);
     color: ${COLORS.TexteSecondaire};
     font-size: 0.8rem;
     line-height: 1.65;
@@ -144,15 +107,7 @@ const Section = styled.section`
       text-align: center;
     }
 
-    ul {
-      width: fit-content;
-      max-width: 100%;
-      margin-right: auto;
-      margin-left: auto;
-      text-align: left;
-    }
-
-    .pricing-copy > .price-context {
+    .pricing-copy > .payment-context {
       margin-right: auto;
       margin-left: auto;
       text-align: left;

@@ -188,6 +188,14 @@ const PerYear = styled.span`
   font-weight: 700;
 `;
 
+const AverageNote = styled.span`
+  display: block;
+  margin-top: 5px;
+  color: ${COLORS.TexteSecondaire};
+  font-size: 0.7rem;
+  line-height: 1.4;
+`;
+
 const PromoInfo = styled.p`
   padding: 11px 13px;
   border-radius: 12px;
@@ -197,6 +205,12 @@ const PromoInfo = styled.p`
   font-weight: 600;
   line-height: 1.5;
   margin: 15px 0;
+
+  a {
+    color: inherit;
+    font-weight: 800;
+    text-underline-offset: 2px;
+  }
 `;
 
 const Features = styled.ul`
@@ -349,30 +363,43 @@ export default function AbonnementCard() {
         <Title>Pack Découverte</Title>
 
         <Subtitle>
-          Faites découvrir votre restaurant sur Nou Link, toute l’année.
+          Une vitrine dédiée à ton activité sur Nou Link.
         </Subtitle>
       </Header>
 
       <Price>
         <PriceLine>
           <span className="amount">10,42 €</span>
-          <span className="per-month">/ mois</span>
+          <span className="per-month">/ mois*</span>
         </PriceLine>
 
-        <PerYear>124,99 € facturés en une fois pour 1 an</PerYear>
+        <PerYear>124,99 € payés en une fois pour 1 an</PerYear>
+        <AverageNote>
+          * Montant moyen calculé en répartissant le tarif annuel sur 12 mois.
+        </AverageNote>
       </Price>
 
-      <PromoInfo>Retrouve -20 % dans la bio Instagram.</PromoInfo>
+      <PromoInfo>
+        Code promo -20 % à retrouver dans la bio{" "}
+        <a
+          href="https://www.instagram.com/noulinkg/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram Nou Link
+        </a>
+        .
+      </PromoInfo>
 
       <Features>
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
-          <span>Profil restaurant web & mobile</span>
+          <span>Profil d’activité web et mobile</span>
         </FeatureItem>
 
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
-          <span>Présentation de vos spécialités</span>
+          <span>Présentation de tes spécialités</span>
         </FeatureItem>
 
         <FeatureItem>
@@ -382,12 +409,12 @@ export default function AbonnementCard() {
 
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
-          <span>Réception et gestion des commandes</span>
+          <span>Réception et gestion de tes commandes en ligne</span>
         </FeatureItem>
 
         <FeatureItem>
           <CheckCircle size={18} color={COLORS.green} />
-          <span>Notifications des nouvelles commandes</span>
+          <span>Notifications de tes nouvelles commandes</span>
         </FeatureItem>
 
         <FeatureItem>
@@ -398,7 +425,7 @@ export default function AbonnementCard() {
 
       {loc.pathname !== "/dashboard" && (
         <SubscribeButton onClick={() => nav("/auth")}>
-          Je découvre
+          Référencer mon activité
         </SubscribeButton>
       )}
       {loc.pathname === "/dashboard" && (

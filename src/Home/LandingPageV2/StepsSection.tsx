@@ -14,20 +14,6 @@ const StepsSection = () => {
         <p>Tu cherches une spécialité ou tu veux la faire connaître ?</p>
       </div>
       <div className="pathways">
-        <article className="pathway">
-          <div className="pathway-top">
-            <span className="round-icon"><Search size={23} /></span>
-            <span className="path-label">Tu cherches un plat</span>
-          </div>
-          <ol>
-            <li><span>01</span><div><strong>Choisis ta ville</strong><small>Commence près de chez toi.</small></div></li>
-            <li><span>02</span><div><strong>Explore les profils</strong><small>Découvre plats, spécialités et photos.</small></div></li>
-            <li><span>03</span><div><strong>Prends contact</strong><small>Échange directement avec la personne.</small></div></li>
-          </ol>
-          <button onClick={() => navigate("/home")}>
-            Explorer les plats <ArrowRight size={17} />
-          </button>
-        </article>
         <article className="pathway provider">
           <div className="pathway-top">
             <span className="round-icon"><UtensilsCrossed size={23} /></span>
@@ -36,10 +22,24 @@ const StepsSection = () => {
           <ol>
             <li><span>01</span><div><strong>Crée ton profil</strong><small>Présente ton activité et ton univers.</small></div></li>
             <li><span>02</span><div><strong>Ajoute tes spécialités</strong><small>Partage tes plats et de belles photos.</small></div></li>
-            <li><span>03</span><div><strong>Fais-toi découvrir</strong><small>Les personnes près de toi te trouvent.</small></div></li>
+            <li><span>03</span><div><strong>Suis tes commandes</strong><small>Gère les commandes envoyées sur Nou Link depuis ton espace vendeur.</small></div></li>
           </ol>
           <button onClick={() => navigate("/auth")}>
             Référencer mon activité <ArrowRight size={17} />
+          </button>
+        </article>
+        <article className="pathway">
+          <div className="pathway-top">
+            <span className="round-icon"><Search size={23} /></span>
+            <span className="path-label">Tu cherches un plat</span>
+          </div>
+          <ol>
+            <li><span>01</span><div><strong>Choisis ta ville</strong><small>Commence près de chez toi.</small></div></li>
+            <li><span>02</span><div><strong>Explore les profils</strong><small>Découvre plats, spécialités et photos.</small></div></li>
+            <li><span>03</span><div><strong>Contacte ou commande</strong><small>Échange directement ou commande sur Nou Link.</small></div></li>
+          </ol>
+          <button onClick={() => navigate("/home")}>
+            Explorer les plats <ArrowRight size={17} />
           </button>
         </article>
       </div>
